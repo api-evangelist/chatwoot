@@ -1,0 +1,133 @@
+vocabulary:
+  name: Chatwoot API Vocabulary
+  description: Key terms and concepts used across Chatwoot APIs for customer support and omni-channel messaging.
+  version: 1.0.0
+  source: https://developers.chatwoot.com/api-reference/introduction
+
+terms:
+
+  - term: account
+    definition: >-
+      A Chatwoot workspace that contains all agents, inboxes, contacts, and conversations.
+      Each account is isolated and identified by an account_id.
+    tags: [core, platform]
+
+  - term: agent
+    definition: >-
+      A team member who handles customer conversations. Agents can be assigned to inboxes
+      and conversations, and have roles of either "agent" or "administrator".
+    tags: [core, application]
+
+  - term: inbox
+    definition: >-
+      A channel endpoint through which customers contact the support team. Inboxes can be
+      web widgets, email, WhatsApp, Facebook, Telegram, SMS, API, or Line channels.
+    tags: [core, application]
+
+  - term: conversation
+    definition: >-
+      A thread of messages between a customer contact and one or more agents. Conversations
+      have statuses of open, resolved, pending, or snoozed.
+    tags: [core, application]
+
+  - term: message
+    definition: >-
+      A single communication unit within a conversation. Messages have types: incoming (0),
+      outgoing (1), activity (2), and template (3).
+    tags: [core, application]
+
+  - term: contact
+    definition: >-
+      A customer or end-user record that may be associated with multiple conversations across
+      different inboxes. Contacts can have labels, notes, and custom attributes.
+    tags: [core, application]
+
+  - term: label
+    definition: >-
+      A tag that can be applied to conversations or contacts to categorize and organize them.
+      Labels are account-scoped and reusable.
+    tags: [organization, application]
+
+  - term: team
+    definition: >-
+      A group of agents that can be collectively assigned to conversations. Teams are used
+      to route and organize work within an account.
+    tags: [organization, application]
+
+  - term: canned_response
+    definition: >-
+      A pre-written reply template that agents can use to quickly respond to common questions.
+      Identified by a short-code for fast retrieval.
+    tags: [efficiency, application]
+
+  - term: webhook
+    definition: >-
+      An HTTP callback registered to receive real-time event notifications from Chatwoot,
+      such as conversation creation, message creation, or contact updates.
+    tags: [integration, application]
+
+  - term: automation_rule
+    definition: >-
+      A conditional trigger-action rule that automatically performs actions (assign agent,
+      add label, send message) when specified conditions are met on conversations.
+    tags: [automation, application]
+
+  - term: custom_attribute
+    definition: >-
+      User-defined metadata fields that can be attached to contacts or conversations to
+      store domain-specific data beyond the standard Chatwoot fields.
+    tags: [extensibility, application]
+
+  - term: portal
+    definition: >-
+      A Help Center knowledge base associated with an account. Portals contain articles
+      organized into categories for customer self-service.
+    tags: [help-center, application]
+
+  - term: article
+    definition: >-
+      A knowledge base document within a Help Center portal. Articles have a title, content,
+      author, category, and publication status.
+    tags: [help-center, application]
+
+  - term: agent_bot
+    definition: >-
+      An automated bot that can be connected to an inbox to handle conversations programmatically
+      before or instead of human agents. Can be platform-level or account-level.
+    tags: [automation, platform, application]
+
+  - term: user_api_key
+    definition: >-
+      An authentication token associated with an individual agent or admin user, used to
+      authenticate requests to the Application API. Found in Profile Settings.
+    tags: [authentication, security]
+
+  - term: platform_app_api_key
+    definition: >-
+      An authentication token for super-admin level Platform API access, used to manage
+      accounts, users, and installation-wide settings on self-hosted deployments.
+    tags: [authentication, security, platform]
+
+  - term: inbox_identifier
+    definition: >-
+      A unique public token associated with an inbox, used by the Client API (public API)
+      to authenticate widget requests without exposing user credentials.
+    tags: [authentication, client-api]
+
+  - term: contact_identifier
+    definition: >-
+      A unique identifier for a contact within a specific inbox context, used in Client API
+      requests to identify returning users in widget conversations.
+    tags: [authentication, client-api]
+
+  - term: availability_status
+    definition: >-
+      An agent's current availability state: online, busy, or offline. Affects auto-assignment
+      of conversations to agents.
+    tags: [agents, availability]
+
+  - term: csat
+    definition: >-
+      Customer Satisfaction score survey sent after a conversation is resolved. CSAT responses
+      are tracked and available via the Reports API.
+    tags: [reporting, customer-satisfaction]

@@ -1,0 +1,30 @@
+{
+  "id": 101,
+  "uid": "conv-uuid-101",
+  "account_id": 1,
+  "inbox_id": 5,
+  "status": "open",
+  "assignee_id": 3,
+  "team_id": 2,
+  "channel": "Channel::WebWidget",
+  "messages_count": 12,
+  "unread_count": 2,
+  "created_at": "2024-06-10T09:00:00.000Z",
+  "updated_at": "2024-06-10T14:20:00.000Z",
+  "last_activity_at": "2024-06-10T14:20:00.000Z",
+  "labels": [
+    "support"
+  ],
+  "meta": {
+    "sender": {
+      "id": 1,
+      "name": "Jane Doe",
+      "type": "contact"
+    },
+    "assignee": {
+      "id": 3,
+      "name": "Support Agent",
+      "type": "user"
+    }
+  }
+}

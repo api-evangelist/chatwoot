@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "Account ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the account"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "administrator",
+        "agent"
+      ],
+      "description": "The user role in the account"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/chatwoot/main/json-schema/account.json",
+  "title": "Account",
+  "description": "Chatwoot Account schema"
+}

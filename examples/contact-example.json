@@ -1,0 +1,20 @@
+{
+  "id": 1,
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com",
+  "phone_number": "+1-555-0123",
+  "avatar_url": "https://app.chatwoot.com/avatars/contact_1.jpg",
+  "identifier": "contact-uuid-001",
+  "location": "San Francisco, CA",
+  "company": {
+    "name": "Acme Corp"
+  },
+  "created_at": "2024-01-15T10:30:00.000Z",
+  "updated_at": "2024-06-01T08:00:00.000Z",
+  "last_activity_at": "2024-06-10T14:20:00.000Z",
+  "additional_attributes": {},
+  "labels": [
+    "vip",
+    "enterprise"
+  ]
+}

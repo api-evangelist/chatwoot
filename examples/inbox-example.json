@@ -1,0 +1,14 @@
+{
+  "id": 5,
+  "name": "Live Chat Widget",
+  "channel_type": "Channel::WebWidget",
+  "webhook_url": "https://example.com/webhook",
+  "enable_auto_assignment": true,
+  "working_hours_enabled": true,
+  "out_of_office_message": "We are currently offline. We'll be back soon!",
+  "greeting_enabled": true,
+  "greeting_message": "Hello! How can we help you today?",
+  "email": "support@example.com",
+  "created_at": "2023-01-10T08:00:00.000Z",
+  "updated_at": "2024-06-01T08:00:00.000Z"
+}

@@ -1,0 +1,201 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "chatwoot": "https://www.chatwoot.com/vocabulary#",
+
+    "id": "@id",
+    "type": "@type",
+
+    "Account": {
+      "@id": "chatwoot:Account",
+      "@type": "@id"
+    },
+    "Agent": {
+      "@id": "chatwoot:Agent",
+      "@type": "@id"
+    },
+    "Contact": {
+      "@id": "chatwoot:Contact",
+      "@type": "@id"
+    },
+    "Conversation": {
+      "@id": "chatwoot:Conversation",
+      "@type": "@id"
+    },
+    "Message": {
+      "@id": "chatwoot:Message",
+      "@type": "@id"
+    },
+    "Inbox": {
+      "@id": "chatwoot:Inbox",
+      "@type": "@id"
+    },
+    "Team": {
+      "@id": "chatwoot:Team",
+      "@type": "@id"
+    },
+    "Label": {
+      "@id": "chatwoot:Label",
+      "@type": "@id"
+    },
+    "Webhook": {
+      "@id": "chatwoot:Webhook",
+      "@type": "@id"
+    },
+    "AutomationRule": {
+      "@id": "chatwoot:AutomationRule",
+      "@type": "@id"
+    },
+    "CannedResponse": {
+      "@id": "chatwoot:CannedResponse",
+      "@type": "@id"
+    },
+    "CustomAttribute": {
+      "@id": "chatwoot:CustomAttribute",
+      "@type": "@id"
+    },
+    "Portal": {
+      "@id": "chatwoot:Portal",
+      "@type": "@id"
+    },
+    "Article": {
+      "@id": "chatwoot:Article",
+      "@type": "@id"
+    },
+    "Category": {
+      "@id": "chatwoot:Category",
+      "@type": "@id"
+    },
+    "AgentBot": {
+      "@id": "chatwoot:AgentBot",
+      "@type": "@id"
+    },
+
+    "account_id": {
+      "@id": "chatwoot:accountId",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "phone_number": {
+      "@id": "schema:telephone",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "avatar_url": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "chatwoot:status",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "schema:text",
+      "@type": "xsd:string"
+    },
+    "inbox_id": {
+      "@id": "chatwoot:inboxId",
+      "@type": "xsd:integer"
+    },
+    "conversation_id": {
+      "@id": "chatwoot:conversationId",
+      "@type": "xsd:integer"
+    },
+    "channel_type": {
+      "@id": "chatwoot:channelType",
+      "@type": "xsd:string"
+    },
+    "assignee_id": {
+      "@id": "chatwoot:assigneeId",
+      "@type": "xsd:integer"
+    },
+    "team_id": {
+      "@id": "chatwoot:teamId",
+      "@type": "xsd:integer"
+    },
+    "role": {
+      "@id": "chatwoot:role",
+      "@type": "xsd:string"
+    },
+    "availability_status": {
+      "@id": "chatwoot:availabilityStatus",
+      "@type": "xsd:string"
+    },
+    "message_type": {
+      "@id": "chatwoot:messageType",
+      "@type": "xsd:integer"
+    },
+    "private": {
+      "@id": "chatwoot:private",
+      "@type": "xsd:boolean"
+    },
+    "labels": {
+      "@id": "chatwoot:labels",
+      "@container": "@set"
+    },
+    "identifier": {
+      "@id": "chatwoot:identifier",
+      "@type": "xsd:string"
+    },
+    "webhook_url": {
+      "@id": "chatwoot:webhookUrl",
+      "@type": "@id"
+    },
+    "short_code": {
+      "@id": "chatwoot:shortCode",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:headline",
+      "@type": "xsd:string"
+    },
+    "author_id": {
+      "@id": "schema:author",
+      "@type": "xsd:integer"
+    },
+    "category_id": {
+      "@id": "chatwoot:categoryId",
+      "@type": "xsd:integer"
+    },
+    "slug": {
+      "@id": "chatwoot:slug",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "schema:location",
+      "@type": "xsd:string"
+    },
+    "uid": {
+      "@id": "chatwoot:uid",
+      "@type": "xsd:string"
+    },
+    "unread_count": {
+      "@id": "chatwoot:unreadCount",
+      "@type": "xsd:integer"
+    },
+    "messages_count": {
+      "@id": "chatwoot:messagesCount",
+      "@type": "xsd:integer"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "payload": {
+      "description": "Response payload that contains automation rule(s)",
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Array of automation rules (for listing endpoint)",
+          "items": {
+            "$ref": "#/components/schemas/automation_rule_item"
+          }
+        },
+        {
+          "type": "object",
+          "description": "Single automation rule (for show/create/update endpoints)",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/automation_rule_item"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/chatwoot/main/json-schema/automation_rule.json",
+  "title": "Automation Rule",
+  "description": "Chatwoot Automation Rule schema"
+}

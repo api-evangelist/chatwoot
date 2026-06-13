@@ -1,0 +1,12 @@
+{
+  "id": 3,
+  "uid": "agent-uuid-003",
+  "name": "Support Agent",
+  "email": "agent@example.com",
+  "role": "agent",
+  "confirmed": true,
+  "availability_status": "online",
+  "avatar_url": "https://app.chatwoot.com/avatars/agent_3.jpg",
+  "created_at": "2023-05-01T12:00:00.000Z",
+  "updated_at": "2024-06-01T08:00:00.000Z"
+}

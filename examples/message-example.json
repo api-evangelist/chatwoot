@@ -1,0 +1,19 @@
+{
+  "id": 501,
+  "content": "Hello, I need help with my order.",
+  "account_id": 1,
+  "inbox_id": 5,
+  "conversation_id": 101,
+  "message_type": 0,
+  "created_at": "2024-06-10T09:05:00.000Z",
+  "updated_at": "2024-06-10T09:05:00.000Z",
+  "private": false,
+  "status": "sent",
+  "sender": {
+    "id": 1,
+    "name": "Jane Doe",
+    "type": "contact"
+  },
+  "attachments": [],
+  "content_attributes": {}
+}
