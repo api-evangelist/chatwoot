@@ -1,0 +1,146 @@
+specificationVersion: '0.1'
+id: chatwoot-plans-pricing
+name: Chatwoot Plans and Pricing
+description: >-
+  Chatwoot offers four pricing tiers for its cloud-hosted customer support
+  platform, ranging from a free Hacker plan to an Enterprise tier. Plans
+  are priced per agent per month (billed annually) and differ in
+  conversation limits, channel availability, AI credits, data retention,
+  and support levels. A self-hosted open-source option is also available
+  at no licensing cost.
+url: https://www.chatwoot.com/pricing/
+plans:
+  - name: Hacker
+    description: >-
+      Free tier for small teams exploring Chatwoot with basic live chat
+      functionality and limited agent seats.
+    price: 0
+    currency: USD
+    period: monthly
+    perAgent: true
+    limits:
+      agents: 2
+      conversations: 500
+      dataRetentionDays: 30
+      captainAiCredits: 0
+    channels:
+      - Website live chat
+    features:
+      - Private notes
+      - Mentions
+      - Labels
+      - Keyboard shortcuts
+      - Canned responses
+      - Command bar
+      - Auto-assignment
+      - Multilingual support
+      - Slack integration
+      - DialogFlow integration
+    support:
+      - Live chat support
+  - name: Startups
+    description: >-
+      Entry-level paid plan for growing teams needing unlimited conversations
+      across all channels with AI-assist credits and a one-year data history.
+    price: 19
+    currency: USD
+    period: monthly
+    perAgent: true
+    billingCycle: annual
+    limits:
+      agents: unlimited
+      conversations: unlimited
+      dataRetentionDays: 365
+      captainAiCredits: 300
+    channels:
+      - Website live chat
+      - Email
+      - Facebook
+      - Instagram
+      - TikTok
+      - WhatsApp
+      - SMS
+      - Telegram
+      - Line
+      - API channel
+    features:
+      - Help center
+      - Custom views
+      - Custom filters
+      - Business hours
+      - Auto-responder
+      - Conversation transcripts
+      - Contact segments and notes
+      - Downloadable reports
+    support:
+      - Priority email support
+  - name: Business
+    description: >-
+      Mid-tier plan for established teams requiring team automation, campaigns,
+      custom attributes, and comprehensive reporting with two-year data
+      retention.
+    price: 39
+    currency: USD
+    period: monthly
+    perAgent: true
+    billingCycle: annual
+    limits:
+      agents: unlimited
+      conversations: unlimited
+      dataRetentionDays: 730
+      captainAiCredits: 500
+    channels:
+      - All channels
+    features:
+      - Teams
+      - Automation rules
+      - Custom attributes
+      - Pre-chat forms
+      - Live chat campaigns
+      - WhatsApp Cloud API campaigns
+      - SMS campaigns
+      - Complete reporting suite
+    support:
+      - SLA support
+  - name: Enterprise
+    description: >-
+      Full-featured plan for large organizations requiring SSO, audit logs,
+      agent capacity management, custom branding removal, and dedicated
+      account management for teams with 20 or more agents.
+    price: 99
+    currency: USD
+    period: monthly
+    perAgent: true
+    billingCycle: annual
+    limits:
+      agents: unlimited
+      conversations: unlimited
+      dataRetentionDays: 1095
+      captainAiCredits: 800
+    channels:
+      - All channels
+    features:
+      - SSO/SAML
+      - Audit logs
+      - Agent capacity management
+      - Remove Chatwoot branding
+      - Video/voice support (20+ agents)
+      - Dedicated account manager (20+ agents)
+    support:
+      - Dedicated account manager (20+ agents)
+addOns:
+  - name: Captain AI Credits
+    description: >-
+      Additional AI credits beyond the monthly plan allocation for Captain AI
+      features including conversation summarization, compose assist, and
+      automated responses.
+    price: 20
+    currency: USD
+    unit: 1000 credits
+selfHosted:
+  available: true
+  license: MIT
+  description: >-
+    Chatwoot is fully open-source and can be self-hosted at no licensing cost.
+    Deployment options include Docker, Kubernetes, and various cloud providers.
+  url: https://github.com/chatwoot/chatwoot

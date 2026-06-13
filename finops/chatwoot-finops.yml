@@ -1,0 +1,143 @@
+specificationVersion: '1.0'
+id: chatwoot-finops
+name: Chatwoot FinOps Framework
+description: >-
+  FinOps guidance for managing Chatwoot API and platform costs across
+  cloud-hosted and self-hosted deployment models. Covers cost visibility,
+  optimization, and governance aligned to the FinOps Framework FOCUS
+  specification for customer support platform expenditure.
+url: https://www.chatwoot.com/pricing/
+framework: FinOps Framework 1.0
+focusAligned: true
+deploymentModels:
+  - name: Cloud Hosted (SaaS)
+    description: >-
+      Chatwoot-managed cloud instance at app.chatwoot.com. Billing is
+      per-agent per month with plan-based feature gating.
+    costDrivers:
+      - name: Agent seats
+        description: >-
+          Primary cost driver. Each agent seat is billed at the plan rate
+          per month (annually). Adding agents scales cost linearly.
+        unit: agent/month
+        billingModel: per-unit
+      - name: Captain AI credits
+        description: >-
+          AI feature consumption (compose, summarize, auto-respond) billed
+          against monthly credit allocations. Overages charged at $20 per
+          1,000 credits.
+        unit: credits
+        billingModel: consumption
+        overage:
+          price: 20
+          currency: USD
+          per: 1000 credits
+      - name: Data retention
+        description: >-
+          Higher plans include longer data retention (30 days to 3 years).
+          Upgrading plans to meet data retention compliance needs drives
+          incremental cost.
+        unit: months
+        billingModel: included-in-plan
+  - name: Self-Hosted (Open Source)
+    description: >-
+      Self-managed deployment on own infrastructure. No Chatwoot licensing
+      cost; costs are infrastructure, operations, and maintenance.
+    costDrivers:
+      - name: Infrastructure compute
+        description: >-
+          Server or cloud VM costs for running the Rails application,
+          Sidekiq workers, and ActionCable server.
+        unit: compute hours
+        billingModel: infrastructure
+      - name: Database storage
+        description: >-
+          PostgreSQL storage costs scale with conversation volume, contact
+          records, and message history retained.
+        unit: GB
+        billingModel: infrastructure
+      - name: File storage
+        description: >-
+          Object storage (S3-compatible) for attachments, avatars, and
+          conversation media files.
+        unit: GB
+        billingModel: infrastructure
+      - name: Engineering operations
+        description: >-
+          Staff time for deployment, upgrades, monitoring, and incident
+          response. Often the dominant cost for self-hosted.
+        unit: hours
+        billingModel: labor
+costVisibility:
+  cloudHosted:
+    - Chatwoot does not currently expose a usage/cost API or dashboard
+    - Monitor agent seat count via the Agents API endpoint
+    - Track Captain AI credit consumption through account settings
+    - Billing managed through the Chatwoot subscription portal
+  selfHosted:
+    - Use infrastructure provider cost allocation tags to track Chatwoot spend
+    - Monitor database size growth via PostgreSQL metrics
+    - Instrument Sidekiq queues to assess worker compute utilization
+optimization:
+  cloudHosted:
+    - name: Right-size agent seats
+      description: >-
+        Regularly audit active agent accounts. Remove or deactivate seats
+        for agents who no longer need access to reduce per-agent billing.
+    - name: Monitor AI credit consumption
+      description: >-
+        Track Captain AI credit burn rate against monthly allocations.
+        Evaluate whether feature usage justifies overage costs vs. plan
+        upgrade.
+    - name: Annual vs monthly billing
+      description: >-
+        Chatwoot plans show lower per-agent prices when billed annually.
+        Commit annually for predictable, lower-cost spend where agent
+        count is stable.
+    - name: Plan right-sizing
+      description: >-
+        Audit feature usage by plan tier. Avoid paying for Enterprise if
+        SSO and audit logs are not required. Downgrade to Business or
+        Startups if advanced features are unused.
+  selfHosted:
+    - name: Container right-sizing
+      description: >-
+        Profile Rails and Sidekiq worker memory usage under production load
+        and right-size containers to avoid over-provisioning.
+    - name: Storage lifecycle policies
+      description: >-
+        Implement S3 lifecycle rules to move older attachments to cheaper
+        storage tiers (e.g., S3 Glacier) for archival.
+    - name: Database connection pooling
+      description: >-
+        Use PgBouncer to reduce PostgreSQL connection overhead and allow
+        smaller database instance sizes.
+governance:
+  cloudHosted:
+    - Define agent provisioning/deprovisioning process tied to HR onboarding
+    - Set alerts for agent count thresholds approaching budget limits
+    - Include Captain AI credit budgets in quarterly planning cycles
+    - Review Chatwoot subscription annually at renewal against usage data
+  selfHosted:
+    - Tag all Chatwoot infrastructure resources with cost center and project
+    - Establish runbook for upgrade cadence to avoid security debt
+    - Include infrastructure costs in total cost of ownership vs. SaaS
+      comparison annually
+budgetGuidance:
+  smallTeam:
+    agentCount: '1-10'
+    recommendedPlan: Startups
+    estimatedMonthlyUSD: '19-190'
+    notes: Annual billing; free Hacker plan viable for 2-agent pilots
+  midMarket:
+    agentCount: '11-50'
+    recommendedPlan: Business
+    estimatedMonthlyUSD: '429-1950'
+    notes: Teams and automation features justify Business plan cost
+  enterprise:
+    agentCount: '50+'
+    recommendedPlan: Enterprise
+    estimatedMonthlyUSD: '4950+'
+    notes: >-
+      SSO, audit logs, and dedicated support are cost-effective at scale;
+      evaluate self-hosted for very large deployments
