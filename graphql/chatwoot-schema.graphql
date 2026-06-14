@@ -1,0 +1,944 @@
+"""
+Chatwoot GraphQL Schema
+Conceptual schema derived from the Chatwoot REST API surface.
+Covers accounts, inboxes, contacts, conversations, messages,
+agents, teams, labels, reports, webhooks, and automation.
+"""
+
+scalar DateTime
+scalar JSON
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum InboxType {
+  EMAIL
+  WEBCHAT
+  FACEBOOK
+  TWITTER
+  WHATSAPP
+  TELEGRAM
+  SMS
+  API
+  LINE
+  INSTAGRAM
+}
+
+enum ConversationStatus {
+  OPEN
+  RESOLVED
+  PENDING
+  SNOOZED
+}
+
+enum MessageType {
+  INCOMING
+  OUTGOING
+  ACTIVITY
+  TEMPLATE
+}
+
+enum MessageContentType {
+  TEXT
+  INPUT_SELECT
+  INPUT_EMAIL
+  INPUT_CSAT
+  CARDS
+  FORM
+  ARTICLE
+  STICKER
+  AUDIO
+  VIDEO
+  IMAGE
+  FILE
+}
+
+enum AgentRole {
+  AGENT
+  ADMINISTRATOR
+}
+
+enum AttachmentFileType {
+  IMAGE
+  AUDIO
+  VIDEO
+  FILE
+  LOCATION
+  FALLBACK
+}
+
+enum TemplateCategory {
+  AUTHENTICATION
+  MARKETING
+  UTILITY
+}
+
+enum CustomAttributeAttributeModel {
+  CONTACT
+  CONVERSATION
+}
+
+enum CustomAttributeAttributeDisplayType {
+  TEXT
+  NUMBER
+  CURRENCY
+  PERCENT
+  LINK
+  DATE
+  LIST
+  CHECKBOX
+}
+
+enum WebhookEventName {
+  CONVERSATION_CREATED
+  CONVERSATION_UPDATED
+  CONVERSATION_STATUS_CHANGED
+  MESSAGE_CREATED
+  MESSAGE_UPDATED
+  CONTACT_CREATED
+  CONTACT_UPDATED
+  WEBWIDGET_TRIGGERED
+}
+
+enum ReportMetricType {
+  ACCOUNT_SUMMARY
+  OVERVIEW
+  INBOX_SUMMARY
+  AGENT_SUMMARY
+  TEAM_SUMMARY
+  LABEL_SUMMARY
+}
+
+# ─── Account ─────────────────────────────────────────────────────────────────
+
+type Account {
+  id: ID!
+  name: String!
+  locale: String
+  domain: String
+  supportEmail: String
+  timezone: String
+  features: AccountFeatures
+  customAttributes: [CustomAttribute!]
+  avatar: AccountAvatar
+  details: AccountDetails
+  inboxes: [Inbox!]
+  agents: [Agent!]
+  teams: [Team!]
+  labels: [Label!]
+  contacts(page: Int, q: String): ContactConnection!
+  conversations(page: Int, status: ConversationStatus): ConversationConnection!
+  reports: [Report!]
+  webhooks: [Webhook!]
+  cannedResponses: [CannedResponse!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AccountDetails {
+  id: ID!
+  name: String!
+  locale: String
+  supportEmail: String
+  domain: String
+  timezone: String
+  features: AccountFeatures
+}
+
+type AccountFeatures {
+  agentManagement: Boolean
+  customAttributes: Boolean
+  reports: Boolean
+  apiChannel: Boolean
+}
+
+type AccountAvatar {
+  avatarUrl: String
+  thumbUrl: String
+}
+
+# ─── Inbox ───────────────────────────────────────────────────────────────────
+
+interface InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Inbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  outOfOfficeMessage: String
+  greeting: String
+  workingHoursEnabled: Boolean
+  agents: [Agent!]
+  webhookUrl: String
+  email: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type EmailInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  email: String!
+  forwardToEmail: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type APIInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  webhookUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type WebchatInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  greeting: String
+  welcomeTitle: String
+  welcomeTagline: String
+  widgetColor: String
+  websiteUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type FacebookPage implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  pageId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TwitterInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  twitterAccountId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type WhatsAppInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  phoneNumber: String!
+  provider: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TelegramInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  botToken: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type SMSInbox implements InboxDetails {
+  id: ID!
+  name: String!
+  channelType: InboxType!
+  enabled: Boolean!
+  accountId: ID!
+  phoneNumber: String!
+  provider: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─── Contact ─────────────────────────────────────────────────────────────────
+
+type Contact {
+  id: ID!
+  name: String
+  email: String
+  phone: String
+  accountId: ID!
+  identifier: String
+  thumbnail: String
+  location: String
+  company: ContactCompany
+  additionalAttributes: JSON
+  details: ContactDetails
+  emails: [ContactEmail!]
+  phones: [ContactPhone!]
+  labels: [ContactLabel!]
+  notes: [ContactNote!]
+  conversations: [Conversation!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ContactDetails {
+  id: ID!
+  name: String
+  email: String
+  phone: String
+  thumbnail: String
+  location: String
+  identifier: String
+  additionalAttributes: JSON
+}
+
+type ContactEmail {
+  email: String!
+  primary: Boolean!
+}
+
+type ContactPhone {
+  phone: String!
+  primary: Boolean!
+}
+
+type ContactLabel {
+  id: ID!
+  title: String!
+}
+
+type ContactNote {
+  id: ID!
+  content: String!
+  contactId: ID!
+  userId: ID
+  createdAt: DateTime!
+}
+
+type ContactCompany {
+  id: ID
+  name: String
+}
+
+type ContactConnection {
+  nodes: [Contact!]!
+  meta: PaginationMeta!
+}
+
+# ─── Conversation ─────────────────────────────────────────────────────────────
+
+type Conversation {
+  id: ID!
+  inboxId: ID!
+  accountId: ID!
+  contactId: ID!
+  status: ConversationStatus!
+  assignee: Agent
+  team: Team
+  labels: [ConversationLabel!]
+  meta: ConversationMeta
+  details: ConversationDetails
+  messages: [Message!]
+  report: ConversationReport
+  customAttributes: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ConversationDetails {
+  id: ID!
+  inboxId: ID!
+  accountId: ID!
+  status: ConversationStatus!
+  priority: String
+  snoozedUntil: DateTime
+  additionalAttributes: JSON
+}
+
+type ConversationMeta {
+  assignee: Agent
+  team: Team
+  allCount: Int
+  mineCount: Int
+  unassignedCount: Int
+  unresolvedCount: Int
+}
+
+type ConversationLabel {
+  id: ID!
+  title: String!
+  color: String
+}
+
+type ConversationConnection {
+  nodes: [Conversation!]!
+  meta: PaginationMeta!
+}
+
+# ─── Message ─────────────────────────────────────────────────────────────────
+
+type Message {
+  id: ID!
+  conversationId: ID!
+  accountId: ID!
+  inboxId: ID!
+  messageType: MessageType!
+  contentType: MessageContentType
+  content: String
+  details: MessageDetails
+  attachments: [Attachment!]
+  sender: MessageSender
+  private: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MessageDetails {
+  id: ID!
+  content: String
+  messageType: MessageType!
+  contentType: MessageContentType
+  contentAttributes: JSON
+  createdAt: DateTime!
+  channel: String
+}
+
+union MessageSender = Agent | Contact
+
+type MessageContent {
+  type: MessageContentType!
+  text: String
+  payload: JSON
+}
+
+type ChatMessage {
+  id: ID!
+  content: String!
+  conversationId: ID!
+  sender: MessageSender
+  private: Boolean!
+  createdAt: DateTime!
+}
+
+type AgentMessage {
+  id: ID!
+  content: String!
+  agent: Agent!
+  conversationId: ID!
+  attachments: [Attachment!]
+  createdAt: DateTime!
+}
+
+type BotMessage {
+  id: ID!
+  content: String!
+  botId: ID!
+  conversationId: ID!
+  createdAt: DateTime!
+}
+
+type ActivityMessage {
+  id: ID!
+  content: String!
+  conversationId: ID!
+  activityType: String!
+  createdAt: DateTime!
+}
+
+type Email {
+  id: ID!
+  subject: String
+  from: [String!]
+  to: [String!]
+  cc: [String!]
+  bcc: [String!]
+  body: String
+  htmlBody: String
+  attachments: [Attachment!]
+  createdAt: DateTime!
+}
+
+# ─── Attachment ──────────────────────────────────────────────────────────────
+
+type Attachment {
+  id: ID!
+  fileType: AttachmentFileType!
+  filename: String
+  url: String!
+  thumbUrl: String
+  fileSize: Int
+  width: Int
+  height: Int
+  messageId: ID!
+}
+
+# ─── Agent ───────────────────────────────────────────────────────────────────
+
+type Agent {
+  id: ID!
+  name: String!
+  email: String!
+  role: AgentRole!
+  accountId: ID!
+  availabilityStatus: String
+  thumbnail: String
+  details: AgentDetails
+  teams: [Team!]
+  inboxes: [Inbox!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AgentDetails {
+  id: ID!
+  name: String!
+  email: String!
+  role: AgentRole!
+  availabilityStatus: String
+  thumbnail: String
+}
+
+# ─── Assignment ──────────────────────────────────────────────────────────────
+
+type Assignment {
+  id: ID!
+  conversationId: ID!
+  assignee: Agent
+  team: Team
+  assignedAt: DateTime!
+}
+
+# ─── Team ────────────────────────────────────────────────────────────────────
+
+type Team {
+  id: ID!
+  name: String!
+  description: String
+  accountId: ID!
+  details: TeamDetails
+  agents: [Agent!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TeamDetails {
+  id: ID!
+  name: String!
+  description: String
+  agentCount: Int
+}
+
+# ─── Label ───────────────────────────────────────────────────────────────────
+
+type Label {
+  id: ID!
+  title: String!
+  description: String
+  color: String!
+  showOnSidebar: Boolean!
+  accountId: ID!
+  details: LabelDetails
+}
+
+type LabelDetails {
+  id: ID!
+  title: String!
+  description: String
+  color: String!
+  showOnSidebar: Boolean!
+}
+
+# ─── Template ────────────────────────────────────────────────────────────────
+
+type Template {
+  id: ID!
+  name: String!
+  body: String!
+  category: TemplateCategory!
+  language: String!
+  status: String
+  details: TemplateDetails
+  components: [TemplateComponent!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TemplateDetails {
+  id: ID!
+  name: String!
+  body: String!
+  category: TemplateCategory!
+  language: String!
+  status: String
+}
+
+type TemplateComponent {
+  type: String!
+  text: String
+  format: String
+  buttons: [TemplateButton!]
+}
+
+type TemplateButton {
+  type: String!
+  text: String!
+  url: String
+  phoneNumber: String
+}
+
+# ─── Canned Response ─────────────────────────────────────────────────────────
+
+type CannedResponse {
+  id: ID!
+  name: String!
+  content: String!
+  accountId: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─── Custom Attribute ────────────────────────────────────────────────────────
+
+type CustomAttribute {
+  id: ID!
+  attributeKey: CustomAttributeKey!
+  attributeModel: CustomAttributeAttributeModel!
+  attributeDisplayType: CustomAttributeAttributeDisplayType!
+  attributeValues: [String!]
+  defaultValue: String
+  accountId: ID!
+}
+
+type CustomAttributeKey {
+  id: ID!
+  key: String!
+  name: String!
+  description: String
+  attributeModel: CustomAttributeAttributeModel!
+  attributeDisplayType: CustomAttributeAttributeDisplayType!
+}
+
+# ─── Report ──────────────────────────────────────────────────────────────────
+
+type Report {
+  id: ID!
+  type: ReportMetricType!
+  accountId: ID!
+  summary: ReportSummary
+  metrics: [ReportMetric!]
+}
+
+type ReportSummary {
+  conversationsCount: Int
+  resolvedConversationsCount: Int
+  openConversationsCount: Int
+  avgFirstResponseTime: Float
+  avgResolutionTime: Float
+  messagesCount: Int
+  incomingMessagesCount: Int
+  outgoingMessagesCount: Int
+}
+
+type ReportMetric {
+  id: ID!
+  name: String!
+  value: Float!
+  timestamp: DateTime!
+}
+
+type ConversationReport {
+  conversationId: ID!
+  firstResponseTime: Float
+  resolutionTime: Float
+  waitingTime: Float
+  messageCount: Int
+}
+
+# ─── Webhook ─────────────────────────────────────────────────────────────────
+
+type Webhook {
+  id: ID!
+  url: String!
+  subscriptions: [WebhookEvent!]!
+  accountId: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type WebhookEvent {
+  id: ID!
+  webhookId: ID!
+  eventName: WebhookEventName!
+  payload: JSON
+  deliveredAt: DateTime
+  responseStatus: Int
+}
+
+# ─── Agent Bot ───────────────────────────────────────────────────────────────
+
+type AgentBot {
+  id: ID!
+  name: String!
+  accountId: ID
+  endpoint: BotEndpoint
+  description: String
+  outgoingUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type BotEndpoint {
+  id: ID!
+  url: String!
+  botId: ID!
+  headers: JSON
+}
+
+# ─── API Key / Token ─────────────────────────────────────────────────────────
+
+type APIKey {
+  id: ID!
+  name: String!
+  key: String!
+  accountId: ID!
+  createdAt: DateTime!
+}
+
+type Token {
+  accessToken: String!
+  tokenType: String!
+}
+
+# ─── Pagination ──────────────────────────────────────────────────────────────
+
+type PaginationMeta {
+  currentPage: Int!
+  totalCount: Int!
+  totalPages: Int!
+  perPage: Int!
+}
+
+# ─── Inputs ──────────────────────────────────────────────────────────────────
+
+input CreateConversationInput {
+  inboxId: ID!
+  contactId: ID!
+  assigneeId: ID
+  teamId: ID
+  subject: String
+  message: MessageInput
+  labels: [String!]
+  customAttributes: JSON
+}
+
+input MessageInput {
+  content: String!
+  private: Boolean
+  contentType: MessageContentType
+  contentAttributes: JSON
+}
+
+input CreateContactInput {
+  name: String
+  email: String
+  phone: String
+  identifier: String
+  location: String
+  additionalAttributes: JSON
+}
+
+input UpdateContactInput {
+  name: String
+  email: String
+  phone: String
+  identifier: String
+  location: String
+  additionalAttributes: JSON
+}
+
+input CreateAgentInput {
+  name: String!
+  email: String!
+  role: AgentRole!
+  availabilityStatus: String
+}
+
+input UpdateAgentInput {
+  name: String
+  role: AgentRole
+  availabilityStatus: String
+}
+
+input CreateLabelInput {
+  title: String!
+  description: String
+  color: String!
+  showOnSidebar: Boolean
+}
+
+input CreateWebhookInput {
+  url: String!
+  subscriptions: [WebhookEventName!]!
+}
+
+input UpdateWebhookInput {
+  url: String
+  subscriptions: [WebhookEventName!]
+}
+
+input CreateCannedResponseInput {
+  name: String!
+  content: String!
+}
+
+input CreateTeamInput {
+  name: String!
+  description: String
+}
+
+input AssignConversationInput {
+  conversationId: ID!
+  assigneeId: ID
+  teamId: ID
+}
+
+# ─── Query ───────────────────────────────────────────────────────────────────
+
+type Query {
+  # Account
+  account(id: ID!): Account
+  accountDetails(id: ID!): AccountDetails
+
+  # Inboxes
+  inboxes(accountId: ID!): [Inbox!]!
+  inbox(accountId: ID!, id: ID!): Inbox
+
+  # Contacts
+  contacts(accountId: ID!, page: Int, q: String): ContactConnection!
+  contact(accountId: ID!, id: ID!): Contact
+  contactNotes(accountId: ID!, contactId: ID!): [ContactNote!]!
+  contactConversations(accountId: ID!, contactId: ID!): [Conversation!]!
+
+  # Conversations
+  conversations(accountId: ID!, status: ConversationStatus, page: Int): ConversationConnection!
+  conversation(accountId: ID!, id: ID!): Conversation
+  conversationMessages(accountId: ID!, conversationId: ID!): [Message!]!
+
+  # Agents
+  agents(accountId: ID!): [Agent!]!
+  agent(accountId: ID!, id: ID!): Agent
+
+  # Teams
+  teams(accountId: ID!): [Team!]!
+  team(accountId: ID!, id: ID!): Team
+  teamAgents(accountId: ID!, teamId: ID!): [Agent!]!
+
+  # Labels
+  labels(accountId: ID!): [Label!]!
+
+  # Reports
+  accountReport(accountId: ID!, type: ReportMetricType!, since: DateTime, until: DateTime): Report
+  conversationReport(accountId: ID!, conversationId: ID!): ConversationReport
+
+  # Canned Responses
+  cannedResponses(accountId: ID!, search: String): [CannedResponse!]!
+
+  # Custom Attributes
+  customAttributes(accountId: ID!, attributeModel: CustomAttributeAttributeModel): [CustomAttribute!]!
+
+  # Webhooks
+  webhooks(accountId: ID!): [Webhook!]!
+  webhook(accountId: ID!, id: ID!): Webhook
+
+  # Templates
+  templates(accountId: ID!, inboxId: ID): [Template!]!
+
+  # Agent Bots
+  agentBots(accountId: ID!): [AgentBot!]!
+  agentBot(accountId: ID!, id: ID!): AgentBot
+}
+
+# ─── Mutation ────────────────────────────────────────────────────────────────
+
+type Mutation {
+  # Conversations
+  createConversation(accountId: ID!, input: CreateConversationInput!): Conversation!
+  updateConversationStatus(accountId: ID!, id: ID!, status: ConversationStatus!): Conversation!
+  assignConversation(accountId: ID!, input: AssignConversationInput!): Assignment!
+  addConversationLabel(accountId: ID!, conversationId: ID!, label: String!): Conversation!
+  removeConversationLabel(accountId: ID!, conversationId: ID!, label: String!): Conversation!
+
+  # Messages
+  createMessage(accountId: ID!, conversationId: ID!, input: MessageInput!): Message!
+  deleteMessage(accountId: ID!, conversationId: ID!, messageId: ID!): Boolean!
+
+  # Contacts
+  createContact(accountId: ID!, input: CreateContactInput!): Contact!
+  updateContact(accountId: ID!, id: ID!, input: UpdateContactInput!): Contact!
+  deleteContact(accountId: ID!, id: ID!): Boolean!
+  createContactNote(accountId: ID!, contactId: ID!, content: String!): ContactNote!
+  deleteContactNote(accountId: ID!, contactId: ID!, noteId: ID!): Boolean!
+
+  # Agents
+  createAgent(accountId: ID!, input: CreateAgentInput!): Agent!
+  updateAgent(accountId: ID!, id: ID!, input: UpdateAgentInput!): Agent!
+  deleteAgent(accountId: ID!, id: ID!): Boolean!
+
+  # Teams
+  createTeam(accountId: ID!, input: CreateTeamInput!): Team!
+  updateTeam(accountId: ID!, id: ID!, input: CreateTeamInput!): Team!
+  deleteTeam(accountId: ID!, id: ID!): Boolean!
+  addTeamAgents(accountId: ID!, teamId: ID!, agentIds: [ID!]!): [Agent!]!
+  removeTeamAgents(accountId: ID!, teamId: ID!, agentIds: [ID!]!): Boolean!
+
+  # Labels
+  createLabel(accountId: ID!, input: CreateLabelInput!): Label!
+  updateLabel(accountId: ID!, id: ID!, input: CreateLabelInput!): Label!
+  deleteLabel(accountId: ID!, id: ID!): Boolean!
+
+  # Webhooks
+  createWebhook(accountId: ID!, input: CreateWebhookInput!): Webhook!
+  updateWebhook(accountId: ID!, id: ID!, input: UpdateWebhookInput!): Webhook!
+  deleteWebhook(accountId: ID!, id: ID!): Boolean!
+
+  # Canned Responses
+  createCannedResponse(accountId: ID!, input: CreateCannedResponseInput!): CannedResponse!
+  updateCannedResponse(accountId: ID!, id: ID!, input: CreateCannedResponseInput!): CannedResponse!
+  deleteCannedResponse(accountId: ID!, id: ID!): Boolean!
+
+  # Agent Bots
+  createAgentBot(accountId: ID!, name: String!, outgoingUrl: String!, description: String): AgentBot!
+  updateAgentBot(accountId: ID!, id: ID!, name: String, outgoingUrl: String, description: String): AgentBot!
+  deleteAgentBot(accountId: ID!, id: ID!): Boolean!
+}
+
+# ─── Subscription ────────────────────────────────────────────────────────────
+
+type Subscription {
+  messageCreated(accountId: ID!, conversationId: ID!): Message!
+  conversationStatusChanged(accountId: ID!): Conversation!
+  conversationAssigned(accountId: ID!): Assignment!
+  contactCreated(accountId: ID!): Contact!
+  contactUpdated(accountId: ID!): Contact!
+}

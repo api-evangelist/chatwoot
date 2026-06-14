@@ -1,13 +1,11 @@
 aid: chatwoot
 name: Chatwoot
-description: >-
-  Chatwoot is an open-source customer support and omni-channel messaging
-  platform that provides REST APIs for managing conversations, contacts,
-  agents, teams, labels, and integrating customer communication workflows.
-  It supports live chat, email, WhatsApp, Facebook, Instagram, Telegram,
-  SMS, and more, with Application APIs for agent-level automation, Client
-  APIs for custom chat interfaces, and Platform APIs for managing
-  self-hosted installations at scale.
+description: Chatwoot is an open-source customer support and omni-channel messaging
+  platform that provides REST APIs for managing conversations, contacts, agents, teams,
+  labels, and integrating customer communication workflows. It supports live chat,
+  email, WhatsApp, Facebook, Instagram, Telegram, SMS, and more, with Application
+  APIs for agent-level automation, Client APIs for custom chat interfaces, and Platform
+  APIs for managing self-hosted installations at scale.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/chatwoot/refs/heads/main/apis.yml
 created: '2026-06-13'
@@ -15,113 +13,112 @@ modified: '2026-06-13'
 specificationVersion: '0.19'
 type: Index
 tags:
-  - Customer Support
-  - Messaging
-  - Live Chat
-  - Omni-channel
+- Customer Support
+- Messaging
+- Live Chat
+- Omni-channel
+- Conversations
+- Contacts
+- Agents
+- Open Source
+apis:
+- aid: chatwoot:application-api
+  name: Chatwoot Application API
+  description: The Application API enables agent and admin interactions with a Chatwoot
+    account, including managing conversations, contacts, inboxes, labels, teams, canned
+    responses, webhooks, and reports. Authenticated via user access tokens from Profile
+    Settings.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.chatwoot.com/api-reference/introduction
+  baseURL: https://app.chatwoot.com
+  tags:
   - Conversations
   - Contacts
   - Agents
-  - Open Source
-apis:
-  - aid: chatwoot:application-api
-    name: Chatwoot Application API
-    description: >-
-      The Application API enables agent and admin interactions with a Chatwoot
-      account, including managing conversations, contacts, inboxes, labels,
-      teams, canned responses, webhooks, and reports. Authenticated via user
-      access tokens from Profile Settings.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.chatwoot.com/api-reference/introduction
-    baseURL: https://app.chatwoot.com
-    tags:
-      - Conversations
-      - Contacts
-      - Agents
-      - Inboxes
-      - Labels
-      - Teams
-      - Webhooks
-      - Reports
-    properties:
-      - type: Documentation
-        url: https://developers.chatwoot.com/api-reference/introduction
-      - type: OpenAPI
-        url: https://www.chatwoot.com/swagger/swagger.json
-      - type: PostmanCollection
-        url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-    contact:
-      - FN: Chatwoot Support
-        url: https://www.chatwoot.com/help-center/
-  - aid: chatwoot:client-api
-    name: Chatwoot Client API
-    description: >-
-      The Client API is designed for building custom messaging interfaces for
-      end users. Authenticates using inbox identifiers and contact identifiers
-      rather than user tokens. Supports conversation creation, messaging, and
-      session management for widget integrations.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.chatwoot.com/api-reference/introduction
-    baseURL: https://app.chatwoot.com
-    tags:
-      - Conversations
-      - Widgets
-      - Sessions
-      - Contacts
-      - Messaging
-    properties:
-      - type: Documentation
-        url: https://developers.chatwoot.com/api-reference/introduction
-    contact:
-      - FN: Chatwoot Support
-        url: https://www.chatwoot.com/help-center/
-  - aid: chatwoot:platform-api
-    name: Chatwoot Platform API
-    description: >-
-      The Platform API is used to manage Chatwoot installations at the super
-      admin level, including managing accounts, users, and installation-wide
-      settings. Requires Platform App access tokens from the Super Admin
-      Console. Available only on self-hosted and managed hosting deployments.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.chatwoot.com/api-reference/introduction
-    baseURL: https://app.chatwoot.com
-    tags:
-      - Platform
-      - Accounts
-      - Users
-      - Administration
-      - Self-Hosted
-    properties:
-      - type: Documentation
-        url: https://developers.chatwoot.com/api-reference/introduction
-      - type: PostmanCollection
-        url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
-    contact:
-      - FN: Chatwoot Support
-        url: https://www.chatwoot.com/help-center/
-common:
-  - type: Website
-    url: https://www.chatwoot.com/
+  - Inboxes
+  - Labels
+  - Teams
+  - Webhooks
+  - Reports
+  properties:
   - type: Documentation
-    url: https://developers.chatwoot.com/
-  - type: GitHubOrg
-    url: https://github.com/chatwoot
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/chatwoot
-  - type: Blog
-    url: https://www.chatwoot.com/blog/
-  - type: Pricing
-    url: https://www.chatwoot.com/pricing/
-  - type: StatusPage
-    url: https://status.chatwoot.com/
-  - type: X
-    url: https://twitter.com/chatwootapp
-  - type: Plans
-    url: plans/chatwoot-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/chatwoot-rate-limits.yml
-  - type: FinOps
-    url: finops/chatwoot-finops.yml
+    url: https://developers.chatwoot.com/api-reference/introduction
+  - type: OpenAPI
+    url: https://www.chatwoot.com/swagger/swagger.json
+  - type: PostmanCollection
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+  - url: graphql/chatwoot-graphql.md
+    type: GraphQL
+  contact:
+  - FN: Chatwoot Support
+    url: https://www.chatwoot.com/help-center/
+- aid: chatwoot:client-api
+  name: Chatwoot Client API
+  description: The Client API is designed for building custom messaging interfaces
+    for end users. Authenticates using inbox identifiers and contact identifiers rather
+    than user tokens. Supports conversation creation, messaging, and session management
+    for widget integrations.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.chatwoot.com/api-reference/introduction
+  baseURL: https://app.chatwoot.com
+  tags:
+  - Conversations
+  - Widgets
+  - Sessions
+  - Contacts
+  - Messaging
+  properties:
+  - type: Documentation
+    url: https://developers.chatwoot.com/api-reference/introduction
+  contact:
+  - FN: Chatwoot Support
+    url: https://www.chatwoot.com/help-center/
+- aid: chatwoot:platform-api
+  name: Chatwoot Platform API
+  description: The Platform API is used to manage Chatwoot installations at the super
+    admin level, including managing accounts, users, and installation-wide settings.
+    Requires Platform App access tokens from the Super Admin Console. Available only
+    on self-hosted and managed hosting deployments.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.chatwoot.com/api-reference/introduction
+  baseURL: https://app.chatwoot.com
+  tags:
+  - Platform
+  - Accounts
+  - Users
+  - Administration
+  - Self-Hosted
+  properties:
+  - type: Documentation
+    url: https://developers.chatwoot.com/api-reference/introduction
+  - type: PostmanCollection
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
+  contact:
+  - FN: Chatwoot Support
+    url: https://www.chatwoot.com/help-center/
+common:
+- type: Website
+  url: https://www.chatwoot.com/
+- type: Documentation
+  url: https://developers.chatwoot.com/
+- type: GitHubOrg
+  url: https://github.com/chatwoot
+- type: LinkedIn
+  url: https://www.linkedin.com/company/chatwoot
+- type: Blog
+  url: https://www.chatwoot.com/blog/
+- type: Pricing
+  url: https://www.chatwoot.com/pricing/
+- type: StatusPage
+  url: https://status.chatwoot.com/
+- type: X
+  url: https://twitter.com/chatwootapp
+- type: Plans
+  url: plans/chatwoot-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/chatwoot-rate-limits.yml
+- type: FinOps
+  url: finops/chatwoot-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
