@@ -6,7 +6,7 @@ description: Chatwoot is an open-source customer support and omni-channel messag
   email, WhatsApp, Facebook, Instagram, Telegram, SMS, and more, with Application
   APIs for agent-level automation, Client APIs for custom chat interfaces, and Platform
   APIs for managing self-hosted installations at scale.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/chatwoot/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -28,7 +28,7 @@ apis:
     account, including managing conversations, contacts, inboxes, labels, teams, canned
     responses, webhooks, and reports. Authenticated via user access tokens from Profile
     Settings.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
@@ -58,7 +58,7 @@ apis:
     for end users. Authenticates using inbox identifiers and contact identifiers rather
     than user tokens. Supports conversation creation, messaging, and session management
     for widget integrations.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
@@ -79,7 +79,7 @@ apis:
     admin level, including managing accounts, users, and installation-wide settings.
     Requires Platform App access tokens from the Super Admin Console. Available only
     on self-hosted and managed hosting deployments.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
