@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/chatwoot-application-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: userApiKey
+  type: apiKey
+  in: header
+  parameter: api_access_token
+  description: This token can be obtained by visiting the profile page or via rails console.
+    Provides access to  endpoints based on the user permissions levels. This token can be saved
+    by an external system when user is created via API, to perform activities on behalf of the
+    user.
+  sources:
+  - openapi/chatwoot-application-api-openapi.yml
