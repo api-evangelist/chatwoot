@@ -2,17 +2,11 @@
   "repo": "chatwoot",
   "feeds": [
     {
-      "source": "https://www.chatwoot.com/blog/",
-      "feed_url": "",
-      "saved": 0,
-      "method": "agent-scrape"
-    },
-    {
       "source": "https://www.linkedin.com/company/chatwoot",
       "error": "HTTPError"
     }
   ],
   "post_count": 1,
-  "fetched": "2026-06-27T12:31:48Z",
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
