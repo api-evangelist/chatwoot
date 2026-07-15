@@ -97,6 +97,8 @@ apis:
   - FN: Chatwoot Support
     url: https://www.chatwoot.com/help-center/
 common:
+- type: AgenticAccess
+  url: agentic-access/chatwoot-agentic-access.yml
 - type: DomainSecurity
   url: security/chatwoot-domain-security.yml
 - type: Authentication
