@@ -1,0 +1,329 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Agents API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Agents
+  description: Agent management APIs
+paths:
+  /api/v1/accounts/{account_id}/agents:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Agents
+      operationId: get-account-agents
+      summary: List Agents in Account
+      description: Get Details of Agents in an Account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of all active agents
+                items:
+                  $ref: '#/components/schemas/agent'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Agents
+      operationId: add-new-agent-to-account
+      summary: Add a New Agent
+      description: Add a new Agent to Account
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent_create_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agent'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/agents/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    patch:
+      tags:
+      - Agents
+      operationId: update-agent-in-account
+      summary: Update Agent in Account
+      description: Update an Agent in Account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the agent to be updated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agent'
+        '404':
+          description: Agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Agents
+      operationId: delete-agent-from-account
+      summary: Remove an Agent from Account
+      description: Remove an Agent from Account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the agent to be deleted.
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    agent_create_payload:
+      type: object
+      required:
+      - name
+      - email
+      - role
+      properties:
+        name:
+          type: string
+          description: Full Name of the agent
+          example: John Doe
+        email:
+          type: string
+          description: Email of the Agent
+          example: john.doe@acme.inc
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          nullable: true
+          type: integer
+          description: The custom role id of the agent
+    agent_update_payload:
+      type: object
+      required:
+      - role
+      properties:
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

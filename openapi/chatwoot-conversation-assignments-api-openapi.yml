@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Conversation Assignments API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Conversation Assignments
+  description: Manage conversation assignments
+paths:
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/assignments:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversation Assignments
+      operationId: assign-a-conversation
+      summary: Assign Conversation
+      description: Assign a conversation to an agent or a team
+      security:
+      - userApiKey: []
+      - agentBotApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: number
+                  description: Id of the assignee user
+                  example: 1
+                team_id:
+                  type: number
+                  description: Id of the team. If the assignee_id is present, this param would be ignored
+                  example: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+        access_token:
+          type: string
+        account_id:
+          type: number
+        available_name:
+          type: string
+        avatar_url:
+          type: string
+        confirmed:
+          type: boolean
+        display_name:
+          nullable: true
+          type: string
+        message_signature:
+          nullable: true
+          type: string
+        email:
+          type: string
+        hmac_identifier:
+          type: string
+        inviter_id:
+          nullable: true
+          type: number
+        name:
+          type: string
+        provider:
+          type: string
+        pubsub_token:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        ui_settings:
+          type: object
+        uid:
+          type: string
+        type:
+          nullable: true
+          type: string
+        custom_attributes:
+          type: object
+          description: Available for users who are created through platform APIs and has custom attributes associated.
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              status:
+                type: string
+              active_at:
+                nullable: true
+                type: string
+                format: date-time
+              role:
+                type: string
+                enum:
+                - administrator
+                - agent
+              permissions:
+                type: array
+                items:
+                  type: string
+              availability:
+                type: string
+              availability_status:
+                type: string
+              auto_offline:
+                type: boolean
+              custom_role_id:
+                nullable: true
+                type: number
+              custom_role:
+                nullable: true
+                type: object
+  parameters:
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

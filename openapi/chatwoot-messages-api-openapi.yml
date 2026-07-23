@@ -1,0 +1,658 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Messages API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Messages
+  description: Message management APIs
+paths:
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    get:
+      tags:
+      - Messages
+      operationId: list-all-messages
+      summary: Get messages
+      security:
+      - userApiKey: []
+      description: List all messages of a conversation
+      parameters:
+      - name: after
+        in: query
+        schema:
+          type: integer
+        description: Fetch messages after the message with this ID. Returns up to 100 messages in ascending order.
+      - name: before
+        in: query
+        schema:
+          type: integer
+        description: Fetch messages before the message with this ID. Returns up to 20 messages in ascending order.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      labels:
+                        type: array
+                        items:
+                          type: string
+                      additional_attributes:
+                        type: object
+                      contact:
+                        $ref: '#/components/schemas/contact'
+                      assignee:
+                        $ref: '#/components/schemas/agent'
+                      agent_last_seen_at:
+                        nullable: true
+                        type: string
+                        format: date-time
+                      assignee_last_seen_at:
+                        nullable: true
+                        type: string
+                        format: date-time
+                  payload:
+                    type: array
+                    description: Array of messages
+                    items:
+                      $ref: '#/components/schemas/message'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Messages
+      operationId: create-a-new-message-in-a-conversation
+      summary: Create New Message
+      description: "Create a new message in the conversation.\n\nUse `application/json` for text messages and `multipart/form-data` when the\nmessage includes file attachments.\n\n### Multipart attachment request\n\nSend files with the `attachments[]` form field. `curl -F` sets the\n`multipart/form-data` content type and boundary automatically.\n\n```bash\ncurl -X POST \"https://app.chatwoot.com/api/v1/accounts/{account_id}/conversations/{conversation_id}/messages\" \\\n  -H \"api_access_token: <your-api-token>\" \\\n  -F \"content=Here is the screenshot\" \\\n  -F \"message_type=outgoing\" \\\n  -F \"private=false\" \\\n  -F \"attachments[]=@/path/to/screenshot.png\"\n```\n\n## WhatsApp Template Messages\n\nFor WhatsApp channels, you can send structured template messages using the `template_params` field. \nTemplates must be pre-approved in WhatsApp Business Manager.\n\n### Example Templates\n\n**Text with Image Header:**\n```json\n{\n  \"content\": \"Hi your order 121212 is confirmed. Please wait for further updates\",\n  \"template_params\": {\n    \"name\": \"order_confirmation\",\n    \"category\": \"MARKETING\",\n    \"language\": \"en\",\n    \"processed_params\": {\n      \"body\": {\n        \"1\": \"121212\"\n      },\n      \"header\": {\n        \"media_url\": \"https://picsum.photos/200/300\",\n        \"media_type\": \"image\"\n      }\n    }\n  }\n}\n```\n\n**Text with Copy Code Button:**\n```json\n{\n  \"content\": \"Special offer! Get 30% off your next purchase. Use the code below\",\n  \"template_params\": {\n    \"name\": \"discount_coupon\",\n    \"category\": \"MARKETING\",\n    \"language\": \"en\",\n    \"processed_params\": {\n      \"body\": {\n        \"discount_percentage\": \"30\"\n      },\n      \"buttons\": [{\n        \"type\": \"copy_code\",\n        \"parameter\": \"SAVE20\"\n      }]\n    }\n  }\n}\n```\n"
+      security:
+      - userApiKey: []
+      - agentBotApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversation_message_create_payload'
+          multipart/form-data:
+            schema:
+              type: object
+              description: Form data payload for creating a message with file attachments.
+              example:
+                content: Here is the screenshot
+                message_type: outgoing
+                private: false
+                attachments[]:
+                - screenshot.png
+              properties:
+                content:
+                  type: string
+                  description: The content of the message
+                  example: Here is the screenshot
+                message_type:
+                  type: string
+                  enum:
+                  - outgoing
+                  - incoming
+                  description: The type of the message
+                  example: outgoing
+                private:
+                  type: boolean
+                  description: Flag to identify if it is a private note
+                  example: false
+                content_type:
+                  type: string
+                  enum:
+                  - text
+                  - input_email
+                  - cards
+                  - input_select
+                  - form
+                  - article
+                  description: Content type of the message
+                  example: text
+                content_attributes:
+                  type: object
+                  description: Attributes based on the content type
+                  example: {}
+                attachments[]:
+                  type: array
+                  description: Files to attach to the message
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              attachments[]:
+                style: form
+                explode: true
+            examples:
+              attachment_message:
+                summary: Message with an attachment
+                value:
+                  content: Here is the screenshot
+                  message_type: outgoing
+                  private: false
+                  attachments[]:
+                  - screenshot.png
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/generic_id'
+                - $ref: '#/components/schemas/message'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages/{message_id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    - $ref: '#/components/parameters/message_id'
+    delete:
+      tags:
+      - Messages
+      operationId: delete-a-message
+      summary: Delete a message
+      security:
+      - userApiKey: []
+      description: Delete a message and it's attachments from the conversation.
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The message or conversation does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    contact:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    contact_inboxes:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Contact Inbox Source Id
+        inbox:
+          $ref: '#/components/schemas/inbox_contact'
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          nullable: true
+          type: integer
+          description: The custom role id of the agent
+    conversation_message_create_payload:
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          type: string
+          description: The content of the message
+          example: Hello, how can I help you?
+        message_type:
+          type: string
+          enum:
+          - outgoing
+          - incoming
+          description: The type of the message
+          example: outgoing
+        private:
+          type: boolean
+          description: Flag to identify if it is a private note
+          example: false
+        content_type:
+          type: string
+          enum:
+          - text
+          - input_email
+          - cards
+          - input_select
+          - form
+          - article
+          description: Content type of the message
+          example: text
+        content_attributes:
+          type: object
+          description: Attributes based on the content type
+          example: {}
+        campaign_id:
+          type: integer
+          description: The campaign id to which the message belongs
+          example: 1
+        template_params:
+          type: object
+          description: WhatsApp template parameters for sending structured messages
+          required:
+          - name
+          - category
+          - language
+          - processed_params
+          properties:
+            name:
+              type: string
+              description: Name of the WhatsApp template (must be approved in WhatsApp Business Manager)
+              example: purchase_receipt
+            category:
+              type: string
+              enum:
+              - UTILITY
+              - MARKETING
+              - SHIPPING_UPDATE
+              - TICKET_UPDATE
+              - ISSUE_RESOLUTION
+              description: Category of the template
+              example: UTILITY
+            language:
+              type: string
+              description: Language code of the template (BCP 47 format)
+              example: en_US
+            processed_params:
+              type: object
+              description: Processed template parameters organized by component type
+              properties:
+                body:
+                  type: object
+                  description: Body component parameters with variable placeholders
+                  additionalProperties:
+                    type: string
+                  example:
+                    '1': Visa
+                    '2': Nike
+                    '3': Bill
+                header:
+                  type: object
+                  description: Header component parameters for media templates
+                  properties:
+                    media_url:
+                      type: string
+                      format: uri
+                      description: Publicly accessible URL for IMAGE, VIDEO, or DOCUMENT headers
+                      example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+                    media_type:
+                      type: string
+                      enum:
+                      - image
+                      - video
+                      - document
+                      description: Type of media for the header
+                      example: document
+                buttons:
+                  type: array
+                  description: Button component parameters for interactive templates
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - url
+                        - copy_code
+                        description: Type of button parameter
+                      parameter:
+                        type: string
+                        description: Dynamic parameter value for the button
+                        example: SSFSDFSD
+    inbox_contact:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        channel_id:
+          type: number
+          description: The ID of the channel
+        name:
+          type: string
+          description: The name of the inbox
+        channel_type:
+          type: string
+          description: The type of the inbox
+        provider:
+          type: string
+          description: The provider of the inbox
+    message:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the message
+        content:
+          type: string
+          description: The text content of the message
+        account_id:
+          type: number
+          description: The ID of the account
+        inbox_id:
+          type: number
+          description: The ID of the inbox
+        conversation_id:
+          type: number
+          description: The ID of the conversation
+        message_type:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: The type of the message
+        created_at:
+          type: integer
+          description: The time at which message was created
+        updated_at:
+          type: integer
+          description: The time at which message was updated
+        private:
+          type: boolean
+          description: The flags which shows whether the message is private or not
+        status:
+          nullable: true
+          type: string
+          enum:
+          - sent
+          - delivered
+          - read
+          - failed
+          - null
+          description: The status of the message
+        source_id:
+          nullable: true
+          type: string
+          description: The source ID of the message
+        content_type:
+          nullable: true
+          type: string
+          enum:
+          - text
+          - input_text
+          - input_textarea
+          - input_email
+          - input_select
+          - cards
+          - form
+          - article
+          - incoming_email
+          - input_csat
+          - integrations
+          - sticker
+          - voice_call
+          - null
+          description: The type of the template message
+        content_attributes:
+          type: object
+          description: The content attributes for each content_type
+        sender_type:
+          nullable: true
+          type: string
+          enum:
+          - Contact
+          - User
+          - AgentBot
+          - Captain::Assistant
+          - null
+          description: The type of the sender
+        sender_id:
+          nullable: true
+          type: number
+          description: The ID of the sender
+        external_source_ids:
+          type: object
+          description: The external source IDs of the message
+        additional_attributes:
+          type: object
+          description: The additional attributes of the message
+        processed_message_content:
+          nullable: true
+          type: string
+          description: The processed message content
+        sentiment:
+          nullable: true
+          type: object
+          description: The sentiment of the message
+        conversation:
+          nullable: true
+          type: object
+          description: The conversation object
+        attachment:
+          nullable: true
+          type: object
+          description: The file object attached to the image
+        sender:
+          type: object
+          description: User/Agent/AgentBot object
+  parameters:
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

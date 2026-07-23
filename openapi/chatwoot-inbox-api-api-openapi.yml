@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Inbox API API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Inbox API
+paths:
+  /public/api/v1/inboxes/{inbox_identifier}:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    get:
+      tags:
+      - Inbox API
+      operationId: get-details-of-a-inbox
+      summary: Inbox details
+      description: Get the details of an inbox
+      security: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_inbox'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given inbox does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    public_inbox:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Inbox identifier
+        name:
+          type: string
+          description: Name of the inbox
+        timezone:
+          type: string
+          description: The timezone defined on the inbox
+        working_hours:
+          type: array
+          description: The working hours defined on the inbox
+          items:
+            type: object
+            properties:
+              day_of_week:
+                type: integer
+                description: Day of the week as a number. Sunday -> 0, Saturday -> 6
+              open_all_day:
+                type: boolean
+                description: Whether or not the business is open the whole day
+              closed_all_day:
+                type: boolean
+                description: Whether or not the business is closed the whole day
+              open_hour:
+                type: integer
+                description: Opening hour. Can be null if closed all day
+              open_minutes:
+                type: integer
+                description: Opening minute. Can be null if closed all day
+              close_hour:
+                type: integer
+                description: Closing hour. Can be null if closed all day
+              close_minutes:
+                type: integer
+                description: Closing minute. Can be null if closed all day
+        working_hours_enabled:
+          type: boolean
+          description: Whether of not the working hours are enabled on the inbox
+        csat_survey_enabled:
+          type: boolean
+          description: Whether of not the Customer Satisfaction survey is enabled on the inbox
+        greeting_enabled:
+          type: boolean
+          description: Whether of not the Greeting Message is enabled on the inbox
+        identity_validation_enabled:
+          type: boolean
+          description: Whether of not the User Identity Validation is enforced on the inbox
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  parameters:
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

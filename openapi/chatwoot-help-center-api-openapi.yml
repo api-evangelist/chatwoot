@@ -1,0 +1,805 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Help Center API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Help Center
+  description: Knowledge base management
+paths:
+  /api/v1/accounts/{account_id}/portals:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    post:
+      tags:
+      - Help Center
+      operationId: add-new-portal-to-account
+      summary: Add a new portal
+      description: Add a new portal to account
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/portal_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portal'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    get:
+      tags:
+      - Help Center
+      operationId: get-portal
+      summary: List all portals in an account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      description: Get details of portals in an Account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portal'
+              example:
+                payload:
+                - id: 4
+                  color: '#1F93FF'
+                  custom_domain: chatwoot.help
+                  header_text: Handbook
+                  homepage_link: https://www.chatwoot.com
+                  name: Handbook
+                  page_title: Handbook
+                  slug: handbook
+                  archived: false
+                  account_id: 1
+                  config:
+                    allowed_locales:
+                    - code: en
+                      articles_count: 32
+                      categories_count: 9
+                  inbox:
+                    id: 37
+                    avatar_url: https://example.com/avatar.png
+                    channel_id: 1
+                    name: Chatwoot
+                    channel_type: Channel::WebWidget
+                    greeting_enabled: true
+                    widget_color: '#1F93FF'
+                    website_url: chatwoot.com
+                  logo:
+                    id: 19399916
+                    portal_id: 4
+                    file_type: image/png
+                    account_id: 1
+                    file_url: https://example.com/logo.png
+                    blob_id: 21239614
+                    filename: square.png
+                  meta:
+                    all_articles_count: 0
+                    categories_count: 9
+                    default_locale: en
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/portals/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+    patch:
+      tags:
+      - Help Center
+      operationId: update-portal-to-account
+      summary: Update a portal
+      description: Update a portal to account
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/portal_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/portal_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portal_single'
+              example:
+                payload:
+                  id: 123
+                  archived: false
+                  color: '#1F93FF'
+                  config:
+                    allowed_locales:
+                    - code: en
+                      articles_count: 32
+                      categories_count: 9
+                  custom_domain: chatwoot.help
+                  header_text: Handbook
+                  homepage_link: https://www.chatwoot.com
+                  name: Handbook
+                  slug: handbook
+                  page_title: Handbook
+                  account_id: 123
+                  inbox:
+                    id: 123
+                    name: Chatwoot
+                    website_url: chatwoot.com
+                    channel_type: Channel::WebWidget
+                    avatar_url: https://example.com/avatar.png
+                    widget_color: '#1F93FF'
+                    website_token: 4cWzuf9i9jxN9tbnv8K9STKU
+                    enable_auto_assignment: true
+                    web_widget_script: <script>...</script>
+                    welcome_title: Hi there ! 🙌🏼
+                    welcome_tagline: We make it simple to connect with us.
+                    greeting_enabled: true
+                    greeting_message: Hey there 👋, Thank you for reaching out to us.
+                    channel_id: 123
+                    working_hours_enabled: true
+                    enable_email_collect: true
+                    csat_survey_enabled: true
+                    timezone: America/Los_Angeles
+                    business_name: Chatwoot
+                    hmac_mandatory: true
+                  logo:
+                    id: 123
+                    portal_id: 123
+                    file_type: image/png
+                    account_id: 123
+                    file_url: https://example.com/logo.png
+                    blob_id: 123
+                    filename: square.png
+                  meta:
+                    all_articles_count: 32
+                    categories_count: 9
+                    default_locale: en
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Portal not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/portals/{id}/categories:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+    post:
+      tags:
+      - Help Center
+      operationId: add-new-category-to-account
+      summary: Add a new category
+      description: Add a new category to portal
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/portals/{id}/articles:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+    post:
+      tags:
+      - Help Center
+      operationId: add-new-article-to-account
+      summary: Add a new article
+      description: Add a new article to portal
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/article_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/article'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    portal_meta:
+      type: object
+      properties:
+        all_articles_count:
+          type: integer
+          description: Total number of articles
+        archived_articles_count:
+          nullable: true
+          type: integer
+          description: Number of archived articles
+        published_count:
+          nullable: true
+          type: integer
+          description: Number of published articles
+        draft_articles_count:
+          nullable: true
+          type: integer
+          description: Number of draft articles
+        categories_count:
+          type: integer
+          description: Number of categories
+        default_locale:
+          type: string
+          description: Default locale for the portal
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+          description: The text content.
+        locale:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        position:
+          type: integer
+        portal_id:
+          type: integer
+        account_id:
+          type: integer
+        associated_category_id:
+          type: integer
+          description: To associate similar categories to each other, e.g same category of product documentation in different languages
+        parent_category_id:
+          type: integer
+          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
+    category_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the category
+          example: Category Name
+        description:
+          type: string
+          description: A description for the category
+          example: Category description
+        position:
+          type: integer
+          description: Category position in the portal list to sort
+          example: 1
+        slug:
+          type: string
+          description: The category slug used in the URL
+          example: category-name
+        locale:
+          type: string
+          description: The locale of the category
+          example: en
+        icon:
+          type: string
+          description: The icon of the category as a string (emoji)
+          example: 📚
+        parent_category_id:
+          type: integer
+          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
+          example: 1
+        associated_category_id:
+          type: integer
+          description: To associate similar categories to each other, e.g same category of product documentation in different languages
+          example: 2
+    article_create_update_payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the article
+          example: Article Title
+        slug:
+          type: string
+          description: The slug of the article
+          example: article-title
+        position:
+          type: integer
+          description: article position in category
+          example: 1
+        content:
+          type: string
+          description: The text content.
+          example: This is the content of the article
+        description:
+          type: string
+          description: The description of the article
+          example: This is the description of the article
+        category_id:
+          type: integer
+          description: The category id of the article
+          example: 1
+        author_id:
+          type: integer
+          description: The author agent id of the article
+          example: 1
+        associated_article_id:
+          type: integer
+          description: To associate similar articles to each other, e.g to provide the link for the reference.
+          example: 2
+        status:
+          type: integer
+          description: The status of the article. 0 for draft, 1 for published, 2 for archived
+          example: 1
+        locale:
+          type: string
+          description: The locale of the article
+          example: en
+        meta:
+          type: object
+          description: Use for search
+          example:
+            tags:
+            - article_name
+            title: article title
+            description: article description
+    portal_create_update_payload:
+      type: object
+      properties:
+        color:
+          type: string
+          description: Header color for help-center in hex format
+          example: '#FFFFFF'
+        custom_domain:
+          type: string
+          description: Custom domain to display help center.
+          example: chatwoot.help
+        header_text:
+          type: string
+          description: Help center header
+          example: Handbook
+        homepage_link:
+          type: string
+          description: link to main dashboard
+          example: https://www.chatwoot.com/
+        name:
+          type: string
+          description: Name for the portal
+          example: Handbook
+        page_title:
+          type: string
+          description: Page title for the portal
+          example: Handbook
+        slug:
+          type: string
+          description: Slug for the portal to display in link
+          example: handbook
+        archived:
+          type: boolean
+          description: Status to check if portal is live
+          example: false
+        config:
+          type: object
+          description: Configuration about supporting locales
+          example:
+            allowed_locales:
+            - en
+            - es
+            default_locale: en
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    article:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+          description: The text content.
+        meta:
+          type: object
+        position:
+          type: integer
+        status:
+          type: integer
+          enum:
+          - draft
+          - published
+          - archived
+        title:
+          type: string
+        slug:
+          type: string
+        views:
+          type: integer
+        portal_id:
+          type: integer
+        account_id:
+          type: integer
+        author_id:
+          type: integer
+        category_id:
+          type: integer
+        folder_id:
+          type: integer
+        associated_article_id:
+          type: integer
+          description: To associate similar articles to each other, e.g to provide the link for the reference.
+    portal_logo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the logo file
+        portal_id:
+          type: integer
+          description: ID of the portal this logo belongs to
+        file_type:
+          type: string
+          description: MIME type of the file
+        account_id:
+          type: integer
+          description: ID of the account
+        file_url:
+          type: string
+          description: URL to access the logo file
+        blob_id:
+          type: integer
+          description: ID of the blob
+        filename:
+          type: string
+          description: Name of the file
+    portal_config:
+      type: object
+      description: Configuration settings for the portal
+      properties:
+        allowed_locales:
+          type: array
+          description: List of allowed locales for the portal
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The language code
+              articles_count:
+                type: integer
+                description: Number of articles in this locale
+              categories_count:
+                type: integer
+                description: Number of categories in this locale
+    portal_item:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the portal
+        archived:
+          type: boolean
+          description: Whether the portal is archived
+        color:
+          type: string
+          description: The color code for the portal
+        config:
+          $ref: '#/components/schemas/portal_config'
+        custom_domain:
+          type: string
+          description: Custom domain for the portal
+        header_text:
+          type: string
+          description: The header text for the portal
+        homepage_link:
+          type: string
+          description: Homepage link for the portal
+        name:
+          type: string
+          description: Name of the portal
+        slug:
+          type: string
+          description: URL slug for the portal
+        page_title:
+          type: string
+          description: Page title for the portal
+        account_id:
+          type: integer
+          description: ID of the account the portal belongs to
+        inbox:
+          $ref: '#/components/schemas/inbox'
+        logo:
+          $ref: '#/components/schemas/portal_logo'
+        meta:
+          $ref: '#/components/schemas/portal_meta'
+    inbox:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the inbox
+        name:
+          type: string
+          description: The name of the inbox
+        website_url:
+          type: string
+          description: Website URL
+        channel_type:
+          type: string
+          description: The type of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        widget_color:
+          type: string
+          description: Widget Color used for customization of the widget
+        website_token:
+          type: string
+          description: Website Token
+        enable_auto_assignment:
+          type: boolean
+          description: The flag which shows whether Auto Assignment is enabled or not
+        web_widget_script:
+          type: string
+          description: Script used to load the website widget
+        welcome_title:
+          nullable: true
+          type: string
+          description: Welcome title to be displayed on the widget
+        welcome_tagline:
+          nullable: true
+          type: string
+          description: Welcome tagline to be displayed on the widget
+        greeting_enabled:
+          type: boolean
+          description: The flag which shows whether greeting is enabled
+        greeting_message:
+          nullable: true
+          type: string
+          description: A greeting message when the user starts the conversation
+        channel_id:
+          type: number
+          description: ID of the channel this inbox belongs to
+        working_hours_enabled:
+          type: boolean
+          description: The flag which shows whether working hours feature is enabled
+        enable_email_collect:
+          type: boolean
+          description: The flag to enable collecting email from contacts
+        csat_survey_enabled:
+          type: boolean
+          description: The flag to enable CSAT survey
+        auto_assignment_config:
+          type: object
+          description: Configuration settings for auto assignment
+        out_of_office_message:
+          nullable: true
+          type: string
+          description: Message to show when agents are out of office
+        working_hours:
+          type: array
+          description: Configuration for working hours of the inbox
+          items:
+            type: object
+            properties:
+              day_of_week:
+                type: number
+                description: Day of the week (0-6, where 0 is Sunday)
+              closed_all_day:
+                type: boolean
+                description: Whether the inbox is closed for the entire day
+              open_hour:
+                nullable: true
+                type: number
+                description: Hour when inbox opens (0-23)
+              open_minutes:
+                nullable: true
+                type: number
+                description: Minutes of the hour when inbox opens (0-59)
+              close_hour:
+                nullable: true
+                type: number
+                description: Hour when inbox closes (0-23)
+              close_minutes:
+                nullable: true
+                type: number
+                description: Minutes of the hour when inbox closes (0-59)
+              open_all_day:
+                type: boolean
+                description: Whether the inbox is open for the entire day
+        timezone:
+          type: string
+          description: Timezone configuration for the inbox
+        callback_webhook_url:
+          nullable: true
+          type: string
+          description: Webhook URL for callbacks
+        allow_messages_after_resolved:
+          type: boolean
+          description: Whether to allow messages after a conversation is resolved
+        lock_to_single_conversation:
+          type: boolean
+          description: Whether to lock a contact to a single conversation
+        sender_name_type:
+          type: string
+          description: Type of sender name to display (e.g., friendly)
+        business_name:
+          nullable: true
+          type: string
+          description: Business name associated with the inbox
+        hmac_mandatory:
+          type: boolean
+          description: Whether HMAC verification is mandatory
+        selected_feature_flags:
+          nullable: true
+          type: array
+          description: Selected feature flags for the inbox
+          items:
+            type: string
+        reply_time:
+          type: string
+          description: Expected reply time
+        messaging_service_sid:
+          nullable: true
+          type: string
+          description: Messaging service SID for SMS providers
+        phone_number:
+          nullable: true
+          type: string
+          description: Phone number associated with the inbox
+        medium:
+          type: string
+          description: Medium of communication (e.g., sms, email)
+        provider:
+          nullable: true
+          type: string
+          description: Provider of the channel
+    portal:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/portal_item'
+    portal_single:
+      type: object
+      properties:
+        payload:
+          $ref: '#/components/schemas/portal_item'
+  parameters:
+    portal_id:
+      in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: The slug identifier of the portal
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

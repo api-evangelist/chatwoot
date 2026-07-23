@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Accounts API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Accounts
+  description: Account management APIs
+paths:
+  /platform/api/v1/accounts:
+    post:
+      tags:
+      - Accounts
+      operationId: create-an-account
+      summary: Create an Account
+      description: Create an Account
+      security:
+      - platformAppApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/platform_account'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /platform/api/v1/accounts/{account_id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Accounts
+      operationId: get-details-of-an-account
+      summary: Get an account details
+      description: Get the details of an account
+      security:
+      - platformAppApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/platform_account'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given account does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Accounts
+      operationId: update-an-account
+      summary: Update an account
+      description: Update an account's attributes
+      security:
+      - platformAppApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/platform_account'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Accounts
+      operationId: delete-an-account
+      summary: Delete an Account
+      description: Delete an Account
+      security:
+      - platformAppApiKey: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The account does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    platform_account:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Account ID
+        name:
+          type: string
+          description: Name of the account
+    account_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the account
+          example: My Account
+        locale:
+          type: string
+          description: The locale of the account
+          example: en
+        domain:
+          type: string
+          description: The domain of the account
+          example: example.com
+        support_email:
+          type: string
+          description: The support email of the account
+          example: support@example.com
+        status:
+          type: string
+          enum:
+          - active
+          - suspended
+          description: The status of the account
+          example: active
+        limits:
+          type: object
+          description: The limits of the account
+          example: {}
+        custom_attributes:
+          type: object
+          description: The custom attributes of the account
+          example: {}
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot AgentBots Account API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Account
+paths:
+  /api/v1/accounts/{account_id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Account
+      operationId: get-account-details
+      summary: Get account details
+      description: Get the details of the current account
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_show_response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Account
+      operationId: update-account
+      summary: Update account
+      description: Update account details, settings, and custom attributes
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_update_payload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/account_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_detail'
+        '401':
+          description: Unauthorized (requires administrator role)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    account_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the account
+          example: My Account
+        locale:
+          type: string
+          description: The locale of the account
+          example: en
+        domain:
+          type: string
+          description: The domain of the account
+          example: example.com
+        support_email:
+          type: string
+          description: The support email of the account
+          example: support@example.com
+        auto_resolve_after:
+          nullable: true
+          type: integer
+          minimum: 10
+          maximum: 1439856
+          description: Auto resolve conversations after specified minutes
+          example: 1440
+        auto_resolve_message:
+          nullable: true
+          type: string
+          description: Message to send when auto resolving
+          example: This conversation has been automatically resolved due to inactivity
+        auto_resolve_ignore_waiting:
+          nullable: true
+          type: boolean
+          description: Whether to ignore waiting conversations for auto resolve
+          example: false
+        industry:
+          type: string
+          description: Industry type
+          example: Technology
+        company_size:
+          type: string
+          description: Company size
+          example: 50-100
+        timezone:
+          type: string
+          description: Account timezone
+          example: UTC
+    account_show_response:
+      allOf:
+      - $ref: '#/components/schemas/account_detail'
+      - type: object
+        properties:
+          latest_chatwoot_version:
+            nullable: true
+            type: string
+            description: Latest version of Chatwoot available
+            example: 3.0.0
+          subscribed_features:
+            type: array
+            items:
+              type: string
+            description: List of subscribed enterprise features (if enterprise edition is enabled)
+    account_detail:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Account ID
+        name:
+          type: string
+          description: Name of the account
+        locale:
+          type: string
+          description: The locale of the account
+        domain:
+          type: string
+          description: The domain of the account
+        support_email:
+          type: string
+          description: The support email of the account
+        status:
+          type: string
+          description: The status of the account
+        created_at:
+          type: string
+          format: date-time
+          description: The creation date of the account
+        cache_keys:
+          type: object
+          description: Cache keys for the account
+        features:
+          type: object
+          description: Enabled features for the account
+        settings:
+          type: object
+          description: Account settings
+          properties:
+            auto_resolve_after:
+              type: number
+              description: Auto resolve conversations after specified minutes
+            auto_resolve_message:
+              type: string
+              description: Message to send when auto resolving
+            auto_resolve_ignore_waiting:
+              type: boolean
+              description: Whether to ignore waiting conversations for auto resolve
+        custom_attributes:
+          type: object
+          description: Custom attributes of the account
+          properties:
+            plan_name:
+              nullable: true
+              type: string
+              description: Subscription plan name
+            subscribed_quantity:
+              nullable: true
+              type: number
+              description: Subscribed quantity
+            subscription_status:
+              nullable: true
+              type: string
+              description: Subscription status
+            subscription_ends_on:
+              nullable: true
+              type: string
+              format: date
+              description: Subscription end date
+            industry:
+              type: string
+              description: Industry type
+            company_size:
+              type: string
+              description: Company size
+            timezone:
+              type: string
+              description: Account timezone
+            logo:
+              type: string
+              description: Account logo URL
+            onboarding_step:
+              type: string
+              description: Current onboarding step
+            marked_for_deletion_at:
+              type: string
+              format: date-time
+              description: When account was marked for deletion
+            marked_for_deletion_reason:
+              type: string
+              description: Reason for account deletion
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

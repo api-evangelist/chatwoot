@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Account Users API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Account Users
+  description: Account user management APIs
+paths:
+  /platform/api/v1/accounts/{account_id}/account_users:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Account Users
+      operationId: list-all-account-users
+      summary: List all Account Users
+      description: List all account users
+      security:
+      - platformAppApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_user'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Account Users
+      operationId: create-an-account-user
+      summary: Create an Account User
+      description: Create an Account User
+      security:
+      - platformAppApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_user_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_id:
+                    type: integer
+                    description: The ID of the account
+                  user_id:
+                    type: integer
+                    description: The ID of the user
+                  role:
+                    type: string
+                    description: whether user is an administrator or agent
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Account Users
+      operationId: delete-an-account-user
+      summary: Delete an Account User
+      description: Delete an Account User
+      security:
+      - platformAppApiKey: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The account does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    account_user:
+      type: array
+      description: Array of account users
+      items:
+        type: object
+        properties:
+          account_id:
+            type: integer
+            description: The ID of the account
+          user_id:
+            type: integer
+            description: The ID of the user
+          role:
+            type: string
+            description: whether user is an administrator or agent
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    account_user_create_update_payload:
+      type: object
+      required:
+      - user_id
+      - role
+      properties:
+        user_id:
+          type: integer
+          description: The ID of the user
+          example: 1
+        role:
+          type: string
+          description: whether user is an administrator or agent
+          example: administrator
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

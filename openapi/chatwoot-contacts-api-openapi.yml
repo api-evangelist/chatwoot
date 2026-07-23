@@ -1,0 +1,1246 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Contacts API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Contacts
+  description: Contact management APIs
+paths:
+  /api/v1/accounts/{account_id}/contacts:
+    get:
+      tags:
+      - Contacts
+      operationId: contactList
+      description: Listing all the resolved contacts with pagination (Page size = 15). Resolved contacts are the ones with a value for identifier, email or phone number
+      summary: List Contacts
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/contact_sort_param'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts_list_response'
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Contacts
+      operationId: contactCreate
+      description: Create a new Contact
+      summary: Create Contact
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contact_create_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/extended_contact'
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: number
+      description: ID of the contact
+    get:
+      tags:
+      - Contacts
+      operationId: contactDetails
+      summary: Show Contact
+      security:
+      - userApiKey: []
+      description: Get a contact belonging to the account using ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_show_response'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    put:
+      tags:
+      - Contacts
+      operationId: contactUpdate
+      summary: Update Contact
+      security:
+      - userApiKey: []
+      description: Update a contact belonging to the account using ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contact_update_payload'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_base'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Contacts
+      operationId: contactDelete
+      summary: Delete Contact
+      security:
+      - userApiKey: []
+      description: Delete a contact belonging to the account using ID
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/{id}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: number
+      description: ID of the contact
+    get:
+      tags:
+      - Contacts
+      operationId: contactConversations
+      summary: Contact Conversations
+      description: Get conversations associated with that contact
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+        description: ID of the contact
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_conversations_response'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/search:
+    get:
+      tags:
+      - Contacts
+      operationId: contactSearch
+      description: Search the resolved contacts using a search key, currently supports email search (Page size = 15). Resolved contacts are the ones with a value for identifier, email or phone number
+      summary: Search Contacts
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search using contact `name`, `identifier`, `email` or `phone number`
+      - $ref: '#/components/parameters/contact_sort_param'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts_list_response'
+        '401':
+          description: Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/filter:
+    post:
+      tags:
+      - Contacts
+      operationId: contactFilter
+      description: Filter contacts with custom filter options and pagination
+      summary: Contact Filter
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - name: page
+        in: query
+        schema:
+          type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      attribute_key:
+                        type: string
+                        description: filter attribute name
+                      filter_operator:
+                        type: string
+                        description: filter operator name
+                        enum:
+                        - equal_to
+                        - not_equal_to
+                        - contains
+                        - does_not_contain
+                      values:
+                        type: array
+                        items:
+                          type: string
+                        description: array of the attribute values to filter
+                      query_operator:
+                        type: string
+                        description: query operator name
+                        enum:
+                        - AND
+                        - OR
+                  example:
+                  - attribute_key: name
+                    filter_operator: equal_to
+                    values:
+                    - en
+                    query_operator: AND
+                  - attribute_key: country_code
+                    filter_operator: equal_to
+                    values:
+                    - us
+                    query_operator: null
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contacts_list_response'
+        '400':
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/{id}/contact_inboxes:
+    post:
+      tags:
+      - Contacts
+      operationId: contactInboxCreation
+      description: Create a contact inbox record for an inbox
+      summary: Create contact inbox
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - name: id
+        in: path
+        schema:
+          type: number
+        description: ID of the contact
+        required: true
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - inbox_id
+              properties:
+                inbox_id:
+                  type: number
+                  description: The ID of the inbox
+                  example: 1
+                source_id:
+                  type: string
+                  description: Contact Inbox Source Id
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_inboxes'
+        '401':
+          description: Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '422':
+          description: Incorrect payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/contacts/{id}/contactable_inboxes:
+    get:
+      tags:
+      - Contacts
+      operationId: contactableInboxesGet
+      description: Get List of contactable Inboxes
+      summary: Get Contactable Inboxes
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - name: id
+        in: path
+        schema:
+          type: number
+        description: ID of the contact
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactable_inboxes_response'
+        '401':
+          description: Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '422':
+          description: Incorrect payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/actions/contact_merge:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    post:
+      tags:
+      - Contacts
+      operationId: contactMerge
+      summary: Merge Contacts
+      security:
+      - userApiKey: []
+      description: 'Merge two contacts into a single contact. The base contact remains and receives all
+
+        data from the mergee contact. After the merge, the mergee contact is permanently deleted.
+
+
+        This action is irreversible. All conversations, labels, and custom attributes from the
+
+        mergee contact will be moved to the base contact.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - base_contact_id
+              - mergee_contact_id
+              properties:
+                base_contact_id:
+                  type: integer
+                  description: ID of the contact that will remain after the merge and receive all data
+                  example: 1
+                mergee_contact_id:
+                  type: integer
+                  description: ID of the contact that will be merged into the base contact and deleted
+                  example: 2
+      responses:
+        '200':
+          description: Contacts merged successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_base'
+        '400':
+          description: Bad request - invalid contact IDs or contacts cannot be merged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: One or both contacts not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    contact_inboxes:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Contact Inbox Source Id
+        inbox:
+          $ref: '#/components/schemas/inbox_contact'
+    contact_inbox:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Source identifier for the contact inbox
+        inbox:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: ID of the inbox
+            avatar_url:
+              type: string
+              description: URL for the inbox avatar
+            channel_id:
+              type: integer
+              description: ID of the channel
+            name:
+              type: string
+              description: Name of the inbox
+            channel_type:
+              type: string
+              description: Type of channel
+            provider:
+              nullable: true
+              type: string
+              description: Provider of the inbox
+    extended_contact:
+      allOf:
+      - $ref: '#/components/schemas/contact'
+      - type: object
+        properties:
+          id:
+            type: number
+            description: Id of the user
+          availability_status:
+            type: string
+            enum:
+            - online
+            - offline
+            description: Availability status of the user
+    contacts_list_response:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/contact_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/contact_list_item'
+          description: List of contacts
+    inbox_contact:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        channel_id:
+          type: number
+          description: The ID of the channel
+        name:
+          type: string
+          description: The name of the inbox
+        channel_type:
+          type: string
+          description: The type of the inbox
+        provider:
+          type: string
+          description: The provider of the inbox
+    contact_base:
+      allOf:
+      - $ref: '#/components/schemas/generic_id'
+      - $ref: '#/components/schemas/contact'
+    contact_conversations_response:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/conversation'
+            - type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    sender:
+                      type: object
+                      properties:
+                        additional_attributes:
+                          type: object
+                          description: The additional attributes of the sender
+                        availability_status:
+                          type: string
+                          description: The availability status of the sender
+                        email:
+                          nullable: true
+                          type: string
+                          description: The email of the sender
+                        id:
+                          type: number
+                          description: ID fo the sender
+                        name:
+                          type: string
+                          description: The name of the sender
+                        phone_number:
+                          nullable: true
+                          type: string
+                          description: The phone number of the sender
+                        blocked:
+                          type: boolean
+                          description: Whether the sender is blocked
+                        identifier:
+                          nullable: true
+                          type: string
+                          description: The identifier of the sender
+                        thumbnail:
+                          nullable: true
+                          type: string
+                          description: Avatar URL of the contact
+                        custom_attributes:
+                          type: object
+                          description: The custom attributes of the sender
+                        last_activity_at:
+                          type: number
+                          description: The last activity at of the sender
+                        created_at:
+                          type: number
+                          description: The created at of the sender
+                    channel:
+                      type: string
+                      description: Channel Type
+                    assignee:
+                      $ref: '#/components/schemas/user'
+                    hmac_verified:
+                      type: boolean
+                      description: Whether the hmac is verified
+          description: List of conversations for the contact
+    contact:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
+    contactable_inboxes_response:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/contact_inbox'
+          description: List of contactable inboxes for the contact
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    contact_create_payload:
+      type: object
+      required:
+      - inbox_id
+      properties:
+        inbox_id:
+          type: number
+          description: ID of the inbox to which the contact belongs
+          example: 1
+        name:
+          type: string
+          description: name of the contact
+          example: Alice
+        email:
+          type: string
+          description: email of the contact
+          example: alice@acme.inc
+        blocked:
+          type: boolean
+          description: whether the contact is blocked or not
+          example: false
+        phone_number:
+          type: string
+          description: phone number of the contact
+          example: '+123456789'
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        avatar_url:
+          type: string
+          description: The url to a jpeg, png file for the contact avatar
+          example: https://example.com/avatar.png
+        identifier:
+          type: string
+          description: A unique identifier for the contact in external system
+          example: '1234567890'
+        additional_attributes:
+          type: object
+          description: An object where you can store additional attributes for contact. example {"type":"customer", "age":30}
+          example:
+            type: customer
+            age: 30
+        custom_attributes:
+          type: object
+          description: An object where you can store custom attributes for contact. example {"type":"customer", "age":30}, this should have a valid custom attribute definition.
+          example: {}
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+        access_token:
+          type: string
+        account_id:
+          type: number
+        available_name:
+          type: string
+        avatar_url:
+          type: string
+        confirmed:
+          type: boolean
+        display_name:
+          nullable: true
+          type: string
+        message_signature:
+          nullable: true
+          type: string
+        email:
+          type: string
+        hmac_identifier:
+          type: string
+        inviter_id:
+          nullable: true
+          type: number
+        name:
+          type: string
+        provider:
+          type: string
+        pubsub_token:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        ui_settings:
+          type: object
+        uid:
+          type: string
+        type:
+          nullable: true
+          type: string
+        custom_attributes:
+          type: object
+          description: Available for users who are created through platform APIs and has custom attributes associated.
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              status:
+                type: string
+              active_at:
+                nullable: true
+                type: string
+                format: date-time
+              role:
+                type: string
+                enum:
+                - administrator
+                - agent
+              permissions:
+                type: array
+                items:
+                  type: string
+              availability:
+                type: string
+              availability_status:
+                type: string
+              auto_offline:
+                type: boolean
+              custom_role_id:
+                nullable: true
+                type: number
+              custom_role:
+                nullable: true
+                type: object
+    message:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the message
+        content:
+          type: string
+          description: The text content of the message
+        account_id:
+          type: number
+          description: The ID of the account
+        inbox_id:
+          type: number
+          description: The ID of the inbox
+        conversation_id:
+          type: number
+          description: The ID of the conversation
+        message_type:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: The type of the message
+        created_at:
+          type: integer
+          description: The time at which message was created
+        updated_at:
+          type: integer
+          description: The time at which message was updated
+        private:
+          type: boolean
+          description: The flags which shows whether the message is private or not
+        status:
+          nullable: true
+          type: string
+          enum:
+          - sent
+          - delivered
+          - read
+          - failed
+          - null
+          description: The status of the message
+        source_id:
+          nullable: true
+          type: string
+          description: The source ID of the message
+        content_type:
+          nullable: true
+          type: string
+          enum:
+          - text
+          - input_text
+          - input_textarea
+          - input_email
+          - input_select
+          - cards
+          - form
+          - article
+          - incoming_email
+          - input_csat
+          - integrations
+          - sticker
+          - voice_call
+          - null
+          description: The type of the template message
+        content_attributes:
+          type: object
+          description: The content attributes for each content_type
+        sender_type:
+          nullable: true
+          type: string
+          enum:
+          - Contact
+          - User
+          - AgentBot
+          - Captain::Assistant
+          - null
+          description: The type of the sender
+        sender_id:
+          nullable: true
+          type: number
+          description: The ID of the sender
+        external_source_ids:
+          type: object
+          description: The external source IDs of the message
+        additional_attributes:
+          type: object
+          description: The additional attributes of the message
+        processed_message_content:
+          nullable: true
+          type: string
+          description: The processed message content
+        sentiment:
+          nullable: true
+          type: object
+          description: The sentiment of the message
+        conversation:
+          nullable: true
+          type: object
+          description: The conversation object
+        attachment:
+          nullable: true
+          type: object
+          description: The file object attached to the image
+        sender:
+          type: object
+          description: User/Agent/AgentBot object
+    contact_meta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of contacts
+        current_page:
+          type: string
+          description: Current page number
+    contact_show_response:
+      type: object
+      properties:
+        payload:
+          $ref: '#/components/schemas/contact_list_item'
+    contact_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name of the contact
+          example: Alice
+        email:
+          type: string
+          description: email of the contact
+          example: alice@acme.inc
+        blocked:
+          type: boolean
+          description: whether the contact is blocked or not
+          example: false
+        phone_number:
+          type: string
+          description: phone number of the contact
+          example: '+123456789'
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        avatar_url:
+          type: string
+          description: The url to a jpeg, png file for the contact avatar
+          example: https://example.com/avatar.png
+        identifier:
+          type: string
+          description: A unique identifier for the contact in external system
+          example: '1234567890'
+        additional_attributes:
+          type: object
+          description: An object where you can store additional attributes for contact. example {"type":"customer", "age":30}
+          example:
+            type: customer
+            age: 30
+        custom_attributes:
+          type: object
+          description: An object where you can store custom attributes for contact. example {"type":"customer", "age":30}, this should have a valid custom attribute definition.
+          example: {}
+    contact_list_item:
+      type: object
+      properties:
+        additional_attributes:
+          type: object
+          description: The object containing additional attributes related to the contact
+          properties:
+            city:
+              type: string
+              description: City of the contact
+            country:
+              type: string
+              description: Country of the contact
+            country_code:
+              nullable: true
+              type: string
+              description: Country code of the contact
+            created_at_ip:
+              type: string
+              description: IP address when the contact was created
+        availability_status:
+          type: string
+          description: Availability status of the contact
+          enum:
+          - online
+          - offline
+        email:
+          nullable: true
+          type: string
+          description: The email address of the contact
+        id:
+          type: integer
+          description: The ID of the contact
+        name:
+          type: string
+          description: The name of the contact
+        phone_number:
+          nullable: true
+          type: string
+          description: The phone number of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        identifier:
+          nullable: true
+          type: string
+          description: The identifier of the contact
+        thumbnail:
+          type: string
+          description: The thumbnail of the contact
+        custom_attributes:
+          type: object
+          description: The custom attributes of the contact
+        last_activity_at:
+          nullable: true
+          type: integer
+          description: Timestamp of last activity
+        created_at:
+          type: integer
+          description: Timestamp when contact was created
+        contact_inboxes:
+          type: array
+          description: List of inboxes associated with this contact
+          items:
+            $ref: '#/components/schemas/contact_inbox'
+    conversation:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the conversation
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/message'
+        account_id:
+          type: number
+          description: Account Id
+        uuid:
+          type: string
+          description: UUID of the conversation
+        additional_attributes:
+          type: object
+          description: The object containing additional attributes related to the conversation
+        agent_last_seen_at:
+          type: number
+          description: The last activity at of the agent
+        assignee_last_seen_at:
+          type: number
+          description: The last activity at of the assignee
+        can_reply:
+          type: boolean
+          description: Whether the conversation can be replied to
+        contact_last_seen_at:
+          type: number
+          description: The last activity at of the contact
+        custom_attributes:
+          type: object
+          description: The object to save custom attributes for conversation, accepts custom attributes key and value
+        inbox_id:
+          type: number
+          description: ID of the inbox
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels of the conversation
+        muted:
+          type: boolean
+          description: Whether the conversation is muted
+        snoozed_until:
+          nullable: true
+          type: number
+          description: The time at which the conversation will be unmuted
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          description: The status of the conversation
+        created_at:
+          type: number
+          description: The time at which conversation was created
+        updated_at:
+          type: number
+          description: The time at which conversation was updated
+        timestamp:
+          type: number
+          description: The time at which conversation was created
+        first_reply_created_at:
+          nullable: true
+          type: number
+          description: The time at which the first reply was created
+        unread_count:
+          type: number
+          description: The number of unread messages
+        last_non_activity_message:
+          oneOf:
+          - $ref: '#/components/schemas/message'
+          - type: 'null'
+          description: The last non activity message
+        last_activity_at:
+          type: number
+          description: The last activity at of the conversation
+        priority:
+          nullable: true
+          type: string
+          description: The priority of the conversation
+        waiting_since:
+          nullable: true
+          type: number
+          description: The time at which the conversation was waiting
+        sla_policy_id:
+          nullable: true
+          type: number
+          description: The ID of the SLA policy
+        applied_sla:
+          type: object
+          description: The applied SLA
+        sla_events:
+          type: array
+          items:
+            type: object
+            description: SLA event objects
+  parameters:
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    contact_sort_param:
+      in: query
+      name: sort
+      schema:
+        type: string
+        enum:
+        - name
+        - email
+        - phone_number
+        - last_activity_at
+        - -name
+        - -email
+        - -phone_number
+        - -last_activity_at
+      required: false
+      description: The attribute by which list should be sorted
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

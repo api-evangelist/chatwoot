@@ -1,0 +1,327 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Contacts API API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Contacts API
+  description: Public contact APIs
+paths:
+  /public/api/v1/inboxes/{inbox_identifier}/contacts:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    post:
+      tags:
+      - Contacts API
+      operationId: create-a-contact
+      summary: Create a contact
+      description: Create a contact
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/public_contact_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_contact'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    get:
+      tags:
+      - Contacts API
+      operationId: get-details-of-a-contact
+      summary: Get a contact
+      description: Get the details of a contact
+      security: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_contact'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given contact does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Contacts API
+      operationId: update-a-contact
+      summary: Update a contact
+      description: Update a contact's attributes
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/public_contact_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_contact_record'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    public_contact_record:
+      type: object
+      additionalProperties: true
+      description: Full serialized contact record returned when the public API renders a Contact model directly.
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        name:
+          nullable: true
+          type: string
+          description: Name of the contact when available
+        email:
+          nullable: true
+          type: string
+          description: Email of the contact
+        phone_number:
+          nullable: true
+          type: string
+          description: Phone number of the contact
+        identifier:
+          nullable: true
+          type: string
+          description: Identifier of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        additional_attributes:
+          nullable: true
+          type: object
+          description: Additional attributes of the contact when present
+        custom_attributes:
+          nullable: true
+          type: object
+          description: Custom attributes of the contact when present
+        contact_type:
+          nullable: true
+          type: string
+          description: Contact type of the contact when available
+        country_code:
+          nullable: true
+          type: string
+          description: Country code of the contact
+        last_activity_at:
+          nullable: true
+          type: string
+          description: Last activity timestamp of the contact in ISO 8601 format
+        created_at:
+          nullable: true
+          type: string
+          description: Created timestamp of the contact in ISO 8601 format
+        updated_at:
+          nullable: true
+          type: string
+          description: Updated timestamp of the contact in ISO 8601 format
+        last_name:
+          nullable: true
+          type: string
+          description: Last name of the contact
+        middle_name:
+          nullable: true
+          type: string
+          description: Middle name of the contact
+        location:
+          nullable: true
+          type: string
+          description: Location of the contact
+        account_id:
+          type: integer
+          description: Account id of the contact
+        company_id:
+          nullable: true
+          type: integer
+          description: Company id of the contact
+        label_list:
+          type: array
+          description: Labels applied to the contact
+          items:
+            type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    public_contact_create_update_payload:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: External identifier of the contact
+          example: '1234567890'
+        identifier_hash:
+          type: string
+          description: Identifier hash prepared for HMAC authentication
+          example: e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9
+        email:
+          type: string
+          description: Email of the contact
+          example: alice@acme.inc
+        name:
+          type: string
+          description: Name of the contact
+          example: Alice
+        phone_number:
+          type: string
+          description: Phone number of the contact
+          example: '+123456789'
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        custom_attributes:
+          type: object
+          description: Custom attributes of the customer
+          example: {}
+    public_contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        source_id:
+          type: string
+          description: The session identifier of the contact
+        name:
+          nullable: true
+          type: string
+          description: Name of the contact when available
+        email:
+          nullable: true
+          type: string
+          description: Email of the contact
+        phone_number:
+          nullable: true
+          type: string
+          description: Phone number of the contact
+        pubsub_token:
+          type: string
+          description: The token to be used to connect to chatwoot websocket
+  parameters:
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

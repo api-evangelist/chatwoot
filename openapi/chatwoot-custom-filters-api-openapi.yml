@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Custom Filters API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Custom Filters
+  description: Saved filters for conversations
+paths:
+  /api/v1/accounts/{account_id}/custom_filters:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: filter_type
+      schema:
+        type: string
+        enum:
+        - conversation
+        - contact
+        - report
+      required: false
+      description: The type of custom filter
+    get:
+      tags:
+      - Custom Filters
+      operationId: list-all-filters
+      summary: List all custom filters
+      description: List all custom filters in a category of a user
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of custom filters
+                items:
+                  $ref: '#/components/schemas/custom_filter'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Custom Filters
+      operationId: create-a-custom-filter
+      summary: Create a custom filter
+      description: Create a custom filter in the account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_filter_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_filter'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/custom_filters/{custom_filter_id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/custom_filter_id'
+    get:
+      tags:
+      - Custom Filters
+      operationId: get-details-of-a-single-custom-filter
+      summary: Get a custom filter details
+      description: Get the details of a custom filter in the account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_filter'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given team ID does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Custom Filters
+      operationId: update-a-custom-filter
+      summary: Update a custom filter
+      security:
+      - userApiKey: []
+      description: Update a custom filter's attributes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_filter_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_filter'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Custom Filters
+      operationId: delete-a-custom-filter
+      summary: Delete a custom filter
+      security:
+      - userApiKey: []
+      description: Delete a custom filter from the account
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The custom filter does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    custom_filter:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the custom filter
+        name:
+          type: string
+          description: The name of the custom filter
+        type:
+          type: string
+          enum:
+          - conversation
+          - contact
+          - report
+          description: The description about the custom filter
+        query:
+          type: object
+          description: A query that needs to be saved as a custom filter
+        created_at:
+          type: string
+          format: date-time
+          description: The time at which the custom filter was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The time at which the custom filter was updated
+    custom_filter_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the custom filter
+          example: My Custom Filter
+        type:
+          type: string
+          enum:
+          - conversation
+          - contact
+          - report
+          description: The description about the custom filter
+          example: conversation
+        query:
+          type: object
+          description: A query that needs to be saved as a custom filter
+          example: {}
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    custom_filter_id:
+      in: path
+      name: custom_filter_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the custom filter
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

@@ -1,0 +1,377 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Conversation API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Conversation
+paths:
+  /accounts/{account_id}/conversations/{conversation_id}/messages:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: conversation_id
+      in: path
+      description: ID of the conversation
+      required: true
+      schema:
+        type: number
+    get:
+      tags:
+      - Conversation
+      summary: Get messages from a conversation
+      description: Returns all messages from a specific conversation
+      operationId: getConversationMessages
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversation_messages'
+components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  schemas:
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          nullable: true
+          type: integer
+          description: The custom role id of the agent
+    message_detailed:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the message
+        content:
+          type: string
+          description: The text content of the message
+        inbox_id:
+          type: number
+          description: The ID of the inbox
+        conversation_id:
+          type: number
+          description: The ID of the conversation
+        message_type:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: 'The type of the message (0: incoming, 1: outgoing, 2: activity, 3: template)'
+        content_type:
+          type: string
+          enum:
+          - text
+          - input_text
+          - input_textarea
+          - input_email
+          - input_select
+          - cards
+          - form
+          - article
+          - incoming_email
+          - input_csat
+          - integrations
+          - sticker
+          - voice_call
+          description: The type of the message content
+        status:
+          type: string
+          enum:
+          - sent
+          - delivered
+          - read
+          - failed
+          description: The status of the message
+        content_attributes:
+          type: object
+          description: The content attributes for each content_type
+          properties:
+            in_reply_to:
+              nullable: true
+              type: string
+              description: ID of the message this is replying to
+        echo_id:
+          nullable: true
+          type: string
+          description: The echo ID of the message, used for deduplication
+        created_at:
+          type: integer
+          description: The timestamp when message was created
+        private:
+          type: boolean
+          description: The flag which shows whether the message is private or not
+        source_id:
+          nullable: true
+          type: string
+          description: The source ID of the message
+        sender:
+          $ref: '#/components/schemas/contact_detail'
+        attachments:
+          type: array
+          description: The list of attachments associated with the message
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: The ID of the attachment
+              message_id:
+                type: number
+                description: The ID of the message
+              file_type:
+                type: string
+                enum:
+                - image
+                - video
+                - audio
+                - file
+                - location
+                - fallback
+                - share
+                - story_mention
+                - contact
+                - ig_reel
+                description: The type of the attached file
+              account_id:
+                type: number
+                description: The ID of the account
+              data_url:
+                type: string
+                description: The URL of the attached file
+              thumb_url:
+                type: string
+                description: The thumbnail URL of the attached file
+              file_size:
+                type: number
+                description: The size of the attached file in bytes
+    conversation_meta:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels associated with the conversation
+        additional_attributes:
+          type: object
+          properties:
+            browser:
+              type: object
+              properties:
+                device_name:
+                  type: string
+                  description: Name of the device
+                browser_name:
+                  type: string
+                  description: Name of the browser
+                platform_name:
+                  type: string
+                  description: Name of the platform
+                browser_version:
+                  type: string
+                  description: Version of the browser
+                platform_version:
+                  type: string
+                  description: Version of the platform
+            referer:
+              type: string
+              description: Referrer URL
+            initiated_at:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                  description: Timestamp when the conversation was initiated
+            browser_language:
+              type: string
+              description: Browser language setting
+            conversation_language:
+              type: string
+              description: Conversation language
+          description: Additional attributes of the conversation
+        contact:
+          $ref: '#/components/schemas/contact_detail'
+        assignee:
+          allOf:
+          - $ref: '#/components/schemas/agent'
+          description: The agent assigned to the conversation
+          nullable: true
+        agent_last_seen_at:
+          nullable: true
+          type: string
+          description: Timestamp when the agent last saw the conversation
+        assignee_last_seen_at:
+          nullable: true
+          type: string
+          description: Timestamp when the assignee last saw the conversation
+    conversation_messages:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/conversation_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/message_detailed'
+          description: List of messages in the conversation
+    contact_detail:
+      type: object
+      properties:
+        additional_attributes:
+          type: object
+          description: The object containing additional attributes related to the contact
+          properties:
+            city:
+              type: string
+              description: City of the contact
+            country:
+              type: string
+              description: Country of the contact
+            country_code:
+              nullable: true
+              type: string
+              description: Country code of the contact
+            created_at_ip:
+              type: string
+              description: IP address when the contact was created
+        custom_attributes:
+          type: object
+          description: The custom attributes of the contact
+        email:
+          type: string
+          description: The email address of the contact
+        id:
+          type: integer
+          description: The ID of the contact
+        identifier:
+          nullable: true
+          type: string
+          description: The identifier of the contact
+        name:
+          type: string
+          description: The name of the contact
+        phone_number:
+          nullable: true
+          type: string
+          description: The phone number of the contact
+        thumbnail:
+          type: string
+          description: The thumbnail of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        type:
+          type: string
+          description: The type of entity
+          enum:
+          - contact
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

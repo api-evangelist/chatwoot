@@ -1,0 +1,260 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Canned Responses API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Canned Responses
+  description: Pre-defined responses for common queries
+paths:
+  /api/v1/accounts/{account_id}/canned_responses:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Canned Responses
+      operationId: get-account-canned-response
+      summary: List all Canned Responses in an Account
+      description: Get Details of Canned Responses in an Account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of all canned responses
+                items:
+                  $ref: '#/components/schemas/canned_response'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Canned Responses
+      operationId: add-new-canned-response-to-account
+      summary: Add a New Canned Response
+      description: Add a new Canned Response to Account
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/canned_response_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/canned_response'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/canned_responses/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    patch:
+      tags:
+      - Canned Responses
+      operationId: update-canned-response-in-account
+      summary: Update Canned Response in Account
+      description: Update a Canned Response in Account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the canned response to be updated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/canned_response_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/canned_response'
+        '404':
+          description: Agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Canned Responses
+      operationId: delete-canned-response-from-account
+      summary: Remove a Canned Response from Account
+      description: Remove a Canned Response from Account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the canned response to be deleted
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Canned Response not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    canned_response_create_update_payload:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Message content for canned response
+          example: Hello, {{contact.name}}! Welcome to our service.
+        short_code:
+          type: string
+          description: Short Code for quick access of the canned response
+          example: welcome
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    canned_response:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the canned response
+        account_id:
+          type: integer
+          description: Account Id
+        short_code:
+          type: string
+          description: Short Code for quick access of the canned response
+        content:
+          type: string
+          description: Message content for canned response
+        created_at:
+          type: string
+          description: The date and time when the canned response was created
+        updated_at:
+          type: string
+          description: The date and time when the canned response was updated
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

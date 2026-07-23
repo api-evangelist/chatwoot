@@ -1,0 +1,277 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Profile API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Profile
+  description: User profile APIs
+paths:
+  /api/v1/profile:
+    get:
+      tags:
+      - Profile
+      operationId: fetchProfile
+      summary: Fetch user profile
+      description: Get the user profile details
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    put:
+      tags:
+      - Profile
+      operationId: updateProfile
+      summary: Update user profile
+      description: Update the user profile details
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - profile
+              properties:
+                profile:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    display_name:
+                      type: string
+                    message_signature:
+                      type: string
+                    phone_number:
+                      type: string
+                    current_password:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    ui_settings:
+                      type: object
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - profile
+              properties:
+                profile:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    display_name:
+                      type: string
+                    message_signature:
+                      type: string
+                    phone_number:
+                      type: string
+                    current_password:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                    avatar:
+                      type: string
+                      format: binary
+                    ui_settings:
+                      type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+        access_token:
+          type: string
+        account_id:
+          type: number
+        available_name:
+          type: string
+        avatar_url:
+          type: string
+        confirmed:
+          type: boolean
+        display_name:
+          nullable: true
+          type: string
+        message_signature:
+          nullable: true
+          type: string
+        email:
+          type: string
+        hmac_identifier:
+          type: string
+        inviter_id:
+          nullable: true
+          type: number
+        name:
+          type: string
+        provider:
+          type: string
+        pubsub_token:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        ui_settings:
+          type: object
+        uid:
+          type: string
+        type:
+          nullable: true
+          type: string
+        custom_attributes:
+          type: object
+          description: Available for users who are created through platform APIs and has custom attributes associated.
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              status:
+                type: string
+              active_at:
+                nullable: true
+                type: string
+                format: date-time
+              role:
+                type: string
+                enum:
+                - administrator
+                - agent
+              permissions:
+                type: array
+                items:
+                  type: string
+              availability:
+                type: string
+              availability_status:
+                type: string
+              auto_offline:
+                type: boolean
+              custom_role_id:
+                nullable: true
+                type: number
+              custom_role:
+                nullable: true
+                type: object
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

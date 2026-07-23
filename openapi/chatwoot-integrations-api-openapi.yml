@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Integrations API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Integrations
+  description: Third-party integrations
+paths:
+  /api/v1/accounts/{account_id}/integrations/apps:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Integrations
+      operationId: get-details-of-all-integrations
+      summary: List all the Integrations
+      security:
+      - userApiKey: []
+      description: Get the details of all Integrations available for the account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: array
+                    description: Array of Integration apps
+                    items:
+                      $ref: '#/components/schemas/integrations_app'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Url not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/integrations/hooks:
+    post:
+      tags:
+      - Integrations
+      operationId: create-an-integration-hook
+      summary: Create an integration hook
+      description: Create an integration hook
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/integrations_hook_create_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/integrations_hook'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/integrations/hooks/{hook_id}:
+    patch:
+      tags:
+      - Integrations
+      operationId: update-an-integrations-hook
+      summary: Update an Integration Hook
+      description: Update an Integration Hook
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/hook_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/integrations_hook_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/integrations_hook'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Integrations
+      operationId: delete-an-integration-hook
+      summary: Delete an Integration Hook
+      description: Delete an Integration Hook
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/hook_id'
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The hook does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    integrations_hook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the integration hook
+        app_id:
+          type: string
+          description: The ID of the integration app
+        inbox_id:
+          type: string
+          description: Inbox ID if its an Inbox integration
+        account_id:
+          type: string
+          description: Account ID of the integration
+        status:
+          type: boolean
+          description: Whether the integration hook is enabled for the account
+        hook_type:
+          type: boolean
+          description: Whether its an account or inbox integration hook
+        settings:
+          type: object
+          description: The associated settings for the integration
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    integrations_app:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the integration
+        name:
+          type: string
+          description: The name of the integration
+        description:
+          type: string
+          description: The description about the team
+        hook_type:
+          type: string
+          description: Whether the integration is an account or inbox integration
+        enabled:
+          type: boolean
+          description: Whether the integration is enabled for the account
+        allow_multiple_hooks:
+          type: boolean
+          description: Whether multiple hooks can be created for the integration
+        hooks:
+          type: array
+          items:
+            type: object
+          description: If there are any hooks created for this integration
+    integrations_hook_create_payload:
+      type: object
+      properties:
+        app_id:
+          type: integer
+          description: The ID of app for which integration hook is being created
+          example: 1
+        inbox_id:
+          type: integer
+          description: The inbox ID, if the hook is an inbox hook
+          example: 1
+        status:
+          type: integer
+          description: The status of the integration (0 for inactive, 1 for active)
+          example: 1
+        settings:
+          type: object
+          description: The settings required by the integration
+          example: {}
+    integrations_hook_update_payload:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The status of the integration (0 for inactive, 1 for active)
+          example: 1
+        settings:
+          type: object
+          description: The settings required by the integration
+          example: {}
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    hook_id:
+      in: path
+      name: hook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the integration hook
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

@@ -1,0 +1,284 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Webhooks API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Webhooks
+  description: Event notification webhooks
+paths:
+  /api/v1/accounts/{account_id}/webhooks:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Webhooks
+      operationId: list-all-webhooks
+      summary: List all webhooks
+      security:
+      - userApiKey: []
+      description: List all webhooks in the account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of webhook objects
+                items:
+                  $ref: '#/components/schemas/webhook'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Webhooks
+      operationId: create-a-webhook
+      summary: Add a webhook
+      security:
+      - userApiKey: []
+      description: Add a webhook subscription to the account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhook_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/webhook'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/webhooks/{webhook_id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/webhook_id'
+    patch:
+      tags:
+      - Webhooks
+      operationId: update-a-webhook
+      summary: Update a webhook object
+      security:
+      - userApiKey: []
+      description: Update a webhook object in the account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/webhook_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/webhook'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Webhooks
+      operationId: delete-a-webhook
+      summary: Delete a webhook
+      security:
+      - userApiKey: []
+      description: Delete a webhook from the account
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: The webhook does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    webhook:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the webhook
+        url:
+          type: string
+          description: The url to which the events will be send
+        name:
+          type: string
+          description: The name of the webhook
+        subscriptions:
+          type: array
+          items:
+            type: string
+            enum:
+            - conversation_created
+            - conversation_status_changed
+            - conversation_updated
+            - contact_created
+            - contact_updated
+            - message_created
+            - message_updated
+            - webwidget_triggered
+            - conversation_typing_on
+            - conversation_typing_off
+          description: The list of subscribed events
+        secret:
+          type: string
+          nullable: true
+          description: Secret used to sign webhook requests. Signed webhook deliveries include `X-Chatwoot-Timestamp` and `X-Chatwoot-Signature`; the signature is `sha256=` followed by the HMAC-SHA256 of `{timestamp}.{raw_request_body}` using this secret. Deliveries also include `X-Chatwoot-Delivery` when a delivery id is available.
+        account_id:
+          type: number
+          description: The id of the account which the webhook object belongs to
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    webhook_create_update_payload:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The url where the events should be sent
+          example: https://example.com/webhook
+        name:
+          type: string
+          description: The name of the webhook
+        subscriptions:
+          type: array
+          items:
+            type: string
+            enum:
+            - conversation_created
+            - conversation_status_changed
+            - conversation_updated
+            - message_created
+            - message_updated
+            - contact_created
+            - contact_updated
+            - webwidget_triggered
+            - conversation_typing_on
+            - conversation_typing_off
+          description: The events you want to subscribe to.
+          example:
+          - conversation_created
+          - conversation_status_changed
+  parameters:
+    webhook_id:
+      in: path
+      name: webhook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the webhook
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

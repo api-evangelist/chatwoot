@@ -1,0 +1,358 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Custom Attributes API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Custom Attributes
+  description: Custom fields for contacts and conversations
+paths:
+  /api/v1/accounts/{account_id}/custom_attribute_definitions:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Custom Attributes
+      operationId: get-account-custom-attribute
+      summary: List all custom attributes in an account
+      parameters:
+      - name: attribute_model
+        in: query
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '1'
+        description: conversation_attribute(0)/contact_attribute(1)
+        required: true
+      description: Get details of custom attributes in an Account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of all custom attributes
+                items:
+                  $ref: '#/components/schemas/custom_attribute'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Custom Attributes
+      operationId: add-new-custom-attribute-to-account
+      summary: Add a new custom attribute
+      description: Add a new custom attribute to account
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_attribute_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_attribute'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/custom_attribute_definitions/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      schema:
+        type: number
+      description: ID of the custom attribute
+      required: true
+    get:
+      tags:
+      - Custom Attributes
+      operationId: get-details-of-a-single-custom-attribute
+      summary: Get a custom attribute details
+      security:
+      - userApiKey: []
+      description: Get the details of a custom attribute in the account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the custom attribute to be updated.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_attribute'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given attribute ID does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Custom Attributes
+      operationId: update-custom-attribute-in-account
+      summary: Update custom attribute in Account
+      description: Update a custom attribute in account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the custom attribute to be updated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_attribute_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_attribute'
+        '404':
+          description: Agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Custom Attributes
+      operationId: delete-custom-attribute-from-account
+      summary: Remove a custom attribute from account
+      description: Remove a custom attribute from account
+      security:
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the custom attribute to be deleted
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Custom attribute not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    custom_attribute_create_update_payload:
+      type: object
+      properties:
+        attribute_display_name:
+          type: string
+          description: Attribute display name
+          example: Custom Attribute
+        attribute_display_type:
+          type: integer
+          description: Attribute display type (text- 0, number- 1, currency- 2, percent- 3, link- 4, date- 5, list- 6, checkbox- 7)
+          example: 0
+        attribute_description:
+          type: string
+          description: Attribute description
+          example: This is a custom attribute
+        attribute_key:
+          type: string
+          description: Attribute unique key value
+          example: custom_attribute
+        attribute_values:
+          type: array
+          description: Attribute values
+          items:
+            type: string
+          example:
+          - value1
+          - value2
+        attribute_model:
+          type: integer
+          description: Attribute type(conversation_attribute- 0, contact_attribute- 1)
+          example: 0
+        regex_pattern:
+          type: string
+          description: Regex pattern (Only applicable for type- text). The regex pattern is used to validate the attribute value(s).
+          example: ^[a-zA-Z0-9]+$
+        regex_cue:
+          type: string
+          description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
+          example: Please enter a valid value
+    custom_attribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identifier
+        attribute_display_name:
+          type: string
+          description: Attribute display name
+        attribute_display_type:
+          type: string
+          description: Attribute display type (text, number, currency, percent, link, date, list, checkbox)
+        attribute_description:
+          type: string
+          description: Attribute description
+        attribute_key:
+          type: string
+          description: Attribute unique key value
+        regex_pattern:
+          type: string
+          description: Regex pattern
+        regex_cue:
+          type: string
+          description: Regex cue
+        attribute_values:
+          type: string
+          description: Attribute values
+        attribute_model:
+          type: string
+          description: Attribute type(conversation_attribute/contact_attribute)
+        default_value:
+          type: string
+          description: Attribute default value
+        created_at:
+          type: string
+          description: The date and time when the custom attribute was created
+        updated_at:
+          type: string
+          description: The date and time when the custom attribute was updated
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

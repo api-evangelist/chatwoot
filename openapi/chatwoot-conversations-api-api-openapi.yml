@@ -1,0 +1,590 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Conversations API API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Conversations API
+  description: Public conversation APIs
+paths:
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    post:
+      tags:
+      - Conversations API
+      operationId: create-a-conversation
+      summary: Create a conversation
+      description: Create a conversation
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/public_conversation_create_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_conversation'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    get:
+      tags:
+      - Conversations API
+      operationId: list-all-contact-conversations
+      summary: List all conversations
+      description: List all conversations for the contact
+      security: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of conversations
+                items:
+                  $ref: '#/components/schemas/public_conversation'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+    get:
+      tags:
+      - Conversations API
+      operationId: get-single-conversation
+      summary: Get a single conversation
+      description: Retrieves the details of a specific conversation
+      security: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_conversation'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_status:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversations API
+      operationId: resolve-conversation
+      summary: Resolve a conversation
+      description: Marks a conversation as resolved
+      security: []
+      responses:
+        '200':
+          description: Conversation resolved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/public_conversation'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_typing:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversations API
+      operationId: toggle-typing-status
+      summary: Toggle typing status
+      description: Toggles the typing status in a conversation
+      security: []
+      parameters:
+      - name: typing_status
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Typing status, either 'on' or 'off'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                typing_status:
+                  type: string
+                  enum:
+                  - 'on'
+                  - 'off'
+                  description: The typing status to set
+                  example: 'on'
+      responses:
+        '200':
+          description: Typing status toggled successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/update_last_seen:
+    parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversations API
+      operationId: update-last-seen
+      summary: Update last seen
+      description: Updates the last seen time of the contact in a conversation
+      security: []
+      responses:
+        '200':
+          description: Last seen updated successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    public_contact_record:
+      type: object
+      additionalProperties: true
+      description: Full serialized contact record returned when the public API renders a Contact model directly.
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        name:
+          nullable: true
+          type: string
+          description: Name of the contact when available
+        email:
+          nullable: true
+          type: string
+          description: Email of the contact
+        phone_number:
+          nullable: true
+          type: string
+          description: Phone number of the contact
+        identifier:
+          nullable: true
+          type: string
+          description: Identifier of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        additional_attributes:
+          nullable: true
+          type: object
+          description: Additional attributes of the contact when present
+        custom_attributes:
+          nullable: true
+          type: object
+          description: Custom attributes of the contact when present
+        contact_type:
+          nullable: true
+          type: string
+          description: Contact type of the contact when available
+        country_code:
+          nullable: true
+          type: string
+          description: Country code of the contact
+        last_activity_at:
+          nullable: true
+          type: string
+          description: Last activity timestamp of the contact in ISO 8601 format
+        created_at:
+          nullable: true
+          type: string
+          description: Created timestamp of the contact in ISO 8601 format
+        updated_at:
+          nullable: true
+          type: string
+          description: Updated timestamp of the contact in ISO 8601 format
+        last_name:
+          nullable: true
+          type: string
+          description: Last name of the contact
+        middle_name:
+          nullable: true
+          type: string
+          description: Middle name of the contact
+        location:
+          nullable: true
+          type: string
+          description: Location of the contact
+        account_id:
+          type: integer
+          description: Account id of the contact
+        company_id:
+          nullable: true
+          type: integer
+          description: Company id of the contact
+        label_list:
+          type: array
+          description: Labels applied to the contact
+          items:
+            type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    public_message_attachment:
+      type: object
+      additionalProperties: true
+      description: Attachment payload. Available fields vary by attachment file_type.
+      properties:
+        id:
+          type: integer
+          description: Id of the attachment
+        message_id:
+          type: integer
+          description: Id of the parent message
+        file_type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - file
+          - location
+          - fallback
+          - share
+          - story_mention
+          - contact
+          - ig_reel
+          - ig_post
+          - ig_story
+          - embed
+          description: Type of the attached file
+        account_id:
+          type: integer
+          description: Id of the account
+        extension:
+          nullable: true
+          type: string
+          description: File extension
+        data_url:
+          nullable: true
+          type: string
+          description: URL of the file. Can be null when an attachment variant has no external URL.
+        thumb_url:
+          type: string
+          description: URL of the file thumbnail
+        file_size:
+          type: integer
+          description: File size in bytes
+        width:
+          nullable: true
+          type: integer
+          description: Width of the attachment when available
+        height:
+          nullable: true
+          type: integer
+          description: Height of the attachment when available
+        coordinates_lat:
+          type: number
+          description: Latitude for location attachments
+        coordinates_long:
+          type: number
+          description: Longitude for location attachments
+        fallback_title:
+          nullable: true
+          type: string
+          description: Fallback title for location, fallback, and contact attachments when available
+        meta:
+          type: object
+          description: Metadata for contact attachments
+        transcribed_text:
+          type: string
+          description: Transcribed text for audio attachments
+    public_conversation_create_payload:
+      type: object
+      properties:
+        custom_attributes:
+          type: object
+          description: Custom attributes of the conversation
+          example: {}
+    public_conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the conversation
+        uuid:
+          type: string
+          description: UUID of the conversation
+        inbox_id:
+          type: integer
+          description: The inbox id of the conversation
+        contact_last_seen_at:
+          type: integer
+          description: Timestamp of when the contact last seen the conversation (Unix timestamp)
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          - snoozed
+          description: The status of the conversation
+        agent_last_seen_at:
+          type: integer
+          description: Timestamp of when the agent last seen the conversation (Unix timestamp)
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/public_message'
+          description: Messages in the conversation
+        contact:
+          $ref: '#/components/schemas/public_contact_record'
+    public_message:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the message
+        content:
+          nullable: true
+          type: string
+          description: Text content of the message. Can be null for attachment-only messages.
+        message_type:
+          type: integer
+          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
+        content_type:
+          type: string
+          description: Content type of the message
+        content_attributes:
+          type: object
+          description: Additional content attributes of the message
+        created_at:
+          type: integer
+          description: Created at Unix timestamp of the message
+        conversation_id:
+          type: integer
+          description: Display Id of the conversation the message belongs to
+        attachments:
+          type: array
+          description: Attachments if any
+          items:
+            $ref: '#/components/schemas/public_message_attachment'
+        sender:
+          $ref: '#/components/schemas/public_message_sender'
+    public_message_sender:
+      type: object
+      additionalProperties: true
+      description: Polymorphic sender payload returned by push_event_data. Available fields vary by sender type.
+      properties:
+        id:
+          type: integer
+          description: Id of the sender
+        name:
+          nullable: true
+          type: string
+          description: Name of the sender when available
+        avatar_url:
+          type: string
+          description: Avatar URL of the sender. Present for senders of type user, agent_bot, and captain_assistant. Not present for contact senders (use thumbnail instead).
+        thumbnail:
+          type: string
+          description: Avatar/thumbnail URL of the sender. Contact senders use this field; user senders may also include it.
+        type:
+          type: string
+          enum:
+          - contact
+          - user
+          - agent_bot
+          - captain_assistant
+          description: Type of the sender
+        available_name:
+          nullable: true
+          type: string
+          description: Display name for user senders
+        availability_status:
+          nullable: true
+          type: string
+          description: Availability status for user senders
+        email:
+          nullable: true
+          type: string
+          description: Email of the sender when the sender is a contact
+        phone_number:
+          nullable: true
+          type: string
+          description: Phone number of the sender when the sender is a contact
+        identifier:
+          nullable: true
+          type: string
+          description: Identifier of the sender when the sender is a contact
+        blocked:
+          type: boolean
+          description: Whether the sender is blocked when the sender is a contact
+        additional_attributes:
+          nullable: true
+          type: object
+          description: Additional attributes when the sender is a contact and available
+        custom_attributes:
+          nullable: true
+          type: object
+          description: Custom attributes when the sender is a contact and available
+        description:
+          nullable: true
+          type: string
+          description: Description when the sender is a captain assistant
+        created_at:
+          nullable: true
+          type: string
+          description: Created timestamp in ISO 8601 format when the sender is a captain assistant
+  parameters:
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page

@@ -1,0 +1,427 @@
+openapi: 3.0.3
+info:
+  title: Chatwoot Account AgentBots Automation Rule API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: https://app.chatwoot.com/
+tags:
+- name: Automation Rule
+  description: Workflow automation rules
+paths:
+  /api/v1/accounts/{account_id}/automation_rules:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    get:
+      tags:
+      - Automation Rule
+      operationId: get-account-automation-rule
+      summary: List all automation rules in an account
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/page'
+      description: Get details of automation rules in an Account
+      security:
+      - userApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automation_rule'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    post:
+      tags:
+      - Automation Rule
+      operationId: add-new-automation-rule-to-account
+      summary: Add a new automation rule
+      description: Add a new automation rule to account
+      security:
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automation_rule_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automation_rule'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+  /api/v1/accounts/{account_id}/automation_rules/{id}:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      schema:
+        type: number
+      description: ID of the Automation Rule
+      required: true
+    get:
+      tags:
+      - Automation Rule
+      operationId: get-details-of-a-single-automation-rule
+      summary: Get a automation rule details
+      description: Get the details of a automation rule in the account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the automation rule to be updated.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automation_rule'
+              example:
+                payload:
+                  id: 90
+                  account_id: 1
+                  name: add-label-bug-if-message-contains-bug
+                  description: add-label-bug-if-message-contains-bug
+                  event_name: message_created
+                  conditions:
+                  - values:
+                    - incoming
+                    attribute_key: message_type
+                    query_operator: and
+                    filter_operator: equal_to
+                  - values:
+                    - bug
+                    attribute_key: content
+                    filter_operator: contains
+                  actions:
+                  - action_name: add_label
+                    action_params:
+                    - bugs
+                    - support-query
+                  created_on: 1650555440
+                  active: true
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given rule ID does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    patch:
+      tags:
+      - Automation Rule
+      operationId: update-automation-rule-in-account
+      summary: Update automation rule in Account
+      description: Update a automation rule in account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the automation rule to be updated.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/automation_rule_create_update_payload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/automation_rule'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Rule not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+    delete:
+      tags:
+      - Automation Rule
+      operationId: delete-automation-rule-from-account
+      summary: Remove a automation rule from account
+      description: Remove a automation rule from account
+      security:
+      - userApiKey: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The ID of the automation rule to be deleted
+      responses:
+        '200':
+          description: Success
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: automation rule not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+components:
+  schemas:
+    automation_rule_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Rule name
+          example: Add label on message create event
+        description:
+          type: string
+          description: The description about the automation and actions
+          example: Add label support and sales on message create event if incoming message content contains text help
+        event_name:
+          type: string
+          enum:
+          - conversation_created
+          - conversation_updated
+          - conversation_resolved
+          - message_created
+          example: message_created
+          description: The event when you want to execute the automation actions
+        active:
+          type: boolean
+          description: Enable/disable automation rule
+        actions:
+          type: array
+          description: Array of actions which you want to perform when condition matches, e.g add label support if message contains content help.
+          items:
+            type: object
+            example:
+              action_name: add_label
+              action_params:
+              - support
+        conditions:
+          type: array
+          description: Array of conditions on which conversation filter would work, e.g message content contains text help.
+          items:
+            type: object
+            example:
+              attribute_key: content
+              filter_operator: contains
+              query_operator: OR
+              values:
+              - help
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    automation_rule_item:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the automation rule
+        account_id:
+          type: integer
+          description: Account Id
+        name:
+          type: string
+          description: The name of the rule
+          example: Add label on message create event
+        description:
+          type: string
+          description: Description to give more context about the rule
+          example: Add label support and sales on message create event if incoming message content contains text help
+        event_name:
+          type: string
+          description: Automation Rule event, on which we call the actions(conversation_created, conversation_updated, message_created)
+          enum:
+          - conversation_created
+          - conversation_updated
+          - message_created
+          example: message_created
+        conditions:
+          type: array
+          description: Array of conditions on which conversation/message filter would work
+          items:
+            type: object
+            properties:
+              values:
+                type: array
+                items:
+                  type: string
+              attribute_key:
+                type: string
+              query_operator:
+                type: string
+              filter_operator:
+                type: string
+            example:
+              attribute_key: content
+              filter_operator: contains
+              values:
+              - help
+              query_operator: and
+        actions:
+          type: array
+          description: Array of actions which we perform when condition matches
+          items:
+            type: object
+            properties:
+              action_name:
+                type: string
+              action_params:
+                type: array
+                items:
+                  type: string
+            example:
+              action_name: add_label
+              action_params:
+              - support
+              - sales
+        created_on:
+          type: integer
+          description: The timestamp when the rule was created
+        active:
+          type: boolean
+          description: Enable/disable automation rule
+    automation_rule:
+      type: object
+      properties:
+        payload:
+          description: Response payload that contains automation rule(s)
+          oneOf:
+          - type: array
+            description: Array of automation rules (for listing endpoint)
+            items:
+              $ref: '#/components/schemas/automation_rule_item'
+          - type: object
+            description: Single automation rule (for show/create/update endpoints)
+            allOf:
+            - $ref: '#/components/schemas/automation_rule_item'
+  parameters:
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+    agentBotApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-tagGroups:
+- name: Platform
+  tags:
+  - Accounts
+  - Account Users
+  - AgentBots
+  - Users
+- name: Application
+  tags:
+  - Account AgentBots
+  - Account
+  - Agents
+  - Audit Logs
+  - Canned Responses
+  - Contacts
+  - Contact Labels
+  - Conversation Assignments
+  - Conversation Labels
+  - Conversations
+  - Custom Attributes
+  - Custom Filters
+  - Inboxes
+  - Integrations
+  - Labels
+  - Messages
+  - Profile
+  - Reports
+  - Teams
+  - Webhooks
+  - Automation Rule
+  - Help Center
+- name: Client
+  tags:
+  - Contacts API
+  - Conversations API
+  - Messages API
+- name: Others
+  tags:
+  - CSAT Survey Page
