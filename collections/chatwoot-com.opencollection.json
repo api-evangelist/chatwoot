@@ -1,0 +1,1017 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_access_token",
+      "value": "{{api_access_token}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application - Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/agents"
+          },
+          "docs": "List agents"
+        },
+        {
+          "info": {
+            "name": "Add agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/agents",
+            "body": {
+              "type": "json",
+              "data": "{\"email\": \"<string>\", \"role\": \"agent\"}"
+            }
+          },
+          "docs": "Add agent"
+        },
+        {
+          "info": {
+            "name": "Update agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/agents/{{id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"role\": \"administrator\", \"availability_status\": \"online\"}"
+            }
+          },
+          "docs": "Update agent"
+        },
+        {
+          "info": {
+            "name": "Delete agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/agents/{{id}}"
+          },
+          "docs": "Delete agent"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/teams"
+          },
+          "docs": "List teams"
+        },
+        {
+          "info": {
+            "name": "Create team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/teams",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"allow_auto_assign\": true}"
+            }
+          },
+          "docs": "Create team"
+        },
+        {
+          "info": {
+            "name": "Get team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/teams/{{team_id}}"
+          },
+          "docs": "Get team"
+        },
+        {
+          "info": {
+            "name": "Update team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/teams/{{team_id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Update team"
+        },
+        {
+          "info": {
+            "name": "Delete team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/teams/{{team_id}}"
+          },
+          "docs": "Delete team"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Inboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/inboxes"
+          },
+          "docs": "List inboxes"
+        },
+        {
+          "info": {
+            "name": "Get inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/inboxes/{{id}}"
+          },
+          "docs": "Get inbox"
+        },
+        {
+          "info": {
+            "name": "Delete inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/inboxes/{{id}}"
+          },
+          "docs": "Delete inbox"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts"
+          },
+          "docs": "List contacts"
+        },
+        {
+          "info": {
+            "name": "Create contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"email\": \"<string>\", \"phone_number\": \"<string>\"}"
+            }
+          },
+          "docs": "Create contact"
+        },
+        {
+          "info": {
+            "name": "Search contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/search?q=<string>"
+          },
+          "docs": "Search contacts"
+        },
+        {
+          "info": {
+            "name": "Filter contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/filter",
+            "body": {
+              "type": "json",
+              "data": "{\"payload\": [{\"attribute_key\": \"email\", \"filter_operator\": \"contains\", \"values\": [\"example.com\"]}]}"
+            }
+          },
+          "docs": "Filter contacts"
+        },
+        {
+          "info": {
+            "name": "Get contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/{{id}}"
+          },
+          "docs": "Get contact"
+        },
+        {
+          "info": {
+            "name": "Update contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/{{id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Update contact"
+        },
+        {
+          "info": {
+            "name": "Delete contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/{{id}}"
+          },
+          "docs": "Delete contact"
+        },
+        {
+          "info": {
+            "name": "List contact conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/contacts/{{id}}/conversations"
+          },
+          "docs": "List contact conversations"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations?status=open"
+          },
+          "docs": "List conversations"
+        },
+        {
+          "info": {
+            "name": "Create conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations",
+            "body": {
+              "type": "json",
+              "data": "{\"source_id\": \"<string>\", \"inbox_id\": 1, \"contact_id\": 1, \"message\": {\"content\": \"<string>\"}}"
+            }
+          },
+          "docs": "Create conversation"
+        },
+        {
+          "info": {
+            "name": "Get conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}"
+          },
+          "docs": "Get conversation"
+        },
+        {
+          "info": {
+            "name": "Toggle status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/toggle_status",
+            "body": {
+              "type": "json",
+              "data": "{\"status\": \"resolved\"}"
+            }
+          },
+          "docs": "Toggle status"
+        },
+        {
+          "info": {
+            "name": "Assign conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/assignments",
+            "body": {
+              "type": "json",
+              "data": "{\"assignee_id\": 1}"
+            }
+          },
+          "docs": "Assign conversation"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/messages"
+          },
+          "docs": "List messages"
+        },
+        {
+          "info": {
+            "name": "Create message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/messages",
+            "body": {
+              "type": "json",
+              "data": "{\"content\": \"<string>\", \"message_type\": \"outgoing\", \"private\": false}"
+            }
+          },
+          "docs": "Create message"
+        },
+        {
+          "info": {
+            "name": "Delete message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/messages/{{message_id}}"
+          },
+          "docs": "Delete message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/labels"
+          },
+          "docs": "List labels"
+        },
+        {
+          "info": {
+            "name": "Get conversation labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/labels"
+          },
+          "docs": "Get conversation labels"
+        },
+        {
+          "info": {
+            "name": "Set conversation labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/{{conversation_id}}/labels",
+            "body": {
+              "type": "json",
+              "data": "{\"labels\": [\"billing\", \"urgent\"]}"
+            }
+          },
+          "docs": "Set conversation labels"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Custom Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/custom_attribute_definitions"
+          },
+          "docs": "List definitions"
+        },
+        {
+          "info": {
+            "name": "Create definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/custom_attribute_definitions",
+            "body": {
+              "type": "json",
+              "data": "{\"attribute_display_name\": \"<string>\", \"attribute_key\": \"<string>\", \"attribute_display_type\": \"text\", \"attribute_model\": \"conversation_attribute\"}"
+            }
+          },
+          "docs": "Create definition"
+        },
+        {
+          "info": {
+            "name": "Delete definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/custom_attribute_definitions/{{id}}"
+          },
+          "docs": "Delete definition"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Canned Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List canned responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/canned_responses"
+          },
+          "docs": "List canned responses"
+        },
+        {
+          "info": {
+            "name": "Create canned response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/canned_responses",
+            "body": {
+              "type": "json",
+              "data": "{\"short_code\": \"<string>\", \"content\": \"<string>\"}"
+            }
+          },
+          "docs": "Create canned response"
+        },
+        {
+          "info": {
+            "name": "Delete canned response",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/canned_responses/{{id}}"
+          },
+          "docs": "Delete canned response"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Automation Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List automation rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/automation_rules"
+          },
+          "docs": "List automation rules"
+        },
+        {
+          "info": {
+            "name": "Create automation rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/automation_rules",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"event_name\": \"conversation_created\", \"conditions\": [], \"actions\": []}"
+            }
+          },
+          "docs": "Create automation rule"
+        },
+        {
+          "info": {
+            "name": "Delete automation rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/automation_rules/{{id}}"
+          },
+          "docs": "Delete automation rule"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application - Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get metric report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/reports?metric=conversations_count&type=account&since=1719792000&until=1722384000"
+          },
+          "docs": "Get metric report"
+        },
+        {
+          "info": {
+            "name": "Conversation summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/{{account_id}}/conversations/meta"
+          },
+          "docs": "Conversation summary"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client - Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create client contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts",
+            "body": {
+              "type": "json",
+              "data": "{\"identifier\": \"<string>\", \"email\": \"<string>\", \"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Create client contact"
+        },
+        {
+          "info": {
+            "name": "Get client contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}"
+          },
+          "docs": "Get client contact"
+        },
+        {
+          "info": {
+            "name": "Update client contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}",
+            "body": {
+              "type": "json",
+              "data": "{\"email\": \"<string>\"}"
+            }
+          },
+          "docs": "Update client contact"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client - Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List client conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations"
+          },
+          "docs": "List client conversations"
+        },
+        {
+          "info": {
+            "name": "Create client conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create client conversation"
+        },
+        {
+          "info": {
+            "name": "Toggle status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations/{{conversation_id}}/toggle_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggle status"
+        },
+        {
+          "info": {
+            "name": "Toggle typing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations/{{conversation_id}}/toggle_typing",
+            "body": {
+              "type": "json",
+              "data": "{\"typing_status\": \"on\"}"
+            }
+          },
+          "docs": "Toggle typing"
+        },
+        {
+          "info": {
+            "name": "Update last seen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations/{{conversation_id}}/update_last_seen",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update last seen"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client - Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List client messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations/{{conversation_id}}/messages"
+          },
+          "docs": "List client messages"
+        },
+        {
+          "info": {
+            "name": "Create client message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/{{inbox_identifier}}/contacts/{{contact_identifier}}/conversations/{{conversation_id}}/messages",
+            "body": {
+              "type": "json",
+              "data": "{\"content\": \"<string>\", \"echo_id\": \"<string>\"}"
+            }
+          },
+          "docs": "Create client message"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Platform - Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/platform/api/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"email\": \"<string>\", \"password\": \"<string>\"}"
+            }
+          },
+          "docs": "Create user"
+        },
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/users/{{id}}"
+          },
+          "docs": "Get user"
+        },
+        {
+          "info": {
+            "name": "Update user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/platform/api/v1/users/{{id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Update user"
+        },
+        {
+          "info": {
+            "name": "Delete user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/platform/api/v1/users/{{id}}"
+          },
+          "docs": "Delete user"
+        },
+        {
+          "info": {
+            "name": "Get SSO login link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/users/{{id}}/login"
+          },
+          "docs": "Get SSO login link"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Platform - Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Create account"
+        },
+        {
+          "info": {
+            "name": "Get account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts/{{account_id}}"
+          },
+          "docs": "Get account"
+        },
+        {
+          "info": {
+            "name": "Update account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts/{{account_id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Update account"
+        },
+        {
+          "info": {
+            "name": "Delete account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts/{{account_id}}"
+          },
+          "docs": "Delete account"
+        },
+        {
+          "info": {
+            "name": "List account users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts/{{account_id}}/account_users"
+          },
+          "docs": "List account users"
+        },
+        {
+          "info": {
+            "name": "Create account user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/platform/api/v1/accounts/{{account_id}}/account_users",
+            "body": {
+              "type": "json",
+              "data": "{\"user_id\": 1, \"role\": \"administrator\"}"
+            }
+          },
+          "docs": "Create account user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Platform - Agent Bots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent bots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots"
+          },
+          "docs": "List agent bots"
+        },
+        {
+          "info": {
+            "name": "Create agent bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\", \"outgoing_url\": \"<string>\"}"
+            }
+          },
+          "docs": "Create agent bot"
+        },
+        {
+          "info": {
+            "name": "Get agent bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/{{id}}"
+          },
+          "docs": "Get agent bot"
+        },
+        {
+          "info": {
+            "name": "Update agent bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/{{id}}",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Update agent bot"
+        },
+        {
+          "info": {
+            "name": "Delete agent bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/{{id}}"
+          },
+          "docs": "Delete agent bot"
+        }
+      ]
+    }
+  ]
+}

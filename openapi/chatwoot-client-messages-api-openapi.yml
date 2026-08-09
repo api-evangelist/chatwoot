@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Chatwoot Agents Client Messages API
+  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    name: Chatwoot Developers
+    url: https://developers.chatwoot.com
+  license:
+    name: MIT (core) with additional Chatwoot license terms for some features
+    url: https://github.com/chatwoot/chatwoot/blob/develop/LICENSE
+  version: '1.0'
+servers:
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
+security:
+- userApiKey: []
+tags:
+- name: Client Messages
+  description: Client API - end-user message management.
+paths:
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages:
+    parameters:
+    - $ref: '#/components/parameters/InboxIdentifier'
+    - $ref: '#/components/parameters/ContactIdentifier'
+    - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: listClientMessages
+      tags:
+      - Client Messages
+      security: []
+      summary: List messages in the contact's conversation.
+      responses:
+        '200':
+          description: Array of messages.
+    post:
+      operationId: createClientMessage
+      tags:
+      - Client Messages
+      security: []
+      summary: Create a message in the contact's conversation.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                echo_id:
+                  type: string
+      responses:
+        '200':
+          description: The created message.
+components:
+  parameters:
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    ContactIdentifier:
+      name: contact_identifier
+      in: path
+      required: true
+      description: The source_id / contact identifier returned when the client contact was created.
+      schema:
+        type: string
+    InboxIdentifier:
+      name: inbox_identifier
+      in: path
+      required: true
+      description: The public inbox identifier (channel/web-widget identifier).
+      schema:
+        type: string
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Application and Client access token passed in the `api_access_token` HTTP header. For the Application API this is an agent/user access token; Client API requests are additionally scoped by inbox and contact identifiers.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Platform App access token passed in the `api_access_token` HTTP header. Created by a super-admin from the Chatwoot installation's Platform Apps area and required for all /platform/api/v1 endpoints.

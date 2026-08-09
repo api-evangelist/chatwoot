@@ -1,0 +1,141 @@
+openapi: 3.0.1
+info:
+  title: Chatwoot Agents Platform Accounts API
+  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    name: Chatwoot Developers
+    url: https://developers.chatwoot.com
+  license:
+    name: MIT (core) with additional Chatwoot license terms for some features
+    url: https://github.com/chatwoot/chatwoot/blob/develop/LICENSE
+  version: '1.0'
+servers:
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
+security:
+- userApiKey: []
+tags:
+- name: Platform Accounts
+  description: Platform API - super-admin account management.
+paths:
+  /platform/api/v1/accounts:
+    post:
+      operationId: createPlatformAccount
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Create an account on the installation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: The created account.
+  /platform/api/v1/accounts/{account_id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: getPlatformAccount
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Get an account by id.
+      responses:
+        '200':
+          description: The account.
+    patch:
+      operationId: updatePlatformAccount
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Update an account.
+      responses:
+        '200':
+          description: The updated account.
+    delete:
+      operationId: deletePlatformAccount
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Delete an account.
+      responses:
+        '200':
+          description: Deleted.
+  /platform/api/v1/accounts/{account_id}/account_users:
+    parameters:
+    - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listPlatformAccountUsers
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: List the users associated with an account.
+      responses:
+        '200':
+          description: Array of account users.
+    post:
+      operationId: createPlatformAccountUser
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Associate a user with an account with a role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                role:
+                  type: string
+                  enum:
+                  - administrator
+                  - agent
+      responses:
+        '200':
+          description: The created account user.
+    delete:
+      operationId: deletePlatformAccountUser
+      tags:
+      - Platform Accounts
+      security:
+      - platformAppApiKey: []
+      summary: Remove a user's association with an account.
+      responses:
+        '200':
+          description: Removed.
+components:
+  parameters:
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Application and Client access token passed in the `api_access_token` HTTP header. For the Application API this is an agent/user access token; Client API requests are additionally scoped by inbox and contact identifiers.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Platform App access token passed in the `api_access_token` HTTP header. Created by a super-admin from the Chatwoot installation's Platform Apps area and required for all /platform/api/v1 endpoints.

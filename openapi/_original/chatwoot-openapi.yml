@@ -1,0 +1,1520 @@
+openapi: 3.0.1
+info:
+  title: Chatwoot API
+  description: >-
+    Chatwoot is an open-source customer engagement suite with a shared inbox
+    across email, live-chat, social, and messaging channels. This specification
+    covers the three Chatwoot API surfaces: the Application API
+    (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and
+    conversation management; the Client API (/public/api/v1/inboxes/...) for
+    building custom end-user chat widgets; and the Platform API
+    (/platform/api/v1/...) for super-admin control of a Chatwoot installation.
+    Application and Platform requests authenticate with an `api_access_token`
+    HTTP header; Client requests are scoped by an inbox identifier and a
+    contact source/pubsub identifier.
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    name: Chatwoot Developers
+    url: https://developers.chatwoot.com
+  license:
+    name: MIT (core) with additional Chatwoot license terms for some features
+    url: https://github.com/chatwoot/chatwoot/blob/develop/LICENSE
+  version: '1.0'
+servers:
+  - url: https://app.chatwoot.com
+    description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
+tags:
+  - name: Agents
+    description: Application API - manage account agents.
+  - name: Teams
+    description: Application API - manage teams and membership.
+  - name: Inboxes
+    description: Application API - manage channels/inboxes.
+  - name: Contacts
+    description: Application API - manage contacts.
+  - name: Conversations
+    description: Application API - manage conversations.
+  - name: Messages
+    description: Application API - manage conversation messages.
+  - name: Labels
+    description: Application API - manage labels.
+  - name: Custom Attributes
+    description: Application API - manage custom attribute definitions.
+  - name: Canned Responses
+    description: Application API - manage saved reply templates.
+  - name: Automation Rules
+    description: Application API - manage automation rules.
+  - name: Reports
+    description: Application API - retrieve analytics and reports.
+  - name: Client Contacts
+    description: Client API - end-user contact management.
+  - name: Client Conversations
+    description: Client API - end-user conversation management.
+  - name: Client Messages
+    description: Client API - end-user message management.
+  - name: Platform Users
+    description: Platform API - super-admin user management.
+  - name: Platform Accounts
+    description: Platform API - super-admin account management.
+  - name: Platform Agent Bots
+    description: Platform API - super-admin agent bot management.
+security:
+  - userApiKey: []
+paths:
+  # ---------------------------------------------------------------------------
+  # APPLICATION API
+  # ---------------------------------------------------------------------------
+  /api/v1/accounts/{account_id}/agents:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listAgents
+      tags: [Agents]
+      summary: List agents in an account.
+      responses:
+        '200':
+          description: Array of agents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+    post:
+      operationId: addAgent
+      tags: [Agents]
+      summary: Add a new agent to the account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentCreate'
+      responses:
+        '200':
+          description: The created agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+  /api/v1/accounts/{account_id}/agents/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    patch:
+      operationId: updateAgent
+      tags: [Agents]
+      summary: Update an agent's role or availability.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentUpdate'
+      responses:
+        '200':
+          description: The updated agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+    delete:
+      operationId: deleteAgent
+      tags: [Agents]
+      summary: Remove an agent from the account.
+      responses:
+        '200':
+          description: Agent removed.
+  /api/v1/accounts/{account_id}/teams:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listTeams
+      tags: [Teams]
+      summary: List teams in an account.
+      responses:
+        '200':
+          description: Array of teams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+    post:
+      operationId: createTeam
+      tags: [Teams]
+      summary: Create a team.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamCreate'
+      responses:
+        '200':
+          description: The created team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+  /api/v1/accounts/{account_id}/teams/{team_id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getTeam
+      tags: [Teams]
+      summary: Get a team by id.
+      responses:
+        '200':
+          description: The team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+    patch:
+      operationId: updateTeam
+      tags: [Teams]
+      summary: Update a team.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamCreate'
+      responses:
+        '200':
+          description: The updated team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+    delete:
+      operationId: deleteTeam
+      tags: [Teams]
+      summary: Delete a team.
+      responses:
+        '200':
+          description: Team deleted.
+  /api/v1/accounts/{account_id}/inboxes:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listInboxes
+      tags: [Inboxes]
+      summary: List inboxes in an account.
+      responses:
+        '200':
+          description: Object containing an array of inboxes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Inbox'
+  /api/v1/accounts/{account_id}/inboxes/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getInbox
+      tags: [Inboxes]
+      summary: Get an inbox by id.
+      responses:
+        '200':
+          description: The inbox.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inbox'
+    patch:
+      operationId: updateInbox
+      tags: [Inboxes]
+      summary: Update an inbox.
+      responses:
+        '200':
+          description: The updated inbox.
+    delete:
+      operationId: deleteInbox
+      tags: [Inboxes]
+      summary: Delete an inbox.
+      responses:
+        '200':
+          description: Inbox deleted.
+  /api/v1/accounts/{account_id}/contacts:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listContacts
+      tags: [Contacts]
+      summary: List contacts (paginated, sortable).
+      parameters:
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [name, email, phone_number, last_activity_at, -name, -email, -phone_number, -last_activity_at]
+        - name: page
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Contacts payload with meta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactList'
+    post:
+      operationId: createContact
+      tags: [Contacts]
+      summary: Create a contact.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: The created contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+  /api/v1/accounts/{account_id}/contacts/search:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: searchContacts
+      tags: [Contacts]
+      summary: Search contacts by name, email, phone, or identifier.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactList'
+  /api/v1/accounts/{account_id}/contacts/filter:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    post:
+      operationId: filterContacts
+      tags: [Contacts]
+      summary: Filter contacts with a set of query conditions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterPayload'
+      responses:
+        '200':
+          description: Matching contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactList'
+  /api/v1/accounts/{account_id}/contacts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getContact
+      tags: [Contacts]
+      summary: Get a contact by id.
+      responses:
+        '200':
+          description: The contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+    put:
+      operationId: updateContact
+      tags: [Contacts]
+      summary: Update a contact.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: The updated contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+    delete:
+      operationId: deleteContact
+      tags: [Contacts]
+      summary: Delete a contact.
+      responses:
+        '200':
+          description: Contact deleted.
+  /api/v1/accounts/{account_id}/contacts/{id}/conversations:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: listContactConversations
+      tags: [Contacts]
+      summary: List all conversations for a contact.
+      responses:
+        '200':
+          description: Array of conversations for the contact.
+  /api/v1/accounts/{account_id}/conversations:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listConversations
+      tags: [Conversations]
+      summary: List conversations with optional status, assignee, and inbox filters.
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, resolved, pending, snoozed, all]
+        - name: assignee_type
+          in: query
+          schema:
+            type: string
+            enum: [me, unassigned, all, assigned]
+        - name: inbox_id
+          in: query
+          schema:
+            type: integer
+        - name: page
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Conversations payload with meta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationList'
+    post:
+      operationId: createConversation
+      tags: [Conversations]
+      summary: Create a new conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+      responses:
+        '200':
+          description: The created conversation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: getConversation
+      tags: [Conversations]
+      summary: Get a conversation by id.
+      responses:
+        '200':
+          description: The conversation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_status:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: toggleConversationStatus
+      tags: [Conversations]
+      summary: Toggle the status of a conversation (open, resolved, pending, snoozed).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [open, resolved, pending, snoozed]
+      responses:
+        '200':
+          description: The updated conversation.
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/assignments:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: assignConversation
+      tags: [Conversations]
+      summary: Assign a conversation to an agent or a team.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: integer
+                team_id:
+                  type: integer
+      responses:
+        '200':
+          description: The assignment result.
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: getConversationLabels
+      tags: [Labels]
+      summary: List labels applied to a conversation.
+      responses:
+        '200':
+          description: Object with a payload array of label names.
+    post:
+      operationId: setConversationLabels
+      tags: [Labels]
+      summary: Set the labels applied to a conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: The updated label list.
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: listMessages
+      tags: [Messages]
+      summary: List messages in a conversation.
+      responses:
+        '200':
+          description: Object with a payload array of messages.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+    post:
+      operationId: createMessage
+      tags: [Messages]
+      summary: Create a message in a conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageCreate'
+      responses:
+        '200':
+          description: The created message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages/{message_id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/ConversationId'
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    delete:
+      operationId: deleteMessage
+      tags: [Messages]
+      summary: Delete a message from a conversation.
+      responses:
+        '200':
+          description: Message deleted.
+  /api/v1/accounts/{account_id}/labels:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listLabels
+      tags: [Labels]
+      summary: List all labels in the account.
+      responses:
+        '200':
+          description: Object with a payload array of labels.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Label'
+  /api/v1/accounts/{account_id}/custom_attribute_definitions:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listCustomAttributeDefinitions
+      tags: [Custom Attributes]
+      summary: List custom attribute definitions.
+      responses:
+        '200':
+          description: Array of custom attribute definitions.
+    post:
+      operationId: createCustomAttributeDefinition
+      tags: [Custom Attributes]
+      summary: Create a custom attribute definition.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAttributeDefinition'
+      responses:
+        '200':
+          description: The created custom attribute definition.
+  /api/v1/accounts/{account_id}/custom_attribute_definitions/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    patch:
+      operationId: updateCustomAttributeDefinition
+      tags: [Custom Attributes]
+      summary: Update a custom attribute definition.
+      responses:
+        '200':
+          description: The updated custom attribute definition.
+    delete:
+      operationId: deleteCustomAttributeDefinition
+      tags: [Custom Attributes]
+      summary: Delete a custom attribute definition.
+      responses:
+        '200':
+          description: Deleted.
+  /api/v1/accounts/{account_id}/canned_responses:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listCannedResponses
+      tags: [Canned Responses]
+      summary: List canned responses.
+      responses:
+        '200':
+          description: Array of canned responses.
+    post:
+      operationId: createCannedResponse
+      tags: [Canned Responses]
+      summary: Create a canned response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CannedResponse'
+      responses:
+        '200':
+          description: The created canned response.
+  /api/v1/accounts/{account_id}/canned_responses/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    patch:
+      operationId: updateCannedResponse
+      tags: [Canned Responses]
+      summary: Update a canned response.
+      responses:
+        '200':
+          description: The updated canned response.
+    delete:
+      operationId: deleteCannedResponse
+      tags: [Canned Responses]
+      summary: Delete a canned response.
+      responses:
+        '200':
+          description: Deleted.
+  /api/v1/accounts/{account_id}/automation_rules:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listAutomationRules
+      tags: [Automation Rules]
+      summary: List automation rules.
+      responses:
+        '200':
+          description: Payload of automation rules.
+    post:
+      operationId: createAutomationRule
+      tags: [Automation Rules]
+      summary: Create an automation rule.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationRule'
+      responses:
+        '200':
+          description: The created automation rule.
+  /api/v1/accounts/{account_id}/automation_rules/{id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getAutomationRule
+      tags: [Automation Rules]
+      summary: Get an automation rule by id.
+      responses:
+        '200':
+          description: The automation rule.
+    patch:
+      operationId: updateAutomationRule
+      tags: [Automation Rules]
+      summary: Update an automation rule.
+      responses:
+        '200':
+          description: The updated automation rule.
+    delete:
+      operationId: deleteAutomationRule
+      tags: [Automation Rules]
+      summary: Delete an automation rule.
+      responses:
+        '200':
+          description: Deleted.
+  /api/v1/accounts/{account_id}/reports:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: getReport
+      tags: [Reports]
+      summary: Get a metric report over a time range.
+      parameters:
+        - name: metric
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - conversations_count
+              - incoming_messages_count
+              - outgoing_messages_count
+              - avg_first_response_time
+              - avg_resolution_time
+              - resolutions_count
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account, agent, inbox, label, team]
+        - name: since
+          in: query
+          schema:
+            type: string
+            description: Unix epoch seconds for the start of the range.
+        - name: until
+          in: query
+          schema:
+            type: string
+            description: Unix epoch seconds for the end of the range.
+      responses:
+        '200':
+          description: Time-series data points for the requested metric.
+  /api/v1/accounts/{account_id}/conversations/meta:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: getConversationReportsSummary
+      tags: [Reports]
+      summary: Get a summary count of conversations by status (open, unassigned, etc.).
+      responses:
+        '200':
+          description: Conversation count summary.
+  # ---------------------------------------------------------------------------
+  # CLIENT API (public, end-user facing)
+  # ---------------------------------------------------------------------------
+  /public/api/v1/inboxes/{inbox_identifier}/contacts:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+    post:
+      operationId: createClientContact
+      tags: [Client Contacts]
+      security: []
+      summary: Create an end-user contact for a public inbox.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                identifier_hash:
+                  type: string
+                email:
+                  type: string
+                name:
+                  type: string
+                phone_number:
+                  type: string
+      responses:
+        '200':
+          description: The created contact including source_id and pubsub_token.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+    get:
+      operationId: getClientContact
+      tags: [Client Contacts]
+      security: []
+      summary: Get the end-user contact.
+      responses:
+        '200':
+          description: The contact.
+    patch:
+      operationId: updateClientContact
+      tags: [Client Contacts]
+      security: []
+      summary: Update the end-user contact.
+      responses:
+        '200':
+          description: The updated contact.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+    get:
+      operationId: listClientConversations
+      tags: [Client Conversations]
+      security: []
+      summary: List the contact's conversations.
+      responses:
+        '200':
+          description: Array of conversations.
+    post:
+      operationId: createClientConversation
+      tags: [Client Conversations]
+      security: []
+      summary: Create a conversation for the contact.
+      responses:
+        '200':
+          description: The created conversation.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_status:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+      - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: toggleClientConversationStatus
+      tags: [Client Conversations]
+      security: []
+      summary: Toggle the status of the contact's conversation.
+      responses:
+        '200':
+          description: Status toggled.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_typing:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+      - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: toggleClientTyping
+      tags: [Client Conversations]
+      security: []
+      summary: Signal typing on/off in the conversation.
+      responses:
+        '200':
+          description: Typing signal recorded.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/update_last_seen:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+      - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: updateClientLastSeen
+      tags: [Client Conversations]
+      security: []
+      summary: Update the contact's last-seen timestamp for the conversation.
+      responses:
+        '200':
+          description: Last-seen updated.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages:
+    parameters:
+      - $ref: '#/components/parameters/InboxIdentifier'
+      - $ref: '#/components/parameters/ContactIdentifier'
+      - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: listClientMessages
+      tags: [Client Messages]
+      security: []
+      summary: List messages in the contact's conversation.
+      responses:
+        '200':
+          description: Array of messages.
+    post:
+      operationId: createClientMessage
+      tags: [Client Messages]
+      security: []
+      summary: Create a message in the contact's conversation.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                echo_id:
+                  type: string
+      responses:
+        '200':
+          description: The created message.
+  # ---------------------------------------------------------------------------
+  # PLATFORM API (super-admin)
+  # ---------------------------------------------------------------------------
+  /platform/api/v1/users:
+    post:
+      operationId: createPlatformUser
+      tags: [Platform Users]
+      security:
+        - platformAppApiKey: []
+      summary: Create a user on the installation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformUserCreate'
+      responses:
+        '200':
+          description: The created user.
+  /platform/api/v1/users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getPlatformUser
+      tags: [Platform Users]
+      security:
+        - platformAppApiKey: []
+      summary: Get a user by id.
+      responses:
+        '200':
+          description: The user.
+    patch:
+      operationId: updatePlatformUser
+      tags: [Platform Users]
+      security:
+        - platformAppApiKey: []
+      summary: Update a user.
+      responses:
+        '200':
+          description: The updated user.
+    delete:
+      operationId: deletePlatformUser
+      tags: [Platform Users]
+      security:
+        - platformAppApiKey: []
+      summary: Delete a user.
+      responses:
+        '200':
+          description: Deleted.
+  /platform/api/v1/users/{id}/login:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getPlatformUserLoginLink
+      tags: [Platform Users]
+      security:
+        - platformAppApiKey: []
+      summary: Get a single-sign-on login link for the user.
+      responses:
+        '200':
+          description: An SSO login URL.
+  /platform/api/v1/accounts:
+    post:
+      operationId: createPlatformAccount
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Create an account on the installation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: The created account.
+  /platform/api/v1/accounts/{account_id}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: getPlatformAccount
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Get an account by id.
+      responses:
+        '200':
+          description: The account.
+    patch:
+      operationId: updatePlatformAccount
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Update an account.
+      responses:
+        '200':
+          description: The updated account.
+    delete:
+      operationId: deletePlatformAccount
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Delete an account.
+      responses:
+        '200':
+          description: Deleted.
+  /platform/api/v1/accounts/{account_id}/account_users:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listPlatformAccountUsers
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: List the users associated with an account.
+      responses:
+        '200':
+          description: Array of account users.
+    post:
+      operationId: createPlatformAccountUser
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Associate a user with an account with a role.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                role:
+                  type: string
+                  enum: [administrator, agent]
+      responses:
+        '200':
+          description: The created account user.
+    delete:
+      operationId: deletePlatformAccountUser
+      tags: [Platform Accounts]
+      security:
+        - platformAppApiKey: []
+      summary: Remove a user's association with an account.
+      responses:
+        '200':
+          description: Removed.
+  /platform/api/v1/agent_bots:
+    get:
+      operationId: listPlatformAgentBots
+      tags: [Platform Agent Bots]
+      security:
+        - platformAppApiKey: []
+      summary: List agent bots.
+      responses:
+        '200':
+          description: Array of agent bots.
+    post:
+      operationId: createPlatformAgentBot
+      tags: [Platform Agent Bots]
+      security:
+        - platformAppApiKey: []
+      summary: Create an agent bot.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentBot'
+      responses:
+        '200':
+          description: The created agent bot.
+  /platform/api/v1/agent_bots/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      operationId: getPlatformAgentBot
+      tags: [Platform Agent Bots]
+      security:
+        - platformAppApiKey: []
+      summary: Get an agent bot by id.
+      responses:
+        '200':
+          description: The agent bot.
+    patch:
+      operationId: updatePlatformAgentBot
+      tags: [Platform Agent Bots]
+      security:
+        - platformAppApiKey: []
+      summary: Update an agent bot.
+      responses:
+        '200':
+          description: The updated agent bot.
+    delete:
+      operationId: deletePlatformAgentBot
+      tags: [Platform Agent Bots]
+      security:
+        - platformAppApiKey: []
+      summary: Delete an agent bot.
+      responses:
+        '200':
+          description: Deleted.
+components:
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: >-
+        Application and Client access token passed in the `api_access_token`
+        HTTP header. For the Application API this is an agent/user access token;
+        Client API requests are additionally scoped by inbox and contact
+        identifiers.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: >-
+        Platform App access token passed in the `api_access_token` HTTP header.
+        Created by a super-admin from the Chatwoot installation's Platform Apps
+        area and required for all /platform/api/v1 endpoints.
+  parameters:
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    InboxIdentifier:
+      name: inbox_identifier
+      in: path
+      required: true
+      description: The public inbox identifier (channel/web-widget identifier).
+      schema:
+        type: string
+    ContactIdentifier:
+      name: contact_identifier
+      in: path
+      required: true
+      description: The source_id / contact identifier returned when the client contact was created.
+      schema:
+        type: string
+  schemas:
+    Agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [agent, administrator]
+        availability_status:
+          type: string
+          enum: [online, offline, busy]
+        confirmed:
+          type: boolean
+    AgentCreate:
+      type: object
+      required: [email, role]
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+          enum: [agent, administrator]
+    AgentUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [agent, administrator]
+        availability_status:
+          type: string
+          enum: [online, offline, busy]
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        allow_auto_assign:
+          type: boolean
+        account_id:
+          type: integer
+    TeamCreate:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        allow_auto_assign:
+          type: boolean
+    Inbox:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        channel_type:
+          type: string
+          description: e.g. Channel::WebWidget, Channel::Email, Channel::Api, Channel::FacebookPage.
+        greeting_enabled:
+          type: boolean
+        working_hours_enabled:
+          type: boolean
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone_number:
+          type: string
+        identifier:
+          type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
+        additional_attributes:
+          type: object
+          additionalProperties: true
+    ContactCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone_number:
+          type: string
+        identifier:
+          type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    ContactList:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            current_page:
+              type: integer
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        inbox_id:
+          type: integer
+        status:
+          type: string
+          enum: [open, resolved, pending, snoozed]
+        contact_id:
+          type: integer
+        assignee_id:
+          type: integer
+        team_id:
+          type: integer
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        labels:
+          type: array
+          items:
+            type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    ConversationCreate:
+      type: object
+      required: [source_id, inbox_id]
+      properties:
+        source_id:
+          type: string
+        inbox_id:
+          type: integer
+        contact_id:
+          type: integer
+        status:
+          type: string
+          enum: [open, resolved, pending, snoozed]
+        assignee_id:
+          type: integer
+        team_id:
+          type: integer
+        message:
+          type: object
+          properties:
+            content:
+              type: string
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        message_type:
+          type: string
+          enum: [incoming, outgoing, activity, template]
+        content_type:
+          type: string
+        private:
+          type: boolean
+        sender:
+          type: object
+        created_at:
+          type: integer
+    MessageCreate:
+      type: object
+      properties:
+        content:
+          type: string
+        message_type:
+          type: string
+          enum: [incoming, outgoing]
+        private:
+          type: boolean
+        content_type:
+          type: string
+        content_attributes:
+          type: object
+          additionalProperties: true
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        show_on_sidebar:
+          type: boolean
+    CustomAttributeDefinition:
+      type: object
+      required: [attribute_display_name, attribute_key, attribute_model]
+      properties:
+        attribute_display_name:
+          type: string
+        attribute_key:
+          type: string
+        attribute_display_type:
+          type: string
+          enum: [text, number, currency, percent, link, date, list, checkbox]
+        attribute_model:
+          type: string
+          enum: [conversation_attribute, contact_attribute]
+        attribute_values:
+          type: array
+          items:
+            type: string
+    CannedResponse:
+      type: object
+      required: [short_code, content]
+      properties:
+        short_code:
+          type: string
+        content:
+          type: string
+    AutomationRule:
+      type: object
+      required: [name, event_name, conditions, actions]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        event_name:
+          type: string
+          enum: [conversation_created, conversation_updated, message_created]
+        active:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            type: object
+        actions:
+          type: array
+          items:
+            type: object
+    FilterPayload:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            type: object
+            properties:
+              attribute_key:
+                type: string
+              filter_operator:
+                type: string
+              values:
+                type: array
+                items:
+                  type: string
+              query_operator:
+                type: string
+                enum: [and, or]
+    PlatformUserCreate:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    AgentBot:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        outgoing_url:
+          type: string

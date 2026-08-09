@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: Chatwoot Agents Automation Rules API
+  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    name: Chatwoot Developers
+    url: https://developers.chatwoot.com
+  license:
+    name: MIT (core) with additional Chatwoot license terms for some features
+    url: https://github.com/chatwoot/chatwoot/blob/develop/LICENSE
+  version: '1.0'
+servers:
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
+security:
+- userApiKey: []
+tags:
+- name: Automation Rules
+  description: Application API - manage automation rules.
+paths:
+  /api/v1/accounts/{account_id}/automation_rules:
+    parameters:
+    - $ref: '#/components/parameters/AccountId'
+    get:
+      operationId: listAutomationRules
+      tags:
+      - Automation Rules
+      summary: List automation rules.
+      responses:
+        '200':
+          description: Payload of automation rules.
+    post:
+      operationId: createAutomationRule
+      tags:
+      - Automation Rules
+      summary: Create an automation rule.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationRule'
+      responses:
+        '200':
+          description: The created automation rule.
+  /api/v1/accounts/{account_id}/automation_rules/{id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountId'
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: getAutomationRule
+      tags:
+      - Automation Rules
+      summary: Get an automation rule by id.
+      responses:
+        '200':
+          description: The automation rule.
+    patch:
+      operationId: updateAutomationRule
+      tags:
+      - Automation Rules
+      summary: Update an automation rule.
+      responses:
+        '200':
+          description: The updated automation rule.
+    delete:
+      operationId: deleteAutomationRule
+      tags:
+      - Automation Rules
+      summary: Delete an automation rule.
+      responses:
+        '200':
+          description: Deleted.
+components:
+  parameters:
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
+  schemas:
+    AutomationRule:
+      type: object
+      required:
+      - name
+      - event_name
+      - conditions
+      - actions
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        event_name:
+          type: string
+          enum:
+          - conversation_created
+          - conversation_updated
+          - message_created
+        active:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            type: object
+        actions:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Application and Client access token passed in the `api_access_token` HTTP header. For the Application API this is an agent/user access token; Client API requests are additionally scoped by inbox and contact identifiers.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Platform App access token passed in the `api_access_token` HTTP header. Created by a super-admin from the Chatwoot installation's Platform Apps area and required for all /platform/api/v1 endpoints.

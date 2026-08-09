@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Chatwoot Agents Client Conversations API
+  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  termsOfService: https://www.chatwoot.com/terms-of-service/
+  contact:
+    name: Chatwoot Developers
+    url: https://developers.chatwoot.com
+  license:
+    name: MIT (core) with additional Chatwoot license terms for some features
+    url: https://github.com/chatwoot/chatwoot/blob/develop/LICENSE
+  version: '1.0'
+servers:
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
+security:
+- userApiKey: []
+tags:
+- name: Client Conversations
+  description: Client API - end-user conversation management.
+paths:
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations:
+    parameters:
+    - $ref: '#/components/parameters/InboxIdentifier'
+    - $ref: '#/components/parameters/ContactIdentifier'
+    get:
+      operationId: listClientConversations
+      tags:
+      - Client Conversations
+      security: []
+      summary: List the contact's conversations.
+      responses:
+        '200':
+          description: Array of conversations.
+    post:
+      operationId: createClientConversation
+      tags:
+      - Client Conversations
+      security: []
+      summary: Create a conversation for the contact.
+      responses:
+        '200':
+          description: The created conversation.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_status:
+    parameters:
+    - $ref: '#/components/parameters/InboxIdentifier'
+    - $ref: '#/components/parameters/ContactIdentifier'
+    - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: toggleClientConversationStatus
+      tags:
+      - Client Conversations
+      security: []
+      summary: Toggle the status of the contact's conversation.
+      responses:
+        '200':
+          description: Status toggled.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_typing:
+    parameters:
+    - $ref: '#/components/parameters/InboxIdentifier'
+    - $ref: '#/components/parameters/ContactIdentifier'
+    - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: toggleClientTyping
+      tags:
+      - Client Conversations
+      security: []
+      summary: Signal typing on/off in the conversation.
+      responses:
+        '200':
+          description: Typing signal recorded.
+  /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/update_last_seen:
+    parameters:
+    - $ref: '#/components/parameters/InboxIdentifier'
+    - $ref: '#/components/parameters/ContactIdentifier'
+    - $ref: '#/components/parameters/ConversationId'
+    post:
+      operationId: updateClientLastSeen
+      tags:
+      - Client Conversations
+      security: []
+      summary: Update the contact's last-seen timestamp for the conversation.
+      responses:
+        '200':
+          description: Last-seen updated.
+components:
+  parameters:
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    ContactIdentifier:
+      name: contact_identifier
+      in: path
+      required: true
+      description: The source_id / contact identifier returned when the client contact was created.
+      schema:
+        type: string
+    InboxIdentifier:
+      name: inbox_identifier
+      in: path
+      required: true
+      description: The public inbox identifier (channel/web-widget identifier).
+      schema:
+        type: string
+  securitySchemes:
+    userApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Application and Client access token passed in the `api_access_token` HTTP header. For the Application API this is an agent/user access token; Client API requests are additionally scoped by inbox and contact identifiers.
+    platformAppApiKey:
+      type: apiKey
+      in: header
+      name: api_access_token
+      description: Platform App access token passed in the `api_access_token` HTTP header. Created by a super-admin from the Chatwoot installation's Platform Apps area and required for all /platform/api/v1 endpoints.

@@ -1,0 +1,103 @@
+aid: chatwoot-com
+name: Chatwoot
+review:
+  question: Does Chatwoot expose a documented public WebSocket API?
+  answer: partial
+  date: '2026-07-01'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Chatwoot ships a realtime layer over ActionCable (WebSocket) that powers
+    live widget updates - the web-widget SDK subscribes to a channel using the
+    contact's pubsub_token to receive message and typing events in real time.
+    This transport is part of the product's realtime behavior but is not
+    published as a first-class, stably-documented public WebSocket API contract
+    in the developer reference the way the REST surfaces are. No AsyncAPI
+    document was authored at this time; the modeled, documented surfaces are the
+    three REST APIs (Application, Client, Platform). Chatwoot also supports
+    outbound Webhooks for event delivery.
+findings:
+  summary: |
+    Chatwoot's documented, first-class API is REST (HTTPS) across three
+    surfaces: the Application API (/api/v1/accounts/{account_id}/...), the
+    Client API (/public/api/v1/inboxes/...) for end-user widgets, and the
+    Platform API (/platform/api/v1/...) for super-admin installation control.
+    Application and Platform requests authenticate with the `api_access_token`
+    HTTP header. Chatwoot is open-source (core MIT with additional Chatwoot
+    license terms for some features) and can be self-hosted, so the base host
+    varies per deployment; Chatwoot Cloud uses https://app.chatwoot.com. A
+    realtime WebSocket layer (ActionCable) exists for the live-chat widget and
+    dashboard, and outbound Webhooks deliver events, but neither is published as
+    a standalone documented WebSocket API the way the REST endpoints are.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://app.chatwoot.com
+      documented: true
+      note: Application, Client, and Platform APIs are all REST over HTTPS.
+    - protocol: WebSocket
+      scheme: wss
+      documented: partial
+      note: >-
+        ActionCable powers realtime widget/dashboard updates (subscribed via
+        pubsub_token). Present in the product but not a first-class documented
+        public API contract.
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: >-
+        Outbound HTTP webhooks deliver conversation and message events to a
+        subscriber URL; this is push, not a client-consumable streaming API.
+  authentication:
+    header: api_access_token
+    note: >-
+      Application (agent/user) and Platform (super-admin Platform App) tokens
+      are both sent in the api_access_token header. Client API requests are
+      scoped by inbox_identifier and the contact identifier/pubsub_token.
+  endpointsConfirmedRest:
+    - GET  /api/v1/accounts/{account_id}/agents
+    - GET  /api/v1/accounts/{account_id}/teams
+    - GET  /api/v1/accounts/{account_id}/inboxes
+    - GET  /api/v1/accounts/{account_id}/contacts
+    - POST /api/v1/accounts/{account_id}/contacts/filter
+    - GET  /api/v1/accounts/{account_id}/conversations
+    - POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_status
+    - POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages
+    - GET  /api/v1/accounts/{account_id}/labels
+    - GET  /api/v1/accounts/{account_id}/custom_attribute_definitions
+    - GET  /api/v1/accounts/{account_id}/canned_responses
+    - GET  /api/v1/accounts/{account_id}/automation_rules
+    - GET  /api/v1/accounts/{account_id}/reports
+    - POST /public/api/v1/inboxes/{inbox_identifier}/contacts
+    - POST /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations
+    - POST /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages
+    - POST /platform/api/v1/users
+    - GET  /platform/api/v1/users/{id}/login
+    - POST /platform/api/v1/accounts
+    - GET  /platform/api/v1/agent_bots
+sources:
+  - url: https://developers.chatwoot.com
+    type: Documentation
+    note: Developer hub describing Application, Platform, and Client APIs.
+  - url: https://developers.chatwoot.com/api-reference/introduction
+    type: APIReference
+    note: REST API reference; api_access_token header auth.
+  - url: https://github.com/chatwoot/chatwoot
+    type: SourceCode
+    note: Open-source repository; swagger/swagger.json is the source of the API reference.
+  - url: https://www.chatwoot.com/pricing
+    type: Pricing
+    note: Chatwoot Cloud per-agent tiers plus free self-hosting.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    The three documented REST surfaces were modeled in
+    openapi/chatwoot-com-openapi.yml and split into API entries in apis.yml.
+    No AsyncAPI document was authored because Chatwoot's WebSocket
+    (ActionCable) realtime layer is an internal transport for the widget and
+    dashboard rather than a first-class, documented public streaming API, and
+    event delivery to external systems is handled via outbound Webhooks.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
