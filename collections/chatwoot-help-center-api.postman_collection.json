@@ -1,0 +1,1162 @@
+{
+  "item": [
+    {
+      "id": "cc4b0084-3edc-43b9-b55d-16c09b9a775f",
+      "name": "Help Center",
+      "description": {
+        "content": "Knowledge base management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38127cb4-8ece-4df8-86e3-2de7da12dec2",
+          "name": "Add a new portal",
+          "request": {
+            "name": "Add a new portal",
+            "description": {
+              "content": "Add a new portal to account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "portals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"color\": \"<string>\",\n  \"custom_domain\": \"<string>\",\n  \"header_text\": \"<string>\",\n  \"homepage_link\": \"<string>\",\n  \"name\": \"<string>\",\n  \"page_title\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"archived\": \"<boolean>\",\n  \"config\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "534e9ee4-c863-4ee0-addb-e65a1489ab11",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"#FFFFFF\",\n  \"custom_domain\": \"chatwoot.help\",\n  \"header_text\": \"Handbook\",\n  \"homepage_link\": \"https://www.chatwoot.com/\",\n  \"name\": \"Handbook\",\n  \"page_title\": \"Handbook\",\n  \"slug\": \"handbook\",\n  \"archived\": false,\n  \"config\": {\n    \"allowed_locales\": [\n      \"en\",\n      \"es\"\n    ],\n    \"default_locale\": \"en\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 7220,\n      \"archived\": false,\n      \"color\": \"string\",\n      \"config\": {\n        \"allowed_locales\": [\n          {\n            \"code\": \"string\",\n            \"articles_count\": 3400,\n            \"categories_count\": 3288\n          },\n          {\n            \"code\": \"string\",\n            \"articles_count\": 7822,\n            \"categories_count\": 3445\n          }\n        ]\n      },\n      \"custom_domain\": \"string\",\n      \"header_text\": \"string\",\n      \"homepage_link\": \"string\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"page_title\": \"string\",\n      \"account_id\": 5363,\n      \"inbox\": {\n        \"id\": 9716.325652730075,\n        \"name\": \"string\",\n        \"website_url\": \"string\",\n        \"channel_type\": \"string\",\n        \"avatar_url\": \"string\",\n        \"widget_color\": \"string\",\n        \"website_token\": \"string\",\n        \"enable_auto_assignment\": false,\n        \"web_widget_script\": \"string\",\n        \"welcome_title\": \"string\",\n        \"welcome_tagline\": \"string\",\n        \"greeting_enabled\": true,\n        \"greeting_message\": \"string\",\n        \"channel_id\": 698.8707293753005,\n        \"working_hours_enabled\": false,\n        \"enable_email_collect\": true,\n        \"csat_survey_enabled\": false,\n        \"auto_assignment_config\": {},\n        \"out_of_office_message\": \"string\",\n        \"working_hours\": [\n          {\n            \"day_of_week\": 4618.728345217129,\n            \"closed_all_day\": false,\n            \"open_hour\": 4986.706094813536,\n            \"open_minutes\": 8580.371241288867,\n            \"close_hour\": 5712.169956267538,\n            \"close_minutes\": 1845.0188315924122,\n            \"open_all_day\": true\n          },\n          {\n            \"day_of_week\": 5092.822754978061,\n            \"closed_all_day\": true,\n            \"open_hour\": 45.86402440968751,\n            \"open_minutes\": 8874.406585204628,\n            \"close_hour\": 7513.3949694604225,\n            \"close_minutes\": 89.94236469423433,\n            \"open_all_day\": false\n          }\n        ],\n        \"timezone\": \"string\",\n        \"callback_webhook_url\": \"string\",\n        \"allow_messages_after_resolved\": true,\n        \"lock_to_single_conversation\": true,\n        \"sender_name_type\": \"string\",\n        \"business_name\": \"string\",\n        \"hmac_mandatory\": false,\n        \"selected_feature_flags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reply_time\": \"string\",\n        \"messaging_service_sid\": \"string\",\n        \"phone_number\": \"string\",\n        \"medium\": \"string\",\n        \"provider\": \"string\"\n      },\n      \"logo\": {\n        \"id\": 4917,\n        \"portal_id\": 1951,\n        \"file_type\": \"string\",\n        \"account_id\": 4331,\n        \"file_url\": \"string\",\n        \"blob_id\": 8121,\n        \"filename\": \"string\"\n      },\n      \"meta\": {\n        \"all_articles_count\": 8722,\n        \"archived_articles_count\": 2729,\n        \"published_count\": 1445,\n        \"draft_articles_count\": 123,\n        \"categories_count\": 2707,\n        \"default_locale\": \"string\"\n      }\n    },\n    {\n      \"id\": 7357,\n      \"archived\": false,\n      \"color\": \"string\",\n      \"config\": {\n        \"allowed_locales\": [\n          {\n            \"code\": \"string\",\n            \"articles_count\": 830,\n            \"categories_count\": 9477\n          },\n          {\n            \"code\": \"string\",\n            \"articles_count\": 4534,\n            \"categories_count\": 1864\n          }\n        ]\n      },\n      \"custom_domain\": \"string\",\n      \"header_text\": \"string\",\n      \"homepage_link\": \"string\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"page_title\": \"string\",\n      \"account_id\": 7053,\n      \"inbox\": {\n        \"id\": 4185.3725302060475,\n        \"name\": \"string\",\n        \"website_url\": \"string\",\n        \"channel_type\": \"string\",\n        \"avatar_url\": \"string\",\n        \"widget_color\": \"string\",\n        \"website_token\": \"string\",\n        \"enable_auto_assignment\": false,\n        \"web_widget_script\": \"string\",\n        \"welcome_title\": \"string\",\n        \"welcome_tagline\": \"string\",\n        \"greeting_enabled\": true,\n        \"greeting_message\": \"string\",\n        \"channel_id\": 2912.074481163234,\n        \"working_hours_enabled\": false,\n        \"enable_email_collect\": false,\n        \"csat_survey_enabled\": true,\n        \"auto_assignment_config\": {},\n        \"out_of_office_message\": \"string\",\n        \"working_hours\": [\n          {\n            \"day_of_week\": 5961.8433288031565,\n            \"closed_all_day\": true,\n            \"open_hour\": 1737.5192007139528,\n            \"open_minutes\": 4895.418210618414,\n            \"close_hour\": 4056.5872511442726,\n            \"close_minutes\": 4448.446724666014,\n            \"open_all_day\": false\n          },\n          {\n            \"day_of_week\": 8722.655245513328,\n            \"closed_all_day\": true,\n            \"open_hour\": 9625.928904954022,\n            \"open_minutes\": 9089.64192261554,\n            \"close_hour\": 3942.7737663431526,\n            \"close_minutes\": 2235.798234941804,\n            \"open_all_day\": true\n          }\n        ],\n        \"timezone\": \"string\",\n        \"callback_webhook_url\": \"string\",\n        \"allow_messages_after_resolved\": true,\n        \"lock_to_single_conversation\": true,\n        \"sender_name_type\": \"string\",\n        \"business_name\": \"string\",\n        \"hmac_mandatory\": true,\n        \"selected_feature_flags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reply_time\": \"string\",\n        \"messaging_service_sid\": \"string\",\n        \"phone_number\": \"string\",\n        \"medium\": \"string\",\n        \"provider\": \"string\"\n      },\n      \"logo\": {\n        \"id\": 4626,\n        \"portal_id\": 7225,\n        \"file_type\": \"string\",\n        \"account_id\": 4673,\n        \"file_url\": \"string\",\n        \"blob_id\": 7499,\n        \"filename\": \"string\"\n      },\n      \"meta\": {\n        \"all_articles_count\": 3774,\n        \"archived_articles_count\": 8048,\n        \"published_count\": 5784,\n        \"draft_articles_count\": 9655,\n        \"categories_count\": 7037,\n        \"default_locale\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f69c1da7-cdbb-4034-8552-d34f68e77a37",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"#FFFFFF\",\n  \"custom_domain\": \"chatwoot.help\",\n  \"header_text\": \"Handbook\",\n  \"homepage_link\": \"https://www.chatwoot.com/\",\n  \"name\": \"Handbook\",\n  \"page_title\": \"Handbook\",\n  \"slug\": \"handbook\",\n  \"archived\": false,\n  \"config\": {\n    \"allowed_locales\": [\n      \"en\",\n      \"es\"\n    ],\n    \"default_locale\": \"en\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b87f397f-c12e-4217-b63b-b89a7b2deb05",
+          "name": "List all portals in an account",
+          "request": {
+            "name": "List all portals in an account",
+            "description": {
+              "content": "Get details of portals in an Account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "portals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "93990250-7ac7-4b78-b1b0-2de067aca772",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 4,\n      \"color\": \"#1F93FF\",\n      \"custom_domain\": \"chatwoot.help\",\n      \"header_text\": \"Handbook\",\n      \"homepage_link\": \"https://www.chatwoot.com\",\n      \"name\": \"Handbook\",\n      \"page_title\": \"Handbook\",\n      \"slug\": \"handbook\",\n      \"archived\": false,\n      \"account_id\": 1,\n      \"config\": {\n        \"allowed_locales\": [\n          {\n            \"code\": \"en\",\n            \"articles_count\": 32,\n            \"categories_count\": 9\n          }\n        ]\n      },\n      \"inbox\": {\n        \"id\": 37,\n        \"avatar_url\": \"https://example.com/avatar.png\",\n        \"channel_id\": 1,\n        \"name\": \"Chatwoot\",\n        \"channel_type\": \"Channel::WebWidget\",\n        \"greeting_enabled\": true,\n        \"widget_color\": \"#1F93FF\",\n        \"website_url\": \"chatwoot.com\"\n      },\n      \"logo\": {\n        \"id\": 19399916,\n        \"portal_id\": 4,\n        \"file_type\": \"image/png\",\n        \"account_id\": 1,\n        \"file_url\": \"https://example.com/logo.png\",\n        \"blob_id\": 21239614,\n        \"filename\": \"square.png\"\n      },\n      \"meta\": {\n        \"all_articles_count\": 0,\n        \"categories_count\": 9,\n        \"default_locale\": \"en\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4c22ac1-2949-45a9-9f17-cc92f134af3d",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4fa3015-2ae6-40c2-a4cd-f7c2be548293",
+          "name": "Update a portal",
+          "request": {
+            "name": "Update a portal",
+            "description": {
+              "content": "Update a portal to account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "portals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The slug identifier of the portal"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"color\": \"<string>\",\n  \"custom_domain\": \"<string>\",\n  \"header_text\": \"<string>\",\n  \"homepage_link\": \"<string>\",\n  \"name\": \"<string>\",\n  \"page_title\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"archived\": \"<boolean>\",\n  \"config\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "abb7ec9c-13e1-49dc-bb4e-21c9d6921ea3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"#FFFFFF\",\n  \"custom_domain\": \"chatwoot.help\",\n  \"header_text\": \"Handbook\",\n  \"homepage_link\": \"https://www.chatwoot.com/\",\n  \"name\": \"Handbook\",\n  \"page_title\": \"Handbook\",\n  \"slug\": \"handbook\",\n  \"archived\": false,\n  \"config\": {\n    \"allowed_locales\": [\n      \"en\",\n      \"es\"\n    ],\n    \"default_locale\": \"en\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": {\n    \"id\": 123,\n    \"archived\": false,\n    \"color\": \"#1F93FF\",\n    \"config\": {\n      \"allowed_locales\": [\n        {\n          \"code\": \"en\",\n          \"articles_count\": 32,\n          \"categories_count\": 9\n        }\n      ]\n    },\n    \"custom_domain\": \"chatwoot.help\",\n    \"header_text\": \"Handbook\",\n    \"homepage_link\": \"https://www.chatwoot.com\",\n    \"name\": \"Handbook\",\n    \"slug\": \"handbook\",\n    \"page_title\": \"Handbook\",\n    \"account_id\": 123,\n    \"inbox\": {\n      \"id\": 123,\n      \"name\": \"Chatwoot\",\n      \"website_url\": \"chatwoot.com\",\n      \"channel_type\": \"Channel::WebWidget\",\n      \"avatar_url\": \"https://example.com/avatar.png\",\n      \"widget_color\": \"#1F93FF\",\n      \"website_token\": \"4cWzuf9i9jxN9tbnv8K9STKU\",\n      \"enable_auto_assignment\": true,\n      \"web_widget_script\": \"<script>...</script>\",\n      \"welcome_title\": \"Hi there ! 🙌🏼\",\n      \"welcome_tagline\": \"We make it simple to connect with us.\",\n      \"greeting_enabled\": true,\n      \"greeting_message\": \"Hey there 👋, Thank you for reaching out to us.\",\n      \"channel_id\": 123,\n      \"working_hours_enabled\": true,\n      \"enable_email_collect\": true,\n      \"csat_survey_enabled\": true,\n      \"timezone\": \"America/Los_Angeles\",\n      \"business_name\": \"Chatwoot\",\n      \"hmac_mandatory\": true\n    },\n    \"logo\": {\n      \"id\": 123,\n      \"portal_id\": 123,\n      \"file_type\": \"image/png\",\n      \"account_id\": 123,\n      \"file_url\": \"https://example.com/logo.png\",\n      \"blob_id\": 123,\n      \"filename\": \"square.png\"\n    },\n    \"meta\": {\n      \"all_articles_count\": 32,\n      \"categories_count\": 9,\n      \"default_locale\": \"en\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "246ee93e-1cc0-415d-9ea8-ab865e12faf3",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"#FFFFFF\",\n  \"custom_domain\": \"chatwoot.help\",\n  \"header_text\": \"Handbook\",\n  \"homepage_link\": \"https://www.chatwoot.com/\",\n  \"name\": \"Handbook\",\n  \"page_title\": \"Handbook\",\n  \"slug\": \"handbook\",\n  \"archived\": false,\n  \"config\": {\n    \"allowed_locales\": [\n      \"en\",\n      \"es\"\n    ],\n    \"default_locale\": \"en\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3db0b7e-4900-4621-ae5d-93639a9e05ff",
+              "name": "Portal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"color\": \"#FFFFFF\",\n  \"custom_domain\": \"chatwoot.help\",\n  \"header_text\": \"Handbook\",\n  \"homepage_link\": \"https://www.chatwoot.com/\",\n  \"name\": \"Handbook\",\n  \"page_title\": \"Handbook\",\n  \"slug\": \"handbook\",\n  \"archived\": false,\n  \"config\": {\n    \"allowed_locales\": [\n      \"en\",\n      \"es\"\n    ],\n    \"default_locale\": \"en\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35cdd69b-c50f-4e75-b7b9-31a187d18fe6",
+          "name": "Add a new category",
+          "request": {
+            "name": "Add a new category",
+            "description": {
+              "content": "Add a new category to portal",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "portals",
+                ":id",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The slug identifier of the portal"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"position\": \"<integer>\",\n  \"slug\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"parent_category_id\": \"<integer>\",\n  \"associated_category_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8dfd1791-8f78-4dce-ae51-5913eb8e4941",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Category Name\",\n  \"description\": \"Category description\",\n  \"position\": 1,\n  \"slug\": \"category-name\",\n  \"locale\": \"en\",\n  \"icon\": \"📚\",\n  \"parent_category_id\": 1,\n  \"associated_category_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6743,\n  \"description\": \"string\",\n  \"locale\": \"string\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"position\": 8343,\n  \"portal_id\": 9343,\n  \"account_id\": 2272,\n  \"associated_category_id\": 2753,\n  \"parent_category_id\": 2983\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80e9a5ff-3aa2-4c2f-b40a-2911885a8d6d",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Category Name\",\n  \"description\": \"Category description\",\n  \"position\": 1,\n  \"slug\": \"category-name\",\n  \"locale\": \"en\",\n  \"icon\": \"📚\",\n  \"parent_category_id\": 1,\n  \"associated_category_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ed75549-5b39-4f33-99ac-bcab3642204c",
+          "name": "Add a new article",
+          "request": {
+            "name": "Add a new article",
+            "description": {
+              "content": "Add a new article to portal",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "portals",
+                ":id",
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The slug identifier of the portal"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"position\": \"<integer>\",\n  \"content\": \"<string>\",\n  \"description\": \"<string>\",\n  \"category_id\": \"<integer>\",\n  \"author_id\": \"<integer>\",\n  \"associated_article_id\": \"<integer>\",\n  \"status\": \"<integer>\",\n  \"locale\": \"<string>\",\n  \"meta\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e399accf-531f-4e9d-b210-b115bb75138c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id",
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Article Title\",\n  \"slug\": \"article-title\",\n  \"position\": 1,\n  \"content\": \"This is the content of the article\",\n  \"description\": \"This is the description of the article\",\n  \"category_id\": 1,\n  \"author_id\": 1,\n  \"associated_article_id\": 2,\n  \"status\": 1,\n  \"locale\": \"en\",\n  \"meta\": {\n    \"tags\": [\n      \"article_name\"\n    ],\n    \"title\": \"article title\",\n    \"description\": \"article description\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2907,\n  \"content\": \"string\",\n  \"meta\": {},\n  \"position\": 6696,\n  \"status\": null,\n  \"title\": \"string\",\n  \"slug\": \"string\",\n  \"views\": 4733,\n  \"portal_id\": 3946,\n  \"account_id\": 9046,\n  \"author_id\": 4348,\n  \"category_id\": 6689,\n  \"folder_id\": 2905,\n  \"associated_article_id\": 6\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e80b8914-4d34-4026-8580-053258f9c2c8",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "portals",
+                    ":id",
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The slug identifier of the portal"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Article Title\",\n  \"slug\": \"article-title\",\n  \"position\": 1,\n  \"content\": \"This is the content of the article\",\n  \"description\": \"This is the description of the article\",\n  \"category_id\": 1,\n  \"author_id\": 1,\n  \"associated_article_id\": 2,\n  \"status\": 1,\n  \"locale\": \"en\",\n  \"meta\": {\n    \"tags\": [\n      \"article_name\"\n    ],\n    \"title\": \"article title\",\n    \"description\": \"article description\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ffe20b6-5fc7-47c6-94f3-a2219ffa74ed",
+    "name": "Chatwoot Account AgentBots Help Center API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

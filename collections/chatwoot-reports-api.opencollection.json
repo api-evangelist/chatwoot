@@ -1,0 +1,546 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Reports API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Reporting Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/reporting_events",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page parameter"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where events should start (Unix timestamp in seconds)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where events should stop (Unix timestamp in seconds)"
+              },
+              {
+                "name": "inbox_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by inbox ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by user/agent ID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by event name (e.g., first_response, resolution, reply_time)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get paginated reporting events for the account. This endpoint returns reporting events such as first response time, resolution time, and other metrics. Only administrators can access this endpoint. Results are paginated with 25 items per page."
+        },
+        {
+          "info": {
+            "name": "Get Account reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query",
+                "description": "The type of metric"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of report"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The Id of specific object in case of agent/inbox/label"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Account reports for a specific type, metric and date range"
+        },
+        {
+          "info": {
+            "name": "Get Account reports summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/summary",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of report"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The Id of specific object in case of agent/inbox/label"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Account reports summary for a specific type and date range"
+        },
+        {
+          "info": {
+            "name": "Account Conversation Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/conversations",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of report"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation metrics for Account"
+        },
+        {
+          "info": {
+            "name": "Agent Conversation Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/conversations/",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of report"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The numeric ID of the user"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation metrics for Agent"
+        },
+        {
+          "info": {
+            "name": "Get conversation statistics grouped by channel type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/summary_reports/channel",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation counts grouped by channel type and status for a given date range.\nReturns statistics for each channel type including open, resolved, pending, snoozed, and total conversation counts.\n\n**Note:** This API endpoint is available only in Chatwoot version 4.10.0 and above. The date range is limited to a maximum of 6 months.\n"
+        },
+        {
+          "info": {
+            "name": "Get conversation statistics grouped by inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/summary_reports/inbox",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              },
+              {
+                "name": "business_hours",
+                "value": "",
+                "type": "query",
+                "description": "Whether to calculate metrics using business hours only."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation statistics grouped by inbox for a given date range.\nReturns metrics for each inbox including conversation counts, resolution counts,\naverage first response time, average resolution time, and average reply time.\n"
+        },
+        {
+          "info": {
+            "name": "Get conversation statistics grouped by agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/summary_reports/agent",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              },
+              {
+                "name": "business_hours",
+                "value": "",
+                "type": "query",
+                "description": "Whether to calculate metrics using business hours only."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation statistics grouped by agent for a given date range.\nReturns metrics for each agent including conversation counts, resolution counts,\naverage first response time, average resolution time, and average reply time.\n"
+        },
+        {
+          "info": {
+            "name": "Get conversation statistics grouped by team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/summary_reports/team",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              },
+              {
+                "name": "business_hours",
+                "value": "",
+                "type": "query",
+                "description": "Whether to calculate metrics using business hours only."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get conversation statistics grouped by team for a given date range.\nReturns metrics for each team including conversation counts, resolution counts,\naverage first response time, average resolution time, and average reply time.\n"
+        },
+        {
+          "info": {
+            "name": "Get first response time distribution by channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/first_response_time_distribution",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the distribution of first response times grouped by channel type.\nReturns conversation counts in different time buckets (0-1h, 1-4h, 4-8h, 8-24h, 24h+) for each channel type.\n\n**Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.\n"
+        },
+        {
+          "info": {
+            "name": "Get inbox-label matrix report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/inbox_label_matrix",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              },
+              {
+                "name": "inbox_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific inbox IDs."
+              },
+              {
+                "name": "label_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific label IDs."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a matrix showing the count of conversations for each inbox-label combination.\nReturns a list of inboxes, labels, and a 2D matrix where each cell contains the count of conversations\nin a specific inbox that have a specific label applied.\n\n**Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.\n"
+        },
+        {
+          "info": {
+            "name": "Get outgoing messages count grouped by entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v2/accounts/:account_id/reports/outgoing_messages_count",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should start (Unix timestamp)."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from where report should stop (Unix timestamp)."
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query",
+                "description": "The entity to group outgoing message counts by."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the count of outgoing messages grouped by a specified entity (agent, team, inbox, or label).\nWhen grouped by agent, messages sent by bots (AgentBot, Captain::Assistant) are excluded.\n\n**Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

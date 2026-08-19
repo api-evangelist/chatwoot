@@ -1,0 +1,708 @@
+{
+  "item": [
+    {
+      "id": "5b92172e-3dad-43cd-9135-2acf1d71ec6f",
+      "name": "Messages API",
+      "description": {
+        "content": "Public message APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f3370ce-bb37-4820-a191-0c9a67c0eb8c",
+          "name": "Create a message",
+          "request": {
+            "name": "Create a message",
+            "description": {
+              "content": "Create a message",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier",
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source id of contact obtained on contact create"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"echo_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "132d2f81-df8a-4a57-85aa-308a72699fad",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Hello, how can I help you?\",\n  \"echo_id\": \"1234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9059,\n  \"content\": \"string\",\n  \"message_type\": 2758,\n  \"content_type\": \"string\",\n  \"content_attributes\": {},\n  \"created_at\": 3923,\n  \"conversation_id\": 6661,\n  \"attachments\": [\n    {\n      \"id\": 1147,\n      \"message_id\": 3590,\n      \"file_type\": \"fallback\",\n      \"account_id\": 6088,\n      \"extension\": \"string\",\n      \"data_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"file_size\": 1671,\n      \"width\": 4830,\n      \"height\": 3336,\n      \"coordinates_lat\": 7295.391754187691,\n      \"coordinates_long\": 5932.896783662915,\n      \"fallback_title\": \"string\",\n      \"meta\": {},\n      \"transcribed_text\": \"string\",\n      \"key_0\": \"string\",\n      \"key_1\": 5364,\n      \"key_2\": \"string\"\n    },\n    {\n      \"id\": 4903,\n      \"message_id\": 6175,\n      \"file_type\": \"ig_story\",\n      \"account_id\": 2777,\n      \"extension\": \"string\",\n      \"data_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"file_size\": 1580,\n      \"width\": 5567,\n      \"height\": 1740,\n      \"coordinates_lat\": 453.9547310993952,\n      \"coordinates_long\": 6806.1008484187205,\n      \"fallback_title\": \"string\",\n      \"meta\": {},\n      \"transcribed_text\": \"string\"\n    }\n  ],\n  \"sender\": {\n    \"id\": 3658,\n    \"name\": \"string\",\n    \"avatar_url\": \"string\",\n    \"thumbnail\": \"string\",\n    \"type\": \"captain_assistant\",\n    \"available_name\": \"string\",\n    \"availability_status\": \"string\",\n    \"email\": \"string\",\n    \"phone_number\": \"string\",\n    \"identifier\": \"string\",\n    \"blocked\": false,\n    \"additional_attributes\": {},\n    \"custom_attributes\": {},\n    \"description\": \"string\",\n    \"created_at\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6850af6a-4a02-4f69-96e0-585baa84e3dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Hello, how can I help you?\",\n  \"echo_id\": \"1234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27f64fc5-29a9-45af-b86a-776e13f23ced",
+          "name": "List all messages",
+          "request": {
+            "name": "List all messages",
+            "description": {
+              "content": "List all messages in the conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier",
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source id of contact obtained on contact create"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6bdc74a2-6d87-4103-b2c7-99fd2444b574",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 8392,\n    \"content\": \"string\",\n    \"message_type\": 5105,\n    \"content_type\": \"string\",\n    \"content_attributes\": {},\n    \"created_at\": 3347,\n    \"conversation_id\": 4977,\n    \"attachments\": [\n      {\n        \"id\": 8371,\n        \"message_id\": 7736,\n        \"file_type\": \"fallback\",\n        \"account_id\": 5889,\n        \"extension\": \"string\",\n        \"data_url\": \"string\",\n        \"thumb_url\": \"string\",\n        \"file_size\": 577,\n        \"width\": 9580,\n        \"height\": 4000,\n        \"coordinates_lat\": 6084.3796592647495,\n        \"coordinates_long\": 761.8867367304072,\n        \"fallback_title\": \"string\",\n        \"meta\": {},\n        \"transcribed_text\": \"string\"\n      },\n      {\n        \"id\": 4908,\n        \"message_id\": 4475,\n        \"file_type\": \"ig_reel\",\n        \"account_id\": 5853,\n        \"extension\": \"string\",\n        \"data_url\": \"string\",\n        \"thumb_url\": \"string\",\n        \"file_size\": 3297,\n        \"width\": 8122,\n        \"height\": 2625,\n        \"coordinates_lat\": 4150.218662166433,\n        \"coordinates_long\": 8506.69399618993,\n        \"fallback_title\": \"string\",\n        \"meta\": {},\n        \"transcribed_text\": \"string\"\n      }\n    ],\n    \"sender\": {\n      \"id\": 5986,\n      \"name\": \"string\",\n      \"avatar_url\": \"string\",\n      \"thumbnail\": \"string\",\n      \"type\": \"user\",\n      \"available_name\": \"string\",\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"phone_number\": \"string\",\n      \"identifier\": \"string\",\n      \"blocked\": false,\n      \"additional_attributes\": {},\n      \"custom_attributes\": {},\n      \"description\": \"string\",\n      \"created_at\": \"string\"\n    }\n  },\n  {\n    \"id\": 415,\n    \"content\": \"string\",\n    \"message_type\": 3089,\n    \"content_type\": \"string\",\n    \"content_attributes\": {},\n    \"created_at\": 2640,\n    \"conversation_id\": 239,\n    \"attachments\": [\n      {\n        \"id\": 7703,\n        \"message_id\": 1091,\n        \"file_type\": \"image\",\n        \"account_id\": 5538,\n        \"extension\": \"string\",\n        \"data_url\": \"string\",\n        \"thumb_url\": \"string\",\n        \"file_size\": 6737,\n        \"width\": 2824,\n        \"height\": 9628,\n        \"coordinates_lat\": 5493.697927383274,\n        \"coordinates_long\": 9591.713038474734,\n        \"fallback_title\": \"string\",\n        \"meta\": {},\n        \"transcribed_text\": \"string\"\n      },\n      {\n        \"id\": 3789,\n        \"message_id\": 5228,\n        \"file_type\": \"fallback\",\n        \"account_id\": 9164,\n        \"extension\": \"string\",\n        \"data_url\": \"string\",\n        \"thumb_url\": \"string\",\n        \"file_size\": 8931,\n        \"width\": 7652,\n        \"height\": 4528,\n        \"coordinates_lat\": 1954.9984424353827,\n        \"coordinates_long\": 6493.644319128528,\n        \"fallback_title\": \"string\",\n        \"meta\": {},\n        \"transcribed_text\": \"string\"\n      }\n    ],\n    \"sender\": {\n      \"id\": 6946,\n      \"name\": \"string\",\n      \"avatar_url\": \"string\",\n      \"thumbnail\": \"string\",\n      \"type\": \"agent_bot\",\n      \"available_name\": \"string\",\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"phone_number\": \"string\",\n      \"identifier\": \"string\",\n      \"blocked\": true,\n      \"additional_attributes\": {},\n      \"custom_attributes\": {},\n      \"description\": \"string\",\n      \"created_at\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01f5c9ae-b123-4ad8-a95d-d873750d0146",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a073f756-b24e-4b74-a927-92ef30406d5a",
+          "name": "Update a message",
+          "request": {
+            "name": "Update a message",
+            "description": {
+              "content": "Update a message",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier",
+                "conversations",
+                ":conversation_id",
+                "messages",
+                ":message_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source id of contact obtained on contact create"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "message_id",
+                  "description": "(Required) The numeric ID of the message"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"submitted_values\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"value\": \"<string>\",\n    \"csat_survey_response\": {\n      \"feedback_message\": \"<string>\",\n      \"rating\": \"<integer>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fe495a8-59a5-46c6-ae8b-141ac2369fa4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages",
+                    ":message_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "message_id",
+                      "description": "(Required) The numeric ID of the message"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"submitted_values\": {\n    \"name\": \"My Name\",\n    \"title\": \"My Title\",\n    \"value\": \"value\",\n    \"csat_survey_response\": {\n      \"feedback_message\": \"Great service!\",\n      \"rating\": 5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6218,\n  \"content\": \"string\",\n  \"message_type\": 3857,\n  \"content_type\": \"string\",\n  \"content_attributes\": {},\n  \"created_at\": 6233,\n  \"conversation_id\": 9142,\n  \"attachments\": [\n    {\n      \"id\": 9480,\n      \"message_id\": 7557,\n      \"file_type\": \"ig_story\",\n      \"account_id\": 352,\n      \"extension\": \"string\",\n      \"data_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"file_size\": 4623,\n      \"width\": 1410,\n      \"height\": 2309,\n      \"coordinates_lat\": 2701.4251249160316,\n      \"coordinates_long\": 783.6915847793979,\n      \"fallback_title\": \"string\",\n      \"meta\": {},\n      \"transcribed_text\": \"string\"\n    },\n    {\n      \"id\": 6078,\n      \"message_id\": 3640,\n      \"file_type\": \"ig_post\",\n      \"account_id\": 8369,\n      \"extension\": \"string\",\n      \"data_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"file_size\": 5963,\n      \"width\": 8804,\n      \"height\": 9434,\n      \"coordinates_lat\": 3869.7678432965545,\n      \"coordinates_long\": 5216.910282652143,\n      \"fallback_title\": \"string\",\n      \"meta\": {},\n      \"transcribed_text\": \"string\"\n    }\n  ],\n  \"sender\": {\n    \"id\": 9429,\n    \"name\": \"string\",\n    \"avatar_url\": \"string\",\n    \"thumbnail\": \"string\",\n    \"type\": \"user\",\n    \"available_name\": \"string\",\n    \"availability_status\": \"string\",\n    \"email\": \"string\",\n    \"phone_number\": \"string\",\n    \"identifier\": \"string\",\n    \"blocked\": false,\n    \"additional_attributes\": {},\n    \"custom_attributes\": {},\n    \"description\": \"string\",\n    \"created_at\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f79d0bbb-1347-40a5-8a4a-229ea498d59e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages",
+                    ":message_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "message_id",
+                      "description": "(Required) The numeric ID of the message"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"submitted_values\": {\n    \"name\": \"My Name\",\n    \"title\": \"My Title\",\n    \"value\": \"value\",\n    \"csat_survey_response\": {\n      \"feedback_message\": \"Great service!\",\n      \"rating\": 5\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9b1c0242-a24c-4d8d-837e-e237c41f6817",
+    "name": "Chatwoot Account AgentBots Messages API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

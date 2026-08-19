@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "d18a4a52-1966-45fb-8da3-9115eb496c84",
+      "name": "Inbox API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "74c374f8-ca6c-45e7-9202-f472f37fd36e",
+          "name": "Inbox details",
+          "request": {
+            "name": "Inbox details",
+            "description": {
+              "content": "Get the details of an inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13cc16ec-0e2c-4bad-8646-088004e89d30",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identifier\": \"string\",\n  \"name\": \"string\",\n  \"timezone\": \"string\",\n  \"working_hours\": [\n    {\n      \"day_of_week\": 5402,\n      \"open_all_day\": false,\n      \"closed_all_day\": false,\n      \"open_hour\": 5326,\n      \"open_minutes\": 2993,\n      \"close_hour\": 5833,\n      \"close_minutes\": 4174\n    },\n    {\n      \"day_of_week\": 1820,\n      \"open_all_day\": true,\n      \"closed_all_day\": false,\n      \"open_hour\": 8432,\n      \"open_minutes\": 3792,\n      \"close_hour\": 7906,\n      \"close_minutes\": 6005\n    }\n  ],\n  \"working_hours_enabled\": true,\n  \"csat_survey_enabled\": false,\n  \"greeting_enabled\": false,\n  \"identity_validation_enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc7e30bb-e7e8-49d3-bd43-17ed9222235b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6847f424-b31b-483b-a87b-d2e2fab3ade9",
+              "name": "The given inbox does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c0755650-14f6-480f-976d-8c494512b193",
+    "name": "Chatwoot Account AgentBots Inbox API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

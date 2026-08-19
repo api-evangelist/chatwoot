@@ -1,0 +1,326 @@
+{
+  "item": [
+    {
+      "id": "2052498c-59ec-4a1f-9549-f6c9dd0d84e1",
+      "name": "Client Messages",
+      "description": {
+        "content": "Client API - end-user message management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d771621d-78ea-4021-b753-3e80f3d7693b",
+          "name": "List messages in the contact's conversation.",
+          "request": {
+            "name": "List messages in the contact's conversation.",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier",
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The public inbox identifier (channel/web-widget identifier)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source_id / contact identifier returned when the client contact was created."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The display id of the conversation."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1180c82b-b3bd-4eef-a284-d8e0f3d5d135",
+              "name": "Array of messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The public inbox identifier (channel/web-widget identifier)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source_id / contact identifier returned when the client contact was created."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The display id of the conversation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6f95d57-b51b-497a-af1e-955b2f67631c",
+          "name": "Create a message in the contact's conversation.",
+          "request": {
+            "name": "Create a message in the contact's conversation.",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier",
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The public inbox identifier (channel/web-widget identifier)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source_id / contact identifier returned when the client contact was created."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The display id of the conversation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"echo_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55c5d082-0514-471d-bd11-ba70312496f8",
+              "name": "The created message.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The public inbox identifier (channel/web-widget identifier)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source_id / contact identifier returned when the client contact was created."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The display id of the conversation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"echo_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f4c2436-2811-46bb-bb6e-5743facea868",
+    "name": "Chatwoot Agents Client Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.\n\nContact Support:\n Name: Chatwoot Developers",
+      "type": "text/plain"
+    }
+  }
+}

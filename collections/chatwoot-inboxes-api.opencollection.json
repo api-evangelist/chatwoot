@@ -1,0 +1,322 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Inboxes API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all inboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all inboxes available in the current account"
+        },
+        {
+          "info": {
+            "name": "Create an inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "You can create more than one website inbox in each account"
+        },
+        {
+          "info": {
+            "name": "Get an inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inbox"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an inbox available in the current account"
+        },
+        {
+          "info": {
+            "name": "Update Inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inbox"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an existing inbox"
+        },
+        {
+          "info": {
+            "name": "Show Inbox Agent Bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes/:id/agent_bot",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inbox"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "See if an agent bot is associated to the Inbox"
+        },
+        {
+          "info": {
+            "name": "Add or remove agent bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inboxes/:id/set_agent_bot",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the inbox"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "To add an agent bot pass agent_bot id, to remove agent bot from an inbox pass null"
+        },
+        {
+          "info": {
+            "name": "List Agents in Inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inbox_members/:inbox_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "inbox_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Inbox"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Details of Agents in an Inbox"
+        },
+        {
+          "info": {
+            "name": "Add a New Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inbox_members",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new Agent to Inbox"
+        },
+        {
+          "info": {
+            "name": "Update Agents in Inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inbox_members",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "All agents except the one passed in params will be removed"
+        },
+        {
+          "info": {
+            "name": "Remove an Agent from Inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/inbox_members",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove an Agent from Inbox"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

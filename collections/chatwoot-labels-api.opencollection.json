@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Labels API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/labels",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all labels available in the current account"
+        },
+        {
+          "info": {
+            "name": "Create a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/labels",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a label in the account"
+        },
+        {
+          "info": {
+            "name": "Get a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/labels/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the label"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the details of a label in the account"
+        },
+        {
+          "info": {
+            "name": "Update a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/labels/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the label"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a label's attributes"
+        },
+        {
+          "info": {
+            "name": "Delete a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/labels/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the label"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a label from the account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

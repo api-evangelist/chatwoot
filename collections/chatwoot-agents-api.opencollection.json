@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Agents API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Agents in Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/agents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get Details of Agents in an Account"
+        },
+        {
+          "info": {
+            "name": "Add a New Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/agents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new Agent to Account"
+        },
+        {
+          "info": {
+            "name": "Update Agent in Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/agents/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the agent to be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an Agent in Account"
+        },
+        {
+          "info": {
+            "name": "Remove an Agent from Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/agents/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the agent to be deleted."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove an Agent from Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "cfcc232c-fc72-440a-826c-9172acce834e",
+      "name": "Profile",
+      "description": {
+        "content": "User profile APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6979c625-3e98-4a0a-b263-59de9c4405e8",
+          "name": "Fetch user profile",
+          "request": {
+            "name": "Fetch user profile",
+            "description": {
+              "content": "Get the user profile details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c6f1727c-44bc-447a-891b-fc6992c1e8bf",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6869.283444768861,\n  \"access_token\": \"string\",\n  \"account_id\": 8246.29597499378,\n  \"available_name\": \"string\",\n  \"avatar_url\": \"string\",\n  \"confirmed\": false,\n  \"display_name\": \"string\",\n  \"message_signature\": \"string\",\n  \"email\": \"string\",\n  \"hmac_identifier\": \"string\",\n  \"inviter_id\": 8116.552589680421,\n  \"name\": \"string\",\n  \"provider\": \"string\",\n  \"pubsub_token\": \"string\",\n  \"role\": \"agent\",\n  \"ui_settings\": {},\n  \"uid\": \"string\",\n  \"type\": \"string\",\n  \"custom_attributes\": {},\n  \"accounts\": [\n    {\n      \"id\": 6280.421415895951,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"active_at\": \"2002-05-09T15:43:02.540Z\",\n      \"role\": \"administrator\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"availability\": \"string\",\n      \"availability_status\": \"string\",\n      \"auto_offline\": true,\n      \"custom_role_id\": 7862.379791409405,\n      \"custom_role\": {}\n    },\n    {\n      \"id\": 9959.227571792391,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"active_at\": \"1980-12-29T09:33:12.448Z\",\n      \"role\": \"administrator\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"availability\": \"string\",\n      \"availability_status\": \"string\",\n      \"auto_offline\": true,\n      \"custom_role_id\": 5526.60687141745,\n      \"custom_role\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "845dfb4f-0995-4ece-bfad-b1f2d3607c1d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18932458-9441-4636-9872-a317fcae1503",
+          "name": "Update user profile",
+          "request": {
+            "name": "Update user profile",
+            "description": {
+              "content": "Update the user profile details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profile",
+                  "value": "{\"name\":\"<string>\",\"email\":\"<string>\",\"display_name\":\"<string>\",\"message_signature\":\"<string>\",\"phone_number\":\"<string>\",\"current_password\":\"<string>\",\"password\":\"<string>\",\"password_confirmation\":\"<string>\",\"avatar\":\"<binary>\",\"ui_settings\":\"<object>\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d70a0e17-d5e7-47fc-8646-2a8896859e8c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "profile",
+                      "value": "{\"name\":\"<string>\",\"email\":\"<string>\",\"display_name\":\"<string>\",\"message_signature\":\"<string>\",\"phone_number\":\"<string>\",\"current_password\":\"<string>\",\"password\":\"<string>\",\"password_confirmation\":\"<string>\",\"avatar\":\"<binary>\",\"ui_settings\":\"<object>\"}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9935.026250878698,\n  \"access_token\": \"string\",\n  \"account_id\": 1860.9513849919356,\n  \"available_name\": \"string\",\n  \"avatar_url\": \"string\",\n  \"confirmed\": false,\n  \"display_name\": \"string\",\n  \"message_signature\": \"string\",\n  \"email\": \"string\",\n  \"hmac_identifier\": \"string\",\n  \"inviter_id\": 3883.0260068468347,\n  \"name\": \"string\",\n  \"provider\": \"string\",\n  \"pubsub_token\": \"string\",\n  \"role\": \"agent\",\n  \"ui_settings\": {},\n  \"uid\": \"string\",\n  \"type\": \"string\",\n  \"custom_attributes\": {},\n  \"accounts\": [\n    {\n      \"id\": 7787.970864264499,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"active_at\": \"2023-11-15T19:57:13.882Z\",\n      \"role\": \"administrator\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"availability\": \"string\",\n      \"availability_status\": \"string\",\n      \"auto_offline\": false,\n      \"custom_role_id\": 4788.1620946931525,\n      \"custom_role\": {}\n    },\n    {\n      \"id\": 9802.101480933612,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"active_at\": \"1969-04-21T05:03:09.997Z\",\n      \"role\": \"administrator\",\n      \"permissions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"availability\": \"string\",\n      \"availability_status\": \"string\",\n      \"auto_offline\": false,\n      \"custom_role_id\": 9628.927457769943,\n      \"custom_role\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e01b8583-82a3-4424-be1c-b074f4fb2ee3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "profile",
+                      "value": "{\"name\":\"<string>\",\"email\":\"<string>\",\"display_name\":\"<string>\",\"message_signature\":\"<string>\",\"phone_number\":\"<string>\",\"current_password\":\"<string>\",\"password\":\"<string>\",\"password_confirmation\":\"<string>\",\"avatar\":\"<binary>\",\"ui_settings\":\"<object>\"}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d6b70f74-bcb6-47f5-be41-1036212693a6",
+    "name": "Chatwoot Account AgentBots Profile API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

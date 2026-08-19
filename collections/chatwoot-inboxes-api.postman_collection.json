@@ -1,0 +1,2883 @@
+{
+  "item": [
+    {
+      "id": "8b7ec0c9-f592-45e0-85a2-73e59817201b",
+      "name": "Inboxes",
+      "description": {
+        "content": "Communication channels setup",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1a1c2fe-5d64-4159-8fdd-ec0371b29174",
+          "name": "List all inboxes",
+          "request": {
+            "name": "List all inboxes",
+            "description": {
+              "content": "List all inboxes available in the current account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "654ac14f-1f11-438a-a384-55a14f6e434d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 6590.440287047509,\n      \"name\": \"string\",\n      \"website_url\": \"string\",\n      \"channel_type\": \"string\",\n      \"avatar_url\": \"string\",\n      \"widget_color\": \"string\",\n      \"website_token\": \"string\",\n      \"enable_auto_assignment\": false,\n      \"web_widget_script\": \"string\",\n      \"welcome_title\": \"string\",\n      \"welcome_tagline\": \"string\",\n      \"greeting_enabled\": true,\n      \"greeting_message\": \"string\",\n      \"channel_id\": 5181.53424705134,\n      \"working_hours_enabled\": true,\n      \"enable_email_collect\": false,\n      \"csat_survey_enabled\": false,\n      \"auto_assignment_config\": {},\n      \"out_of_office_message\": \"string\",\n      \"working_hours\": [\n        {\n          \"day_of_week\": 4294.3845950244795,\n          \"closed_all_day\": false,\n          \"open_hour\": 801.1711775599317,\n          \"open_minutes\": 3912.4918537856256,\n          \"close_hour\": 3142.825385615726,\n          \"close_minutes\": 2208.9409672047223,\n          \"open_all_day\": false\n        },\n        {\n          \"day_of_week\": 1779.2044673296614,\n          \"closed_all_day\": false,\n          \"open_hour\": 7095.049135180115,\n          \"open_minutes\": 6256.037673402311,\n          \"close_hour\": 3685.6113192663806,\n          \"close_minutes\": 8817.180471362099,\n          \"open_all_day\": true\n        }\n      ],\n      \"timezone\": \"string\",\n      \"callback_webhook_url\": \"string\",\n      \"allow_messages_after_resolved\": false,\n      \"lock_to_single_conversation\": false,\n      \"sender_name_type\": \"string\",\n      \"business_name\": \"string\",\n      \"hmac_mandatory\": true,\n      \"selected_feature_flags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reply_time\": \"string\",\n      \"messaging_service_sid\": \"string\",\n      \"phone_number\": \"string\",\n      \"medium\": \"string\",\n      \"provider\": \"string\"\n    },\n    {\n      \"id\": 3003.6147993328486,\n      \"name\": \"string\",\n      \"website_url\": \"string\",\n      \"channel_type\": \"string\",\n      \"avatar_url\": \"string\",\n      \"widget_color\": \"string\",\n      \"website_token\": \"string\",\n      \"enable_auto_assignment\": true,\n      \"web_widget_script\": \"string\",\n      \"welcome_title\": \"string\",\n      \"welcome_tagline\": \"string\",\n      \"greeting_enabled\": false,\n      \"greeting_message\": \"string\",\n      \"channel_id\": 8597.603952129622,\n      \"working_hours_enabled\": false,\n      \"enable_email_collect\": true,\n      \"csat_survey_enabled\": false,\n      \"auto_assignment_config\": {},\n      \"out_of_office_message\": \"string\",\n      \"working_hours\": [\n        {\n          \"day_of_week\": 5455.888645865644,\n          \"closed_all_day\": true,\n          \"open_hour\": 908.460423896581,\n          \"open_minutes\": 6091.957354602263,\n          \"close_hour\": 9823.127740190983,\n          \"close_minutes\": 1601.0765310458696,\n          \"open_all_day\": true\n        },\n        {\n          \"day_of_week\": 8882.206659877613,\n          \"closed_all_day\": false,\n          \"open_hour\": 8690.09818568174,\n          \"open_minutes\": 6822.59901979172,\n          \"close_hour\": 9824.011739495883,\n          \"close_minutes\": 911.1132532561139,\n          \"open_all_day\": true\n        }\n      ],\n      \"timezone\": \"string\",\n      \"callback_webhook_url\": \"string\",\n      \"allow_messages_after_resolved\": false,\n      \"lock_to_single_conversation\": false,\n      \"sender_name_type\": \"string\",\n      \"business_name\": \"string\",\n      \"hmac_mandatory\": false,\n      \"selected_feature_flags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reply_time\": \"string\",\n      \"messaging_service_sid\": \"string\",\n      \"phone_number\": \"string\",\n      \"medium\": \"string\",\n      \"provider\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fbadb39-04f9-45e9-a4d6-655b7a66a5c7",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf55aba4-e0e5-4796-9f14-48ee51021083",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d3f30dc-ff3b-46f0-9222-d2f88ca189a7",
+          "name": "Create an inbox",
+          "request": {
+            "name": "Create an inbox",
+            "description": {
+              "content": "You can create more than one website inbox in each account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"greeting_enabled\": \"<boolean>\",\n  \"greeting_message\": \"<string>\",\n  \"enable_email_collect\": \"<boolean>\",\n  \"csat_survey_enabled\": \"<boolean>\",\n  \"csat_config\": {\n    \"display_type\": \"<string>\",\n    \"message\": \"<string>\",\n    \"button_text\": \"<string>\",\n    \"language\": \"<string>\",\n    \"survey_rules\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"enable_auto_assignment\": \"<boolean>\",\n  \"working_hours_enabled\": \"<boolean>\",\n  \"out_of_office_message\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"allow_messages_after_resolved\": \"<boolean>\",\n  \"lock_to_single_conversation\": \"<boolean>\",\n  \"portal_id\": \"<integer>\",\n  \"sender_name_type\": \"<string>\",\n  \"business_name\": \"<string>\",\n  \"channel\": {\n    \"type\": \"<string>\",\n    \"website_url\": \"<string>\",\n    \"welcome_title\": \"<string>\",\n    \"welcome_tagline\": \"<string>\",\n    \"widget_color\": \"<string>\",\n    \"reply_time\": \"<string>\",\n    \"pre_chat_form_enabled\": \"<boolean>\",\n    \"pre_chat_form_options\": \"<object>\",\n    \"continuity_via_email\": \"<boolean>\",\n    \"hmac_mandatory\": \"<boolean>\",\n    \"allowed_domains\": \"<string>\",\n    \"selected_feature_flags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50af8c85-4407-41e6-b5e4-9467c09492b0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"type\": \"web_widget\",\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4083.6947755035626,\n  \"name\": \"string\",\n  \"website_url\": \"string\",\n  \"channel_type\": \"string\",\n  \"avatar_url\": \"string\",\n  \"widget_color\": \"string\",\n  \"website_token\": \"string\",\n  \"enable_auto_assignment\": false,\n  \"web_widget_script\": \"string\",\n  \"welcome_title\": \"string\",\n  \"welcome_tagline\": \"string\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"string\",\n  \"channel_id\": 9135.030718668457,\n  \"working_hours_enabled\": false,\n  \"enable_email_collect\": true,\n  \"csat_survey_enabled\": false,\n  \"auto_assignment_config\": {},\n  \"out_of_office_message\": \"string\",\n  \"working_hours\": [\n    {\n      \"day_of_week\": 3901.210816314462,\n      \"closed_all_day\": false,\n      \"open_hour\": 4176.292119265423,\n      \"open_minutes\": 2180.8163535166414,\n      \"close_hour\": 6723.661278115826,\n      \"close_minutes\": 1543.2077237571984,\n      \"open_all_day\": false\n    },\n    {\n      \"day_of_week\": 9295.232828915701,\n      \"closed_all_day\": false,\n      \"open_hour\": 9842.073542736283,\n      \"open_minutes\": 7403.777352530181,\n      \"close_hour\": 2313.387216423656,\n      \"close_minutes\": 5418.139033745999,\n      \"open_all_day\": true\n    }\n  ],\n  \"timezone\": \"string\",\n  \"callback_webhook_url\": \"string\",\n  \"allow_messages_after_resolved\": true,\n  \"lock_to_single_conversation\": true,\n  \"sender_name_type\": \"string\",\n  \"business_name\": \"string\",\n  \"hmac_mandatory\": true,\n  \"selected_feature_flags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reply_time\": \"string\",\n  \"messaging_service_sid\": \"string\",\n  \"phone_number\": \"string\",\n  \"medium\": \"string\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84d7163e-ff51-44e3-90bb-c66def5dd68a",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"type\": \"web_widget\",\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1be0010e-2556-4224-837e-2ab1cecef407",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"type\": \"web_widget\",\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3092c7c7-9762-45ad-8878-96ac2b34288e",
+          "name": "Get an inbox",
+          "request": {
+            "name": "Get an inbox",
+            "description": {
+              "content": "Get an inbox available in the current account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the inbox"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4a09fef-9f4a-4cd4-957c-d47be6066754",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4083.6947755035626,\n  \"name\": \"string\",\n  \"website_url\": \"string\",\n  \"channel_type\": \"string\",\n  \"avatar_url\": \"string\",\n  \"widget_color\": \"string\",\n  \"website_token\": \"string\",\n  \"enable_auto_assignment\": false,\n  \"web_widget_script\": \"string\",\n  \"welcome_title\": \"string\",\n  \"welcome_tagline\": \"string\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"string\",\n  \"channel_id\": 9135.030718668457,\n  \"working_hours_enabled\": false,\n  \"enable_email_collect\": true,\n  \"csat_survey_enabled\": false,\n  \"auto_assignment_config\": {},\n  \"out_of_office_message\": \"string\",\n  \"working_hours\": [\n    {\n      \"day_of_week\": 3901.210816314462,\n      \"closed_all_day\": false,\n      \"open_hour\": 4176.292119265423,\n      \"open_minutes\": 2180.8163535166414,\n      \"close_hour\": 6723.661278115826,\n      \"close_minutes\": 1543.2077237571984,\n      \"open_all_day\": false\n    },\n    {\n      \"day_of_week\": 9295.232828915701,\n      \"closed_all_day\": false,\n      \"open_hour\": 9842.073542736283,\n      \"open_minutes\": 7403.777352530181,\n      \"close_hour\": 2313.387216423656,\n      \"close_minutes\": 5418.139033745999,\n      \"open_all_day\": true\n    }\n  ],\n  \"timezone\": \"string\",\n  \"callback_webhook_url\": \"string\",\n  \"allow_messages_after_resolved\": true,\n  \"lock_to_single_conversation\": true,\n  \"sender_name_type\": \"string\",\n  \"business_name\": \"string\",\n  \"hmac_mandatory\": true,\n  \"selected_feature_flags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reply_time\": \"string\",\n  \"messaging_service_sid\": \"string\",\n  \"phone_number\": \"string\",\n  \"medium\": \"string\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dec78c2-0497-452a-9306-12feb21478d3",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7d6dfd0-e307-4aea-8247-06cb9e6c4d17",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bff1f01-cc05-4c73-ba30-a822624fbddd",
+          "name": "Update Inbox",
+          "request": {
+            "name": "Update Inbox",
+            "description": {
+              "content": "Update an existing inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the inbox"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"greeting_enabled\": \"<boolean>\",\n  \"greeting_message\": \"<string>\",\n  \"enable_email_collect\": \"<boolean>\",\n  \"csat_survey_enabled\": \"<boolean>\",\n  \"csat_config\": {\n    \"display_type\": \"<string>\",\n    \"message\": \"<string>\",\n    \"button_text\": \"<string>\",\n    \"language\": \"<string>\",\n    \"survey_rules\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"enable_auto_assignment\": \"<boolean>\",\n  \"working_hours_enabled\": \"<boolean>\",\n  \"out_of_office_message\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"allow_messages_after_resolved\": \"<boolean>\",\n  \"lock_to_single_conversation\": \"<boolean>\",\n  \"portal_id\": \"<integer>\",\n  \"sender_name_type\": \"<string>\",\n  \"business_name\": \"<string>\",\n  \"channel\": {\n    \"website_url\": \"<string>\",\n    \"welcome_title\": \"<string>\",\n    \"welcome_tagline\": \"<string>\",\n    \"widget_color\": \"<string>\",\n    \"reply_time\": \"<string>\",\n    \"pre_chat_form_enabled\": \"<boolean>\",\n    \"pre_chat_form_options\": \"<object>\",\n    \"continuity_via_email\": \"<boolean>\",\n    \"hmac_mandatory\": \"<boolean>\",\n    \"allowed_domains\": \"<string>\",\n    \"selected_feature_flags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ed3a7dd-920c-4c87-b7c1-04b8cc19347d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4083.6947755035626,\n  \"name\": \"string\",\n  \"website_url\": \"string\",\n  \"channel_type\": \"string\",\n  \"avatar_url\": \"string\",\n  \"widget_color\": \"string\",\n  \"website_token\": \"string\",\n  \"enable_auto_assignment\": false,\n  \"web_widget_script\": \"string\",\n  \"welcome_title\": \"string\",\n  \"welcome_tagline\": \"string\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"string\",\n  \"channel_id\": 9135.030718668457,\n  \"working_hours_enabled\": false,\n  \"enable_email_collect\": true,\n  \"csat_survey_enabled\": false,\n  \"auto_assignment_config\": {},\n  \"out_of_office_message\": \"string\",\n  \"working_hours\": [\n    {\n      \"day_of_week\": 3901.210816314462,\n      \"closed_all_day\": false,\n      \"open_hour\": 4176.292119265423,\n      \"open_minutes\": 2180.8163535166414,\n      \"close_hour\": 6723.661278115826,\n      \"close_minutes\": 1543.2077237571984,\n      \"open_all_day\": false\n    },\n    {\n      \"day_of_week\": 9295.232828915701,\n      \"closed_all_day\": false,\n      \"open_hour\": 9842.073542736283,\n      \"open_minutes\": 7403.777352530181,\n      \"close_hour\": 2313.387216423656,\n      \"close_minutes\": 5418.139033745999,\n      \"open_all_day\": true\n    }\n  ],\n  \"timezone\": \"string\",\n  \"callback_webhook_url\": \"string\",\n  \"allow_messages_after_resolved\": true,\n  \"lock_to_single_conversation\": true,\n  \"sender_name_type\": \"string\",\n  \"business_name\": \"string\",\n  \"hmac_mandatory\": true,\n  \"selected_feature_flags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"reply_time\": \"string\",\n  \"messaging_service_sid\": \"string\",\n  \"phone_number\": \"string\",\n  \"medium\": \"string\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ecfe65e-0837-4714-b455-e3bc16e3a3cf",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a73c380-a742-4e90-ba63-b34de7f8dabf",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Support\",\n  \"greeting_enabled\": true,\n  \"greeting_message\": \"Hello, how can I help you?\",\n  \"enable_email_collect\": true,\n  \"enable_auto_assignment\": true,\n  \"working_hours_enabled\": true,\n  \"timezone\": \"America/New_York\",\n  \"allow_messages_after_resolved\": true,\n  \"channel\": {\n    \"website_url\": \"https://example.com\",\n    \"welcome_title\": \"Welcome to our support\",\n    \"welcome_tagline\": \"We are here to help you\",\n    \"widget_color\": \"#FF5733\",\n    \"reply_time\": \"in_a_few_minutes\",\n    \"pre_chat_form_enabled\": false,\n    \"continuity_via_email\": true,\n    \"hmac_mandatory\": false,\n    \"selected_feature_flags\": [\n      \"attachments\",\n      \"emoji_picker\",\n      \"end_conversation\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fd5db1b-21a2-4f6c-9278-bcc174746ce5",
+          "name": "Show Inbox Agent Bot",
+          "request": {
+            "name": "Show Inbox Agent Bot",
+            "description": {
+              "content": "See if an agent bot is associated to the Inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes",
+                ":id",
+                "agent_bot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the inbox"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cc0f288c-873f-4c86-808e-36d86dae8b38",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 932.1561165707881,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"thumbnail\": \"string\",\n  \"outgoing_url\": \"string\",\n  \"bot_type\": \"string\",\n  \"bot_config\": {},\n  \"account_id\": 2923.26903697701,\n  \"access_token\": \"string\",\n  \"system_bot\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9003eea-e1a4-487f-acce-c3f6db80d1eb",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91f8a9e1-00b1-420a-965c-7ea8ed0b1ed1",
+              "name": "Inbox not found, Agent bot not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68697a54-3aaa-4612-81e1-2fbcd6eaea9b",
+          "name": "Add or remove agent bot",
+          "request": {
+            "name": "Add or remove agent bot",
+            "description": {
+              "content": "To add an agent bot pass agent_bot id, to remove agent bot from an inbox pass null",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inboxes",
+                ":id",
+                "set_agent_bot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the inbox"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agent_bot\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac579a30-7294-4881-a2f3-dead69616b63",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "set_agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent_bot\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aae4191b-d87b-4bee-a33a-5bbdc09091be",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "set_agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent_bot\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44769f3e-6efb-4386-8259-d20be3da133c",
+              "name": "Inbox not found, Agent bot not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inboxes",
+                    ":id",
+                    "set_agent_bot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the inbox"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent_bot\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fafffc6-7de5-4b7d-8c76-ec22295a11e7",
+          "name": "List Agents in Inbox",
+          "request": {
+            "name": "List Agents in Inbox",
+            "description": {
+              "content": "Get Details of Agents in an Inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inbox_members",
+                ":inbox_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "inbox_id",
+                  "description": "(Required) The ID of the Inbox"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd56b511-2af8-4fa4-ac0c-afd72656eef6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members",
+                    ":inbox_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inbox_id",
+                      "description": "(Required) The ID of the Inbox"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 5696,\n      \"account_id\": 3113,\n      \"availability_status\": \"offline\",\n      \"auto_offline\": true,\n      \"confirmed\": false,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 5609\n    },\n    {\n      \"id\": 3940,\n      \"account_id\": 6851,\n      \"availability_status\": \"online\",\n      \"auto_offline\": true,\n      \"confirmed\": true,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 219\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f038dba-5fa1-47e7-8100-e2e205f5eefc",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members",
+                    ":inbox_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inbox_id",
+                      "description": "(Required) The ID of the Inbox"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e450b325-5e3f-4b81-b8c2-e8949c264f82",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members",
+                    ":inbox_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "inbox_id",
+                      "description": "(Required) The ID of the Inbox"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e4fc147-3630-4e1e-bded-e0f8ea8e8e40",
+          "name": "Add a New Agent",
+          "request": {
+            "name": "Add a New Agent",
+            "description": {
+              "content": "Add a new Agent to Inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inbox_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inbox_id\": \"<integer>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d1b1410-4cc7-4d7a-ba0b-0b9425d22fc2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 5696,\n      \"account_id\": 3113,\n      \"availability_status\": \"offline\",\n      \"auto_offline\": true,\n      \"confirmed\": false,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 5609\n    },\n    {\n      \"id\": 3940,\n      \"account_id\": 6851,\n      \"availability_status\": \"online\",\n      \"auto_offline\": true,\n      \"confirmed\": true,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 219\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c046d6-0cc2-4c5a-aa1f-01229a3f8171",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ea06d5e-9dc5-45aa-89c1-48e9685d15a2",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8063b3d9-e59f-4d13-a1b7-18e438d3838d",
+              "name": "User must exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad801f57-2a82-4bd5-8f33-fa0e4a524362",
+          "name": "Update Agents in Inbox",
+          "request": {
+            "name": "Update Agents in Inbox",
+            "description": {
+              "content": "All agents except the one passed in params will be removed",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inbox_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5c6385e-f713-465b-b3f5-b8b635a367c2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 5696,\n      \"account_id\": 3113,\n      \"availability_status\": \"offline\",\n      \"auto_offline\": true,\n      \"confirmed\": false,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 5609\n    },\n    {\n      \"id\": 3940,\n      \"account_id\": 6851,\n      \"availability_status\": \"online\",\n      \"auto_offline\": true,\n      \"confirmed\": true,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 219\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e130e39-8f97-4777-943e-93015a7156e3",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4457c646-1662-4a13-b217-f884b3d80cd2",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "602dba07-625f-480f-9f3d-0b3407249f65",
+              "name": "User must exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    1\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "731b7f7a-282c-4e89-b771-f8b947367fd3",
+          "name": "Remove an Agent from Inbox",
+          "request": {
+            "name": "Remove an Agent from Inbox",
+            "description": {
+              "content": "Remove an Agent from Inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "inbox_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecb05deb-8dee-4636-a845-3135bc3168cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a89feb9-bc91-41ee-bd28-3cec153b31c6",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ad5cc84-c33b-4b77-bcea-23673bcf3c42",
+              "name": "Inbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c3fd25f-fdc1-4db4-a268-fb186cdb3f68",
+              "name": "User must exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "inbox_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": \"<string>\",\n  \"user_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cd7a9494-8a8e-43a0-9e78-0e050e1ac12c",
+    "name": "Chatwoot Account AgentBots Inboxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

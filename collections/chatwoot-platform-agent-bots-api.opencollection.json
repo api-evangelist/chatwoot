@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Agents Platform Agent Bots API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_access_token",
+      "value": "{{api_access_token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Agent Bots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent bots.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots",
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List agent bots."
+        },
+        {
+          "info": {
+            "name": "Create an agent bot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an agent bot."
+        },
+        {
+          "info": {
+            "name": "Get an agent bot by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an agent bot by id."
+        },
+        {
+          "info": {
+            "name": "Update an agent bot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an agent bot."
+        },
+        {
+          "info": {
+            "name": "Delete an agent bot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/platform/api/v1/agent_bots/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an agent bot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

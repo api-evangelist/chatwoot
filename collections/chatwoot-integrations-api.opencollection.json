@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Integrations API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all the Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/integrations/apps",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the details of all Integrations available for the account"
+        },
+        {
+          "info": {
+            "name": "Create an integration hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/integrations/hooks",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an integration hook"
+        },
+        {
+          "info": {
+            "name": "Update an Integration Hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/integrations/hooks/:hook_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the integration hook"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an Integration Hook"
+        },
+        {
+          "info": {
+            "name": "Delete an Integration Hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.chatwoot.com/api/v1/accounts/:account_id/integrations/hooks/:hook_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "hook_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the integration hook"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_access_token",
+              "value": "{{api_access_token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an Integration Hook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

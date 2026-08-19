@@ -1,0 +1,626 @@
+{
+  "item": [
+    {
+      "id": "fbc6ba4f-97a9-496a-be7a-3428e0f9a0ac",
+      "name": "Contacts API",
+      "description": {
+        "content": "Public contact APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "252cac86-0e19-4ef4-bdff-6df71f73c470",
+          "name": "Create a contact",
+          "request": {
+            "name": "Create a contact",
+            "description": {
+              "content": "Create a contact",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"<string>\",\n  \"identifier_hash\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ae01fd8-e4d7-482d-9719-df79f0e4e800",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": \"1234567890\",\n  \"identifier_hash\": \"e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9\",\n  \"email\": \"alice@acme.inc\",\n  \"name\": \"Alice\",\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7737,\n  \"source_id\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"phone_number\": \"string\",\n  \"pubsub_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c59dfb3-88cb-41ff-a554-a648afd2acb1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": \"1234567890\",\n  \"identifier_hash\": \"e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9\",\n  \"email\": \"alice@acme.inc\",\n  \"name\": \"Alice\",\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d86ce4e-1576-4e10-bfd6-d42dd7136899",
+          "name": "Get a contact",
+          "request": {
+            "name": "Get a contact",
+            "description": {
+              "content": "Get the details of a contact",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source id of contact obtained on contact create"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de4cfdcf-fe60-42cc-902f-f2fde57b1d24",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7737,\n  \"source_id\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"phone_number\": \"string\",\n  \"pubsub_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "430b4ba3-604e-452b-a8bc-5ada383dbbb8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "120aa7c5-2471-4a40-b8df-56e8a42d4bfc",
+              "name": "The given contact does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a55ef1de-4ae5-443c-82b6-7525c7682868",
+          "name": "Update a contact",
+          "request": {
+            "name": "Update a contact",
+            "description": {
+              "content": "Update a contact's attributes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "api",
+                "v1",
+                "inboxes",
+                ":inbox_identifier",
+                "contacts",
+                ":contact_identifier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbox_identifier",
+                  "description": "(Required) The identifier obtained from API inbox channel"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contact_identifier",
+                  "description": "(Required) The source id of contact obtained on contact create"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"<string>\",\n  \"identifier_hash\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "210d2b44-f41d-4558-a62d-fa50c1ac1b49",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": \"1234567890\",\n  \"identifier_hash\": \"e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9\",\n  \"email\": \"alice@acme.inc\",\n  \"name\": \"Alice\",\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6500,\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"phone_number\": \"string\",\n  \"identifier\": \"string\",\n  \"blocked\": false,\n  \"additional_attributes\": {},\n  \"custom_attributes\": {},\n  \"contact_type\": \"string\",\n  \"country_code\": \"string\",\n  \"last_activity_at\": \"string\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"last_name\": \"string\",\n  \"middle_name\": \"string\",\n  \"location\": \"string\",\n  \"account_id\": 2237,\n  \"company_id\": 8114,\n  \"label_list\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9013ab7b-ab7e-45a6-99df-ce3a1abd513c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "api",
+                    "v1",
+                    "inboxes",
+                    ":inbox_identifier",
+                    "contacts",
+                    ":contact_identifier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbox_identifier",
+                      "description": "(Required) The identifier obtained from API inbox channel"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contact_identifier",
+                      "description": "(Required) The source id of contact obtained on contact create"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": \"1234567890\",\n  \"identifier_hash\": \"e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9\",\n  \"email\": \"alice@acme.inc\",\n  \"name\": \"Alice\",\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5e410791-17a4-4e91-8c12-5f3eded9b3c5",
+    "name": "Chatwoot Account AgentBots Contacts API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

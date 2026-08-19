@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots CSAT Survey Page API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CSAT Survey Page",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get CSAT survey page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/survey/responses/:conversation_uuid",
+            "params": [
+              {
+                "name": "conversation_uuid",
+                "value": "",
+                "type": "path",
+                "description": "The uuid of the conversation"
+              }
+            ]
+          },
+          "docs": "You can redirect the client to this URL, instead of implementing the CSAT survey component yourself."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

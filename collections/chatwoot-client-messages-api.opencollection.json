@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Agents Client Messages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_access_token",
+      "value": "{{api_access_token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messages in the contact's conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The public inbox identifier (channel/web-widget identifier)."
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source_id / contact identifier returned when the client contact was created."
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The display id of the conversation."
+              }
+            ]
+          },
+          "docs": "List messages in the contact's conversation."
+        },
+        {
+          "info": {
+            "name": "Create a message in the contact's conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The public inbox identifier (channel/web-widget identifier)."
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source_id / contact identifier returned when the client contact was created."
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The display id of the conversation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a message in the contact's conversation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

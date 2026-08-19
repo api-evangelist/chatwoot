@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Agents Client Contacts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_access_token",
+      "value": "{{api_access_token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an end-user contact for a public inbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The public inbox identifier (channel/web-widget identifier)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an end-user contact for a public inbox."
+        },
+        {
+          "info": {
+            "name": "Get the end-user contact.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The public inbox identifier (channel/web-widget identifier)."
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source_id / contact identifier returned when the client contact was created."
+              }
+            ]
+          },
+          "docs": "Get the end-user contact."
+        },
+        {
+          "info": {
+            "name": "Update the end-user contact.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The public inbox identifier (channel/web-widget identifier)."
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source_id / contact identifier returned when the client contact was created."
+              }
+            ]
+          },
+          "docs": "Update the end-user contact."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

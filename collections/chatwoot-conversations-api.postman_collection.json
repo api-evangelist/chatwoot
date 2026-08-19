@@ -1,0 +1,3580 @@
+{
+  "item": [
+    {
+      "id": "5b868c0a-2ca3-40ae-bb1e-f4b8d78e3edb",
+      "name": "Conversations",
+      "description": {
+        "content": "Conversation management APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "077a4438-14a7-457f-96a2-28afcdb582e3",
+          "name": "Get Conversation Counts",
+          "request": {
+            "name": "Get Conversation Counts",
+            "description": {
+              "content": "Get open, unassigned and all Conversation counts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                "meta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "open",
+                  "description": "Filter by conversation status."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Filters conversations with messages containing the search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "inbox_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bb50e3c5-9c51-4852-b60b-67cbe069e4e8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    "meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbox_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"mine_count\": 2100.57886558504,\n    \"unassigned_count\": 3407.280054912253,\n    \"assigned_count\": 3728.1784344037883,\n    \"all_count\": 7288.710505776768\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc93a143-ce5d-4d3b-8e34-05872ffb5695",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    "meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbox_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17eca977-3884-4552-ab1a-9de884071510",
+          "name": "Conversations List",
+          "request": {
+            "name": "Conversations List",
+            "description": {
+              "content": "List all the conversations with pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assignee_type",
+                  "value": "all",
+                  "description": "Filter conversations by assignee type."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "open",
+                  "description": "Filter by conversation status."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Filters conversations with messages containing the search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "inbox_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "paginate through conversations"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81ce8b36-fb4e-4111-903e-c1f819912083",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assignee_type",
+                      "value": "all"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbox_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"meta\": {\n      \"mine_count\": 9053.13888150467,\n      \"unassigned_count\": 9501.675423796449,\n      \"assigned_count\": 6631.2341720740205,\n      \"all_count\": 2338.1042042656254\n    },\n    \"payload\": [\n      {\n        \"id\": 4831.853369438161,\n        \"messages\": [\n          {\n            \"id\": 5198.260888793305,\n            \"content\": \"string\",\n            \"account_id\": 4653.409697964545,\n            \"inbox_id\": 4038.678549411707,\n            \"conversation_id\": 6071.628443602991,\n            \"message_type\": 2,\n            \"created_at\": 7282,\n            \"updated_at\": 8601,\n            \"private\": false,\n            \"status\": \"sent\",\n            \"source_id\": \"string\",\n            \"content_type\": \"integrations\",\n            \"content_attributes\": {},\n            \"sender_type\": \"AgentBot\",\n            \"sender_id\": 5431.227452091249,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          },\n          {\n            \"id\": 7834.427850554609,\n            \"content\": \"string\",\n            \"account_id\": 2774.576246759507,\n            \"inbox_id\": 203.78634435597286,\n            \"conversation_id\": 6902.390503940504,\n            \"message_type\": 2,\n            \"created_at\": 1571,\n            \"updated_at\": 2670,\n            \"private\": false,\n            \"status\": \"failed\",\n            \"source_id\": \"string\",\n            \"content_type\": null,\n            \"content_attributes\": {},\n            \"sender_type\": null,\n            \"sender_id\": 9963.239347125778,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          }\n        ],\n        \"account_id\": 9503.729298851027,\n        \"uuid\": \"string\",\n        \"additional_attributes\": {},\n        \"agent_last_seen_at\": 632.7852076944596,\n        \"assignee_last_seen_at\": 6483.4075961882745,\n        \"can_reply\": false,\n        \"contact_last_seen_at\": 1987.8334622089776,\n        \"custom_attributes\": {},\n        \"inbox_id\": 2855.3808382059465,\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"muted\": false,\n        \"snoozed_until\": 4878.785989592065,\n        \"status\": \"open\",\n        \"created_at\": 4852.1183371114685,\n        \"updated_at\": 4647.885882711009,\n        \"timestamp\": 5941.790050864425,\n        \"first_reply_created_at\": 5720.358119299066,\n        \"unread_count\": 7866.231445122822,\n        \"last_non_activity_message\": {\n          \"id\": 7168.461933340573,\n          \"content\": \"string\",\n          \"account_id\": 9901.532222086213,\n          \"inbox_id\": 5262.79135540714,\n          \"conversation_id\": 7152.093289942007,\n          \"message_type\": 1,\n          \"created_at\": 7592,\n          \"updated_at\": 277,\n          \"private\": true,\n          \"status\": null,\n          \"source_id\": \"string\",\n          \"content_type\": \"input_textarea\",\n          \"content_attributes\": {},\n          \"sender_type\": \"User\",\n          \"sender_id\": 8585.775302010607,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        \"last_activity_at\": 5260.6917435240475,\n        \"priority\": \"string\",\n        \"waiting_since\": 5603.9955399407445,\n        \"sla_policy_id\": 4795.357858659808,\n        \"applied_sla\": {},\n        \"meta\": {\n          \"sender\": {\n            \"additional_attributes\": {},\n            \"availability_status\": \"string\",\n            \"email\": \"string\",\n            \"id\": 2890.0611349030137,\n            \"name\": \"string\",\n            \"phone_number\": \"string\",\n            \"blocked\": false,\n            \"identifier\": \"string\",\n            \"thumbnail\": \"string\",\n            \"custom_attributes\": {},\n            \"last_activity_at\": 7538.146648008954,\n            \"created_at\": 84.02925621516344\n          },\n          \"channel\": \"string\",\n          \"assignee\": {\n            \"id\": 2569.4277864800665,\n            \"access_token\": \"string\",\n            \"account_id\": 5716.581704843935,\n            \"available_name\": \"string\",\n            \"avatar_url\": \"string\",\n            \"confirmed\": true,\n            \"display_name\": \"string\",\n            \"message_signature\": \"string\",\n            \"email\": \"string\",\n            \"hmac_identifier\": \"string\",\n            \"inviter_id\": 8684.338166558762,\n            \"name\": \"string\",\n            \"provider\": \"string\",\n            \"pubsub_token\": \"string\",\n            \"role\": \"administrator\",\n            \"ui_settings\": {},\n            \"uid\": \"string\",\n            \"type\": \"string\",\n            \"custom_attributes\": {},\n            \"accounts\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"hmac_verified\": true\n        }\n      },\n      {\n        \"id\": 2773.708520870162,\n        \"messages\": [\n          {\n            \"id\": 218.60422175792203,\n            \"content\": \"string\",\n            \"account_id\": 3040.2211768584707,\n            \"inbox_id\": 4750.209324500955,\n            \"conversation_id\": 181.6923242281221,\n            \"message_type\": 0,\n            \"created_at\": 5364,\n            \"updated_at\": 2264,\n            \"private\": false,\n            \"status\": \"delivered\",\n            \"source_id\": \"string\",\n            \"content_type\": \"voice_call\",\n            \"content_attributes\": {},\n            \"sender_type\": \"Captain::Assistant\",\n            \"sender_id\": 8404.688752517017,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          },\n          {\n            \"id\": 7323.8942804362905,\n            \"content\": \"string\",\n            \"account_id\": 3520.1428322376414,\n            \"inbox_id\": 5723.966336342327,\n            \"conversation_id\": 1490.8414741718868,\n            \"message_type\": 2,\n            \"created_at\": 6347,\n            \"updated_at\": 2792,\n            \"private\": false,\n            \"status\": null,\n            \"source_id\": \"string\",\n            \"content_type\": \"input_textarea\",\n            \"content_attributes\": {},\n            \"sender_type\": \"User\",\n            \"sender_id\": 921.442004010663,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          }\n        ],\n        \"account_id\": 9186.862979123234,\n        \"uuid\": \"string\",\n        \"additional_attributes\": {},\n        \"agent_last_seen_at\": 7755.336972398459,\n        \"assignee_last_seen_at\": 6991.64071773421,\n        \"can_reply\": true,\n        \"contact_last_seen_at\": 1673.5020874734407,\n        \"custom_attributes\": {},\n        \"inbox_id\": 1365.3446901654343,\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"muted\": false,\n        \"snoozed_until\": 4623.438405183187,\n        \"status\": \"pending\",\n        \"created_at\": 9132.867345871797,\n        \"updated_at\": 672.3405824797879,\n        \"timestamp\": 508.2427342548601,\n        \"first_reply_created_at\": 2166.0951431598396,\n        \"unread_count\": 9002.74734915424,\n        \"last_non_activity_message\": {\n          \"id\": 7587.294224945728,\n          \"content\": \"string\",\n          \"account_id\": 9546.230565326725,\n          \"inbox_id\": 8932.894440081853,\n          \"conversation_id\": 5010.800769162443,\n          \"message_type\": 3,\n          \"created_at\": 701,\n          \"updated_at\": 9026,\n          \"private\": true,\n          \"status\": \"sent\",\n          \"source_id\": \"string\",\n          \"content_type\": \"cards\",\n          \"content_attributes\": {},\n          \"sender_type\": \"Contact\",\n          \"sender_id\": 7558.902305586153,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        \"last_activity_at\": 8346.009435233746,\n        \"priority\": \"string\",\n        \"waiting_since\": 5242.332217506534,\n        \"sla_policy_id\": 8204.172344768554,\n        \"applied_sla\": {},\n        \"meta\": {\n          \"sender\": {\n            \"additional_attributes\": {},\n            \"availability_status\": \"string\",\n            \"email\": \"string\",\n            \"id\": 5647.343286014002,\n            \"name\": \"string\",\n            \"phone_number\": \"string\",\n            \"blocked\": false,\n            \"identifier\": \"string\",\n            \"thumbnail\": \"string\",\n            \"custom_attributes\": {},\n            \"last_activity_at\": 2996.2604454353923,\n            \"created_at\": 8806.216792611925\n          },\n          \"channel\": \"string\",\n          \"assignee\": {\n            \"id\": 3862.149487801395,\n            \"access_token\": \"string\",\n            \"account_id\": 742.9000124016261,\n            \"available_name\": \"string\",\n            \"avatar_url\": \"string\",\n            \"confirmed\": false,\n            \"display_name\": \"string\",\n            \"message_signature\": \"string\",\n            \"email\": \"string\",\n            \"hmac_identifier\": \"string\",\n            \"inviter_id\": 9037.144408417525,\n            \"name\": \"string\",\n            \"provider\": \"string\",\n            \"pubsub_token\": \"string\",\n            \"role\": \"administrator\",\n            \"ui_settings\": {},\n            \"uid\": \"string\",\n            \"type\": \"string\",\n            \"custom_attributes\": {},\n            \"accounts\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"hmac_verified\": true\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdb3f388-f9ae-4f37-a279-5c6da4196b8e",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assignee_type",
+                      "value": "all"
+                    },
+                    {
+                      "key": "status",
+                      "value": "open"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbox_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "317166b4-bf47-4575-a6c9-7b981d8e029f",
+          "name": "Create New Conversation",
+          "request": {
+            "name": "Create New Conversation",
+            "description": {
+              "content": "Creating a conversation in chatwoot requires a source id. \n\n Learn more about source_id: https://www.chatwoot.com/hc/user-guide/articles/1677839703-how-to-create-an-api-channel-inbox#send-messages-to-the-api-channel",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_id\": \"<string>\",\n  \"inbox_id\": \"<integer>\",\n  \"contact_id\": \"<integer>\",\n  \"additional_attributes\": \"<object>\",\n  \"custom_attributes\": \"<object>\",\n  \"status\": \"<string>\",\n  \"assignee_id\": \"<integer>\",\n  \"team_id\": \"<integer>\",\n  \"snoozed_until\": \"<dateTime>\",\n  \"message\": {\n    \"content\": \"<string>\",\n    \"template_params\": {\n      \"name\": \"<string>\",\n      \"category\": \"<string>\",\n      \"language\": \"<string>\",\n      \"processed_params\": \"<object>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1086902e-287b-48ea-8ef9-1e62a81f5320",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_id\": \"1234567890\",\n  \"inbox_id\": 1,\n  \"contact_id\": 1,\n  \"additional_attributes\": {\n    \"browser\": \"Chrome\",\n    \"browser_version\": \"89.0.4389.82\",\n    \"os\": \"Windows\",\n    \"os_version\": \"10\"\n  },\n  \"custom_attributes\": {\n    \"attribute_key\": \"attribute_value\",\n    \"priority_conversation_number\": 3\n  },\n  \"status\": \"open\",\n  \"assignee_id\": 1,\n  \"team_id\": 1,\n  \"snoozed_until\": \"2030-07-21T17:32:28Z\",\n  \"message\": {\n    \"content\": \"Hello, how can I help you?\",\n    \"template_params\": {\n      \"name\": \"sample_issue_resolution\",\n      \"category\": \"UTILITY\",\n      \"language\": \"en_US\",\n      \"processed_params\": {\n        \"1\": \"Chatwoot\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4968.960320214921,\n  \"account_id\": 6241.85645412541,\n  \"inbox_id\": 9815.282009834853\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16a5d6df-6661-4c04-af8d-21e337c0cbde",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_id\": \"1234567890\",\n  \"inbox_id\": 1,\n  \"contact_id\": 1,\n  \"additional_attributes\": {\n    \"browser\": \"Chrome\",\n    \"browser_version\": \"89.0.4389.82\",\n    \"os\": \"Windows\",\n    \"os_version\": \"10\"\n  },\n  \"custom_attributes\": {\n    \"attribute_key\": \"attribute_value\",\n    \"priority_conversation_number\": 3\n  },\n  \"status\": \"open\",\n  \"assignee_id\": 1,\n  \"team_id\": 1,\n  \"snoozed_until\": \"2030-07-21T17:32:28Z\",\n  \"message\": {\n    \"content\": \"Hello, how can I help you?\",\n    \"template_params\": {\n      \"name\": \"sample_issue_resolution\",\n      \"category\": \"UTILITY\",\n      \"language\": \"en_US\",\n      \"processed_params\": {\n        \"1\": \"Chatwoot\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f175ed6-d3bd-4f3a-b1f3-9b2a254f29e6",
+          "name": "Conversations Filter",
+          "request": {
+            "name": "Conversations Filter",
+            "description": {
+              "content": "Filter conversations with custom filter options and pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccf41a5f-9dfc-4b2e-bab8-26d10cfcb50f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"meta\": {\n      \"mine_count\": 4783.755016781367,\n      \"unassigned_count\": 6930.790673408217,\n      \"assigned_count\": 7719.549382881299,\n      \"all_count\": 6480.891877681914\n    },\n    \"payload\": [\n      {\n        \"id\": 6181.712477230293,\n        \"messages\": [\n          {\n            \"id\": 3608.223608514478,\n            \"content\": \"string\",\n            \"account_id\": 6048.610508816622,\n            \"inbox_id\": 588.0635431488179,\n            \"conversation_id\": 1634.311802420715,\n            \"message_type\": 2,\n            \"created_at\": 1593,\n            \"updated_at\": 8844,\n            \"private\": true,\n            \"status\": \"delivered\",\n            \"source_id\": \"string\",\n            \"content_type\": \"text\",\n            \"content_attributes\": {},\n            \"sender_type\": \"User\",\n            \"sender_id\": 5351.712395768793,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          },\n          {\n            \"id\": 9966.01773984648,\n            \"content\": \"string\",\n            \"account_id\": 1827.1908361107357,\n            \"inbox_id\": 418.20100715653786,\n            \"conversation_id\": 5369.939277018755,\n            \"message_type\": 0,\n            \"created_at\": 3908,\n            \"updated_at\": 5605,\n            \"private\": false,\n            \"status\": \"read\",\n            \"source_id\": \"string\",\n            \"content_type\": \"input_csat\",\n            \"content_attributes\": {},\n            \"sender_type\": \"Contact\",\n            \"sender_id\": 4857.681327444746,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          }\n        ],\n        \"account_id\": 820.6836341333734,\n        \"uuid\": \"string\",\n        \"additional_attributes\": {},\n        \"agent_last_seen_at\": 2582.0923161449373,\n        \"assignee_last_seen_at\": 9907.506466526602,\n        \"can_reply\": false,\n        \"contact_last_seen_at\": 1351.5426883385605,\n        \"custom_attributes\": {},\n        \"inbox_id\": 3854.2885510765113,\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"muted\": false,\n        \"snoozed_until\": 8768.953356075588,\n        \"status\": \"pending\",\n        \"created_at\": 686.6864793332117,\n        \"updated_at\": 2445.079058202445,\n        \"timestamp\": 959.5531719620886,\n        \"first_reply_created_at\": 2018.0133066799765,\n        \"unread_count\": 9125.91530209791,\n        \"last_non_activity_message\": {\n          \"id\": 9128.00563353712,\n          \"content\": \"string\",\n          \"account_id\": 6320.039207135635,\n          \"inbox_id\": 8222.047436018625,\n          \"conversation_id\": 9786.96656377441,\n          \"message_type\": 3,\n          \"created_at\": 7827,\n          \"updated_at\": 4184,\n          \"private\": true,\n          \"status\": \"read\",\n          \"source_id\": \"string\",\n          \"content_type\": \"input_textarea\",\n          \"content_attributes\": {},\n          \"sender_type\": \"Captain::Assistant\",\n          \"sender_id\": 1083.773962931287,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        \"last_activity_at\": 3253.3969037484367,\n        \"priority\": \"string\",\n        \"waiting_since\": 9446.656940960449,\n        \"sla_policy_id\": 4069.4797281171877,\n        \"applied_sla\": {},\n        \"meta\": {\n          \"sender\": {\n            \"additional_attributes\": {},\n            \"availability_status\": \"string\",\n            \"email\": \"string\",\n            \"id\": 8462.326967624438,\n            \"name\": \"string\",\n            \"phone_number\": \"string\",\n            \"blocked\": false,\n            \"identifier\": \"string\",\n            \"thumbnail\": \"string\",\n            \"custom_attributes\": {},\n            \"last_activity_at\": 7483.800948645328,\n            \"created_at\": 7993.033328081461\n          },\n          \"channel\": \"string\",\n          \"assignee\": {\n            \"id\": 3035.700290472313,\n            \"access_token\": \"string\",\n            \"account_id\": 4966.186167816701,\n            \"available_name\": \"string\",\n            \"avatar_url\": \"string\",\n            \"confirmed\": false,\n            \"display_name\": \"string\",\n            \"message_signature\": \"string\",\n            \"email\": \"string\",\n            \"hmac_identifier\": \"string\",\n            \"inviter_id\": 4437.5218785101015,\n            \"name\": \"string\",\n            \"provider\": \"string\",\n            \"pubsub_token\": \"string\",\n            \"role\": \"administrator\",\n            \"ui_settings\": {},\n            \"uid\": \"string\",\n            \"type\": \"string\",\n            \"custom_attributes\": {},\n            \"accounts\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"hmac_verified\": false\n        }\n      },\n      {\n        \"id\": 6578.00940996861,\n        \"messages\": [\n          {\n            \"id\": 982.6792323945765,\n            \"content\": \"string\",\n            \"account_id\": 7967.432078918158,\n            \"inbox_id\": 2829.5844711584496,\n            \"conversation_id\": 909.3834116578691,\n            \"message_type\": 1,\n            \"created_at\": 8490,\n            \"updated_at\": 3402,\n            \"private\": false,\n            \"status\": null,\n            \"source_id\": \"string\",\n            \"content_type\": \"incoming_email\",\n            \"content_attributes\": {},\n            \"sender_type\": \"AgentBot\",\n            \"sender_id\": 3215.625885810842,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          },\n          {\n            \"id\": 9153.538380438493,\n            \"content\": \"string\",\n            \"account_id\": 3885.1543934745614,\n            \"inbox_id\": 962.5801242210364,\n            \"conversation_id\": 2392.89112862361,\n            \"message_type\": 0,\n            \"created_at\": 2292,\n            \"updated_at\": 9094,\n            \"private\": false,\n            \"status\": \"sent\",\n            \"source_id\": \"string\",\n            \"content_type\": null,\n            \"content_attributes\": {},\n            \"sender_type\": \"AgentBot\",\n            \"sender_id\": 1890.0315001174095,\n            \"external_source_ids\": {},\n            \"additional_attributes\": {},\n            \"processed_message_content\": \"string\",\n            \"sentiment\": {},\n            \"conversation\": {},\n            \"attachment\": {},\n            \"sender\": {}\n          }\n        ],\n        \"account_id\": 7502.235274559385,\n        \"uuid\": \"string\",\n        \"additional_attributes\": {},\n        \"agent_last_seen_at\": 9305.887425151854,\n        \"assignee_last_seen_at\": 1653.9578340298988,\n        \"can_reply\": false,\n        \"contact_last_seen_at\": 3370.3194882528987,\n        \"custom_attributes\": {},\n        \"inbox_id\": 9188.431042762862,\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"muted\": true,\n        \"snoozed_until\": 5897.879076899284,\n        \"status\": \"pending\",\n        \"created_at\": 9106.577175335187,\n        \"updated_at\": 2472.3309467223808,\n        \"timestamp\": 697.021484104614,\n        \"first_reply_created_at\": 3647.380828080615,\n        \"unread_count\": 9975.522409046844,\n        \"last_non_activity_message\": {\n          \"id\": 3513.839357809895,\n          \"content\": \"string\",\n          \"account_id\": 5189.358095639298,\n          \"inbox_id\": 9900.920061769868,\n          \"conversation_id\": 8583.57440125459,\n          \"message_type\": 0,\n          \"created_at\": 9339,\n          \"updated_at\": 6181,\n          \"private\": false,\n          \"status\": \"failed\",\n          \"source_id\": \"string\",\n          \"content_type\": \"incoming_email\",\n          \"content_attributes\": {},\n          \"sender_type\": \"AgentBot\",\n          \"sender_id\": 5683.47248185607,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        \"last_activity_at\": 5223.120277599028,\n        \"priority\": \"string\",\n        \"waiting_since\": 4938.053311310891,\n        \"sla_policy_id\": 735.4874613914819,\n        \"applied_sla\": {},\n        \"meta\": {\n          \"sender\": {\n            \"additional_attributes\": {},\n            \"availability_status\": \"string\",\n            \"email\": \"string\",\n            \"id\": 4198.78026945487,\n            \"name\": \"string\",\n            \"phone_number\": \"string\",\n            \"blocked\": true,\n            \"identifier\": \"string\",\n            \"thumbnail\": \"string\",\n            \"custom_attributes\": {},\n            \"last_activity_at\": 4361.072417615995,\n            \"created_at\": 1834.2590932300884\n          },\n          \"channel\": \"string\",\n          \"assignee\": {\n            \"id\": 885.6081131984761,\n            \"access_token\": \"string\",\n            \"account_id\": 858.4423357403404,\n            \"available_name\": \"string\",\n            \"avatar_url\": \"string\",\n            \"confirmed\": true,\n            \"display_name\": \"string\",\n            \"message_signature\": \"string\",\n            \"email\": \"string\",\n            \"hmac_identifier\": \"string\",\n            \"inviter_id\": 6955.775378051251,\n            \"name\": \"string\",\n            \"provider\": \"string\",\n            \"pubsub_token\": \"string\",\n            \"role\": \"agent\",\n            \"ui_settings\": {},\n            \"uid\": \"string\",\n            \"type\": \"string\",\n            \"custom_attributes\": {},\n            \"accounts\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"active_at\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"permissions\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"availability_status\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"auto_offline\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role_id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"custom_role\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"hmac_verified\": true\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dcf0f26-2942-4af0-8680-b9607ea945a1",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "165dee6c-4b67-4ed1-b868-dac3d41997cc",
+          "name": "Conversation Details",
+          "request": {
+            "name": "Conversation Details",
+            "description": {
+              "content": "Get all details regarding a conversation with all messages in the conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae2405e5-2d14-4e93-a8e6-bb71351c69a4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 668.5668931172318,\n  \"messages\": [\n    {\n      \"id\": 2376.7003105694307,\n      \"content\": \"string\",\n      \"account_id\": 736.5683744215889,\n      \"inbox_id\": 3550.8412037478142,\n      \"conversation_id\": 5212.712235558945,\n      \"message_type\": 3,\n      \"created_at\": 5408,\n      \"updated_at\": 3917,\n      \"private\": true,\n      \"status\": \"failed\",\n      \"source_id\": \"string\",\n      \"content_type\": \"incoming_email\",\n      \"content_attributes\": {},\n      \"sender_type\": null,\n      \"sender_id\": 8656.298543501258,\n      \"external_source_ids\": {},\n      \"additional_attributes\": {},\n      \"processed_message_content\": \"string\",\n      \"sentiment\": {},\n      \"conversation\": {},\n      \"attachment\": {},\n      \"sender\": {}\n    },\n    {\n      \"id\": 4920.029185651909,\n      \"content\": \"string\",\n      \"account_id\": 4119.7762065847555,\n      \"inbox_id\": 3464.7262874837593,\n      \"conversation_id\": 9689.904188151402,\n      \"message_type\": 2,\n      \"created_at\": 9691,\n      \"updated_at\": 325,\n      \"private\": true,\n      \"status\": \"read\",\n      \"source_id\": \"string\",\n      \"content_type\": \"incoming_email\",\n      \"content_attributes\": {},\n      \"sender_type\": null,\n      \"sender_id\": 2446.976112500827,\n      \"external_source_ids\": {},\n      \"additional_attributes\": {},\n      \"processed_message_content\": \"string\",\n      \"sentiment\": {},\n      \"conversation\": {},\n      \"attachment\": {},\n      \"sender\": {}\n    }\n  ],\n  \"account_id\": 1301.5172261405728,\n  \"uuid\": \"string\",\n  \"additional_attributes\": {},\n  \"agent_last_seen_at\": 5692.753311066467,\n  \"assignee_last_seen_at\": 3853.330079871784,\n  \"can_reply\": false,\n  \"contact_last_seen_at\": 6825.14242437874,\n  \"custom_attributes\": {},\n  \"inbox_id\": 3476.7659190382806,\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"muted\": false,\n  \"snoozed_until\": 8327.076980002017,\n  \"status\": \"resolved\",\n  \"created_at\": 6723.7788617781325,\n  \"updated_at\": 2480.513604461404,\n  \"timestamp\": 30.08480875854369,\n  \"first_reply_created_at\": 8091.4648049175985,\n  \"unread_count\": 9983.790272124086,\n  \"last_non_activity_message\": {\n    \"id\": 8573.838312982909,\n    \"content\": \"string\",\n    \"account_id\": 8458.142154139245,\n    \"inbox_id\": 4668.660871832592,\n    \"conversation_id\": 9802.881616564553,\n    \"message_type\": 1,\n    \"created_at\": 5283,\n    \"updated_at\": 4618,\n    \"private\": true,\n    \"status\": \"failed\",\n    \"source_id\": \"string\",\n    \"content_type\": \"text\",\n    \"content_attributes\": {},\n    \"sender_type\": null,\n    \"sender_id\": 598.0486743236846,\n    \"external_source_ids\": {},\n    \"additional_attributes\": {},\n    \"processed_message_content\": \"string\",\n    \"sentiment\": {},\n    \"conversation\": {},\n    \"attachment\": {},\n    \"sender\": {}\n  },\n  \"last_activity_at\": 7727.005070491317,\n  \"priority\": \"string\",\n  \"waiting_since\": 8343.850848642243,\n  \"sla_policy_id\": 4721.479128964899,\n  \"applied_sla\": {},\n  \"meta\": {\n    \"sender\": {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 7205.825785770607,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": false,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 5120.556453014559,\n      \"created_at\": 1718.1128220397911\n    },\n    \"channel\": \"string\",\n    \"assignee\": {\n      \"id\": 8582.937636395756,\n      \"access_token\": \"string\",\n      \"account_id\": 1972.861670847229,\n      \"available_name\": \"string\",\n      \"avatar_url\": \"string\",\n      \"confirmed\": true,\n      \"display_name\": \"string\",\n      \"message_signature\": \"string\",\n      \"email\": \"string\",\n      \"hmac_identifier\": \"string\",\n      \"inviter_id\": 4793.59480446219,\n      \"name\": \"string\",\n      \"provider\": \"string\",\n      \"pubsub_token\": \"string\",\n      \"role\": \"agent\",\n      \"ui_settings\": {},\n      \"uid\": \"string\",\n      \"type\": \"string\",\n      \"custom_attributes\": {},\n      \"accounts\": [\n        {\n          \"id\": 5307.127112063559,\n          \"name\": \"string\",\n          \"status\": \"string\",\n          \"active_at\": \"2009-01-12T18:23:37.908Z\",\n          \"role\": \"agent\",\n          \"permissions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"availability\": \"string\",\n          \"availability_status\": \"string\",\n          \"auto_offline\": false,\n          \"custom_role_id\": 9534.77308548654,\n          \"custom_role\": {}\n        },\n        {\n          \"id\": 8805.897314821703,\n          \"name\": \"string\",\n          \"status\": \"string\",\n          \"active_at\": \"1953-01-28T08:29:14.040Z\",\n          \"role\": \"agent\",\n          \"permissions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"availability\": \"string\",\n          \"availability_status\": \"string\",\n          \"auto_offline\": false,\n          \"custom_role_id\": 2146.957719461775,\n          \"custom_role\": {}\n        }\n      ]\n    },\n    \"hmac_verified\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1428191d-eaf3-401f-85e3-eb2d2fdc3e9d",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f37214c0-4157-4a0e-9c6e-6400bae53432",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53a9952a-70b6-4ee7-8c1a-83e690231b44",
+          "name": "Update Conversation",
+          "request": {
+            "name": "Update Conversation",
+            "description": {
+              "content": "Update Conversation Attributes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": \"<string>\",\n  \"sla_policy_id\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d49c9de-576d-484b-9fef-f2c11c135834",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\",\n  \"sla_policy_id\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8649.880041986775,\n  \"messages\": [\n    {\n      \"id\": 2139.384484999829,\n      \"content\": \"string\",\n      \"account_id\": 1370.2638890794449,\n      \"inbox_id\": 3221.534010332775,\n      \"conversation_id\": 3890.9407407499684,\n      \"message_type\": 3,\n      \"created_at\": 3108,\n      \"updated_at\": 6030,\n      \"private\": false,\n      \"status\": \"sent\",\n      \"source_id\": \"string\",\n      \"content_type\": \"text\",\n      \"content_attributes\": {},\n      \"sender_type\": null,\n      \"sender_id\": 7949.489831177805,\n      \"external_source_ids\": {},\n      \"additional_attributes\": {},\n      \"processed_message_content\": \"string\",\n      \"sentiment\": {},\n      \"conversation\": {},\n      \"attachment\": {},\n      \"sender\": {}\n    },\n    {\n      \"id\": 6019.962786198716,\n      \"content\": \"string\",\n      \"account_id\": 8777.101845643598,\n      \"inbox_id\": 513.041025729809,\n      \"conversation_id\": 8387.596194629517,\n      \"message_type\": 1,\n      \"created_at\": 7292,\n      \"updated_at\": 5038,\n      \"private\": false,\n      \"status\": \"read\",\n      \"source_id\": \"string\",\n      \"content_type\": \"form\",\n      \"content_attributes\": {},\n      \"sender_type\": \"AgentBot\",\n      \"sender_id\": 543.4624860706127,\n      \"external_source_ids\": {},\n      \"additional_attributes\": {},\n      \"processed_message_content\": \"string\",\n      \"sentiment\": {},\n      \"conversation\": {},\n      \"attachment\": {},\n      \"sender\": {}\n    }\n  ],\n  \"account_id\": 1621.2506976238594,\n  \"uuid\": \"string\",\n  \"additional_attributes\": {},\n  \"agent_last_seen_at\": 677.406707543311,\n  \"assignee_last_seen_at\": 8206.456242473627,\n  \"can_reply\": false,\n  \"contact_last_seen_at\": 6592.122110438806,\n  \"custom_attributes\": {},\n  \"inbox_id\": 9941.992925093615,\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"muted\": true,\n  \"snoozed_until\": 6197.244634947658,\n  \"status\": \"open\",\n  \"created_at\": 759.8922464818459,\n  \"updated_at\": 7257.228012343241,\n  \"timestamp\": 8672.139710965534,\n  \"first_reply_created_at\": 6074.4565777830385,\n  \"unread_count\": 817.1617175272772,\n  \"last_non_activity_message\": {\n    \"id\": 1122.3900212747817,\n    \"content\": \"string\",\n    \"account_id\": 4678.860411863544,\n    \"inbox_id\": 1249.680138200222,\n    \"conversation_id\": 4511.329798886619,\n    \"message_type\": 0,\n    \"created_at\": 3571,\n    \"updated_at\": 3389,\n    \"private\": true,\n    \"status\": \"sent\",\n    \"source_id\": \"string\",\n    \"content_type\": \"cards\",\n    \"content_attributes\": {},\n    \"sender_type\": \"Captain::Assistant\",\n    \"sender_id\": 6010.845460368064,\n    \"external_source_ids\": {},\n    \"additional_attributes\": {},\n    \"processed_message_content\": \"string\",\n    \"sentiment\": {},\n    \"conversation\": {},\n    \"attachment\": {},\n    \"sender\": {}\n  },\n  \"last_activity_at\": 7206.811869885388,\n  \"priority\": \"string\",\n  \"waiting_since\": 5526.426126037229,\n  \"sla_policy_id\": 6871.883061212497,\n  \"applied_sla\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b9ef755-afc8-4c4a-be0d-93c99a9793bb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\",\n  \"sla_policy_id\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c3b5564-1ae5-49fb-bf0b-da56bd18ea4a",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\",\n  \"sla_policy_id\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "815ec6a8-837f-4ecd-97d6-84dae57fdc05",
+          "name": "Toggle Status",
+          "request": {
+            "name": "Toggle Status",
+            "description": {
+              "content": "Toggle the status of a conversation. Pass `status` to explicitly set the\nconversation state. Use `snoozed` along with `snoozed_until` to snooze a\nconversation until a specific time. If `snoozed_until` is omitted, the\nconversation is snoozed until the next reply from the contact. Regardless\nof the value provided, snoozed conversations always reopen on the next\nreply from the contact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "toggle_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"snoozed_until\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de74fcb1-303d-4db2-a699-207267bd33dc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"open\",\n  \"snoozed_until\": 1757506877\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {},\n  \"payload\": {\n    \"success\": false,\n    \"current_status\": \"pending\",\n    \"conversation_id\": 8912.761768018183\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de62899e-26bd-45aa-b129-1286f8b580fc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"open\",\n  \"snoozed_until\": 1757506877\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5319fa4c-52f4-4bc3-a48f-ef15bb8c4b8d",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"open\",\n  \"snoozed_until\": 1757506877\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80bc4138-f4b4-4a3d-8e50-71e108462e10",
+          "name": "Toggle Priority",
+          "request": {
+            "name": "Toggle Priority",
+            "description": {
+              "content": "Toggles the priority of conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "toggle_priority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8bee5653-0df3-4f63-a32c-15f9d2826dd4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e15ffa3-b953-4305-ab8a-49dc9221a24f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5c4aa1a-a72f-4b88-abb1-3a02b85b7d21",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"high\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11e648aa-f24a-44a9-9d2f-01c85384a9df",
+          "name": "Toggle Typing Status",
+          "request": {
+            "name": "Toggle Typing Status",
+            "description": {
+              "content": "Toggles the typing status for a conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "toggle_typing_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"typing_status\": \"<string>\",\n  \"is_private\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8576e223-b5aa-4a82-9214-cc37f221baef",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_typing_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"typing_status\": \"on\",\n  \"is_private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43156931-e46f-4146-ab47-fa0326dc4201",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_typing_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"typing_status\": \"on\",\n  \"is_private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d1794a0-e468-420a-8658-f3cd402d7ea4",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "toggle_typing_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"typing_status\": \"on\",\n  \"is_private\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe5801ce-b763-405d-8224-59727ff8db47",
+          "name": "Update Custom Attributes",
+          "request": {
+            "name": "Update Custom Attributes",
+            "description": {
+              "content": "Updates the custom attributes of a conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "custom_attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed28d532-95cf-489d-ae2b-fcbc14d24471",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "custom_attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_attributes\": {\n    \"order_id\": \"12345\",\n    \"previous_conversation\": \"67890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_attributes\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7773da89-6437-4d21-b048-ac58dd017fd4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "custom_attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_attributes\": {\n    \"order_id\": \"12345\",\n    \"previous_conversation\": \"67890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19fb3843-acdc-4b36-98f7-efe1544f07f7",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "custom_attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_attributes\": {\n    \"order_id\": \"12345\",\n    \"previous_conversation\": \"67890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63feb363-751e-40be-ac3d-c95b604f736a",
+          "name": "List Labels",
+          "request": {
+            "name": "List Labels",
+            "description": {
+              "content": "Lists all the labels of a conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d3e184f-ec9b-40e4-a9de-9dab0ac0d873",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1cd341c-e12c-464e-b193-bca7748e4d50",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e7a8871-5343-466b-965c-c645d3da70fd",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7661b8c2-a477-4d61-b0bf-219360e5627a",
+          "name": "Add Labels",
+          "request": {
+            "name": "Add Labels",
+            "description": {
+              "content": "Add labels to a conversation. Note that this API would overwrite the existing list of labels associated to the conversation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "596f804e-c5e5-491d-a7d8-dc47183d9ec2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"labels\": [\n    \"support\",\n    \"billing\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be054c17-dcf5-45ab-bff6-f7e2b28aef17",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"labels\": [\n    \"support\",\n    \"billing\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3db283a0-1b1c-4889-a295-31e12acac556",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"labels\": [\n    \"support\",\n    \"billing\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50f1923c-35dd-4139-982a-d77df7a27569",
+          "name": "Conversation Reporting Events",
+          "request": {
+            "name": "Conversation Reporting Events",
+            "description": {
+              "content": "Get reporting events for a specific conversation. This endpoint returns events such as first response time, resolution time, and other metrics for the conversation, sorted by creation time in ascending order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "reporting_events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_id",
+                  "description": "(Required) The numeric ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6808c677-b989-41e5-8077-185bb43a10e3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "reporting_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 3757.8260862961065,\n    \"name\": \"string\",\n    \"value\": 9494.76305393666,\n    \"value_in_business_hours\": 404.23520565175176,\n    \"event_start_time\": \"2013-11-30T00:19:49.900Z\",\n    \"event_end_time\": \"1953-06-07T03:48:37.396Z\",\n    \"account_id\": 4921.672198151049,\n    \"conversation_id\": 7158.745307929421,\n    \"inbox_id\": 7278.136137337221,\n    \"user_id\": 7081.562940121217,\n    \"created_at\": \"1989-08-13T05:59:11.977Z\",\n    \"updated_at\": \"1989-08-11T20:12:48.555Z\"\n  },\n  {\n    \"id\": 6790.494846870781,\n    \"name\": \"string\",\n    \"value\": 4527.41637634391,\n    \"value_in_business_hours\": 3627.9305084044477,\n    \"event_start_time\": \"2009-04-27T04:01:49.166Z\",\n    \"event_end_time\": \"2013-10-22T05:50:15.932Z\",\n    \"account_id\": 6537.701888185111,\n    \"conversation_id\": 9320.805450654254,\n    \"inbox_id\": 5855.255917386701,\n    \"user_id\": 1058.9105006193079,\n    \"created_at\": \"2008-07-08T18:45:32.825Z\",\n    \"updated_at\": \"1995-03-03T18:41:30.104Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "815122fd-aaab-4838-8336-bc852ef6750b",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "reporting_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54b6281f-2f69-46d5-8d08-dcf31aebf5f3",
+              "name": "Conversation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "reporting_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_id",
+                      "description": "(Required) The numeric ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5d0a9a65-04ba-4ef0-a10b-584aabff5cfe",
+    "name": "Chatwoot Account AgentBots Conversations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

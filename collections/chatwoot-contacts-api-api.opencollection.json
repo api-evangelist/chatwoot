@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Contacts API API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a contact"
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              }
+            ]
+          },
+          "docs": "Get the details of a contact"
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contact's attributes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Messages API API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              }
+            ]
+          },
+          "docs": "List all messages in the conversation"
+        },
+        {
+          "info": {
+            "name": "Create a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a message"
+        },
+        {
+          "info": {
+            "name": "Update a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/messages/:message_id",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              },
+              {
+                "name": "message_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the message"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a message"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

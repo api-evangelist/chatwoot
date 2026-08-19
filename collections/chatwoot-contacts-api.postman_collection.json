@@ -1,0 +1,2855 @@
+{
+  "item": [
+    {
+      "id": "ee79b803-23cb-468c-99f3-9b5a932e8857",
+      "name": "Contacts",
+      "description": {
+        "content": "Contact management APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f48bb1c7-6285-4fd3-b7ca-5f9909e897ae",
+          "name": "List Contacts",
+          "request": {
+            "name": "List Contacts",
+            "description": {
+              "content": "Listing all the resolved contacts with pagination (Page size = 15). Resolved contacts are the ones with a value for identifier, email or phone number",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "The attribute by which list should be sorted"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page parameter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f0b384ea-2990-4e3c-b388-71b29dc281d4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"count\": 2348,\n    \"current_page\": \"string\"\n  },\n  \"payload\": [\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"offline\",\n      \"email\": \"string\",\n      \"id\": 4418,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 8375,\n      \"created_at\": 5746,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 2872,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 164,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 2543,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 1235,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"offline\",\n      \"email\": \"string\",\n      \"id\": 1418,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": false,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 1135,\n      \"created_at\": 1357,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 1301,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 6482,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 8360,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 3546,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d74a0944-5cff-4b1b-b508-09839ce95655",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ba602a7-5a28-488e-b457-e52288b4f2e6",
+          "name": "Create Contact",
+          "request": {
+            "name": "Create Contact",
+            "description": {
+              "content": "Create a new Contact",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inbox_id\": \"<number>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"blocked\": \"<boolean>\",\n  \"phone_number\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"additional_attributes\": \"<object>\",\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e39eadc-afa1-4bb1-8d91-c8787a4b772d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"name\": \"Alice\",\n  \"email\": \"alice@acme.inc\",\n  \"blocked\": false,\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"https://example.com/avatar.png\",\n  \"identifier\": \"1234567890\",\n  \"additional_attributes\": {\n    \"type\": \"customer\",\n    \"age\": 30\n  },\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 5115,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": false,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 9069,\n      \"created_at\": 4987,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 6492,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 7637,\n      \"created_at\": 7963,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"id\": 8472.38869791182,\n  \"availability_status\": \"online\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d664293a-7485-4635-8fd8-1a1395405c7f",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"name\": \"Alice\",\n  \"email\": \"alice@acme.inc\",\n  \"blocked\": false,\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"https://example.com/avatar.png\",\n  \"identifier\": \"1234567890\",\n  \"additional_attributes\": {\n    \"type\": \"customer\",\n    \"age\": 30\n  },\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71b2c952-84e2-4882-a66a-c10ee327fd85",
+          "name": "Show Contact",
+          "request": {
+            "name": "Show Contact",
+            "description": {
+              "content": "Get a contact belonging to the account using ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac853554-7132-4cd1-9bb4-fd9faf383e54",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": {\n    \"additional_attributes\": {\n      \"city\": \"string\",\n      \"country\": \"string\",\n      \"country_code\": \"string\",\n      \"created_at_ip\": \"string\"\n    },\n    \"availability_status\": \"online\",\n    \"email\": \"string\",\n    \"id\": 3313,\n    \"name\": \"string\",\n    \"phone_number\": \"string\",\n    \"blocked\": true,\n    \"identifier\": \"string\",\n    \"thumbnail\": \"string\",\n    \"custom_attributes\": {},\n    \"last_activity_at\": 7321,\n    \"created_at\": 9061,\n    \"contact_inboxes\": [\n      {\n        \"source_id\": \"string\",\n        \"inbox\": {\n          \"id\": 3264,\n          \"avatar_url\": \"string\",\n          \"channel_id\": 4400,\n          \"name\": \"string\",\n          \"channel_type\": \"string\",\n          \"provider\": \"string\"\n        }\n      },\n      {\n        \"source_id\": \"string\",\n        \"inbox\": {\n          \"id\": 7648,\n          \"avatar_url\": \"string\",\n          \"channel_id\": 8923,\n          \"name\": \"string\",\n          \"channel_type\": \"string\",\n          \"provider\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81a7ac93-0c45-4431-abe6-419e064b8c27",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3610f8d7-ec93-4883-858f-a2ffc46f4a2e",
+              "name": "Contact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3d7596f-6cac-4a1e-bdaa-92d23a9347f5",
+          "name": "Update Contact",
+          "request": {
+            "name": "Update Contact",
+            "description": {
+              "content": "Update a contact belonging to the account using ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"blocked\": \"<boolean>\",\n  \"phone_number\": \"<string>\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"additional_attributes\": \"<object>\",\n  \"custom_attributes\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "76397e89-9949-453e-9745-a2751122734b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@acme.inc\",\n  \"blocked\": false,\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"https://example.com/avatar.png\",\n  \"identifier\": \"1234567890\",\n  \"additional_attributes\": {\n    \"type\": \"customer\",\n    \"age\": 30\n  },\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2868.0835919250003,\n  \"payload\": [\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 1370,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 5967,\n      \"created_at\": 5591,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 668,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 7170,\n      \"created_at\": 9517,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "454f82c0-4942-4a15-aa93-5dd06aaa603f",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@acme.inc\",\n  \"blocked\": false,\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"https://example.com/avatar.png\",\n  \"identifier\": \"1234567890\",\n  \"additional_attributes\": {\n    \"type\": \"customer\",\n    \"age\": 30\n  },\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad5cb3dc-bf24-46ea-ac80-c3e445a3247c",
+              "name": "Contact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@acme.inc\",\n  \"blocked\": false,\n  \"phone_number\": \"+123456789\",\n  \"avatar\": \"<binary>\",\n  \"avatar_url\": \"https://example.com/avatar.png\",\n  \"identifier\": \"1234567890\",\n  \"additional_attributes\": {\n    \"type\": \"customer\",\n    \"age\": 30\n  },\n  \"custom_attributes\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d7cf1d8-0396-49e2-86aa-fdd2dde84549",
+          "name": "Delete Contact",
+          "request": {
+            "name": "Delete Contact",
+            "description": {
+              "content": "Delete a contact belonging to the account using ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2d051cbb-1ba0-4fe2-b138-159e09585e83",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e40b7bf2-c32f-48cd-abf8-0466e5ad814f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe328abd-d2d6-41d5-9cfd-f9c7dc86d148",
+              "name": "Contact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "508639a1-db1a-4da3-97e3-3164c372c680",
+          "name": "Contact Conversations",
+          "request": {
+            "name": "Contact Conversations",
+            "description": {
+              "content": "Get conversations associated with that contact",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id",
+                "conversations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af316c57-48f4-4487-9fa9-f7e20f8df950",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 8237.338903633818,\n      \"messages\": [\n        {\n          \"id\": 2698.5033794915103,\n          \"content\": \"string\",\n          \"account_id\": 3029.627349404974,\n          \"inbox_id\": 9783.343059897044,\n          \"conversation_id\": 786.950090070333,\n          \"message_type\": 0,\n          \"created_at\": 1985,\n          \"updated_at\": 6690,\n          \"private\": false,\n          \"status\": \"read\",\n          \"source_id\": \"string\",\n          \"content_type\": \"cards\",\n          \"content_attributes\": {},\n          \"sender_type\": \"AgentBot\",\n          \"sender_id\": 1782.0647986589877,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        {\n          \"id\": 1953.9919284088514,\n          \"content\": \"string\",\n          \"account_id\": 5896.621703032491,\n          \"inbox_id\": 2757.494339660167,\n          \"conversation_id\": 878.5970084839745,\n          \"message_type\": 2,\n          \"created_at\": 6233,\n          \"updated_at\": 5226,\n          \"private\": false,\n          \"status\": \"sent\",\n          \"source_id\": \"string\",\n          \"content_type\": \"voice_call\",\n          \"content_attributes\": {},\n          \"sender_type\": null,\n          \"sender_id\": 9882.846726887672,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        }\n      ],\n      \"account_id\": 1361.7172125000666,\n      \"uuid\": \"string\",\n      \"additional_attributes\": {},\n      \"agent_last_seen_at\": 956.6345635641627,\n      \"assignee_last_seen_at\": 2955.47337315656,\n      \"can_reply\": false,\n      \"contact_last_seen_at\": 3472.91047578983,\n      \"custom_attributes\": {},\n      \"inbox_id\": 6972.237306580568,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"muted\": true,\n      \"snoozed_until\": 6251.604286405556,\n      \"status\": \"open\",\n      \"created_at\": 1935.3608078030416,\n      \"updated_at\": 5966.763027004511,\n      \"timestamp\": 1244.100569461305,\n      \"first_reply_created_at\": 108.87207732925953,\n      \"unread_count\": 3617.8837275708743,\n      \"last_non_activity_message\": {\n        \"id\": 7460.4747804685,\n        \"content\": \"string\",\n        \"account_id\": 7591.667903255751,\n        \"inbox_id\": 6132.319530165065,\n        \"conversation_id\": 97.45999405841089,\n        \"message_type\": 3,\n        \"created_at\": 9061,\n        \"updated_at\": 570,\n        \"private\": true,\n        \"status\": \"sent\",\n        \"source_id\": \"string\",\n        \"content_type\": \"input_text\",\n        \"content_attributes\": {},\n        \"sender_type\": \"Captain::Assistant\",\n        \"sender_id\": 8616.706600308471,\n        \"external_source_ids\": {},\n        \"additional_attributes\": {},\n        \"processed_message_content\": \"string\",\n        \"sentiment\": {},\n        \"conversation\": {},\n        \"attachment\": {},\n        \"sender\": {}\n      },\n      \"last_activity_at\": 558.2788340026012,\n      \"priority\": \"string\",\n      \"waiting_since\": 3355.771767630481,\n      \"sla_policy_id\": 7205.546147238351,\n      \"applied_sla\": {},\n      \"meta\": {\n        \"sender\": {\n          \"additional_attributes\": {},\n          \"availability_status\": \"string\",\n          \"email\": \"string\",\n          \"id\": 2090.6505122574135,\n          \"name\": \"string\",\n          \"phone_number\": \"string\",\n          \"blocked\": false,\n          \"identifier\": \"string\",\n          \"thumbnail\": \"string\",\n          \"custom_attributes\": {},\n          \"last_activity_at\": 1722.363578640974,\n          \"created_at\": 6691.586746893849\n        },\n        \"channel\": \"string\",\n        \"assignee\": {\n          \"id\": 4593.645155648896,\n          \"access_token\": \"string\",\n          \"account_id\": 7714.04992633404,\n          \"available_name\": \"string\",\n          \"avatar_url\": \"string\",\n          \"confirmed\": false,\n          \"display_name\": \"string\",\n          \"message_signature\": \"string\",\n          \"email\": \"string\",\n          \"hmac_identifier\": \"string\",\n          \"inviter_id\": 1935.557937184189,\n          \"name\": \"string\",\n          \"provider\": \"string\",\n          \"pubsub_token\": \"string\",\n          \"role\": \"agent\",\n          \"ui_settings\": {},\n          \"uid\": \"string\",\n          \"type\": \"string\",\n          \"custom_attributes\": {},\n          \"accounts\": [\n            {\n              \"id\": 5353.572250814542,\n              \"name\": \"string\",\n              \"status\": \"string\",\n              \"active_at\": \"1986-11-28T16:16:00.743Z\",\n              \"role\": \"agent\",\n              \"permissions\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"availability\": \"string\",\n              \"availability_status\": \"string\",\n              \"auto_offline\": false,\n              \"custom_role_id\": 7987.5504745359995,\n              \"custom_role\": {}\n            },\n            {\n              \"id\": 8277.158730212086,\n              \"name\": \"string\",\n              \"status\": \"string\",\n              \"active_at\": \"1997-02-01T21:42:22.416Z\",\n              \"role\": \"administrator\",\n              \"permissions\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"availability\": \"string\",\n              \"availability_status\": \"string\",\n              \"auto_offline\": true,\n              \"custom_role_id\": 8870.345909513486,\n              \"custom_role\": {}\n            }\n          ]\n        },\n        \"hmac_verified\": true\n      }\n    },\n    {\n      \"id\": 7967.837507992423,\n      \"messages\": [\n        {\n          \"id\": 2198.1448989176356,\n          \"content\": \"string\",\n          \"account_id\": 4021.493945646347,\n          \"inbox_id\": 9966.378992657983,\n          \"conversation_id\": 1072.2511455253814,\n          \"message_type\": 1,\n          \"created_at\": 3873,\n          \"updated_at\": 7490,\n          \"private\": false,\n          \"status\": \"failed\",\n          \"source_id\": \"string\",\n          \"content_type\": \"sticker\",\n          \"content_attributes\": {},\n          \"sender_type\": \"AgentBot\",\n          \"sender_id\": 9509.379003531125,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        },\n        {\n          \"id\": 2364.535605066417,\n          \"content\": \"string\",\n          \"account_id\": 4170.299869222851,\n          \"inbox_id\": 5906.81759310015,\n          \"conversation_id\": 6973.616237065989,\n          \"message_type\": 0,\n          \"created_at\": 9422,\n          \"updated_at\": 1073,\n          \"private\": true,\n          \"status\": \"delivered\",\n          \"source_id\": \"string\",\n          \"content_type\": \"input_email\",\n          \"content_attributes\": {},\n          \"sender_type\": null,\n          \"sender_id\": 1848.7740727560242,\n          \"external_source_ids\": {},\n          \"additional_attributes\": {},\n          \"processed_message_content\": \"string\",\n          \"sentiment\": {},\n          \"conversation\": {},\n          \"attachment\": {},\n          \"sender\": {}\n        }\n      ],\n      \"account_id\": 3216.5179679727385,\n      \"uuid\": \"string\",\n      \"additional_attributes\": {},\n      \"agent_last_seen_at\": 5005.614508761151,\n      \"assignee_last_seen_at\": 3260.7404655917226,\n      \"can_reply\": true,\n      \"contact_last_seen_at\": 6491.961252143345,\n      \"custom_attributes\": {},\n      \"inbox_id\": 2326.5045272081566,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"muted\": true,\n      \"snoozed_until\": 1062.6360773797228,\n      \"status\": \"resolved\",\n      \"created_at\": 129.2390018054912,\n      \"updated_at\": 8215.634507189863,\n      \"timestamp\": 2179.897681808245,\n      \"first_reply_created_at\": 5560.02299819186,\n      \"unread_count\": 5630.9162363059395,\n      \"last_non_activity_message\": {\n        \"id\": 2803.5955606390794,\n        \"content\": \"string\",\n        \"account_id\": 3823.9715988958046,\n        \"inbox_id\": 7487.377431905646,\n        \"conversation_id\": 957.654942718561,\n        \"message_type\": 1,\n        \"created_at\": 7892,\n        \"updated_at\": 6500,\n        \"private\": false,\n        \"status\": \"read\",\n        \"source_id\": \"string\",\n        \"content_type\": \"sticker\",\n        \"content_attributes\": {},\n        \"sender_type\": \"Contact\",\n        \"sender_id\": 682.6849405488011,\n        \"external_source_ids\": {},\n        \"additional_attributes\": {},\n        \"processed_message_content\": \"string\",\n        \"sentiment\": {},\n        \"conversation\": {},\n        \"attachment\": {},\n        \"sender\": {}\n      },\n      \"last_activity_at\": 3073.8399534103155,\n      \"priority\": \"string\",\n      \"waiting_since\": 7601.301458649337,\n      \"sla_policy_id\": 2439.9899024119854,\n      \"applied_sla\": {},\n      \"meta\": {\n        \"sender\": {\n          \"additional_attributes\": {},\n          \"availability_status\": \"string\",\n          \"email\": \"string\",\n          \"id\": 9131.542623307818,\n          \"name\": \"string\",\n          \"phone_number\": \"string\",\n          \"blocked\": true,\n          \"identifier\": \"string\",\n          \"thumbnail\": \"string\",\n          \"custom_attributes\": {},\n          \"last_activity_at\": 8619.44634311196,\n          \"created_at\": 8411.263535660159\n        },\n        \"channel\": \"string\",\n        \"assignee\": {\n          \"id\": 3880.979825661104,\n          \"access_token\": \"string\",\n          \"account_id\": 2817.414752634073,\n          \"available_name\": \"string\",\n          \"avatar_url\": \"string\",\n          \"confirmed\": false,\n          \"display_name\": \"string\",\n          \"message_signature\": \"string\",\n          \"email\": \"string\",\n          \"hmac_identifier\": \"string\",\n          \"inviter_id\": 5682.33015098787,\n          \"name\": \"string\",\n          \"provider\": \"string\",\n          \"pubsub_token\": \"string\",\n          \"role\": \"agent\",\n          \"ui_settings\": {},\n          \"uid\": \"string\",\n          \"type\": \"string\",\n          \"custom_attributes\": {},\n          \"accounts\": [\n            {\n              \"id\": 2142.750797515004,\n              \"name\": \"string\",\n              \"status\": \"string\",\n              \"active_at\": \"1977-01-26T01:25:04.034Z\",\n              \"role\": \"administrator\",\n              \"permissions\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"availability\": \"string\",\n              \"availability_status\": \"string\",\n              \"auto_offline\": false,\n              \"custom_role_id\": 2609.257731132679,\n              \"custom_role\": {}\n            },\n            {\n              \"id\": 3970.4941661549465,\n              \"name\": \"string\",\n              \"status\": \"string\",\n              \"active_at\": \"2010-04-17T21:43:43.879Z\",\n              \"role\": \"administrator\",\n              \"permissions\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"availability\": \"string\",\n              \"availability_status\": \"string\",\n              \"auto_offline\": false,\n              \"custom_role_id\": 7348.510665167078,\n              \"custom_role\": {}\n            }\n          ]\n        },\n        \"hmac_verified\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54051261-ba03-44b5-867e-5209aa8e3b14",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "845989c9-12cd-4dc5-bad3-0d291883026b",
+              "name": "Contact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "conversations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2be9f69-c59f-4105-9c5a-6d3059395cc6",
+          "name": "Search Contacts",
+          "request": {
+            "name": "Search Contacts",
+            "description": {
+              "content": "Search the resolved contacts using a search key, currently supports email search (Page size = 15). Resolved contacts are the ones with a value for identifier, email or phone number",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search using contact `name`, `identifier`, `email` or `phone number`"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "The attribute by which list should be sorted"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page parameter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c47c8a3-bb0f-4c03-b127-835d2f6a585f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"count\": 3430,\n    \"current_page\": \"string\"\n  },\n  \"payload\": [\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"offline\",\n      \"email\": \"string\",\n      \"id\": 8906,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 1516,\n      \"created_at\": 237,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 1529,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 4355,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 7014,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 5128,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"online\",\n      \"email\": \"string\",\n      \"id\": 1898,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": false,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 6776,\n      \"created_at\": 2421,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 2098,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 1248,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 8915,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 1623,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10ad6831-2649-4764-9df9-f956dc132fb1",
+              "name": "Authentication error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "524dbdf6-85d3-444c-82df-f12ec6838bd9",
+          "name": "Contact Filter",
+          "request": {
+            "name": "Contact Filter",
+            "description": {
+              "content": "Filter contacts with custom filter options and pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43cda59c-6fde-4fc9-8a1b-b1d64a81df28",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"count\": 3430,\n    \"current_page\": \"string\"\n  },\n  \"payload\": [\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"offline\",\n      \"email\": \"string\",\n      \"id\": 8906,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 1516,\n      \"created_at\": 237,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 1529,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 4355,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 7014,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 5128,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"availability_status\": \"online\",\n      \"email\": \"string\",\n      \"id\": 1898,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": false,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {},\n      \"last_activity_at\": 6776,\n      \"created_at\": 2421,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 2098,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 1248,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": 8915,\n            \"avatar_url\": \"string\",\n            \"channel_id\": 1623,\n            \"name\": \"string\",\n            \"channel_type\": \"string\",\n            \"provider\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dc422f7-2d76-454b-8545-5e44e321bf14",
+              "name": "Bad Request Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": [\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    },\n    {\n      \"attribute_key\": \"<string>\",\n      \"filter_operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"query_operator\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce8fe889-a62e-4ca6-95be-162463473978",
+          "name": "Create contact inbox",
+          "request": {
+            "name": "Create contact inbox",
+            "description": {
+              "content": "Create a contact inbox record for an inbox",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id",
+                "contact_inboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inbox_id\": \"<number>\",\n  \"source_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "430858e6-92b0-4ff8-9816-716c5e525218",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contact_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"source_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_id\": \"string\",\n  \"inbox\": {\n    \"id\": 9320.678019233577,\n    \"avatar_url\": \"string\",\n    \"channel_id\": 6602.661769528349,\n    \"name\": \"string\",\n    \"channel_type\": \"string\",\n    \"provider\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24c65ba8-93d5-4543-bdcf-7a35ecec3efe",
+              "name": "Authentication error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contact_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"source_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad49a329-4a37-4ab7-8a6c-0c73a1a862c1",
+              "name": "Incorrect payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contact_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inbox_id\": 1,\n  \"source_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f14a49c-b20e-4ac3-a3f2-b00b7639f73a",
+          "name": "Get Contactable Inboxes",
+          "request": {
+            "name": "Get Contactable Inboxes",
+            "description": {
+              "content": "Get List of contactable Inboxes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "contacts",
+                ":id",
+                "contactable_inboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "id",
+                  "description": "(Required) ID of the contact"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2856b54d-5ac2-484e-8f3a-859acee88874",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contactable_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"source_id\": \"string\",\n      \"inbox\": {\n        \"id\": 3362,\n        \"avatar_url\": \"string\",\n        \"channel_id\": 1172,\n        \"name\": \"string\",\n        \"channel_type\": \"string\",\n        \"provider\": \"string\"\n      }\n    },\n    {\n      \"source_id\": \"string\",\n      \"inbox\": {\n        \"id\": 5638,\n        \"avatar_url\": \"string\",\n        \"channel_id\": 1159,\n        \"name\": \"string\",\n        \"channel_type\": \"string\",\n        \"provider\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09158922-161b-43c8-ad2d-6d8f5246390e",
+              "name": "Authentication error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contactable_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a3ed092-71d1-40af-ab63-edd541378d86",
+              "name": "Incorrect payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "contacts",
+                    ":id",
+                    "contactable_inboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "id",
+                      "description": "(Required) ID of the contact"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ad2f086-373c-445c-8133-29a7b1ae6d70",
+          "name": "Merge Contacts",
+          "request": {
+            "name": "Merge Contacts",
+            "description": {
+              "content": "Merge two contacts into a single contact. The base contact remains and receives all\ndata from the mergee contact. After the merge, the mergee contact is permanently deleted.\n\nThis action is irreversible. All conversations, labels, and custom attributes from the\nmergee contact will be moved to the base contact.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "actions",
+                "contact_merge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_contact_id\": \"<integer>\",\n  \"mergee_contact_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19c15e00-e127-4a98-b073-5fadd2ddfe3c",
+              "name": "Contacts merged successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "actions",
+                    "contact_merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_contact_id\": 1,\n  \"mergee_contact_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2868.0835919250003,\n  \"payload\": [\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 1370,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 5967,\n      \"created_at\": 5591,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"additional_attributes\": {},\n      \"availability_status\": \"string\",\n      \"email\": \"string\",\n      \"id\": 668,\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"blocked\": true,\n      \"identifier\": \"string\",\n      \"thumbnail\": \"string\",\n      \"custom_attributes\": {\n        \"attribute_key\": \"attribute_value\",\n        \"signed_up_at\": \"dd/mm/yyyy\"\n      },\n      \"last_activity_at\": 7170,\n      \"created_at\": 9517,\n      \"contact_inboxes\": [\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"source_id\": \"string\",\n          \"inbox\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatar_url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"channel_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ee300dc-8c54-437b-8e8c-a14782104542",
+              "name": "Bad request - invalid contact IDs or contacts cannot be merged",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "actions",
+                    "contact_merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_contact_id\": 1,\n  \"mergee_contact_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d58a7113-9e13-4430-a7ed-d3a30e0d2703",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "actions",
+                    "contact_merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_contact_id\": 1,\n  \"mergee_contact_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "325dad10-425d-46c3-9638-12754d538312",
+              "name": "One or both contacts not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "actions",
+                    "contact_merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_contact_id\": 1,\n  \"mergee_contact_id\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b5244c4e-a514-4b93-9978-ffcec73a0f79",
+    "name": "Chatwoot Account AgentBots Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "item": [
+    {
+      "id": "bb8f866d-8ef0-4ecf-bb0b-839521c4a594",
+      "name": "CSAT Survey Page",
+      "description": {
+        "content": "Customer satisfaction survey",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11088c57-d6db-4f9f-980f-9f91949ba913",
+          "name": "Get CSAT survey page",
+          "request": {
+            "name": "Get CSAT survey page",
+            "description": {
+              "content": "You can redirect the client to this URL, instead of implementing the CSAT survey component yourself.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "survey",
+                "responses",
+                ":conversation_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "conversation_uuid",
+                  "description": "(Required) The uuid of the conversation"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f181c47b-4ce1-433e-ba89-fc210f151a65",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "survey",
+                    "responses",
+                    ":conversation_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "conversation_uuid",
+                      "description": "(Required) The uuid of the conversation"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a548f950-486a-4587-b8ee-2d2f7ff7ca89",
+    "name": "Chatwoot Account AgentBots CSAT Survey Page API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

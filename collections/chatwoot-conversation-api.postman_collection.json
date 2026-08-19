@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "bfbf0292-6704-47d1-8301-75f1fa824148",
+      "name": "Conversation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "026167c7-f97a-4544-a904-3bc2b2d6ffc3",
+          "name": "Get messages from a conversation",
+          "request": {
+            "name": "Get messages from a conversation",
+            "description": {
+              "content": "Returns all messages from a specific conversation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "conversation_id",
+                  "description": "(Required) ID of the conversation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d47f42b4-acf0-4127-9803-d79a4df9d102",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "conversation_id",
+                      "description": "(Required) ID of the conversation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"additional_attributes\": {\n      \"browser\": {\n        \"device_name\": \"string\",\n        \"browser_name\": \"string\",\n        \"platform_name\": \"string\",\n        \"browser_version\": \"string\",\n        \"platform_version\": \"string\"\n      },\n      \"referer\": \"string\",\n      \"initiated_at\": {\n        \"timestamp\": \"string\"\n      },\n      \"browser_language\": \"string\",\n      \"conversation_language\": \"string\"\n    },\n    \"contact\": {\n      \"additional_attributes\": {\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at_ip\": \"string\"\n      },\n      \"custom_attributes\": {},\n      \"email\": \"string\",\n      \"id\": 6787,\n      \"identifier\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"thumbnail\": \"string\",\n      \"blocked\": false,\n      \"type\": \"contact\"\n    },\n    \"assignee\": {\n      \"id\": 8886,\n      \"account_id\": 8593,\n      \"availability_status\": \"busy\",\n      \"auto_offline\": true,\n      \"confirmed\": false,\n      \"email\": \"string\",\n      \"available_name\": \"string\",\n      \"name\": \"string\",\n      \"role\": \"agent\",\n      \"thumbnail\": \"string\",\n      \"custom_role_id\": 4932\n    },\n    \"agent_last_seen_at\": \"string\",\n    \"assignee_last_seen_at\": \"string\"\n  },\n  \"payload\": [\n    {\n      \"id\": 3770.0488314509807,\n      \"content\": \"string\",\n      \"inbox_id\": 7670.160853243368,\n      \"conversation_id\": 644.0995217946155,\n      \"message_type\": 2,\n      \"content_type\": \"input_textarea\",\n      \"status\": \"failed\",\n      \"content_attributes\": {\n        \"in_reply_to\": \"string\"\n      },\n      \"echo_id\": \"string\",\n      \"created_at\": 5180,\n      \"private\": false,\n      \"source_id\": \"string\",\n      \"sender\": {\n        \"additional_attributes\": {\n          \"city\": \"string\",\n          \"country\": \"string\",\n          \"country_code\": \"string\",\n          \"created_at_ip\": \"string\"\n        },\n        \"custom_attributes\": {},\n        \"email\": \"string\",\n        \"id\": 3178,\n        \"identifier\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"thumbnail\": \"string\",\n        \"blocked\": false,\n        \"type\": \"contact\"\n      },\n      \"attachments\": [\n        {\n          \"id\": 8388.073107939219,\n          \"message_id\": 4558.714187595242,\n          \"file_type\": \"file\",\n          \"account_id\": 1134.604516220522,\n          \"data_url\": \"string\",\n          \"thumb_url\": \"string\",\n          \"file_size\": 1408.9590337578627\n        },\n        {\n          \"id\": 3411.6438296123943,\n          \"message_id\": 7301.455268147091,\n          \"file_type\": \"contact\",\n          \"account_id\": 6429.756095183174,\n          \"data_url\": \"string\",\n          \"thumb_url\": \"string\",\n          \"file_size\": 4214.315160910304\n        }\n      ]\n    },\n    {\n      \"id\": 372.50069072952476,\n      \"content\": \"string\",\n      \"inbox_id\": 3439.2119276320086,\n      \"conversation_id\": 9963.011037787008,\n      \"message_type\": 2,\n      \"content_type\": \"input_csat\",\n      \"status\": \"delivered\",\n      \"content_attributes\": {\n        \"in_reply_to\": \"string\"\n      },\n      \"echo_id\": \"string\",\n      \"created_at\": 2660,\n      \"private\": true,\n      \"source_id\": \"string\",\n      \"sender\": {\n        \"additional_attributes\": {\n          \"city\": \"string\",\n          \"country\": \"string\",\n          \"country_code\": \"string\",\n          \"created_at_ip\": \"string\"\n        },\n        \"custom_attributes\": {},\n        \"email\": \"string\",\n        \"id\": 290,\n        \"identifier\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"thumbnail\": \"string\",\n        \"blocked\": false,\n        \"type\": \"contact\"\n      },\n      \"attachments\": [\n        {\n          \"id\": 3513.9797835787467,\n          \"message_id\": 3346.0165930214957,\n          \"file_type\": \"audio\",\n          \"account_id\": 5583.310815670001,\n          \"data_url\": \"string\",\n          \"thumb_url\": \"string\",\n          \"file_size\": 4537.406541890105\n        },\n        {\n          \"id\": 5829.950462739836,\n          \"message_id\": 2222.4339869254904,\n          \"file_type\": \"image\",\n          \"account_id\": 8309.140025633544,\n          \"data_url\": \"string\",\n          \"thumb_url\": \"string\",\n          \"file_size\": 4944.944399243347\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d9ea3ea-7b46-43e7-a6ef-91343b789282",
+    "name": "Chatwoot Account AgentBots Conversation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

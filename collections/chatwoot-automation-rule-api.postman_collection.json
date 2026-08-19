@@ -1,0 +1,1237 @@
+{
+  "item": [
+    {
+      "id": "2c195bf5-ce25-4bc1-9c34-6bcb8c74e3e7",
+      "name": "Automation Rule",
+      "description": {
+        "content": "Workflow automation rules",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67af21c7-be01-4013-bfe1-3fe179417ab2",
+          "name": "List all automation rules in an account",
+          "request": {
+            "name": "List all automation rules in an account",
+            "description": {
+              "content": "Get details of automation rules in an Account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "automation_rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page parameter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd7f5878-1ec8-4284-ac40-ef33f3901adb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 7790,\n      \"account_id\": 3905,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"attribute_key\": \"content\",\n          \"filter_operator\": \"contains\",\n          \"values\": [\n            \"help\"\n          ],\n          \"query_operator\": \"and\"\n        },\n        {\n          \"attribute_key\": \"content\",\n          \"filter_operator\": \"contains\",\n          \"values\": [\n            \"help\"\n          ],\n          \"query_operator\": \"and\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 599,\n      \"active\": true\n    },\n    {\n      \"id\": 5795,\n      \"account_id\": 3585,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"attribute_key\": \"content\",\n          \"filter_operator\": \"contains\",\n          \"values\": [\n            \"help\"\n          ],\n          \"query_operator\": \"and\"\n        },\n        {\n          \"attribute_key\": \"content\",\n          \"filter_operator\": \"contains\",\n          \"values\": [\n            \"help\"\n          ],\n          \"query_operator\": \"and\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 7400,\n      \"active\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76c71de4-5af1-4a8b-9409-7430942c83b8",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "853619cd-3454-450e-b0cf-4b7654a66c4b",
+          "name": "Add a new automation rule",
+          "request": {
+            "name": "Add a new automation rule",
+            "description": {
+              "content": "Add a new automation rule to account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "automation_rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"event_name\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"conditions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b57ab1d8-04c2-417f-9d04-0b8a3b6eab45",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Add label on message create event\",\n  \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n  \"event_name\": \"message_created\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    },\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    }\n  ],\n  \"conditions\": [\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    },\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 572,\n      \"account_id\": 4902,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        },\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 3236,\n      \"active\": false\n    },\n    {\n      \"id\": 4370,\n      \"account_id\": 9765,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        },\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 7347,\n      \"active\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dca0083-a505-42f0-8f0c-8f5a2871088b",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Add label on message create event\",\n  \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n  \"event_name\": \"message_created\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    },\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    }\n  ],\n  \"conditions\": [\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    },\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f215976d-3919-4ce3-8b7e-71d06daa982b",
+          "name": "Get a automation rule details",
+          "request": {
+            "name": "Get a automation rule details",
+            "description": {
+              "content": "Get the details of a automation rule in the account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "automation_rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the automation rule to be updated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a3e65a3-aa30-4642-972f-ab126582c094",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": {\n    \"id\": 90,\n    \"account_id\": 1,\n    \"name\": \"add-label-bug-if-message-contains-bug\",\n    \"description\": \"add-label-bug-if-message-contains-bug\",\n    \"event_name\": \"message_created\",\n    \"conditions\": [\n      {\n        \"values\": [\n          \"incoming\"\n        ],\n        \"attribute_key\": \"message_type\",\n        \"query_operator\": \"and\",\n        \"filter_operator\": \"equal_to\"\n      },\n      {\n        \"values\": [\n          \"bug\"\n        ],\n        \"attribute_key\": \"content\",\n        \"filter_operator\": \"contains\"\n      }\n    ],\n    \"actions\": [\n      {\n        \"action_name\": \"add_label\",\n        \"action_params\": [\n          \"bugs\",\n          \"support-query\"\n        ]\n      }\n    ],\n    \"created_on\": 1650555440,\n    \"active\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d1f06ea-8e1c-473e-9c7d-4d6bf5cbdcd6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26aea2d7-e955-4016-a5cb-f210c69a4545",
+              "name": "The given rule ID does not exist in the account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff4edb86-cda4-46e9-a088-de8985673b22",
+          "name": "Update automation rule in Account",
+          "request": {
+            "name": "Update automation rule in Account",
+            "description": {
+              "content": "Update a automation rule in account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "automation_rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the automation rule to be updated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"event_name\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"conditions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82e823b6-d413-49ad-a73d-f6d3c61f602b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Add label on message create event\",\n  \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n  \"event_name\": \"message_created\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    },\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    }\n  ],\n  \"conditions\": [\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    },\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payload\": [\n    {\n      \"id\": 572,\n      \"account_id\": 4902,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        },\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 3236,\n      \"active\": false\n    },\n    {\n      \"id\": 4370,\n      \"account_id\": 9765,\n      \"name\": \"Add label on message create event\",\n      \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n      \"event_name\": \"message_created\",\n      \"conditions\": [\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        },\n        {\n          \"values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"attribute_key\": \"string\",\n          \"query_operator\": \"string\",\n          \"filter_operator\": \"string\"\n        }\n      ],\n      \"actions\": [\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        },\n        {\n          \"action_name\": \"add_label\",\n          \"action_params\": [\n            \"support\",\n            \"sales\"\n          ]\n        }\n      ],\n      \"created_on\": 7347,\n      \"active\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e21be0df-ac2b-4da7-af83-5c4f0dab639f",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Add label on message create event\",\n  \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n  \"event_name\": \"message_created\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    },\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    }\n  ],\n  \"conditions\": [\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    },\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c955d28-da5c-4272-a735-99a9327d157d",
+              "name": "Rule not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Add label on message create event\",\n  \"description\": \"Add label support and sales on message create event if incoming message content contains text help\",\n  \"event_name\": \"message_created\",\n  \"active\": \"<boolean>\",\n  \"actions\": [\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    },\n    {\n      \"action_name\": \"add_label\",\n      \"action_params\": [\n        \"support\"\n      ]\n    }\n  ],\n  \"conditions\": [\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    },\n    {\n      \"attribute_key\": \"content\",\n      \"filter_operator\": \"contains\",\n      \"query_operator\": \"OR\",\n      \"values\": [\n        \"help\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "546c6f82-985a-4e17-8eb0-bc5b3295d9cc",
+          "name": "Remove a automation rule from account",
+          "request": {
+            "name": "Remove a automation rule from account",
+            "description": {
+              "content": "Remove a automation rule from account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id",
+                "automation_rules",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the automation rule to be deleted"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "868700d0-c7ba-4cea-a3aa-7fe9fd373486",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d2c27be-d321-4652-9a9c-b59d2622234c",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7e2578c-9856-4ba4-b7df-7ba899b5fcbf",
+              "name": "automation rule not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id",
+                    "automation_rules",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the automation rule to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b588ebca-c185-4597-a21e-c7754d37219c",
+    "name": "Chatwoot Account AgentBots Automation Rule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}

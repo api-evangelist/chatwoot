@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Conversations API API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              }
+            ]
+          },
+          "docs": "List all conversations for the contact"
+        },
+        {
+          "info": {
+            "name": "Create a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a conversation"
+        },
+        {
+          "info": {
+            "name": "Get a single conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific conversation"
+        },
+        {
+          "info": {
+            "name": "Resolve a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/toggle_status",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              }
+            ]
+          },
+          "docs": "Marks a conversation as resolved"
+        },
+        {
+          "info": {
+            "name": "Toggle typing status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/toggle_typing",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              },
+              {
+                "name": "typing_status",
+                "value": "",
+                "type": "query",
+                "description": "Typing status, either 'on' or 'off'"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggles the typing status in a conversation"
+        },
+        {
+          "info": {
+            "name": "Update last seen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.chatwoot.com/public/api/v1/inboxes/:inbox_identifier/contacts/:contact_identifier/conversations/:conversation_id/update_last_seen",
+            "params": [
+              {
+                "name": "inbox_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The identifier obtained from API inbox channel"
+              },
+              {
+                "name": "contact_identifier",
+                "value": "",
+                "type": "path",
+                "description": "The source id of contact obtained on contact create"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the conversation"
+              }
+            ]
+          },
+          "docs": "Updates the last seen time of the contact in a conversation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

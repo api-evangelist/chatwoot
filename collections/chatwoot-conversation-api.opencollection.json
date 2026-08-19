@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chatwoot Account AgentBots Conversation API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get messages from a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.chatwoot.com/accounts/:account_id/conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the account"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the conversation"
+              }
+            ]
+          },
+          "docs": "Returns all messages from a specific conversation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

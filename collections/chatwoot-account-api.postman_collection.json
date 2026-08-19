@@ -1,0 +1,979 @@
+{
+  "item": [
+    {
+      "id": "24295542-7d54-4260-9c45-47d60f7dd19f",
+      "name": "Account",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71d59305-71ab-42ec-8b29-3350a2b17d10",
+          "name": "Get account details",
+          "request": {
+            "name": "Get account details",
+            "description": {
+              "content": "Get the details of the current account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5f6a38dc-1f31-4ec2-92ac-80aa2bcf21b4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6005.334403339493,\n  \"name\": \"string\",\n  \"locale\": \"string\",\n  \"domain\": \"string\",\n  \"support_email\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"1955-06-08T15:45:35.211Z\",\n  \"cache_keys\": {},\n  \"features\": {},\n  \"settings\": {\n    \"auto_resolve_after\": 1864.0968681350612,\n    \"auto_resolve_message\": \"string\",\n    \"auto_resolve_ignore_waiting\": false\n  },\n  \"custom_attributes\": {\n    \"plan_name\": \"string\",\n    \"subscribed_quantity\": 5871.062894703265,\n    \"subscription_status\": \"string\",\n    \"subscription_ends_on\": \"2017-06-18\",\n    \"industry\": \"string\",\n    \"company_size\": \"string\",\n    \"timezone\": \"string\",\n    \"logo\": \"string\",\n    \"onboarding_step\": \"string\",\n    \"marked_for_deletion_at\": \"2010-04-17T21:39:45.970Z\",\n    \"marked_for_deletion_reason\": \"string\"\n  },\n  \"latest_chatwoot_version\": \"3.0.0\",\n  \"subscribed_features\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "904bef7d-d296-4806-bf32-ada91f323a97",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39dcc03d-30aa-4eeb-83e4-a037e2d8a825",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29f690fe-ad2f-4965-9955-69b92386c0a2",
+          "name": "Update account",
+          "request": {
+            "name": "Update account",
+            "description": {
+              "content": "Update account details, settings, and custom attributes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The numeric ID of the account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_access_token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the account"
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale of the account"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "The domain of the account"
+                },
+                {
+                  "disabled": false,
+                  "key": "support_email",
+                  "value": "<string>",
+                  "description": "The support email of the account"
+                },
+                {
+                  "disabled": false,
+                  "key": "auto_resolve_after",
+                  "value": "<integer>",
+                  "description": "Auto resolve conversations after specified minutes"
+                },
+                {
+                  "disabled": false,
+                  "key": "auto_resolve_message",
+                  "value": "<string>",
+                  "description": "Message to send when auto resolving"
+                },
+                {
+                  "disabled": false,
+                  "key": "auto_resolve_ignore_waiting",
+                  "value": "<boolean>",
+                  "description": "Whether to ignore waiting conversations for auto resolve"
+                },
+                {
+                  "disabled": false,
+                  "key": "industry",
+                  "value": "<string>",
+                  "description": "Industry type"
+                },
+                {
+                  "disabled": false,
+                  "key": "company_size",
+                  "value": "<string>",
+                  "description": "Company size"
+                },
+                {
+                  "disabled": false,
+                  "key": "timezone",
+                  "value": "<string>",
+                  "description": "Account timezone"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f2b7e5c-72dc-439c-8e42-f9c9c233adcf",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "My Account"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The locale of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The domain of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "domain",
+                      "value": "example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The support email of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "support_email",
+                      "value": "support@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Auto resolve conversations after specified minutes",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_after",
+                      "value": "1440"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Message to send when auto resolving",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_message",
+                      "value": "This conversation has been automatically resolved due to inactivity"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to ignore waiting conversations for auto resolve",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_ignore_waiting",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Industry type",
+                        "type": "text/plain"
+                      },
+                      "key": "industry",
+                      "value": "Technology"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Company size",
+                        "type": "text/plain"
+                      },
+                      "key": "company_size",
+                      "value": "50-100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account timezone",
+                        "type": "text/plain"
+                      },
+                      "key": "timezone",
+                      "value": "UTC"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2161.1067675482022,\n  \"name\": \"string\",\n  \"locale\": \"string\",\n  \"domain\": \"string\",\n  \"support_email\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2023-07-20T14:18:59.430Z\",\n  \"cache_keys\": {},\n  \"features\": {},\n  \"settings\": {\n    \"auto_resolve_after\": 3614.6360134519364,\n    \"auto_resolve_message\": \"string\",\n    \"auto_resolve_ignore_waiting\": false\n  },\n  \"custom_attributes\": {\n    \"plan_name\": \"string\",\n    \"subscribed_quantity\": 4773.3037794908905,\n    \"subscription_status\": \"string\",\n    \"subscription_ends_on\": \"1969-02-21\",\n    \"industry\": \"string\",\n    \"company_size\": \"string\",\n    \"timezone\": \"string\",\n    \"logo\": \"string\",\n    \"onboarding_step\": \"string\",\n    \"marked_for_deletion_at\": \"1977-07-30T13:40:34.111Z\",\n    \"marked_for_deletion_reason\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52c23d75-9930-45d3-aa87-38e676dfb350",
+              "name": "Unauthorized (requires administrator role)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "My Account"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The locale of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The domain of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "domain",
+                      "value": "example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The support email of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "support_email",
+                      "value": "support@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Auto resolve conversations after specified minutes",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_after",
+                      "value": "1440"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Message to send when auto resolving",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_message",
+                      "value": "This conversation has been automatically resolved due to inactivity"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to ignore waiting conversations for auto resolve",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_ignore_waiting",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Industry type",
+                        "type": "text/plain"
+                      },
+                      "key": "industry",
+                      "value": "Technology"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Company size",
+                        "type": "text/plain"
+                      },
+                      "key": "company_size",
+                      "value": "50-100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account timezone",
+                        "type": "text/plain"
+                      },
+                      "key": "timezone",
+                      "value": "UTC"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac24255d-a5ee-412d-bf4e-5ead8d3f8033",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "My Account"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The locale of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The domain of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "domain",
+                      "value": "example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The support email of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "support_email",
+                      "value": "support@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Auto resolve conversations after specified minutes",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_after",
+                      "value": "1440"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Message to send when auto resolving",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_message",
+                      "value": "This conversation has been automatically resolved due to inactivity"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to ignore waiting conversations for auto resolve",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_ignore_waiting",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Industry type",
+                        "type": "text/plain"
+                      },
+                      "key": "industry",
+                      "value": "Technology"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Company size",
+                        "type": "text/plain"
+                      },
+                      "key": "company_size",
+                      "value": "50-100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account timezone",
+                        "type": "text/plain"
+                      },
+                      "key": "timezone",
+                      "value": "UTC"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7baaf934-f1cd-4d57-b40e-aa760a8a38c3",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The numeric ID of the account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_access_token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "My Account"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The locale of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The domain of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "domain",
+                      "value": "example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The support email of the account",
+                        "type": "text/plain"
+                      },
+                      "key": "support_email",
+                      "value": "support@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Auto resolve conversations after specified minutes",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_after",
+                      "value": "1440"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Message to send when auto resolving",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_message",
+                      "value": "This conversation has been automatically resolved due to inactivity"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to ignore waiting conversations for auto resolve",
+                        "type": "text/plain"
+                      },
+                      "key": "auto_resolve_ignore_waiting",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Industry type",
+                        "type": "text/plain"
+                      },
+                      "key": "industry",
+                      "value": "Technology"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Company size",
+                        "type": "text/plain"
+                      },
+                      "key": "company_size",
+                      "value": "50-100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account timezone",
+                        "type": "text/plain"
+                      },
+                      "key": "timezone",
+                      "value": "UTC"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.chatwoot.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "16b64d56-8729-43a5-9021-19616a371fb1",
+    "name": "Chatwoot AgentBots Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the API documentation for Chatwoot server.\n\nContact Support:\n Email: hello@chatwoot.com",
+      "type": "text/plain"
+    }
+  }
+}
