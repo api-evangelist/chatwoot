@@ -25,6 +25,15 @@ modified: '2026-08-08'
 specificationVersion: '0.23'
 type: Index
 tags:
+- Customer-Support
+- Messaging
+- Live Chat
+- Omnichannel
+- Conversations
+- Contacts
+- Agents
+- Open-Source
+tags_raw:
 - Customer Support
 - Messaging
 - Live Chat
@@ -63,6 +72,12 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Platform
+  - Account
+  - User
+  - Administration
+  - Self-Hosted
+  tags_raw:
   - Platform
   - Accounts
   - Users
@@ -130,6 +145,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -434,6 +451,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -482,6 +501,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -530,6 +551,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -546,6 +569,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -562,6 +587,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
