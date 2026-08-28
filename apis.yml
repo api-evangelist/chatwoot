@@ -5,6 +5,18 @@ description: Chatwoot is an open-source customer support and omni-channel messag
   workflows. It supports live chat, email, WhatsApp, Facebook, Instagram, Telegram, SMS, and more, with
   Application APIs for agent-level automation, Client APIs for custom chat interfaces, and Platform APIs
   for managing self-hosted installations at scale.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
