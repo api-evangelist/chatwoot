@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Inbox API API
+  title: Chatwoot Inbox API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -45,15 +45,16 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     public_inbox:
       type: object
       properties:
@@ -105,16 +106,15 @@ components:
         identity_validation_enabled:
           type: boolean
           description: Whether of not the User Identity Validation is enforced on the inbox
-    bad_request_error:
-      title: data
+    request_error:
       type: object
       properties:
-        description:
+        field:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+        message:
+          type: string
+        code:
+          type: string
   parameters:
     public_inbox_identifier:
       in: path

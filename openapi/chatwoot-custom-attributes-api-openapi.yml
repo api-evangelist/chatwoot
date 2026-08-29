@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Custom Attributes API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Custom Attributes API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Custom Attributes across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Custom Attributes
   description: Custom fields for contacts and conversations
@@ -79,6 +76,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/custom_attribute_definitions/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -194,74 +193,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    custom_attribute_create_update_payload:
-      type: object
-      properties:
-        attribute_display_name:
-          type: string
-          description: Attribute display name
-          example: Custom Attribute
-        attribute_display_type:
-          type: integer
-          description: Attribute display type (text- 0, number- 1, currency- 2, percent- 3, link- 4, date- 5, list- 6, checkbox- 7)
-          example: 0
-        attribute_description:
-          type: string
-          description: Attribute description
-          example: This is a custom attribute
-        attribute_key:
-          type: string
-          description: Attribute unique key value
-          example: custom_attribute
-        attribute_values:
-          type: array
-          description: Attribute values
-          items:
-            type: string
-          example:
-          - value1
-          - value2
-        attribute_model:
-          type: integer
-          description: Attribute type(conversation_attribute- 0, contact_attribute- 1)
-          example: 0
-        regex_pattern:
-          type: string
-          description: Regex pattern (Only applicable for type- text). The regex pattern is used to validate the attribute value(s).
-          example: ^[a-zA-Z0-9]+$
-        regex_cue:
-          type: string
-          description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
-          example: Please enter a valid value
     custom_attribute:
       type: object
       properties:
@@ -301,6 +236,110 @@ components:
         updated_at:
           type: string
           description: The date and time when the custom attribute was updated
+    custom_attribute_create_update_payload:
+      type: object
+      properties:
+        attribute_display_name:
+          type: string
+          description: Attribute display name
+          example: Custom Attribute
+        attribute_display_type:
+          type: integer
+          description: Attribute display type (text- 0, number- 1, currency- 2, percent- 3, link- 4, date- 5, list- 6, checkbox- 7)
+          example: 0
+        attribute_description:
+          type: string
+          description: Attribute description
+          example: This is a custom attribute
+        attribute_key:
+          type: string
+          description: Attribute unique key value
+          example: custom_attribute
+        attribute_values:
+          type: array
+          description: Attribute values
+          items:
+            type: string
+          example:
+          - value1
+          - value2
+        attribute_model:
+          type: integer
+          description: Attribute type(conversation_attribute- 0, contact_attribute- 1)
+          example: 0
+        regex_pattern:
+          type: string
+          description: Regex pattern (Only applicable for type- text). The regex pattern is used to validate the attribute value(s).
+          example: ^[a-zA-Z0-9]+$
+        regex_cue:
+          type: string
+          description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
+          example: Please enter a valid value
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    CustomAttributeDefinition:
+      type: object
+      required:
+      - attribute_display_name
+      - attribute_key
+      - attribute_model
+      properties:
+        attribute_display_name:
+          type: string
+        attribute_key:
+          type: string
+        attribute_display_type:
+          type: string
+          enum:
+          - text
+          - number
+          - currency
+          - percent
+          - link
+          - date
+          - list
+          - checkbox
+        attribute_model:
+          type: string
+          enum:
+          - conversation_attribute
+          - contact_attribute
+        attribute_values:
+          type: array
+          items:
+            type: string
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -317,6 +356,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

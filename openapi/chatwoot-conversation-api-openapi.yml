@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Conversation API
+  title: Chatwoot Conversation API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -37,58 +37,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/conversation_messages'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
-    agent:
-      type: object
-      properties:
-        id:
-          type: integer
-        account_id:
-          type: integer
-        availability_status:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          readOnly: true
-          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-        confirmed:
-          type: boolean
-          description: Whether the agent has confirmed their email address.
-        email:
-          type: string
-          description: The email of the agent
-        available_name:
-          type: string
-          description: The available name of the agent
-        name:
-          type: string
-          description: The name of the agent
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: The role of the agent
-        thumbnail:
-          type: string
-          description: The thumbnail of the agent
-        custom_role_id:
-          nullable: true
-          type: integer
-          description: The custom role id of the agent
     message_detailed:
       type: object
       properties:
@@ -142,12 +91,14 @@ components:
           description: The content attributes for each content_type
           properties:
             in_reply_to:
-              nullable: true
-              type: string
+              type:
+              - string
+              - 'null'
               description: ID of the message this is replying to
         echo_id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The echo ID of the message, used for deduplication
         created_at:
           type: integer
@@ -156,8 +107,9 @@ components:
           type: boolean
           description: The flag which shows whether the message is private or not
         source_id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The source ID of the message
         sender:
           $ref: '#/components/schemas/contact_detail'
@@ -250,25 +202,16 @@ components:
           allOf:
           - $ref: '#/components/schemas/agent'
           description: The agent assigned to the conversation
-          nullable: true
         agent_last_seen_at:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Timestamp when the agent last saw the conversation
         assignee_last_seen_at:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Timestamp when the assignee last saw the conversation
-    conversation_messages:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/conversation_meta'
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/message_detailed'
-          description: List of messages in the conversation
     contact_detail:
       type: object
       properties:
@@ -283,8 +226,9 @@ components:
               type: string
               description: Country of the contact
             country_code:
-              nullable: true
-              type: string
+              type:
+              - string
+              - 'null'
               description: Country code of the contact
             created_at_ip:
               type: string
@@ -299,15 +243,17 @@ components:
           type: integer
           description: The ID of the contact
         identifier:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The identifier of the contact
         name:
           type: string
           description: The name of the contact
         phone_number:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The phone number of the contact
         thumbnail:
           type: string
@@ -320,6 +266,68 @@ components:
           description: The type of entity
           enum:
           - contact
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          type:
+          - integer
+          - 'null'
+          description: The custom role id of the agent
+    conversation_messages:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/conversation_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/message_detailed'
+          description: List of messages in the conversation
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

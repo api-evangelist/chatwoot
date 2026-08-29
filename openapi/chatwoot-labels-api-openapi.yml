@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Labels API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Labels API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Labels across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Labels
   description: Account label management APIs
@@ -72,6 +69,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/labels/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -158,18 +157,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels:
+    parameters:
+    - $ref: '#/components/parameters/AccountId'
+    - $ref: '#/components/parameters/ConversationId'
+    get:
+      operationId: getConversationLabels
+      tags:
+      - Labels
+      summary: List labels applied to a conversation.
+      responses:
+        '200':
+          description: Object with a payload array of label names.
+      security:
+      - userApiKey: []
+    post:
+      operationId: setConversationLabels
+      tags:
+      - Labels
+      summary: Set the labels applied to a conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: The updated label list.
+      security:
+      - userApiKey: []
+    servers:
+    - url: https://app.chatwoot.com
+      description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    bad_request_error:
-      title: data
+    label_create_update_payload:
       type: object
       properties:
+        title:
+          type: string
+          description: The label title
+          example: support
         description:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: A short description for the label
+          example: Conversations that need support follow-up
+        color:
+          type: string
+          description: Hex color code for the label
+          example: '#1f93ff'
+        show_on_sidebar:
+          type: boolean
+          description: Whether the label should appear in the sidebar
+          example: true
     request_error:
       type: object
       properties:
@@ -197,25 +245,29 @@ components:
         show_on_sidebar:
           type: boolean
           description: Whether the label should appear in the sidebar
-    label_create_update_payload:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        title:
-          type: string
-          description: The label title
-          example: support
         description:
           type: string
-          description: A short description for the label
-          example: Conversations that need support follow-up
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
         color:
           type: string
-          description: Hex color code for the label
-          example: '#1f93ff'
         show_on_sidebar:
           type: boolean
-          description: Whether the label should appear in the sidebar
-          example: true
   parameters:
     account_id:
       in: path
@@ -224,6 +276,20 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -240,6 +306,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Users API
+  title: Chatwoot Users API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -158,34 +158,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    platform_user_id:
-      in: path
-      name: id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the user on the platform
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     user:
       type: object
       properties:
@@ -202,18 +175,21 @@ components:
         confirmed:
           type: boolean
         display_name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         message_signature:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email:
           type: string
         hmac_identifier:
           type: string
         inviter_id:
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         name:
           type: string
         provider:
@@ -230,8 +206,9 @@ components:
         uid:
           type: string
         type:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         custom_attributes:
           type: object
           description: Available for users who are created through platform APIs and has custom attributes associated.
@@ -247,8 +224,9 @@ components:
               status:
                 type: string
               active_at:
-                nullable: true
-                type: string
+                type:
+                - string
+                - 'null'
                 format: date-time
               role:
                 type: string
@@ -266,11 +244,22 @@ components:
               auto_offline:
                 type: boolean
               custom_role_id:
-                nullable: true
-                type: number
+                type:
+                - number
+                - 'null'
               custom_role:
-                nullable: true
-                type: object
+                type:
+                - object
+                - 'null'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     user_create_update_payload:
       type: object
       properties:
@@ -294,6 +283,24 @@ components:
           type: object
           description: Custom attributes you want to associate with the user
           example: {}
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  parameters:
+    platform_user_id:
+      in: path
+      name: id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the user on the platform
   securitySchemes:
     userApiKey:
       type: apiKey

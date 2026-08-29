@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Teams API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Teams API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Teams across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Teams
   description: Team management APIs
@@ -71,6 +68,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/teams/{team_id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -152,6 +151,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/teams/{team_id}/team_members:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -336,18 +337,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
 components:
   schemas:
-    bad_request_error:
-      title: data
+    team:
       type: object
       properties:
-        description:
+        id:
+          type: number
+          description: The ID of the team
+        name:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: The name of the team
+        description:
+          type:
+          - string
+          - 'null'
+          description: The description about the team
+        allow_auto_assign:
+          type: boolean
+          description: If this setting is turned on, the system would automatically assign the conversation to an agent in the team while assigning the conversation to a team
+        account_id:
+          type: number
+          description: The ID of the account with the team is a part of
+        is_member:
+          type: boolean
+          description: This field shows whether the current user is a part of the team
     team_create_update_payload:
       type: object
       properties:
@@ -363,28 +379,6 @@ components:
           type: boolean
           description: If this setting is turned on, the system would automatically assign the conversation to an agent in the team while assigning the conversation to a team
           example: true
-    team:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The ID of the team
-        name:
-          type: string
-          description: The name of the team
-        description:
-          nullable: true
-          type: string
-          description: The description about the team
-        allow_auto_assign:
-          type: boolean
-          description: If this setting is turned on, the system would automatically assign the conversation to an agent in the team while assigning the conversation to a team
-        account_id:
-          type: number
-          description: The ID of the account with the team is a part of
-        is_member:
-          type: boolean
-          description: This field shows whether the current user is a part of the team
     request_error:
       type: object
       properties:
@@ -434,9 +428,44 @@ components:
           type: string
           description: The thumbnail of the agent
         custom_role_id:
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The custom role id of the agent
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    TeamCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        allow_auto_assign:
+          type: boolean
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        allow_auto_assign:
+          type: boolean
+        account_id:
+          type: integer
   parameters:
     account_id:
       in: path
@@ -452,6 +481,13 @@ components:
         type: integer
       required: true
       description: The ID of the team to be updated
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -468,6 +504,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

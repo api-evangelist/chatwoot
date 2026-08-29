@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Webhooks API
+  title: Chatwoot Webhooks API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -128,17 +128,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    webhook_id:
+      in: path
+      name: webhook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the webhook
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     webhook:
       type: object
       properties:
@@ -168,21 +173,13 @@ components:
             - conversation_typing_off
           description: The list of subscribed events
         secret:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Secret used to sign webhook requests. Signed webhook deliveries include `X-Chatwoot-Timestamp` and `X-Chatwoot-Signature`; the signature is `sha256=` followed by the HMAC-SHA256 of `{timestamp}.{raw_request_body}` using this secret. Deliveries also include `X-Chatwoot-Delivery` when a delivery id is available.
         account_id:
           type: number
           description: The id of the account which the webhook object belongs to
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     webhook_create_update_payload:
       type: object
       properties:
@@ -212,21 +209,25 @@ components:
           example:
           - conversation_created
           - conversation_status_changed
-  parameters:
-    webhook_id:
-      in: path
-      name: webhook_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the webhook
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

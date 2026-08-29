@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Contacts API API
+  title: Chatwoot Contacts API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -102,95 +102,33 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    public_contact_record:
+    public_contact:
       type: object
-      additionalProperties: true
-      description: Full serialized contact record returned when the public API renders a Contact model directly.
       properties:
         id:
           type: integer
           description: Id of the contact
-        name:
-          nullable: true
+        source_id:
           type: string
+          description: The session identifier of the contact
+        name:
+          type:
+          - string
+          - 'null'
           description: Name of the contact when available
         email:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Email of the contact
         phone_number:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Phone number of the contact
-        identifier:
-          nullable: true
+        pubsub_token:
           type: string
-          description: Identifier of the contact
-        blocked:
-          type: boolean
-          description: Whether the contact is blocked
-        additional_attributes:
-          nullable: true
-          type: object
-          description: Additional attributes of the contact when present
-        custom_attributes:
-          nullable: true
-          type: object
-          description: Custom attributes of the contact when present
-        contact_type:
-          nullable: true
-          type: string
-          description: Contact type of the contact when available
-        country_code:
-          nullable: true
-          type: string
-          description: Country code of the contact
-        last_activity_at:
-          nullable: true
-          type: string
-          description: Last activity timestamp of the contact in ISO 8601 format
-        created_at:
-          nullable: true
-          type: string
-          description: Created timestamp of the contact in ISO 8601 format
-        updated_at:
-          nullable: true
-          type: string
-          description: Updated timestamp of the contact in ISO 8601 format
-        last_name:
-          nullable: true
-          type: string
-          description: Last name of the contact
-        middle_name:
-          nullable: true
-          type: string
-          description: Middle name of the contact
-        location:
-          nullable: true
-          type: string
-          description: Location of the contact
-        account_id:
-          type: integer
-          description: Account id of the contact
-        company_id:
-          nullable: true
-          type: integer
-          description: Company id of the contact
-        label_list:
-          type: array
-          description: Labels applied to the contact
-          items:
-            type: string
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: The token to be used to connect to chatwoot websocket
     request_error:
       type: object
       properties:
@@ -231,30 +169,110 @@ components:
           type: object
           description: Custom attributes of the customer
           example: {}
-    public_contact:
+    public_contact_record:
       type: object
+      additionalProperties: true
+      description: Full serialized contact record returned when the public API renders a Contact model directly.
       properties:
         id:
           type: integer
           description: Id of the contact
-        source_id:
-          type: string
-          description: The session identifier of the contact
         name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the contact when available
         email:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Email of the contact
         phone_number:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Phone number of the contact
-        pubsub_token:
+        identifier:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        additional_attributes:
+          type:
+          - object
+          - 'null'
+          description: Additional attributes of the contact when present
+        custom_attributes:
+          type:
+          - object
+          - 'null'
+          description: Custom attributes of the contact when present
+        contact_type:
+          type:
+          - string
+          - 'null'
+          description: Contact type of the contact when available
+        country_code:
+          type:
+          - string
+          - 'null'
+          description: Country code of the contact
+        last_activity_at:
+          type:
+          - string
+          - 'null'
+          description: Last activity timestamp of the contact in ISO 8601 format
+        created_at:
+          type:
+          - string
+          - 'null'
+          description: Created timestamp of the contact in ISO 8601 format
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Updated timestamp of the contact in ISO 8601 format
+        last_name:
+          type:
+          - string
+          - 'null'
+          description: Last name of the contact
+        middle_name:
+          type:
+          - string
+          - 'null'
+          description: Middle name of the contact
+        location:
+          type:
+          - string
+          - 'null'
+          description: Location of the contact
+        account_id:
+          type: integer
+          description: Account id of the contact
+        company_id:
+          type:
+          - integer
+          - 'null'
+          description: Company id of the contact
+        label_list:
+          type: array
+          description: Labels applied to the contact
+          items:
+            type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
           type: string
-          description: The token to be used to connect to chatwoot websocket
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   parameters:
     public_contact_identifier:
       in: path

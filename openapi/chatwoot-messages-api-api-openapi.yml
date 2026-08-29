@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Messages API API
+  title: Chatwoot Messages API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -102,6 +102,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
   schemas:
     public_message_create_payload:
       type: object
@@ -114,16 +143,6 @@ components:
           type: string
           description: Temporary identifier which will be passed back via websockets
           example: '1234567890'
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:
@@ -133,75 +152,37 @@ components:
           type: string
         code:
           type: string
-    public_message_attachment:
+    public_message_update_payload:
       type: object
-      additionalProperties: true
-      description: Attachment payload. Available fields vary by attachment file_type.
       properties:
-        id:
-          type: integer
-          description: Id of the attachment
-        message_id:
-          type: integer
-          description: Id of the parent message
-        file_type:
-          type: string
-          enum:
-          - image
-          - audio
-          - video
-          - file
-          - location
-          - fallback
-          - share
-          - story_mention
-          - contact
-          - ig_reel
-          - ig_post
-          - ig_story
-          - embed
-          description: Type of the attached file
-        account_id:
-          type: integer
-          description: Id of the account
-        extension:
-          nullable: true
-          type: string
-          description: File extension
-        data_url:
-          nullable: true
-          type: string
-          description: URL of the file. Can be null when an attachment variant has no external URL.
-        thumb_url:
-          type: string
-          description: URL of the file thumbnail
-        file_size:
-          type: integer
-          description: File size in bytes
-        width:
-          nullable: true
-          type: integer
-          description: Width of the attachment when available
-        height:
-          nullable: true
-          type: integer
-          description: Height of the attachment when available
-        coordinates_lat:
-          type: number
-          description: Latitude for location attachments
-        coordinates_long:
-          type: number
-          description: Longitude for location attachments
-        fallback_title:
-          nullable: true
-          type: string
-          description: Fallback title for location, fallback, and contact attachments when available
-        meta:
+        submitted_values:
           type: object
-          description: Metadata for contact attachments
-        transcribed_text:
-          type: string
-          description: Transcribed text for audio attachments
+          description: Replies to the Bot Message Types
+          properties:
+            name:
+              type: string
+              description: The name of the submiitted value
+              example: My Name
+            title:
+              type: string
+              description: The title of the submitted value
+              example: My Title
+            value:
+              type: string
+              description: The value of the submitted value
+              example: value
+            csat_survey_response:
+              type: object
+              description: The CSAT survey response
+              properties:
+                feedback_message:
+                  type: string
+                  description: The feedback message of the CSAT survey response
+                  example: Great service!
+                rating:
+                  type: integer
+                  description: The rating of the CSAT survey response
+                  example: 5
     public_message:
       type: object
       properties:
@@ -209,8 +190,9 @@ components:
           type: integer
           description: Id of the message
         content:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Text content of the message. Can be null for attachment-only messages.
         message_type:
           type: integer
@@ -243,8 +225,9 @@ components:
           type: integer
           description: Id of the sender
         name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the sender when available
         avatar_url:
           type: string
@@ -261,104 +244,137 @@ components:
           - captain_assistant
           description: Type of the sender
         available_name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Display name for user senders
         availability_status:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Availability status for user senders
         email:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Email of the sender when the sender is a contact
         phone_number:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Phone number of the sender when the sender is a contact
         identifier:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the sender when the sender is a contact
         blocked:
           type: boolean
           description: Whether the sender is blocked when the sender is a contact
         additional_attributes:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
           description: Additional attributes when the sender is a contact and available
         custom_attributes:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
           description: Custom attributes when the sender is a contact and available
         description:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description when the sender is a captain assistant
         created_at:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Created timestamp in ISO 8601 format when the sender is a captain assistant
-    public_message_update_payload:
+    public_message_attachment:
+      type: object
+      additionalProperties: true
+      description: Attachment payload. Available fields vary by attachment file_type.
+      properties:
+        id:
+          type: integer
+          description: Id of the attachment
+        message_id:
+          type: integer
+          description: Id of the parent message
+        file_type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - file
+          - location
+          - fallback
+          - share
+          - story_mention
+          - contact
+          - ig_reel
+          - ig_post
+          - ig_story
+          - embed
+          description: Type of the attached file
+        account_id:
+          type: integer
+          description: Id of the account
+        extension:
+          type:
+          - string
+          - 'null'
+          description: File extension
+        data_url:
+          type:
+          - string
+          - 'null'
+          description: URL of the file. Can be null when an attachment variant has no external URL.
+        thumb_url:
+          type: string
+          description: URL of the file thumbnail
+        file_size:
+          type: integer
+          description: File size in bytes
+        width:
+          type:
+          - integer
+          - 'null'
+          description: Width of the attachment when available
+        height:
+          type:
+          - integer
+          - 'null'
+          description: Height of the attachment when available
+        coordinates_lat:
+          type: number
+          description: Latitude for location attachments
+        coordinates_long:
+          type: number
+          description: Longitude for location attachments
+        fallback_title:
+          type:
+          - string
+          - 'null'
+          description: Fallback title for location, fallback, and contact attachments when available
+        meta:
+          type: object
+          description: Metadata for contact attachments
+        transcribed_text:
+          type: string
+          description: Transcribed text for audio attachments
+    bad_request_error:
+      title: data
       type: object
       properties:
-        submitted_values:
-          type: object
-          description: Replies to the Bot Message Types
-          properties:
-            name:
-              type: string
-              description: The name of the submiitted value
-              example: My Name
-            title:
-              type: string
-              description: The title of the submitted value
-              example: My Title
-            value:
-              type: string
-              description: The value of the submitted value
-              example: value
-            csat_survey_response:
-              type: object
-              description: The CSAT survey response
-              properties:
-                feedback_message:
-                  type: string
-                  description: The feedback message of the CSAT survey response
-                  example: Great service!
-                rating:
-                  type: integer
-                  description: The rating of the CSAT survey response
-                  example: 5
-  parameters:
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    message_id:
-      in: path
-      name: message_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the message
-    public_contact_identifier:
-      in: path
-      name: contact_identifier
-      schema:
-        type: string
-      required: true
-      description: The source id of contact obtained on contact create
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

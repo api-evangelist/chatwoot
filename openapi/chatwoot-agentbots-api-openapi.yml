@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots API
+  title: Chatwoot Agent Bots API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -149,6 +149,16 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     agent_bot:
       type: object
       properties:
@@ -182,16 +192,6 @@ components:
         system_bot:
           type: boolean
           description: Whether the bot is a system bot
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:

@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Canned Responses API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Canned Responses API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Canned Responses across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Canned Responses
   description: Pre-defined responses for common queries
@@ -69,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/canned_responses/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -142,8 +141,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     canned_response_create_update_payload:
       type: object
       properties:
@@ -155,25 +180,6 @@ components:
           type: string
           description: Short Code for quick access of the canned response
           example: welcome
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     canned_response:
       type: object
       properties:
@@ -195,14 +201,26 @@ components:
         updated_at:
           type: string
           description: The date and time when the canned response was updated
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    CannedResponse:
+      type: object
+      required:
+      - short_code
+      - content
+      properties:
+        short_code:
+          type: string
+        content:
+          type: string
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -219,6 +237,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

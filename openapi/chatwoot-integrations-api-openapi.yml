@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Integrations API
+  title: Chatwoot Integrations API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -140,49 +140,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    integrations_hook:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the integration hook
-        app_id:
-          type: string
-          description: The ID of the integration app
-        inbox_id:
-          type: string
-          description: Inbox ID if its an Inbox integration
-        account_id:
-          type: string
-          description: Account ID of the integration
-        status:
-          type: boolean
-          description: Whether the integration hook is enabled for the account
-        hook_type:
-          type: boolean
-          description: Whether its an account or inbox integration hook
-        settings:
-          type: object
-          description: The associated settings for the integration
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     integrations_app:
       type: object
       properties:
@@ -228,6 +185,15 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     integrations_hook_update_payload:
       type: object
       properties:
@@ -239,6 +205,40 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    integrations_hook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the integration hook
+        app_id:
+          type: string
+          description: The ID of the integration app
+        inbox_id:
+          type: string
+          description: Inbox ID if its an Inbox integration
+        account_id:
+          type: string
+          description: Account ID of the integration
+        status:
+          type: boolean
+          description: Whether the integration hook is enabled for the account
+        hook_type:
+          type: boolean
+          description: Whether its an account or inbox integration hook
+        settings:
+          type: object
+          description: The associated settings for the integration
   parameters:
     account_id:
       in: path

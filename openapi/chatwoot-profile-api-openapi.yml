@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Profile API
+  title: Chatwoot Profile API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -116,15 +116,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     user:
       type: object
       properties:
@@ -141,18 +132,21 @@ components:
         confirmed:
           type: boolean
         display_name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         message_signature:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         email:
           type: string
         hmac_identifier:
           type: string
         inviter_id:
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         name:
           type: string
         provider:
@@ -169,8 +163,9 @@ components:
         uid:
           type: string
         type:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         custom_attributes:
           type: object
           description: Available for users who are created through platform APIs and has custom attributes associated.
@@ -186,8 +181,9 @@ components:
               status:
                 type: string
               active_at:
-                nullable: true
-                type: string
+                type:
+                - string
+                - 'null'
                 format: date-time
               role:
                 type: string
@@ -205,11 +201,13 @@ components:
               auto_offline:
                 type: boolean
               custom_role_id:
-                nullable: true
-                type: number
+                type:
+                - number
+                - 'null'
               custom_role:
-                nullable: true
-                type: object
+                type:
+                - object
+                - 'null'
     bad_request_error:
       title: data
       type: object
@@ -220,6 +218,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
   securitySchemes:
     userApiKey:
       type: apiKey

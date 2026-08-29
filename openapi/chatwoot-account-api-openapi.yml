@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot AgentBots Account API
+  title: Chatwoot Account API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -91,34 +91,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     account_update_payload:
       type: object
       properties:
@@ -139,20 +112,23 @@ components:
           description: The support email of the account
           example: support@example.com
         auto_resolve_after:
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 10
           maximum: 1439856
           description: Auto resolve conversations after specified minutes
           example: 1440
         auto_resolve_message:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: Message to send when auto resolving
           example: This conversation has been automatically resolved due to inactivity
         auto_resolve_ignore_waiting:
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Whether to ignore waiting conversations for auto resolve
           example: false
         industry:
@@ -167,21 +143,15 @@ components:
           type: string
           description: Account timezone
           example: UTC
-    account_show_response:
-      allOf:
-      - $ref: '#/components/schemas/account_detail'
-      - type: object
-        properties:
-          latest_chatwoot_version:
-            nullable: true
-            type: string
-            description: Latest version of Chatwoot available
-            example: 3.0.0
-          subscribed_features:
-            type: array
-            items:
-              type: string
-            description: List of subscribed enterprise features (if enterprise edition is enabled)
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     account_detail:
       type: object
       properties:
@@ -231,20 +201,24 @@ components:
           description: Custom attributes of the account
           properties:
             plan_name:
-              nullable: true
-              type: string
+              type:
+              - string
+              - 'null'
               description: Subscription plan name
             subscribed_quantity:
-              nullable: true
-              type: number
+              type:
+              - number
+              - 'null'
               description: Subscribed quantity
             subscription_status:
-              nullable: true
-              type: string
+              type:
+              - string
+              - 'null'
               description: Subscription status
             subscription_ends_on:
-              nullable: true
-              type: string
+              type:
+              - string
+              - 'null'
               format: date
               description: Subscription end date
             industry:
@@ -269,6 +243,40 @@ components:
             marked_for_deletion_reason:
               type: string
               description: Reason for account deletion
+    account_show_response:
+      allOf:
+      - $ref: '#/components/schemas/account_detail'
+      - type: object
+        properties:
+          latest_chatwoot_version:
+            type:
+            - string
+            - 'null'
+            description: Latest version of Chatwoot available
+            example: 3.0.0
+          subscribed_features:
+            type: array
+            items:
+              type: string
+            description: List of subscribed enterprise features (if enterprise edition is enabled)
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

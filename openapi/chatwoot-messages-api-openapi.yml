@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Messages API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Messages API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Messages across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Messages
   description: Message management APIs
@@ -60,12 +57,14 @@ paths:
                       assignee:
                         $ref: '#/components/schemas/agent'
                       agent_last_seen_at:
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
                       assignee_last_seen_at:
-                        nullable: true
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
                   payload:
                     type: array
@@ -180,6 +179,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages/{message_id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -208,7 +209,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
 components:
+  parameters:
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   schemas:
     contact:
       type: object
@@ -261,16 +300,11 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/contact_inboxes'
-    bad_request_error:
-      title: data
+    generic_id:
       type: object
       properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+        id:
+          type: number
     request_error:
       type: object
       properties:
@@ -280,19 +314,6 @@ components:
           type: string
         code:
           type: string
-    contact_inboxes:
-      type: object
-      properties:
-        source_id:
-          type: string
-          description: Contact Inbox Source Id
-        inbox:
-          $ref: '#/components/schemas/inbox_contact'
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
     agent:
       type: object
       properties:
@@ -333,8 +354,9 @@ components:
           type: string
           description: The thumbnail of the agent
         custom_role_id:
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The custom role id of the agent
     conversation_message_create_payload:
       type: object
@@ -448,6 +470,14 @@ components:
                         type: string
                         description: Dynamic parameter value for the button
                         example: SSFSDFSD
+    contact_inboxes:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Contact Inbox Source Id
+        inbox:
+          $ref: '#/components/schemas/inbox_contact'
     inbox_contact:
       type: object
       properties:
@@ -505,8 +535,9 @@ components:
           type: boolean
           description: The flags which shows whether the message is private or not
         status:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - sent
           - delivered
@@ -515,12 +546,14 @@ components:
           - null
           description: The status of the message
         source_id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The source ID of the message
         content_type:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - text
           - input_text
@@ -541,8 +574,9 @@ components:
           type: object
           description: The content attributes for each content_type
         sender_type:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - Contact
           - User
@@ -551,8 +585,9 @@ components:
           - null
           description: The type of the sender
         sender_id:
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
           description: The ID of the sender
         external_source_ids:
           type: object
@@ -561,46 +596,77 @@ components:
           type: object
           description: The additional attributes of the message
         processed_message_content:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           description: The processed message content
         sentiment:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
           description: The sentiment of the message
         conversation:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
           description: The conversation object
         attachment:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
           description: The file object attached to the image
         sender:
           type: object
           description: User/Agent/AgentBot object
-  parameters:
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    message_id:
-      in: path
-      name: message_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the message
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        message_type:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+          - activity
+          - template
+        content_type:
+          type: string
+        private:
+          type: boolean
+        sender:
+          type: object
+        created_at:
+          type: integer
+    MessageCreate:
+      type: object
+      properties:
+        content:
+          type: string
+        message_type:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+        private:
+          type: boolean
+        content_type:
+          type: string
+        content_attributes:
+          type: object
+          additionalProperties: true
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -617,6 +683,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

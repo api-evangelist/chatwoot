@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Automation Rule API
+  title: Chatwoot Automation Rule API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -208,68 +208,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    automation_rule_create_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Rule name
-          example: Add label on message create event
-        description:
-          type: string
-          description: The description about the automation and actions
-          example: Add label support and sales on message create event if incoming message content contains text help
-        event_name:
-          type: string
-          enum:
-          - conversation_created
-          - conversation_updated
-          - conversation_resolved
-          - message_created
-          example: message_created
-          description: The event when you want to execute the automation actions
-        active:
-          type: boolean
-          description: Enable/disable automation rule
-        actions:
-          type: array
-          description: Array of actions which you want to perform when condition matches, e.g add label support if message contains content help.
-          items:
-            type: object
-            example:
-              action_name: add_label
-              action_params:
-              - support
-        conditions:
-          type: array
-          description: Array of conditions on which conversation filter would work, e.g message content contains text help.
-          items:
-            type: object
-            example:
-              attribute_key: content
-              filter_operator: contains
-              query_operator: OR
-              values:
-              - help
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     automation_rule_item:
       type: object
       properties:
@@ -354,6 +292,68 @@ components:
             description: Single automation rule (for show/create/update endpoints)
             allOf:
             - $ref: '#/components/schemas/automation_rule_item'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    automation_rule_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Rule name
+          example: Add label on message create event
+        description:
+          type: string
+          description: The description about the automation and actions
+          example: Add label support and sales on message create event if incoming message content contains text help
+        event_name:
+          type: string
+          enum:
+          - conversation_created
+          - conversation_updated
+          - conversation_resolved
+          - message_created
+          example: message_created
+          description: The event when you want to execute the automation actions
+        active:
+          type: boolean
+          description: Enable/disable automation rule
+        actions:
+          type: array
+          description: Array of actions which you want to perform when condition matches, e.g add label support if message contains content help.
+          items:
+            type: object
+            example:
+              action_name: add_label
+              action_params:
+              - support
+        conditions:
+          type: array
+          description: Array of conditions on which conversation filter would work, e.g message content contains text help.
+          items:
+            type: object
+            example:
+              attribute_key: content
+              filter_operator: contains
+              query_operator: OR
+              values:
+              - help
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   parameters:
     page:
       in: query

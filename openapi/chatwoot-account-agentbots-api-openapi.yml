@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Chatwoot Account AgentBots API
   description: This is the API documentation for Chatwoot server.
@@ -185,6 +185,15 @@ components:
         system_bot:
           type: boolean
           description: Whether the bot is a system bot
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     agent_bot_create_update_payload:
       type: object
       properties:
@@ -226,15 +235,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     agent_bot_id:
       in: path

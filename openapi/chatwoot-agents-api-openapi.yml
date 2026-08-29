@@ -1,16 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Agents API
-  description: This is the API documentation for Chatwoot server.
-  version: 1.1.0
+  title: Chatwoot Agents API
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  contact:
-    email: hello@chatwoot.com
-  license:
-    name: MIT License
-    url: https://opensource.org/licenses/MIT
+  version: '1.0'
+  description: 'Operations tagged Agents across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.chatwoot.com/
+- url: https://app.chatwoot.com
+  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Agents
   description: Agent management APIs
@@ -69,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/agents/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -142,18 +141,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
+    servers:
+    - url: https://app.chatwoot.com/
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:
@@ -163,40 +169,6 @@ components:
           type: string
         code:
           type: string
-    agent_create_payload:
-      type: object
-      required:
-      - name
-      - email
-      - role
-      properties:
-        name:
-          type: string
-          description: Full Name of the agent
-          example: John Doe
-        email:
-          type: string
-          description: Email of the Agent
-          example: john.doe@acme.inc
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: Whether its administrator or agent
-          example: agent
-        availability:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          description: The configured availability of the agent.
-          example: online
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-          example: true
     agent:
       type: object
       properties:
@@ -237,9 +209,44 @@ components:
           type: string
           description: The thumbnail of the agent
         custom_role_id:
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The custom role id of the agent
+    agent_create_payload:
+      type: object
+      required:
+      - name
+      - email
+      - role
+      properties:
+        name:
+          type: string
+          description: Full Name of the agent
+          example: John Doe
+        email:
+          type: string
+          description: Email of the Agent
+          example: john.doe@acme.inc
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
     agent_update_payload:
       type: object
       required:
@@ -264,14 +271,65 @@ components:
           type: boolean
           description: Whether the agent is automatically marked offline when they are away.
           example: true
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    AgentUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        availability_status:
+          type: string
+          enum:
+          - online
+          - offline
+          - busy
+    AgentCreate:
+      type: object
+      required:
+      - email
+      - role
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+    Agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        availability_status:
+          type: string
+          enum:
+          - online
+          - offline
+          - busy
+        confirmed:
+          type: boolean
   securitySchemes:
     userApiKey:
       type: apiKey
@@ -288,6 +346,9 @@ components:
       in: header
       name: api_access_token
       description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+x-refined-from:
+- chatwoot-application-api-openapi.yml
+- chatwoot-openapi.yml
 x-tagGroups:
 - name: Platform
   tags:

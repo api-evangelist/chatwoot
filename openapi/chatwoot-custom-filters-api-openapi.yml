@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Chatwoot Account AgentBots Custom Filters API
+  title: Chatwoot Custom Filters API
   description: This is the API documentation for Chatwoot server.
   version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
@@ -164,16 +164,25 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    bad_request_error:
-      title: data
+    custom_filter_create_update_payload:
       type: object
       properties:
-        description:
+        name:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: The name of the custom filter
+          example: My Custom Filter
+        type:
+          type: string
+          enum:
+          - conversation
+          - contact
+          - report
+          description: The description about the custom filter
+          example: conversation
+        query:
+          type: object
+          description: A query that needs to be saved as a custom filter
+          example: {}
     request_error:
       type: object
       properties:
@@ -210,25 +219,16 @@ components:
           type: string
           format: date-time
           description: The time at which the custom filter was updated
-    custom_filter_create_update_payload:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        name:
+        description:
           type: string
-          description: The name of the custom filter
-          example: My Custom Filter
-        type:
-          type: string
-          enum:
-          - conversation
-          - contact
-          - report
-          description: The description about the custom filter
-          example: conversation
-        query:
-          type: object
-          description: A query that needs to be saved as a custom filter
-          example: {}
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   parameters:
     account_id:
       in: path
