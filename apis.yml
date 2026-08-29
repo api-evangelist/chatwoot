@@ -716,6 +716,9 @@ apis:
   - type: OpenAPI
     url: openapi/chatwoot-platform-users-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/chatwoot-capability-edges.yml
+  name: Chatwoot Business Capability Map
 - type: AgenticAccess
   url: agentic-access/chatwoot-agentic-access.yml
 - type: DomainSecurity

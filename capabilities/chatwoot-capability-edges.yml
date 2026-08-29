@@ -1,0 +1,187 @@
+slug: chatwoot
+provider: Chatwoot
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 18
+edges:
+- tag: Contacts
+  spec_file: chatwoot-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.9
+  evidence: POST /api/v1/accounts/{account_id}/actions/contact_merge  contactMerge  Merge Contacts
+  reason: 'Full contact master lifecycle: create, update, search, filter and merge (identity resolution
+    / golden record) of customer contact records.'
+- tag: Conversations
+  spec_file: chatwoot-conversations-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.9
+  evidence: toggle-status-of-a-conversation  Toggle Status / toggle-priority-of-a-conversation  Toggle
+    Priority
+  reason: 'Core support ticket/conversation lifecycle: create, list, prioritise, resolve, label — inbound
+    customer inquiry management in an omni-channel support platform.'
+- tag: Client Conversations
+  spec_file: chatwoot-client-conversations-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.85
+  evidence: createClientConversation  Create a conversation for the contact. / toggleClientConversationStatus
+  reason: Customer-initiated support conversations via chat widget, with status toggling — inbound contact
+    capture and handling in a customer support platform.
+- tag: Conversation Assignments
+  spec_file: chatwoot-conversation-assignments-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.85
+  evidence: assign-a-conversation  Assign Conversation
+  reason: Assigning a support conversation to an agent/team is routing of inbound contacts within customer
+    service operations.
+- tag: Conversations API
+  spec_file: chatwoot-conversations-api-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.85
+  evidence: resolve-conversation  Resolve a conversation
+  reason: Public/client-side conversation lifecycle including creation and resolution of customer support
+    conversations.
+- tag: Help Center
+  spec_file: chatwoot-help-center-api-openapi.yml
+  capability_id: BC-430.40
+  capability_id_l1: BC-430
+  capability_name: Self-Service Management
+  confidence: 0.85
+  evidence: 'POST /api/v1/accounts/{account_id}/portals/{id}/articles — Add a new article; schemas: portal,
+    category, article'
+  reason: Operations build and maintain a customer-facing help-centre portal with categories and knowledge
+    articles — a knowledge base / self-service portal, which is Customer Service Management > Self-Service
+    Management.
+- tag: Messages
+  spec_file: chatwoot-messages-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.82
+  evidence: 'POST /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages — Create New
+    Message; schemas: contact, agent, message'
+  reason: Agent-side sending and retrieval of messages within customer support conversations — handling
+    of inbound/outbound customer contacts, i.e. Customer Inquiry Management.
+- tag: CSAT Survey Page
+  spec_file: chatwoot-csat-survey-page-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.8
+  evidence: GET /survey/responses/{conversation_uuid}  get-csat-survey-page  Get CSAT survey page
+  reason: CSAT (customer satisfaction) survey page retrieval for a support conversation is customer feedback/survey
+    capture, a Customer Feedback Management surface. Single read-only operation keeps confidence moderate.
+- tag: Client Contacts
+  spec_file: chatwoot-client-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: POST /public/api/v1/inboxes/{inbox_identifier}/contacts  createClientContact  Create an end-user
+    contact for a public inbox.
+  reason: CRUD over end-user contact records (create/get/update) is customer/contact master data maintenance
+    for the support platform.
+- tag: Client Messages
+  spec_file: chatwoot-client-messages-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.8
+  evidence: createClientMessage  Create a message in the contact's conversation.
+  reason: Message exchange within a customer support conversation from the end-user widget; inbound customer
+    contact handling.
+- tag: Contacts API
+  spec_file: chatwoot-contacts-api-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: create-a-contact  Create a contact / update-a-contact  Update a contact
+  reason: Public inbox contact CRUD — creation and maintenance of customer contact records.
+- tag: Inboxes
+  spec_file: chatwoot-inboxes-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.78
+  evidence: POST /api/v1/accounts/{account_id}/inboxes — Create an inbox; inbox_create_whatsapp_channel_payload,
+    inbox_create_sms_channel_payload; POST /inbox_members — Add a New Agent
+  reason: These operations configure omni-channel support inboxes (email, SMS, WhatsApp, web widget) and
+    assign agents to them — the channel and staffing set-up of contact-centre operations.
+- tag: Conversation
+  spec_file: chatwoot-conversation-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.75
+  evidence: getConversationMessages  Get messages from a conversation
+  reason: Retrieval of support conversation messages between agent and contact; part of inbound inquiry
+    handling. Single operation, so moderate confidence.
+- tag: Messages API
+  spec_file: chatwoot-messages-api-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.75
+  evidence: POST /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages
+    — Create a message; schema public_message_sender
+  reason: Client-side (end-customer widget) message exchange inside a support conversation; same customer-contact
+    handling capability, exposed to the contact rather than the agent.
+- tag: Accounts
+  spec_file: chatwoot-accounts-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: POST /platform/api/v1/accounts create-an-account Create an Account; DELETE ... delete-an-account
+    (schema platform_account)
+  reason: Platform-level create/update/delete of accounts in a multi-tenant Chatwoot installation is tenant
+    provisioning and lifecycle, not customer master data.
+- tag: Platform Accounts
+  spec_file: chatwoot-platform-accounts-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: POST /platform/api/v1/accounts — Create an account on the installation; DELETE /platform/api/v1/accounts/{account_id}
+  reason: Platform API is described as 'super-admin control of a Chatwoot installation'; creating, updating
+    and deleting accounts on the installation is tenant provisioning and lifecycle in the multi-tenant
+    service. User-role association is secondary.
+- tag: Canned Responses
+  spec_file: chatwoot-canned-responses-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: List all Canned Responses in an Account / Add a New Canned Response
+  reason: Canned responses are pre-written agent reply templates used in support conversation handling
+    — support agent enablement within Customer Service Management. Could arguably be knowledge/self-service,
+    hence moderate confidence.
+- tag: Reports
+  spec_file: chatwoot-reports-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.7
+  evidence: Get conversation statistics grouped by agent / 'Get first response time distribution by channel'
+  reason: Operational reporting on support conversations, agent/team/inbox performance and first response
+    time is contact-centre operations analytics within Customer Service Management. Some ambiguity vs
+    generic analytics/BI, hence moderate confidence.
