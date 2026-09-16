@@ -34,7 +34,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/chatwoot.png
 url: https://raw.githubusercontent.com/api-evangelist/chatwoot/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-08-08'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 type: Index
 tags:
@@ -58,9 +58,8 @@ tags_raw:
 apis:
 - aid: chatwoot:client-api
   name: Chatwoot Client API
-  description: >-
-    The Client API is designed for building custom messaging interfaces for end users. Authenticates using
-    inbox identifiers and contact identifiers rather than user tokens. Supports conversation creation,
+  description: The Client API is designed for building custom messaging interfaces for end users. Authenticates
+    using inbox identifiers and contact identifiers rather than user tokens. Supports conversation creation,
     messaging, and session management for widget integrations.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
@@ -79,10 +78,9 @@ apis:
     url: https://www.chatwoot.com/help-center/
 - aid: chatwoot:platform-api
   name: Chatwoot Platform API
-  description: >-
-    The Platform API is used to manage Chatwoot installations at the super admin level, including managing
-    accounts, users, and installation-wide settings. Requires Platform App access tokens from the Super
-    Admin Console. Available only on self-hosted and managed hosting deployments.
+  description: The Platform API is used to manage Chatwoot installations at the super admin level, including
+    managing accounts, users, and installation-wide settings. Requires Platform App access tokens from
+    the Super Admin Console. Available only on self-hosted and managed hosting deployments.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -102,8 +100,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
   contact:
   - FN: Chatwoot Support
     url: https://www.chatwoot.com/help-center/
@@ -120,8 +117,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-account-api
@@ -137,8 +133,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-account-users-api
@@ -154,8 +149,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-accounts-api
@@ -173,8 +167,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-agentbots-api
@@ -190,8 +183,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-agents-api
@@ -207,8 +199,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-audit-logs-api
@@ -224,8 +215,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-automation-rule-api
@@ -241,8 +231,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-canned-responses-api
@@ -258,8 +247,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-contact-labels-api
@@ -275,12 +263,11 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-contacts-api-api
-  name: Chatwoot Contacts API API
+  name: Chatwoot Contacts API
   description: Public contact APIs
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -292,8 +279,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-contacts-api
@@ -309,8 +295,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-conversation-api
@@ -326,8 +311,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-conversation-assignments-api
@@ -343,12 +327,11 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-conversations-api-api
-  name: Chatwoot Conversations API API
+  name: Chatwoot Conversations API
   description: Public conversation APIs
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -360,8 +343,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-conversations-api
@@ -377,8 +359,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-csat-survey-page-api
@@ -394,8 +375,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-custom-attributes-api
@@ -411,8 +391,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-custom-filters-api
@@ -428,8 +407,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-help-center-api
@@ -445,12 +423,11 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-inbox-api-api
-  name: Chatwoot Inbox API API
+  name: Chatwoot Inbox API
   description: The Inbox API API from Chatwoot — 1 operation(s) for inbox api.
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -462,8 +439,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-inboxes-api
@@ -479,8 +455,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-integrations-api
@@ -498,8 +473,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-labels-api
@@ -515,12 +489,11 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-messages-api-api
-  name: Chatwoot Messages API API
+  name: Chatwoot Messages API
   description: Public message APIs
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -532,8 +505,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-messages-api
@@ -551,8 +523,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-profile-api
@@ -568,8 +539,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-reports-api
@@ -585,8 +555,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-teams-api
@@ -604,8 +573,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-users-api
@@ -623,8 +591,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-webhooks-api
@@ -642,8 +609,7 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: >-
-      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
   - type: GraphQL
     url: graphql/chatwoot-graphql.md
 - aid: chatwoot:chatwoot-automation-rules-api
