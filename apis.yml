@@ -304,6 +304,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Conversations
+  tags_raw:
   - Conversation
   properties:
   - type: OpenAPI
@@ -532,6 +534,8 @@ apis:
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
+  - Profiles
+  tags_raw:
   - Profile
   properties:
   - type: OpenAPI
