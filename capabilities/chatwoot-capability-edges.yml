@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 17
+edge_count: 18
 edges:
 - tag: CSAT Survey Page
   spec_file: chatwoot-csat-survey-page-api-openapi.yml
@@ -177,3 +177,14 @@ edges:
     a Chatwoot installation'''
   reason: Super-admin provisioning and decommissioning of accounts (tenants) on an installation, plus
     user-to-account association — tenant lifecycle management rather than any end-customer capability.
+- tag: Reports
+  spec_file: chatwoot-reports-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.7
+  evidence: Get conversation statistics grouped by agent / 'Get first response time distribution by channel'
+  reason: Operational reporting on support conversations, agent/team/inbox performance and first response
+    time is contact-centre operations analytics within Customer Service Management. Some ambiguity vs
+    generic analytics/BI, hence moderate confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
