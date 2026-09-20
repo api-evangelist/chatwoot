@@ -1,124 +1,57 @@
-specificationVersion: '0.1'
-id: chatwoot-rate-limits
-name: Chatwoot API Rate Limits
-description: >-
-  Chatwoot uses Rack::Attack for request throttling. The default limit is
-  3,000 requests per minute per IP address for the general API, with
-  stricter limits on authentication and widget endpoints. Self-hosted
-  operators can configure limits via environment variables.
-url: https://developers.chatwoot.com/self-hosted/monitoring/rate-limiting
-global:
-  - name: General API throttle
-    description: >-
-      Default rate limit applied per IP address for all API endpoints.
-      Localhost IPs (127.0.0.1 and ::1) are exempt from this limit.
-    requests: 3000
-    window: 60
-    windowUnit: seconds
-    scope: IP address
-    exemptions:
-      - 127.0.0.1
-      - '::1'
-authentication:
-  - name: Signup throttle
-    description: >-
-      Limits new account signup attempts per IP address to prevent abuse.
-    endpoint: /auth/sign_up
-    requests: 5
-    window: 300
-    windowUnit: seconds
-    scope: IP address
-  - name: Sign-in throttle by IP
-    description: >-
-      Limits login attempts per IP address to mitigate credential stuffing.
-    endpoint: /auth/sign_in
-    requests: 5
-    window: 20
-    windowUnit: seconds
-    scope: IP address
-  - name: Sign-in throttle by email
-    description: >-
-      Limits login attempts per email address to protect individual accounts.
-    endpoint: /auth/sign_in
-    requests: 20
-    window: 300
-    windowUnit: seconds
-    scope: email address
-  - name: Password reset throttle
-    description: >-
-      Limits password reset requests per email address per hour.
-    endpoint: /auth/password
-    requests: 5
-    window: 3600
-    windowUnit: seconds
-    scope: email address
-widgetApi:
-  enabled: false
-  envVar: ENABLE_RACK_ATTACK_WIDGET_API
-  note: >-
-    Widget API rate limits are disabled by default and can be enabled by
-    setting the ENABLE_RACK_ATTACK_WIDGET_API environment variable.
-  limits:
-    - name: Widget conversation creation
-      description: >-
-        Limits the creation of new widget conversations per IP address
-        over a 12-hour rolling window.
-      endpoint: /widget/conversations
-      requests: 6
-      window: 43200
-      windowUnit: seconds
-      scope: IP address
-    - name: Widget contact update
-      description: >-
-        Limits contact update requests from the widget per IP address.
-      endpoint: /widget/contacts
-      requests: 60
-      window: 3600
-      windowUnit: seconds
-      scope: IP address
-    - name: Widget new session
-      description: >-
-        Limits new session creation for contacts without an existing
-        conversation token per IP address.
-      endpoint: /widget/sessions
-      requests: 5
-      window: 3600
-      windowUnit: seconds
-      scope: IP address
-attachments:
-  - name: Avatar uploads
-    formats:
-      - JPEG
-      - GIF
-      - PNG
-    maxSizeMB: 15
-  - name: Website channel message attachments
-    formats:
-      - PNG
-      - JPEG
-      - GIF
-      - BMP
-      - TIFF
-      - PDF
-      - MP3
-      - MP4
-      - OGG
-      - CSV
-    maxSizeMB: 40
-configuration:
-  implementation: rack_attack gem
-  configFile: config/initializers/rack_attack.rb
-  environmentVariables:
-    - name: ENABLE_RACK_ATTACK
-      description: Toggle rate limit protection on or off
-      type: boolean
-    - name: RACK_ATTACK_LIMIT
-      description: Override the default per-minute request threshold
-      type: integer
-    - name: ENABLE_RACK_ATTACK_WIDGET_API
-      description: Enable widget-specific API rate limiting
-      type: boolean
-  note: >-
-    Rate limits apply primarily to self-hosted installations. Cloud-hosted
-    Chatwoot instances may have additional infrastructure-level throttling
-    managed by Chatwoot's platform team.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://developers.chatwoot.com/self-hosted/monitoring/rate-limiting
+sources:
+- https://developers.chatwoot.com/self-hosted/monitoring/rate-limiting
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Self-hosted rack_attack limits; no headers or status codes documented.
+limit_count: 8
+limits:
+- name: Global IP throttle
+  limit_text: 3000 requests per 1 minute
+  limit: 3000
+  window: minute
+  scope: ip
+- name: Signup requests
+  limit_text: 5 requests per 5 minutes
+  limit: 5
+  scope: ip
+  endpoint: Signup
+- name: SignIn by IP
+  limit_text: 5 requests per 20 seconds
+  limit: 5
+  scope: ip
+  endpoint: SignIn
+- name: SignIn by email
+  limit_text: 20 requests per 5 minutes
+  limit: 20
+  scope: user
+  endpoint: SignIn
+- name: Reset password
+  limit_text: 5 requests per 1 hour
+  limit: 5
+  window: hour
+  scope: user
+  endpoint: Reset Password
+- name: Widget conversation creation
+  limit_text: 6 requests per 12 hours
+  limit: 6
+  scope: ip
+  endpoint: Widget conversation creation
+- name: Widget contact updates
+  limit_text: 60 requests per 1 hour
+  limit: 60
+  window: hour
+  scope: ip
+  endpoint: Widget contact updates
+- name: New widget sessions
+  limit_text: 5 requests per 1 hour
+  limit: 5
+  window: hour
+  scope: ip
+  endpoint: New widget sessions without an existing conversation token
