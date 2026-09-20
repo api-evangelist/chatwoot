@@ -11,6 +11,12 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: per-seat
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-09-20'
+  evidence: The modern, open source, self-hosted customer support platform.
+  managed_tier: Startups
 published: true
 note: Per-agent tiered SaaS pricing with AI credit overage; API included as a channel/feature.
 plan_count: 5
