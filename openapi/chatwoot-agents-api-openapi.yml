@@ -116,7 +116,6 @@ paths:
       - Agents
       operationId: delete-agent-from-account
       summary: Remove an Agent from Account
-      description: Remove an Agent from Account
       security:
       - userApiKey: []
       parameters:
@@ -160,6 +159,50 @@ components:
       schema:
         type: integer
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    agent_create_payload:
+      type: object
+      required:
+      - name
+      - email
+      - role
+      properties:
+        name:
+          type: string
+          description: Full Name of the agent
+          example: John Doe
+        email:
+          type: string
+          description: Email of the Agent
+          example: john.doe@acme.inc
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
     request_error:
       type: object
       properties:
@@ -213,40 +256,6 @@ components:
           - integer
           - 'null'
           description: The custom role id of the agent
-    agent_create_payload:
-      type: object
-      required:
-      - name
-      - email
-      - role
-      properties:
-        name:
-          type: string
-          description: Full Name of the agent
-          example: John Doe
-        email:
-          type: string
-          description: Email of the Agent
-          example: john.doe@acme.inc
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: Whether its administrator or agent
-          example: agent
-        availability:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          description: The configured availability of the agent.
-          example: online
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-          example: true
     agent_update_payload:
       type: object
       required:
@@ -271,30 +280,6 @@ components:
           type: boolean
           description: Whether the agent is automatically marked offline when they are away.
           example: true
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    AgentUpdate:
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-        availability_status:
-          type: string
-          enum:
-          - online
-          - offline
-          - busy
     AgentCreate:
       type: object
       required:
@@ -330,6 +315,20 @@ components:
           - busy
         confirmed:
           type: boolean
+    AgentUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        availability_status:
+          type: string
+          enum:
+          - online
+          - offline
+          - busy
   securitySchemes:
     userApiKey:
       type: apiKey

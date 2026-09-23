@@ -63,7 +63,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     user:
       type: object
       properties:
@@ -156,40 +190,6 @@ components:
                 type:
                 - object
                 - 'null'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-  parameters:
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

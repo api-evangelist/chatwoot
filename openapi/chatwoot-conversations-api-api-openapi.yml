@@ -24,7 +24,6 @@ paths:
       - Conversations API
       operationId: create-a-conversation
       summary: Create a conversation
-      description: Create a conversation
       security: []
       requestBody:
         required: true
@@ -206,260 +205,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    public_contact_identifier:
-      in: path
-      name: contact_identifier
-      schema:
-        type: string
-      required: true
-      description: The source id of contact obtained on contact create
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
   schemas:
-    public_conversation:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the conversation
-        uuid:
-          type: string
-          description: UUID of the conversation
-        inbox_id:
-          type: integer
-          description: The inbox id of the conversation
-        contact_last_seen_at:
-          type: integer
-          description: Timestamp of when the contact last seen the conversation (Unix timestamp)
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-          description: The status of the conversation
-        agent_last_seen_at:
-          type: integer
-          description: Timestamp of when the agent last seen the conversation (Unix timestamp)
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/public_message'
-          description: Messages in the conversation
-        contact:
-          $ref: '#/components/schemas/public_contact_record'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    public_message:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the message
-        content:
-          type:
-          - string
-          - 'null'
-          description: Text content of the message. Can be null for attachment-only messages.
-        message_type:
-          type: integer
-          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
-        content_type:
-          type: string
-          description: Content type of the message
-        content_attributes:
-          type: object
-          description: Additional content attributes of the message
-        created_at:
-          type: integer
-          description: Created at Unix timestamp of the message
-        conversation_id:
-          type: integer
-          description: Display Id of the conversation the message belongs to
-        attachments:
-          type: array
-          description: Attachments if any
-          items:
-            $ref: '#/components/schemas/public_message_attachment'
-        sender:
-          $ref: '#/components/schemas/public_message_sender'
-    public_message_sender:
-      type: object
-      additionalProperties: true
-      description: Polymorphic sender payload returned by push_event_data. Available fields vary by sender type.
-      properties:
-        id:
-          type: integer
-          description: Id of the sender
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the sender when available
-        avatar_url:
-          type: string
-          description: Avatar URL of the sender. Present for senders of type user, agent_bot, and captain_assistant. Not present for contact senders (use thumbnail instead).
-        thumbnail:
-          type: string
-          description: Avatar/thumbnail URL of the sender. Contact senders use this field; user senders may also include it.
-        type:
-          type: string
-          enum:
-          - contact
-          - user
-          - agent_bot
-          - captain_assistant
-          description: Type of the sender
-        available_name:
-          type:
-          - string
-          - 'null'
-          description: Display name for user senders
-        availability_status:
-          type:
-          - string
-          - 'null'
-          description: Availability status for user senders
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email of the sender when the sender is a contact
-        phone_number:
-          type:
-          - string
-          - 'null'
-          description: Phone number of the sender when the sender is a contact
-        identifier:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the sender when the sender is a contact
-        blocked:
-          type: boolean
-          description: Whether the sender is blocked when the sender is a contact
-        additional_attributes:
-          type:
-          - object
-          - 'null'
-          description: Additional attributes when the sender is a contact and available
-        custom_attributes:
-          type:
-          - object
-          - 'null'
-          description: Custom attributes when the sender is a contact and available
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description when the sender is a captain assistant
-        created_at:
-          type:
-          - string
-          - 'null'
-          description: Created timestamp in ISO 8601 format when the sender is a captain assistant
-    public_conversation_create_payload:
-      type: object
-      properties:
-        custom_attributes:
-          type: object
-          description: Custom attributes of the conversation
-          example: {}
-    public_message_attachment:
-      type: object
-      additionalProperties: true
-      description: Attachment payload. Available fields vary by attachment file_type.
-      properties:
-        id:
-          type: integer
-          description: Id of the attachment
-        message_id:
-          type: integer
-          description: Id of the parent message
-        file_type:
-          type: string
-          enum:
-          - image
-          - audio
-          - video
-          - file
-          - location
-          - fallback
-          - share
-          - story_mention
-          - contact
-          - ig_reel
-          - ig_post
-          - ig_story
-          - embed
-          description: Type of the attached file
-        account_id:
-          type: integer
-          description: Id of the account
-        extension:
-          type:
-          - string
-          - 'null'
-          description: File extension
-        data_url:
-          type:
-          - string
-          - 'null'
-          description: URL of the file. Can be null when an attachment variant has no external URL.
-        thumb_url:
-          type: string
-          description: URL of the file thumbnail
-        file_size:
-          type: integer
-          description: File size in bytes
-        width:
-          type:
-          - integer
-          - 'null'
-          description: Width of the attachment when available
-        height:
-          type:
-          - integer
-          - 'null'
-          description: Height of the attachment when available
-        coordinates_lat:
-          type: number
-          description: Latitude for location attachments
-        coordinates_long:
-          type: number
-          description: Longitude for location attachments
-        fallback_title:
-          type:
-          - string
-          - 'null'
-          description: Fallback title for location, fallback, and contact attachments when available
-        meta:
-          type: object
-          description: Metadata for contact attachments
-        transcribed_text:
-          type: string
-          description: Transcribed text for audio attachments
     public_contact_record:
       type: object
       additionalProperties: true
@@ -554,6 +300,39 @@ components:
           description: Labels applied to the contact
           items:
             type: string
+    public_message:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the message
+        content:
+          type:
+          - string
+          - 'null'
+          description: Text content of the message. Can be null for attachment-only messages.
+        message_type:
+          type: integer
+          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
+        content_type:
+          type: string
+          description: Content type of the message
+        content_attributes:
+          type: object
+          description: Additional content attributes of the message
+        created_at:
+          type: integer
+          description: Created at Unix timestamp of the message
+        conversation_id:
+          type: integer
+          description: Display Id of the conversation the message belongs to
+        attachments:
+          type: array
+          description: Attachments if any
+          items:
+            $ref: '#/components/schemas/public_message_attachment'
+        sender:
+          $ref: '#/components/schemas/public_message_sender'
     bad_request_error:
       title: data
       type: object
@@ -564,6 +343,226 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    public_message_sender:
+      type: object
+      additionalProperties: true
+      description: Polymorphic sender payload returned by push_event_data. Available fields vary by sender type.
+      properties:
+        id:
+          type: integer
+          description: Id of the sender
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the sender when available
+        avatar_url:
+          type: string
+          description: Avatar URL of the sender. Present for senders of type user, agent_bot, and captain_assistant. Not present for contact senders (use thumbnail instead).
+        thumbnail:
+          type: string
+          description: Avatar/thumbnail URL of the sender. Contact senders use this field; user senders may also include it.
+        type:
+          type: string
+          enum:
+          - contact
+          - user
+          - agent_bot
+          - captain_assistant
+          description: Type of the sender
+        available_name:
+          type:
+          - string
+          - 'null'
+          description: Display name for user senders
+        availability_status:
+          type:
+          - string
+          - 'null'
+          description: Availability status for user senders
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email of the sender when the sender is a contact
+        phone_number:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the sender when the sender is a contact
+        identifier:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the sender when the sender is a contact
+        blocked:
+          type: boolean
+          description: Whether the sender is blocked when the sender is a contact
+        additional_attributes:
+          type:
+          - object
+          - 'null'
+          description: Additional attributes when the sender is a contact and available
+        custom_attributes:
+          type:
+          - object
+          - 'null'
+          description: Custom attributes when the sender is a contact and available
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description when the sender is a captain assistant
+        created_at:
+          type:
+          - string
+          - 'null'
+          description: Created timestamp in ISO 8601 format when the sender is a captain assistant
+    public_conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the conversation
+        uuid:
+          type: string
+          description: UUID of the conversation
+        inbox_id:
+          type: integer
+          description: The inbox id of the conversation
+        contact_last_seen_at:
+          type: integer
+          description: Timestamp of when the contact last seen the conversation (Unix timestamp)
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          - snoozed
+          description: The status of the conversation
+        agent_last_seen_at:
+          type: integer
+          description: Timestamp of when the agent last seen the conversation (Unix timestamp)
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/public_message'
+          description: Messages in the conversation
+        contact:
+          $ref: '#/components/schemas/public_contact_record'
+    public_message_attachment:
+      type: object
+      additionalProperties: true
+      description: Attachment payload. Available fields vary by attachment file_type.
+      properties:
+        id:
+          type: integer
+          description: Id of the attachment
+        message_id:
+          type: integer
+          description: Id of the parent message
+        file_type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - file
+          - location
+          - fallback
+          - share
+          - story_mention
+          - contact
+          - ig_reel
+          - ig_post
+          - ig_story
+          - embed
+          description: Type of the attached file
+        account_id:
+          type: integer
+          description: Id of the account
+        extension:
+          type:
+          - string
+          - 'null'
+          description: File extension
+        data_url:
+          type:
+          - string
+          - 'null'
+          description: URL of the file. Can be null when an attachment variant has no external URL.
+        thumb_url:
+          type: string
+          description: URL of the file thumbnail
+        file_size:
+          type: integer
+          description: File size in bytes
+        width:
+          type:
+          - integer
+          - 'null'
+          description: Width of the attachment when available
+        height:
+          type:
+          - integer
+          - 'null'
+          description: Height of the attachment when available
+        coordinates_lat:
+          type: number
+          description: Latitude for location attachments
+        coordinates_long:
+          type: number
+          description: Longitude for location attachments
+        fallback_title:
+          type:
+          - string
+          - 'null'
+          description: Fallback title for location, fallback, and contact attachments when available
+        meta:
+          type: object
+          description: Metadata for contact attachments
+        transcribed_text:
+          type: string
+          description: Transcribed text for audio attachments
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    public_conversation_create_payload:
+      type: object
+      properties:
+        custom_attributes:
+          type: object
+          description: Custom attributes of the conversation
+          example: {}
+  parameters:
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
   securitySchemes:
     userApiKey:
       type: apiKey

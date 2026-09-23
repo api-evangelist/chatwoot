@@ -21,7 +21,6 @@ paths:
       - Accounts
       operationId: create-an-account
       summary: Create an Account
-      description: Create an Account
       security:
       - platformAppApiKey: []
       requestBody:
@@ -105,7 +104,6 @@ paths:
       - Accounts
       operationId: delete-an-account
       summary: Delete an Account
-      description: Delete an Account
       security:
       - platformAppApiKey: []
       responses:
@@ -124,7 +122,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     platform_account:
       type: object
       properties:
@@ -177,24 +193,6 @@ components:
           type: object
           description: The custom attributes of the account
           example: {}
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

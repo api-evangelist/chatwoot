@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Client Contacts API
-  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  description: Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels.
   termsOfService: https://www.chatwoot.com/terms-of-service/
   contact:
     name: Chatwoot Developers
@@ -27,7 +27,7 @@ paths:
       tags:
       - Client Contacts
       security: []
-      summary: Create an end-user contact for a public inbox.
+      summary: Create an end-user contact for a public inbox
       requestBody:
         content:
           application/json:
@@ -56,7 +56,7 @@ paths:
       tags:
       - Client Contacts
       security: []
-      summary: Get the end-user contact.
+      summary: Get the end-user contact
       responses:
         '200':
           description: The contact.
@@ -65,24 +65,24 @@ paths:
       tags:
       - Client Contacts
       security: []
-      summary: Update the end-user contact.
+      summary: Update the end-user contact
       responses:
         '200':
           description: The updated contact.
 components:
   parameters:
-    ContactIdentifier:
-      name: contact_identifier
-      in: path
-      required: true
-      description: The source_id / contact identifier returned when the client contact was created.
-      schema:
-        type: string
     InboxIdentifier:
       name: inbox_identifier
       in: path
       required: true
       description: The public inbox identifier (channel/web-widget identifier).
+      schema:
+        type: string
+    ContactIdentifier:
+      name: contact_identifier
+      in: path
+      required: true
+      description: The source_id / contact identifier returned when the client contact was created.
       schema:
         type: string
   securitySchemes:

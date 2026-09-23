@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Automation Rules API
-  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  description: Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels.
   termsOfService: https://www.chatwoot.com/terms-of-service/
   contact:
     name: Chatwoot Developers
@@ -26,7 +26,7 @@ paths:
       operationId: listAutomationRules
       tags:
       - Automation Rules
-      summary: List automation rules.
+      summary: List automation rules
       responses:
         '200':
           description: Payload of automation rules.
@@ -34,7 +34,7 @@ paths:
       operationId: createAutomationRule
       tags:
       - Automation Rules
-      summary: Create an automation rule.
+      summary: Create an automation rule
       requestBody:
         required: true
         content:
@@ -56,7 +56,7 @@ paths:
       operationId: getAutomationRule
       tags:
       - Automation Rules
-      summary: Get an automation rule by id.
+      summary: Get an automation rule by id
       responses:
         '200':
           description: The automation rule.
@@ -64,7 +64,7 @@ paths:
       operationId: updateAutomationRule
       tags:
       - Automation Rules
-      summary: Update an automation rule.
+      summary: Update an automation rule
       responses:
         '200':
           description: The updated automation rule.
@@ -72,11 +72,19 @@ paths:
       operationId: deleteAutomationRule
       tags:
       - Automation Rules
-      summary: Delete an automation rule.
+      summary: Delete an automation rule
       responses:
         '200':
           description: Deleted.
 components:
+  parameters:
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   schemas:
     AutomationRule:
       type: object
@@ -106,14 +114,6 @@ components:
           type: array
           items:
             type: object
-  parameters:
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

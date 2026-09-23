@@ -44,7 +44,6 @@ paths:
       - Account Users
       operationId: create-an-account-user
       summary: Create an Account User
-      description: Create an Account User
       security:
       - platformAppApiKey: []
       requestBody:
@@ -81,7 +80,6 @@ paths:
       - Account Users
       operationId: delete-an-account-user
       summary: Delete an Account User
-      description: Delete an Account User
       security:
       - platformAppApiKey: []
       responses:
@@ -109,6 +107,31 @@ components:
       required: true
       description: The numeric ID of the account
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    account_user:
+      type: array
+      description: Array of account users
+      items:
+        type: object
+        properties:
+          account_id:
+            type: integer
+            description: The ID of the account
+          user_id:
+            type: integer
+            description: The ID of the user
+          role:
+            type: string
+            description: whether user is an administrator or agent
     account_user_create_update_payload:
       type: object
       required:
@@ -132,31 +155,6 @@ components:
           type: string
         code:
           type: string
-    account_user:
-      type: array
-      description: Array of account users
-      items:
-        type: object
-        properties:
-          account_id:
-            type: integer
-            description: The ID of the account
-          user_id:
-            type: integer
-            description: The ID of the user
-          role:
-            type: string
-            description: whether user is an administrator or agent
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

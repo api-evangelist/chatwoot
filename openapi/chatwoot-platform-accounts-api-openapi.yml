@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Platform Accounts API
-  description: 'Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels. This specification covers the three Chatwoot API surfaces: the Application API (/api/v1/accounts/{account_id}/...) for account-scoped agent, contact, and conversation management; the Client API (/public/api/v1/inboxes/...) for building custom end-user chat widgets; and the Platform API (/platform/api/v1/...) for super-admin control of a Chatwoot installation. Application and Platform requests authenticate with an `api_access_token` HTTP header; Client requests are scoped by an inbox identifier and a contact source/pubsub identifier.'
+  description: Chatwoot is an open-source customer engagement suite with a shared inbox across email, live-chat, social, and messaging channels.
   termsOfService: https://www.chatwoot.com/terms-of-service/
   contact:
     name: Chatwoot Developers
@@ -26,7 +26,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Create an account on the installation.
+      summary: Create an account on the installation
       requestBody:
         required: true
         content:
@@ -48,7 +48,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Get an account by id.
+      summary: Get an account by id
       responses:
         '200':
           description: The account.
@@ -58,7 +58,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Update an account.
+      summary: Update an account
       responses:
         '200':
           description: The updated account.
@@ -68,7 +68,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Delete an account.
+      summary: Delete an account
       responses:
         '200':
           description: Deleted.
@@ -81,7 +81,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: List the users associated with an account.
+      summary: List the users associated with an account
       responses:
         '200':
           description: Array of account users.
@@ -91,7 +91,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Associate a user with an account with a role.
+      summary: Associate a user with an account with a role
       requestBody:
         required: true
         content:
@@ -115,7 +115,7 @@ paths:
       - Platform Accounts
       security:
       - platformAppApiKey: []
-      summary: Remove a user's association with an account.
+      summary: Remove a user's association with an account
       responses:
         '200':
           description: Removed.

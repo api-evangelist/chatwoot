@@ -129,13 +129,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   parameters:
-    webhook_id:
-      in: path
-      name: webhook_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the webhook
     account_id:
       in: path
       name: account_id
@@ -143,7 +136,24 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
+    webhook_id:
+      in: path
+      name: webhook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the webhook
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     webhook:
       type: object
       properties:
@@ -180,6 +190,15 @@ components:
         account_id:
           type: number
           description: The id of the account which the webhook object belongs to
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     webhook_create_update_payload:
       type: object
       properties:
@@ -209,25 +228,6 @@ components:
           example:
           - conversation_created
           - conversation_status_changed
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

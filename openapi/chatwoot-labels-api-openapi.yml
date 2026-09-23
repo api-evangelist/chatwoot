@@ -167,7 +167,7 @@ paths:
       operationId: getConversationLabels
       tags:
       - Labels
-      summary: List labels applied to a conversation.
+      summary: List labels applied to a conversation
       responses:
         '200':
           description: Object with a payload array of label names.
@@ -177,7 +177,7 @@ paths:
       operationId: setConversationLabels
       tags:
       - Labels
-      summary: Set the labels applied to a conversation.
+      summary: Set the labels applied to a conversation
       requestBody:
         required: true
         content:
@@ -199,34 +199,6 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    label_create_update_payload:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The label title
-          example: support
-        description:
-          type: string
-          description: A short description for the label
-          example: Conversations that need support follow-up
-        color:
-          type: string
-          description: Hex color code for the label
-          example: '#1f93ff'
-        show_on_sidebar:
-          type: boolean
-          description: Whether the label should appear in the sidebar
-          example: true
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     label:
       type: object
       properties:
@@ -255,6 +227,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    label_create_update_payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The label title
+          example: support
+        description:
+          type: string
+          description: A short description for the label
+          example: Conversations that need support follow-up
+        color:
+          type: string
+          description: Hex color code for the label
+          example: '#1f93ff'
+        show_on_sidebar:
+          type: boolean
+          description: Whether the label should appear in the sidebar
+          example: true
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     Label:
       type: object
       properties:
@@ -276,18 +276,18 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
     AccountId:
       name: account_id
       in: path
       required: true
       description: The numeric id of the account.
+      schema:
+        type: integer
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
       schema:
         type: integer
   securitySchemes:

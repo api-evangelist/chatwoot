@@ -116,7 +116,6 @@ paths:
       - Canned Responses
       operationId: delete-canned-response-from-account
       summary: Remove a Canned Response from Account
-      description: Remove a Canned Response from Account
       security:
       - userApiKey: []
       parameters:
@@ -160,26 +159,16 @@ components:
       schema:
         type: integer
   schemas:
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
-    canned_response_create_update_payload:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Message content for canned response
-          example: Hello, {{contact.name}}! Welcome to our service.
-        short_code:
-          type: string
-          description: Short Code for quick access of the canned response
-          example: welcome
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     canned_response:
       type: object
       properties:
@@ -201,16 +190,26 @@ components:
         updated_at:
           type: string
           description: The date and time when the canned response was updated
-    bad_request_error:
-      title: data
+    canned_response_create_update_payload:
       type: object
       properties:
-        description:
+        content:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: Message content for canned response
+          example: Hello, {{contact.name}}! Welcome to our service.
+        short_code:
+          type: string
+          description: Short Code for quick access of the canned response
+          example: welcome
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     CannedResponse:
       type: object
       required:

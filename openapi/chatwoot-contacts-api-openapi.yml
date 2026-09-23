@@ -431,9 +431,7 @@ paths:
 
         This action is irreversible. All conversations, labels, and custom attributes from the
 
-        mergee contact will be moved to the base contact.
-
-        '
+        mergee contact will be moved to the base contact.'
       requestBody:
         required: true
         content:
@@ -481,39 +479,6 @@ paths:
     - url: https://app.chatwoot.com/
 components:
   schemas:
-    contact_base:
-      allOf:
-      - $ref: '#/components/schemas/generic_id'
-      - $ref: '#/components/schemas/contact'
-    contact_inboxes:
-      type: object
-      properties:
-        source_id:
-          type: string
-          description: Contact Inbox Source Id
-        inbox:
-          $ref: '#/components/schemas/inbox_contact'
-    inbox_contact:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the inbox
-        avatar_url:
-          type: string
-          description: The avatar image of the inbox
-        channel_id:
-          type: number
-          description: The ID of the channel
-        name:
-          type: string
-          description: The name of the inbox
-        channel_type:
-          type: string
-          description: The type of the inbox
-        provider:
-          type: string
-          description: The provider of the inbox
     contact_inbox:
       type: object
       properties:
@@ -553,62 +518,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    contact:
+    contact_show_response:
       type: object
       properties:
         payload:
-          type: array
-          items:
-            type: object
-            properties:
-              additional_attributes:
-                type: object
-                description: The object containing additional attributes related to the contact
-              availability_status:
-                type: string
-                description: The availability status of the contact
-              email:
-                type: string
-                description: The email address of the contact
-              id:
-                type: integer
-                description: The ID of the contact
-              name:
-                type: string
-                description: The name of the contact
-              phone_number:
-                type: string
-                description: The phone number of the contact
-              blocked:
-                type: boolean
-                description: Whether the contact is blocked
-              identifier:
-                type: string
-                description: The identifier of the contact
-              thumbnail:
-                type: string
-                description: The thumbnail of the contact
-              custom_attributes:
-                type: object
-                description: The custom attributes of the contact
-                example:
-                  attribute_key: attribute_value
-                  signed_up_at: dd/mm/yyyy
-              last_activity_at:
-                type: integer
-                description: The last activity at of the contact
-              created_at:
-                type: integer
-                description: The created at of the contact
-              contact_inboxes:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_inboxes'
-    generic_id:
+          $ref: '#/components/schemas/contact_list_item'
+    contact_base:
+      allOf:
+      - $ref: '#/components/schemas/generic_id'
+      - $ref: '#/components/schemas/contact'
+    inbox_contact:
       type: object
       properties:
         id:
           type: number
+          description: ID of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        channel_id:
+          type: number
+          description: The ID of the channel
+        name:
+          type: string
+          description: The name of the inbox
+        channel_type:
+          type: string
+          description: The type of the inbox
+        provider:
+          type: string
+          description: The provider of the inbox
     message:
       type: object
       properties:
@@ -728,76 +667,6 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    contact_list_item:
-      type: object
-      properties:
-        additional_attributes:
-          type: object
-          description: The object containing additional attributes related to the contact
-          properties:
-            city:
-              type: string
-              description: City of the contact
-            country:
-              type: string
-              description: Country of the contact
-            country_code:
-              type:
-              - string
-              - 'null'
-              description: Country code of the contact
-            created_at_ip:
-              type: string
-              description: IP address when the contact was created
-        availability_status:
-          type: string
-          description: Availability status of the contact
-          enum:
-          - online
-          - offline
-        email:
-          type:
-          - string
-          - 'null'
-          description: The email address of the contact
-        id:
-          type: integer
-          description: The ID of the contact
-        name:
-          type: string
-          description: The name of the contact
-        phone_number:
-          type:
-          - string
-          - 'null'
-          description: The phone number of the contact
-        blocked:
-          type: boolean
-          description: Whether the contact is blocked
-        identifier:
-          type:
-          - string
-          - 'null'
-          description: The identifier of the contact
-        thumbnail:
-          type: string
-          description: The thumbnail of the contact
-        custom_attributes:
-          type: object
-          description: The custom attributes of the contact
-        last_activity_at:
-          type:
-          - integer
-          - 'null'
-          description: Timestamp of last activity
-        created_at:
-          type: integer
-          description: Timestamp when contact was created
-        contact_inboxes:
-          type: array
-          description: List of inboxes associated with this contact
-          items:
-            $ref: '#/components/schemas/contact_inbox'
     contact_update_payload:
       type: object
       properties:
@@ -839,25 +708,6 @@ components:
           type: object
           description: An object where you can store custom attributes for contact. example {"type":"customer", "age":30}, this should have a valid custom attribute definition.
           example: {}
-    contact_show_response:
-      type: object
-      properties:
-        payload:
-          $ref: '#/components/schemas/contact_list_item'
-    extended_contact:
-      allOf:
-      - $ref: '#/components/schemas/contact'
-      - type: object
-        properties:
-          id:
-            type: number
-            description: Id of the user
-          availability_status:
-            type: string
-            enum:
-            - online
-            - offline
-            description: Availability status of the user
     conversation:
       type: object
       properties:
@@ -1032,62 +882,14 @@ components:
                       type: boolean
                       description: Whether the hmac is verified
           description: List of conversations for the contact
-    contact_create_payload:
-      type: object
-      required:
-      - inbox_id
-      properties:
-        inbox_id:
-          type: number
-          description: ID of the inbox to which the contact belongs
-          example: 1
-        name:
-          type: string
-          description: name of the contact
-          example: Alice
-        email:
-          type: string
-          description: email of the contact
-          example: alice@acme.inc
-        blocked:
-          type: boolean
-          description: whether the contact is blocked or not
-          example: false
-        phone_number:
-          type: string
-          description: phone number of the contact
-          example: '+123456789'
-        avatar:
-          type: string
-          format: binary
-          description: Send the form data with the avatar image binary or use the avatar_url
-        avatar_url:
-          type: string
-          description: The url to a jpeg, png file for the contact avatar
-          example: https://example.com/avatar.png
-        identifier:
-          type: string
-          description: A unique identifier for the contact in external system
-          example: '1234567890'
-        additional_attributes:
-          type: object
-          description: An object where you can store additional attributes for contact. example {"type":"customer", "age":30}
-          example:
-            type: customer
-            age: 30
-        custom_attributes:
-          type: object
-          description: An object where you can store custom attributes for contact. example {"type":"customer", "age":30}, this should have a valid custom attribute definition.
-          example: {}
-    contact_meta:
+    contactable_inboxes_response:
       type: object
       properties:
-        count:
-          type: integer
-          description: Total number of contacts
-        current_page:
-          type: string
-          description: Current page number
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/contact_inbox'
+          description: List of contactable inboxes for the contact
     user:
       type: object
       properties:
@@ -1180,15 +982,81 @@ components:
                 type:
                 - object
                 - 'null'
-    request_error:
+    extended_contact:
+      allOf:
+      - $ref: '#/components/schemas/contact'
+      - type: object
+        properties:
+          id:
+            type: number
+            description: Id of the user
+          availability_status:
+            type: string
+            enum:
+            - online
+            - offline
+            description: Availability status of the user
+    generic_id:
       type: object
       properties:
-        field:
+        id:
+          type: number
+    contact_meta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of contacts
+        current_page:
           type: string
-        message:
+          description: Current page number
+    contact_create_payload:
+      type: object
+      required:
+      - inbox_id
+      properties:
+        inbox_id:
+          type: number
+          description: ID of the inbox to which the contact belongs
+          example: 1
+        name:
           type: string
-        code:
+          description: name of the contact
+          example: Alice
+        email:
           type: string
+          description: email of the contact
+          example: alice@acme.inc
+        blocked:
+          type: boolean
+          description: whether the contact is blocked or not
+          example: false
+        phone_number:
+          type: string
+          description: phone number of the contact
+          example: '+123456789'
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        avatar_url:
+          type: string
+          description: The url to a jpeg, png file for the contact avatar
+          example: https://example.com/avatar.png
+        identifier:
+          type: string
+          description: A unique identifier for the contact in external system
+          example: '1234567890'
+        additional_attributes:
+          type: object
+          description: An object where you can store additional attributes for contact. example {"type":"customer", "age":30}
+          example:
+            type: customer
+            age: 30
+        custom_attributes:
+          type: object
+          description: An object where you can store custom attributes for contact. example {"type":"customer", "age":30}, this should have a valid custom attribute definition.
+          example: {}
     contacts_list_response:
       type: object
       properties:
@@ -1199,33 +1067,144 @@ components:
           items:
             $ref: '#/components/schemas/contact_list_item'
           description: List of contacts
-    contactable_inboxes_response:
+    contact_list_item:
+      type: object
+      properties:
+        additional_attributes:
+          type: object
+          description: The object containing additional attributes related to the contact
+          properties:
+            city:
+              type: string
+              description: City of the contact
+            country:
+              type: string
+              description: Country of the contact
+            country_code:
+              type:
+              - string
+              - 'null'
+              description: Country code of the contact
+            created_at_ip:
+              type: string
+              description: IP address when the contact was created
+        availability_status:
+          type: string
+          description: Availability status of the contact
+          enum:
+          - online
+          - offline
+        email:
+          type:
+          - string
+          - 'null'
+          description: The email address of the contact
+        id:
+          type: integer
+          description: The ID of the contact
+        name:
+          type: string
+          description: The name of the contact
+        phone_number:
+          type:
+          - string
+          - 'null'
+          description: The phone number of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        identifier:
+          type:
+          - string
+          - 'null'
+          description: The identifier of the contact
+        thumbnail:
+          type: string
+          description: The thumbnail of the contact
+        custom_attributes:
+          type: object
+          description: The custom attributes of the contact
+        last_activity_at:
+          type:
+          - integer
+          - 'null'
+          description: Timestamp of last activity
+        created_at:
+          type: integer
+          description: Timestamp when contact was created
+        contact_inboxes:
+          type: array
+          description: List of inboxes associated with this contact
+          items:
+            $ref: '#/components/schemas/contact_inbox'
+    contact_inboxes:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Contact Inbox Source Id
+        inbox:
+          $ref: '#/components/schemas/inbox_contact'
+    contact:
       type: object
       properties:
         payload:
           type: array
           items:
-            $ref: '#/components/schemas/contact_inbox'
-          description: List of contactable inboxes for the contact
-    Contact:
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
+    request_error:
       type: object
       properties:
-        id:
-          type: integer
-        name:
+        field:
           type: string
-        email:
+        message:
           type: string
-        phone_number:
+        code:
           type: string
-        identifier:
-          type: string
-        custom_attributes:
-          type: object
-          additionalProperties: true
-        additional_attributes:
-          type: object
-          additionalProperties: true
     ContactCreate:
       type: object
       properties:
@@ -1240,6 +1219,20 @@ components:
         custom_attributes:
           type: object
           additionalProperties: true
+    ContactList:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            current_page:
+              type: integer
     FilterPayload:
       type: object
       properties:
@@ -1261,20 +1254,25 @@ components:
                 enum:
                 - and
                 - or
-    ContactList:
+    Contact:
       type: object
       properties:
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        meta:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone_number:
+          type: string
+        identifier:
+          type: string
+        custom_attributes:
           type: object
-          properties:
-            count:
-              type: integer
-            current_page:
-              type: integer
+          additionalProperties: true
+        additional_attributes:
+          type: object
+          additionalProperties: true
   parameters:
     page:
       in: query
@@ -1284,13 +1282,6 @@ components:
         default: 1
       required: false
       description: The page parameter
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     contact_sort_param:
       in: query
       name: sort
@@ -1307,6 +1298,13 @@ components:
         - -last_activity_at
       required: false
       description: The attribute by which list should be sorted
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
     AccountId:
       name: account_id
       in: path

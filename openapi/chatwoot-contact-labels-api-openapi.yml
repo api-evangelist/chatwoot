@@ -96,15 +96,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   schemas:
-    contact_labels:
-      type: object
-      properties:
-        payload:
-          type: array
-          description: Array of labels
-          items:
-            type: string
     bad_request_error:
       title: data
       type: object
@@ -115,6 +115,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    contact_labels:
+      type: object
+      properties:
+        payload:
+          type: array
+          description: Array of labels
+          items:
+            type: string
     request_error:
       type: object
       properties:
@@ -124,14 +132,6 @@ components:
           type: string
         code:
           type: string
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

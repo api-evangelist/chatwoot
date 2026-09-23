@@ -291,9 +291,7 @@ paths:
         Returns statistics for each channel type including open, resolved, pending, snoozed, and total conversation counts.
 
 
-        **Note:** This API endpoint is available only in Chatwoot version 4.10.0 and above. The date range is limited to a maximum of 6 months.
-
-        '
+        **Note:** This API endpoint is available only in Chatwoot version 4.10.0 and above. The date range is limited to a maximum of 6 months.'
       responses:
         '200':
           description: Success
@@ -344,9 +342,7 @@ paths:
 
         Returns metrics for each inbox including conversation counts, resolution counts,
 
-        average first response time, average resolution time, and average reply time.
-
-        '
+        average first response time, average resolution time, and average reply time.'
       responses:
         '200':
           description: Success
@@ -391,9 +387,7 @@ paths:
 
         Returns metrics for each agent including conversation counts, resolution counts,
 
-        average first response time, average resolution time, and average reply time.
-
-        '
+        average first response time, average resolution time, and average reply time.'
       responses:
         '200':
           description: Success
@@ -438,9 +432,7 @@ paths:
 
         Returns metrics for each team including conversation counts, resolution counts,
 
-        average first response time, average resolution time, and average reply time.
-
-        '
+        average first response time, average resolution time, and average reply time.'
       responses:
         '200':
           description: Success
@@ -481,9 +473,7 @@ paths:
         Returns conversation counts in different time buckets (0-1h, 1-4h, 4-8h, 8-24h, 24h+) for each channel type.
 
 
-        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.
-
-        '
+        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.'
       responses:
         '200':
           description: Success
@@ -540,9 +530,7 @@ paths:
         in a specific inbox that have a specific label applied.
 
 
-        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.
-
-        '
+        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.'
       responses:
         '200':
           description: Success
@@ -583,9 +571,7 @@ paths:
         When grouped by agent, messages sent by bots (AgentBot, Captain::Assistant) are excluded.
 
 
-        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.
-
-        '
+        **Note:** This API endpoint is available only in Chatwoot version 4.11.0 and above.'
       parameters:
       - in: query
         name: group_by
@@ -620,7 +606,7 @@ paths:
       operationId: getReport
       tags:
       - Reports
-      summary: Get a metric report over a time range.
+      summary: Get a metric report over a time range
       parameters:
       - name: metric
         in: query
@@ -670,7 +656,7 @@ paths:
       operationId: getConversationReportsSummary
       tags:
       - Reports
-      summary: Get a summary count of conversations by status (open, unassigned, etc.).
+      summary: Get a summary count of conversations by status (open, unassigned, etc.)
       responses:
         '200':
           description: Conversation count summary.
@@ -680,402 +666,7 @@ paths:
     - url: https://app.chatwoot.com
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
-  parameters:
-    report_metric:
-      in: query
-      name: metric
-      schema:
-        type: string
-        enum:
-        - conversations_count
-        - incoming_messages_count
-        - outgoing_messages_count
-        - avg_first_response_time
-        - avg_resolution_time
-        - resolutions_count
-      required: true
-      description: The type of metric
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-      required: false
-      description: The page parameter
-    report_type:
-      in: query
-      name: type
-      schema:
-        type: string
-        enum:
-        - account
-        - agent
-        - inbox
-        - label
-        - team
-      required: true
-      description: Type of report
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   schemas:
-    reporting_event:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the reporting event
-        name:
-          type: string
-          description: Name of the event (e.g., first_response, resolution, reply_time)
-        value:
-          type: number
-          format: double
-          description: Value of the metric in seconds
-        value_in_business_hours:
-          type: number
-          format: double
-          description: Value of the metric in seconds, calculated only for business hours
-        event_start_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event started
-        event_end_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event ended
-        account_id:
-          type: number
-          description: ID of the account
-        conversation_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the conversation
-        inbox_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the inbox
-        user_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the user/agent
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was created
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was last updated
-    agent_conversation_metrics:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        email:
-          type: string
-        thumbnail:
-          type: string
-        availability:
-          type: string
-        metric:
-          type: object
-          properties:
-            open:
-              type: number
-            unattended:
-              type: number
-    inbox_label_matrix:
-      type: object
-      description: Inbox-label matrix report showing the count of conversations for each inbox-label combination.
-      properties:
-        inboxes:
-          type: array
-          description: List of inboxes included in the report
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                description: The inbox ID
-              name:
-                type: string
-                description: The inbox name
-        labels:
-          type: array
-          description: List of labels included in the report
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                description: The label ID
-              title:
-                type: string
-                description: The label title
-        matrix:
-          type: array
-          description: 2D array where matrix[i][j] represents the count of conversations in inboxes[i] with labels[j]
-          items:
-            type: array
-            items:
-              type: number
-      example:
-        inboxes:
-        - id: 1
-          name: Website Chat
-        - id: 2
-          name: Email Support
-        labels:
-        - id: 1
-          title: bug
-        - id: 2
-          title: feature-request
-        - id: 3
-          title: urgent
-        matrix:
-        - - 10
-          - 5
-          - 3
-        - - 8
-          - 12
-          - 2
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    reporting_event_meta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of reporting events
-        current_page:
-          type: integer
-          description: Current page number
-        total_pages:
-          type: integer
-          description: Total number of pages
-    outgoing_messages_count:
-      type: array
-      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The ID of the grouped entity (agent, team, inbox, or label).
-          name:
-            type: string
-            description: The name of the grouped entity.
-          outgoing_messages_count:
-            type: number
-            description: The total number of outgoing messages for this entity in the given time range.
-      example:
-      - id: 1
-        name: Agent One
-        outgoing_messages_count: 42
-      - id: 2
-        name: Agent Two
-        outgoing_messages_count: 18
-    reporting_events_list_response:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/reporting_event_meta'
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/reporting_event'
-          description: List of reporting events
-    inbox_summary:
-      type: array
-      description: Inbox summary report containing conversation statistics grouped by inbox.
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The inbox ID
-          conversations_count:
-            type: number
-            description: Number of conversations created in the inbox during the date range
-          resolved_conversations_count:
-            type: number
-            description: Number of conversations resolved in the inbox during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
-      example:
-      - id: 1
-        conversations_count: 150
-        resolved_conversations_count: 120
-        avg_resolution_time: 3600
-        avg_first_response_time: 300
-        avg_reply_time: 600
-      - id: 2
-        conversations_count: 75
-        resolved_conversations_count: 60
-        avg_resolution_time: 1800
-        avg_first_response_time: 180
-        avg_reply_time: 420
-    first_response_time_distribution:
-      type: object
-      description: First response time distribution report grouped by channel type. Shows the count of conversations with first response times in different time buckets.
-      additionalProperties:
-        type: object
-        description: First response time distribution for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
-        properties:
-          0-1h:
-            type: number
-            description: Number of conversations with first response time less than 1 hour
-          1-4h:
-            type: number
-            description: Number of conversations with first response time between 1-4 hours
-          4-8h:
-            type: number
-            description: Number of conversations with first response time between 4-8 hours
-          8-24h:
-            type: number
-            description: Number of conversations with first response time between 8-24 hours
-          24h+:
-            type: number
-            description: Number of conversations with first response time greater than 24 hours
-      example:
-        Channel::WebWidget:
-          0-1h: 150
-          1-4h: 80
-          4-8h: 45
-          8-24h: 30
-          24h+: 15
-        Channel::Api:
-          0-1h: 75
-          1-4h: 40
-          4-8h: 20
-          8-24h: 10
-          24h+: 5
-    team_summary:
-      type: array
-      description: Team summary report containing conversation statistics grouped by team.
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The team ID
-          conversations_count:
-            type: number
-            description: Number of conversations assigned to the team during the date range
-          resolved_conversations_count:
-            type: number
-            description: Number of conversations resolved by the team during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
-      example:
-      - id: 1
-        conversations_count: 250
-        resolved_conversations_count: 200
-        avg_resolution_time: 2800
-        avg_first_response_time: 240
-        avg_reply_time: 500
-      - id: 2
-        conversations_count: 180
-        resolved_conversations_count: 150
-        avg_resolution_time: 2400
-        avg_first_response_time: 200
-        avg_reply_time: 450
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    channel_summary:
-      type: object
-      description: Channel summary report containing conversation counts grouped by channel type and status. Available in version 4.10.0+.
-      additionalProperties:
-        type: object
-        description: Conversation statistics for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
-        properties:
-          open:
-            type: number
-            description: Number of open conversations
-          resolved:
-            type: number
-            description: Number of resolved conversations
-          pending:
-            type: number
-            description: Number of pending conversations
-          snoozed:
-            type: number
-            description: Number of snoozed conversations
-          total:
-            type: number
-            description: Total number of conversations
-      example:
-        Channel::WebWidget:
-          open: 10
-          resolved: 20
-          pending: 5
-          snoozed: 2
-          total: 37
-        Channel::Api:
-          open: 5
-          resolved: 15
-          pending: 3
-          snoozed: 1
-          total: 24
     agent_summary:
       type: array
       description: Agent summary report containing conversation statistics grouped by agent.
@@ -1149,6 +740,401 @@ components:
               type: number
             resolutions_count:
               type: number
+    reporting_event_meta:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of reporting events
+        current_page:
+          type: integer
+          description: Current page number
+        total_pages:
+          type: integer
+          description: Total number of pages
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    team_summary:
+      type: array
+      description: Team summary report containing conversation statistics grouped by team.
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The team ID
+          conversations_count:
+            type: number
+            description: Number of conversations assigned to the team during the date range
+          resolved_conversations_count:
+            type: number
+            description: Number of conversations resolved by the team during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
+      example:
+      - id: 1
+        conversations_count: 250
+        resolved_conversations_count: 200
+        avg_resolution_time: 2800
+        avg_first_response_time: 240
+        avg_reply_time: 500
+      - id: 2
+        conversations_count: 180
+        resolved_conversations_count: 150
+        avg_resolution_time: 2400
+        avg_first_response_time: 200
+        avg_reply_time: 450
+    inbox_summary:
+      type: array
+      description: Inbox summary report containing conversation statistics grouped by inbox.
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The inbox ID
+          conversations_count:
+            type: number
+            description: Number of conversations created in the inbox during the date range
+          resolved_conversations_count:
+            type: number
+            description: Number of conversations resolved in the inbox during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
+      example:
+      - id: 1
+        conversations_count: 150
+        resolved_conversations_count: 120
+        avg_resolution_time: 3600
+        avg_first_response_time: 300
+        avg_reply_time: 600
+      - id: 2
+        conversations_count: 75
+        resolved_conversations_count: 60
+        avg_resolution_time: 1800
+        avg_first_response_time: 180
+        avg_reply_time: 420
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    inbox_label_matrix:
+      type: object
+      description: Inbox-label matrix report showing the count of conversations for each inbox-label combination.
+      properties:
+        inboxes:
+          type: array
+          description: List of inboxes included in the report
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: The inbox ID
+              name:
+                type: string
+                description: The inbox name
+        labels:
+          type: array
+          description: List of labels included in the report
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: The label ID
+              title:
+                type: string
+                description: The label title
+        matrix:
+          type: array
+          description: 2D array where matrix[i][j] represents the count of conversations in inboxes[i] with labels[j]
+          items:
+            type: array
+            items:
+              type: number
+      example:
+        inboxes:
+        - id: 1
+          name: Website Chat
+        - id: 2
+          name: Email Support
+        labels:
+        - id: 1
+          title: bug
+        - id: 2
+          title: feature-request
+        - id: 3
+          title: urgent
+        matrix:
+        - - 10
+          - 5
+          - 3
+        - - 8
+          - 12
+          - 2
+    outgoing_messages_count:
+      type: array
+      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The ID of the grouped entity (agent, team, inbox, or label).
+          name:
+            type: string
+            description: The name of the grouped entity.
+          outgoing_messages_count:
+            type: number
+            description: The total number of outgoing messages for this entity in the given time range.
+      example:
+      - id: 1
+        name: Agent One
+        outgoing_messages_count: 42
+      - id: 2
+        name: Agent Two
+        outgoing_messages_count: 18
+    reporting_events_list_response:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/reporting_event_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/reporting_event'
+          description: List of reporting events
+    channel_summary:
+      type: object
+      description: Channel summary report containing conversation counts grouped by channel type and status. Available in version 4.10.0+.
+      additionalProperties:
+        type: object
+        description: Conversation statistics for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
+        properties:
+          open:
+            type: number
+            description: Number of open conversations
+          resolved:
+            type: number
+            description: Number of resolved conversations
+          pending:
+            type: number
+            description: Number of pending conversations
+          snoozed:
+            type: number
+            description: Number of snoozed conversations
+          total:
+            type: number
+            description: Total number of conversations
+      example:
+        Channel::WebWidget:
+          open: 10
+          resolved: 20
+          pending: 5
+          snoozed: 2
+          total: 37
+        Channel::Api:
+          open: 5
+          resolved: 15
+          pending: 3
+          snoozed: 1
+          total: 24
+    first_response_time_distribution:
+      type: object
+      description: First response time distribution report grouped by channel type. Shows the count of conversations with first response times in different time buckets.
+      additionalProperties:
+        type: object
+        description: First response time distribution for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
+        properties:
+          0-1h:
+            type: number
+            description: Number of conversations with first response time less than 1 hour
+          1-4h:
+            type: number
+            description: Number of conversations with first response time between 1-4 hours
+          4-8h:
+            type: number
+            description: Number of conversations with first response time between 4-8 hours
+          8-24h:
+            type: number
+            description: Number of conversations with first response time between 8-24 hours
+          24h+:
+            type: number
+            description: Number of conversations with first response time greater than 24 hours
+      example:
+        Channel::WebWidget:
+          0-1h: 150
+          1-4h: 80
+          4-8h: 45
+          8-24h: 30
+          24h+: 15
+        Channel::Api:
+          0-1h: 75
+          1-4h: 40
+          4-8h: 20
+          8-24h: 10
+          24h+: 5
+    reporting_event:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the reporting event
+        name:
+          type: string
+          description: Name of the event (e.g., first_response, resolution, reply_time)
+        value:
+          type: number
+          format: double
+          description: Value of the metric in seconds
+        value_in_business_hours:
+          type: number
+          format: double
+          description: Value of the metric in seconds, calculated only for business hours
+        event_start_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event started
+        event_end_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event ended
+        account_id:
+          type: number
+          description: ID of the account
+        conversation_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the conversation
+        inbox_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the inbox
+        user_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the user/agent
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was last updated
+    agent_conversation_metrics:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        thumbnail:
+          type: string
+        availability:
+          type: string
+        metric:
+          type: object
+          properties:
+            open:
+              type: number
+            unattended:
+              type: number
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
+    report_type:
+      in: query
+      name: type
+      schema:
+        type: string
+        enum:
+        - account
+        - agent
+        - inbox
+        - label
+        - team
+      required: true
+      description: Type of report
+    report_metric:
+      in: query
+      name: metric
+      schema:
+        type: string
+        enum:
+        - conversations_count
+        - incoming_messages_count
+        - outgoing_messages_count
+        - avg_first_response_time
+        - avg_resolution_time
+        - resolutions_count
+      required: true
+      description: The type of metric
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

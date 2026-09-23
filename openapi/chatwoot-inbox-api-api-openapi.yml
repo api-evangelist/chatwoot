@@ -45,6 +45,15 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object
@@ -106,15 +115,6 @@ components:
         identity_validation_enabled:
           type: boolean
           description: Whether of not the User Identity Validation is enforced on the inbox
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     public_inbox_identifier:
       in: path

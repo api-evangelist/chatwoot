@@ -64,7 +64,8 @@
     "tag 'Labels' spans 2 source specs (chatwoot-application-api-openapi.yml, chatwoot-openapi.yml): per-path servers applied",
     "tag 'Messages' spans 2 source specs (chatwoot-application-api-openapi.yml, chatwoot-openapi.yml): per-path servers applied",
     "tag 'Reports' spans 2 source specs (chatwoot-application-api-openapi.yml, chatwoot-openapi.yml): per-path servers applied",
-    "tag 'Teams' spans 2 source specs (chatwoot-application-api-openapi.yml, chatwoot-openapi.yml): per-path servers applied"
+    "tag 'Teams' spans 2 source specs (chatwoot-application-api-openapi.yml, chatwoot-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "chatwoot-account-agentbots-api-openapi.yml: previously refined output, superseded by openapi/_original/",

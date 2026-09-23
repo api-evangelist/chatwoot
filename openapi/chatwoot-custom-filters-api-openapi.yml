@@ -163,7 +163,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    custom_filter_id:
+      in: path
+      name: custom_filter_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the custom filter
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     custom_filter_create_update_payload:
       type: object
       properties:
@@ -183,15 +208,6 @@ components:
           type: object
           description: A query that needs to be saved as a custom filter
           example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     custom_filter:
       type: object
       properties:
@@ -219,31 +235,15 @@ components:
           type: string
           format: date-time
           description: The time at which the custom filter was updated
-    bad_request_error:
-      title: data
+    request_error:
       type: object
       properties:
-        description:
+        field:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    custom_filter_id:
-      in: path
-      name: custom_filter_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the custom filter
+        message:
+          type: string
+        code:
+          type: string
   securitySchemes:
     userApiKey:
       type: apiKey

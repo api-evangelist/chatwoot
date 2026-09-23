@@ -1,0 +1,29 @@
+# Front Door AI Index — chatwoot — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: chatwoot
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.chatwoot.com
+  final_host: www.chatwoot.com
+  ownership: own
+  owner: chatwoot
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 20
+  host_score: 20
+  density: 16.72
+  words: 1196
+  tiers:
+    agentic: 11
+    core: 9
+    model: 0
+  ambiguous: 15
+  top_terms:
+    agent: 10
+    AI: 9
+    copilot: 8
+    smart: 5
+    AI agent: 3

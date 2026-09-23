@@ -21,7 +21,6 @@ paths:
       - Users
       operationId: create-a-user
       summary: Create a User
-      description: Create a User
       security:
       - platformAppApiKey: []
       requestBody:
@@ -105,7 +104,6 @@ paths:
       - Users
       operationId: delete-a-user
       summary: Delete a User
-      description: Delete a User
       security:
       - platformAppApiKey: []
       responses:
@@ -159,6 +157,48 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    user_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the user
+          example: Daniel
+        display_name:
+          type: string
+          description: Display name of the user
+          example: Dan
+        email:
+          type: string
+          description: Email of the user
+          example: daniel@acme.inc
+        password:
+          type: string
+          description: Password must contain uppercase, lowercase letters, number and a special character
+          example: Password2!
+        custom_attributes:
+          type: object
+          description: Custom attributes you want to associate with the user
+          example: {}
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     user:
       type: object
       properties:
@@ -251,48 +291,6 @@ components:
                 type:
                 - object
                 - 'null'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    user_create_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the user
-          example: Daniel
-        display_name:
-          type: string
-          description: Display name of the user
-          example: Dan
-        email:
-          type: string
-          description: Email of the user
-          example: daniel@acme.inc
-        password:
-          type: string
-          description: Password must contain uppercase, lowercase letters, number and a special character
-          example: Password2!
-        custom_attributes:
-          type: object
-          description: Custom attributes you want to associate with the user
-          example: {}
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   parameters:
     platform_user_id:
       in: path

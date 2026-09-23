@@ -181,7 +181,6 @@ paths:
       - Automation Rule
       operationId: delete-automation-rule-from-account
       summary: Remove a automation rule from account
-      description: Remove a automation rule from account
       security:
       - userApiKey: []
       parameters:
@@ -207,7 +206,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
   schemas:
+    automation_rule:
+      type: object
+      properties:
+        payload:
+          description: Response payload that contains automation rule(s)
+          oneOf:
+          - type: array
+            description: Array of automation rules (for listing endpoint)
+            items:
+              $ref: '#/components/schemas/automation_rule_item'
+          - type: object
+            description: Single automation rule (for show/create/update endpoints)
+            allOf:
+            - $ref: '#/components/schemas/automation_rule_item'
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     automation_rule_item:
       type: object
       properties:
@@ -278,20 +317,6 @@ components:
         active:
           type: boolean
           description: Enable/disable automation rule
-    automation_rule:
-      type: object
-      properties:
-        payload:
-          description: Response payload that contains automation rule(s)
-          oneOf:
-          - type: array
-            description: Array of automation rules (for listing endpoint)
-            items:
-              $ref: '#/components/schemas/automation_rule_item'
-          - type: object
-            description: Single automation rule (for show/create/update endpoints)
-            allOf:
-            - $ref: '#/components/schemas/automation_rule_item'
     request_error:
       type: object
       properties:
@@ -344,32 +369,6 @@ components:
               query_operator: OR
               values:
               - help
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-  parameters:
-    page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-      required: false
-      description: The page parameter
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

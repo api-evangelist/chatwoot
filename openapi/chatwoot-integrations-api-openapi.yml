@@ -57,7 +57,6 @@ paths:
       - Integrations
       operationId: create-an-integration-hook
       summary: Create an integration hook
-      description: Create an integration hook
       security:
       - userApiKey: []
       parameters:
@@ -87,7 +86,6 @@ paths:
       - Integrations
       operationId: update-an-integrations-hook
       summary: Update an Integration Hook
-      description: Update an Integration Hook
       security:
       - userApiKey: []
       parameters:
@@ -117,7 +115,6 @@ paths:
       - Integrations
       operationId: delete-an-integration-hook
       summary: Delete an Integration Hook
-      description: Delete an Integration Hook
       security:
       - userApiKey: []
       parameters:
@@ -139,7 +136,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    hook_id:
+      in: path
+      name: hook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the integration hook
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     integrations_app:
       type: object
       properties:
@@ -166,6 +188,15 @@ components:
           items:
             type: object
           description: If there are any hooks created for this integration
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     integrations_hook_create_payload:
       type: object
       properties:
@@ -185,36 +216,6 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    integrations_hook_update_payload:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: The status of the integration (0 for inactive, 1 for active)
-          example: 1
-        settings:
-          type: object
-          description: The settings required by the integration
-          example: {}
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     integrations_hook:
       type: object
       properties:
@@ -239,21 +240,17 @@ components:
         settings:
           type: object
           description: The associated settings for the integration
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    hook_id:
-      in: path
-      name: hook_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the integration hook
+    integrations_hook_update_payload:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The status of the integration (0 for inactive, 1 for active)
+          example: 1
+        settings:
+          type: object
+          description: The settings required by the integration
+          example: {}
   securitySchemes:
     userApiKey:
       type: apiKey
