@@ -71,18 +71,18 @@ paths:
           description: The updated contact.
 components:
   parameters:
-    InboxIdentifier:
-      name: inbox_identifier
-      in: path
-      required: true
-      description: The public inbox identifier (channel/web-widget identifier).
-      schema:
-        type: string
     ContactIdentifier:
       name: contact_identifier
       in: path
       required: true
       description: The source_id / contact identifier returned when the client contact was created.
+      schema:
+        type: string
+    InboxIdentifier:
+      name: inbox_identifier
+      in: path
+      required: true
+      description: The public inbox identifier (channel/web-widget identifier).
       schema:
         type: string
   securitySchemes:

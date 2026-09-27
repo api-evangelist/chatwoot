@@ -195,32 +195,7 @@ paths:
     servers:
     - url: https://app.chatwoot.com/
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     custom_attribute_create_update_payload:
       type: object
       properties:
@@ -260,6 +235,25 @@ components:
           type: string
           description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
           example: Please enter a valid value
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     custom_attribute:
       type: object
       properties:
@@ -299,15 +293,6 @@ components:
         updated_at:
           type: string
           description: The date and time when the custom attribute was updated
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     CustomAttributeDefinition:
       type: object
       required:
@@ -339,6 +324,21 @@ components:
           type: array
           items:
             type: string
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

@@ -45,15 +45,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     bad_request_error:
       title: data
       type: object
@@ -64,6 +55,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     public_inbox:
       type: object
       properties:

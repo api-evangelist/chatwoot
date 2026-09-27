@@ -98,15 +98,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
+    account_user_create_update_payload:
+      type: object
+      required:
+      - user_id
+      - role
+      properties:
+        user_id:
+          type: integer
+          description: The ID of the user
+          example: 1
+        role:
+          type: string
+          description: whether user is an administrator or agent
+          example: administrator
     bad_request_error:
       title: data
       type: object
@@ -132,20 +138,6 @@ components:
           role:
             type: string
             description: whether user is an administrator or agent
-    account_user_create_update_payload:
-      type: object
-      required:
-      - user_id
-      - role
-      properties:
-        user_id:
-          type: integer
-          description: The ID of the user
-          example: 1
-        role:
-          type: string
-          description: whether user is an administrator or agent
-          example: administrator
     request_error:
       type: object
       properties:
@@ -155,6 +147,14 @@ components:
           type: string
         code:
           type: string
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

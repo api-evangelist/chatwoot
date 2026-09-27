@@ -151,22 +151,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    agent_bot_id:
-      in: path
-      name: id
-      schema:
-        type: integer
-      required: true
-      description: The ID of the agentbot to be updated
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object
@@ -177,15 +171,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
+    agent_bot_create_update_payload:
       type: object
       properties:
-        field:
+        name:
           type: string
-        message:
+          description: The name of the agent bot
+          example: My Agent Bot
+        description:
           type: string
-        code:
+          description: The description of the agent bot
+          example: This is a sample agent bot
+        outgoing_url:
           type: string
+          description: The webhook URL for the bot
+          example: https://example.com/webhook
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        avatar_url:
+          type: string
+          description: The url to a jpeg, png file for the agent bot avatar
+          example: https://example.com/avatar.png
+        bot_type:
+          type: integer
+          description: The type of the bot (0 for webhook)
+          example: 0
+        bot_config:
+          type: object
+          description: The configuration for the bot
+          example: {}
     agent_bot:
       type: object
       properties:
@@ -219,37 +235,21 @@ components:
         system_bot:
           type: boolean
           description: Whether the bot is a system bot
-    agent_bot_create_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the agent bot
-          example: My Agent Bot
-        description:
-          type: string
-          description: The description of the agent bot
-          example: This is a sample agent bot
-        outgoing_url:
-          type: string
-          description: The webhook URL for the bot
-          example: https://example.com/webhook
-        avatar:
-          type: string
-          format: binary
-          description: Send the form data with the avatar image binary or use the avatar_url
-        avatar_url:
-          type: string
-          description: The url to a jpeg, png file for the agent bot avatar
-          example: https://example.com/avatar.png
-        bot_type:
-          type: integer
-          description: The type of the bot (0 for webhook)
-          example: 0
-        bot_config:
-          type: object
-          description: The configuration for the bot
-          example: {}
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    agent_bot_id:
+      in: path
+      name: id
+      schema:
+        type: integer
+      required: true
+      description: The ID of the agentbot to be updated
   securitySchemes:
     userApiKey:
       type: apiKey

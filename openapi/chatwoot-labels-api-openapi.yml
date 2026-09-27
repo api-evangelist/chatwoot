@@ -199,6 +199,25 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
+    label_create_update_payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The label title
+          example: support
+        description:
+          type: string
+          description: A short description for the label
+          example: Conversations that need support follow-up
+        color:
+          type: string
+          description: Hex color code for the label
+          example: '#1f93ff'
+        show_on_sidebar:
+          type: boolean
+          description: Whether the label should appear in the sidebar
+          example: true
     label:
       type: object
       properties:
@@ -227,25 +246,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    label_create_update_payload:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The label title
-          example: support
-        description:
-          type: string
-          description: A short description for the label
-          example: Conversations that need support follow-up
-        color:
-          type: string
-          description: Hex color code for the label
-          example: '#1f93ff'
-        show_on_sidebar:
-          type: boolean
-          description: Whether the label should appear in the sidebar
-          example: true
     request_error:
       type: object
       properties:

@@ -143,32 +143,31 @@ paths:
     servers:
     - url: https://app.chatwoot.com/
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   schemas:
-    bad_request_error:
-      title: data
+    agent_update_payload:
       type: object
+      required:
+      - role
       properties:
-        description:
+        role:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
     agent_create_payload:
       type: object
       required:
@@ -203,6 +202,16 @@ components:
           type: boolean
           description: Whether the agent is automatically marked offline when they are away.
           example: true
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:
@@ -256,30 +265,20 @@ components:
           - integer
           - 'null'
           description: The custom role id of the agent
-    agent_update_payload:
+    AgentUpdate:
       type: object
-      required:
-      - role
       properties:
         role:
           type: string
           enum:
           - agent
           - administrator
-          description: Whether its administrator or agent
-          example: agent
-        availability:
+        availability_status:
           type: string
           enum:
           - online
-          - busy
           - offline
-          description: The configured availability of the agent.
-          example: online
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-          example: true
+          - busy
     AgentCreate:
       type: object
       required:
@@ -315,20 +314,21 @@ components:
           - busy
         confirmed:
           type: boolean
-    AgentUpdate:
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-        availability_status:
-          type: string
-          enum:
-          - online
-          - offline
-          - busy
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

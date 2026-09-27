@@ -336,32 +336,57 @@ paths:
     - url: https://app.chatwoot.com/
 components:
   schemas:
-    inbox_contact:
+    contact:
       type: object
       properties:
-        id:
-          type: number
-          description: ID of the inbox
-        avatar_url:
-          type: string
-          description: The avatar image of the inbox
-        channel_id:
-          type: number
-          description: The ID of the channel
-        name:
-          type: string
-          description: The name of the inbox
-        channel_type:
-          type: string
-          description: The type of the inbox
-        provider:
-          type: string
-          description: The provider of the inbox
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
+        payload:
+          type: array
+          items:
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
     message:
       type: object
       properties:
@@ -481,16 +506,6 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     conversation_message_create_payload:
       type: object
       required:
@@ -603,57 +618,42 @@ components:
                         type: string
                         description: Dynamic parameter value for the button
                         example: SSFSDFSD
-    contact:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        payload:
+        description:
+          type: string
+        errors:
           type: array
           items:
-            type: object
-            properties:
-              additional_attributes:
-                type: object
-                description: The object containing additional attributes related to the contact
-              availability_status:
-                type: string
-                description: The availability status of the contact
-              email:
-                type: string
-                description: The email address of the contact
-              id:
-                type: integer
-                description: The ID of the contact
-              name:
-                type: string
-                description: The name of the contact
-              phone_number:
-                type: string
-                description: The phone number of the contact
-              blocked:
-                type: boolean
-                description: Whether the contact is blocked
-              identifier:
-                type: string
-                description: The identifier of the contact
-              thumbnail:
-                type: string
-                description: The thumbnail of the contact
-              custom_attributes:
-                type: object
-                description: The custom attributes of the contact
-                example:
-                  attribute_key: attribute_value
-                  signed_up_at: dd/mm/yyyy
-              last_activity_at:
-                type: integer
-                description: The last activity at of the contact
-              created_at:
-                type: integer
-                description: The created at of the contact
-              contact_inboxes:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_inboxes'
+            $ref: '#/components/schemas/request_error'
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    inbox_contact:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        channel_id:
+          type: number
+          description: The ID of the channel
+        name:
+          type: string
+          description: The name of the inbox
+        channel_type:
+          type: string
+          description: The type of the inbox
+        provider:
+          type: string
+          description: The provider of the inbox
     request_error:
       type: object
       properties:
@@ -755,13 +755,6 @@ components:
           type: object
           additionalProperties: true
   parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     message_id:
       in: path
       name: message_id
@@ -769,6 +762,13 @@ components:
         type: integer
       required: true
       description: The numeric ID of the message
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
     conversation_id:
       in: path
       name: conversation_id
@@ -776,18 +776,18 @@ components:
         type: integer
       required: true
       description: The numeric ID of the conversation
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
     AccountId:
       name: account_id
       in: path
       required: true
       description: The numeric id of the account.
+      schema:
+        type: integer
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
       schema:
         type: integer
   securitySchemes:

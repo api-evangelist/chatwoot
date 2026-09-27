@@ -206,47 +206,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-      required: false
-      description: The page parameter
   schemas:
-    automation_rule:
-      type: object
-      properties:
-        payload:
-          description: Response payload that contains automation rule(s)
-          oneOf:
-          - type: array
-            description: Array of automation rules (for listing endpoint)
-            items:
-              $ref: '#/components/schemas/automation_rule_item'
-          - type: object
-            description: Single automation rule (for show/create/update endpoints)
-            allOf:
-            - $ref: '#/components/schemas/automation_rule_item'
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     automation_rule_item:
       type: object
       properties:
@@ -317,15 +277,30 @@ components:
         active:
           type: boolean
           description: Enable/disable automation rule
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    automation_rule:
+      type: object
+      properties:
+        payload:
+          description: Response payload that contains automation rule(s)
+          oneOf:
+          - type: array
+            description: Array of automation rules (for listing endpoint)
+            items:
+              $ref: '#/components/schemas/automation_rule_item'
+          - type: object
+            description: Single automation rule (for show/create/update endpoints)
+            allOf:
+            - $ref: '#/components/schemas/automation_rule_item'
     automation_rule_create_update_payload:
       type: object
       properties:
@@ -369,6 +344,31 @@ components:
               query_operator: OR
               values:
               - help
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
   securitySchemes:
     userApiKey:
       type: apiKey

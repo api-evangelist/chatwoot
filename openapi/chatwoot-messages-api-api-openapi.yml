@@ -101,49 +101,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    public_message:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the message
-        content:
-          type:
-          - string
-          - 'null'
-          description: Text content of the message. Can be null for attachment-only messages.
-        message_type:
-          type: integer
-          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
-        content_type:
-          type: string
-          description: Content type of the message
-        content_attributes:
-          type: object
-          description: Additional content attributes of the message
-        created_at:
-          type: integer
-          description: Created at Unix timestamp of the message
-        conversation_id:
-          type: integer
-          description: Display Id of the conversation the message belongs to
-        attachments:
-          type: array
-          description: Attachments if any
-          items:
-            $ref: '#/components/schemas/public_message_attachment'
-        sender:
-          $ref: '#/components/schemas/public_message_sender'
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     public_message_sender:
       type: object
       additionalProperties: true
@@ -219,6 +176,39 @@ components:
           - string
           - 'null'
           description: Created timestamp in ISO 8601 format when the sender is a captain assistant
+    public_message:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the message
+        content:
+          type:
+          - string
+          - 'null'
+          description: Text content of the message. Can be null for attachment-only messages.
+        message_type:
+          type: integer
+          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
+        content_type:
+          type: string
+          description: Content type of the message
+        content_attributes:
+          type: object
+          description: Additional content attributes of the message
+        created_at:
+          type: integer
+          description: Created at Unix timestamp of the message
+        conversation_id:
+          type: integer
+          description: Display Id of the conversation the message belongs to
+        attachments:
+          type: array
+          description: Attachments if any
+          items:
+            $ref: '#/components/schemas/public_message_attachment'
+        sender:
+          $ref: '#/components/schemas/public_message_sender'
     public_message_create_payload:
       type: object
       properties:
@@ -304,15 +294,6 @@ components:
         transcribed_text:
           type: string
           description: Transcribed text for audio attachments
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     public_message_update_payload:
       type: object
       properties:
@@ -344,6 +325,25 @@ components:
                   type: integer
                   description: The rating of the CSAT survey response
                   example: 5
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
   parameters:
     message_id:
       in: path
@@ -359,13 +359,6 @@ components:
         type: string
       required: true
       description: The identifier obtained from API inbox channel
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
     public_contact_identifier:
       in: path
       name: contact_identifier
@@ -373,6 +366,13 @@ components:
         type: string
       required: true
       description: The source id of contact obtained on contact create
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
   securitySchemes:
     userApiKey:
       type: apiKey

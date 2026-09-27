@@ -77,14 +77,6 @@ paths:
         '200':
           description: Deleted.
 components:
-  parameters:
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   schemas:
     AutomationRule:
       type: object
@@ -114,6 +106,14 @@ components:
           type: array
           items:
             type: object
+  parameters:
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

@@ -159,16 +159,17 @@ components:
       schema:
         type: integer
   schemas:
-    bad_request_error:
-      title: data
+    canned_response_create_update_payload:
       type: object
       properties:
-        description:
+        content:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: Message content for canned response
+          example: Hello, {{contact.name}}! Welcome to our service.
+        short_code:
+          type: string
+          description: Short Code for quick access of the canned response
+          example: welcome
     canned_response:
       type: object
       properties:
@@ -190,17 +191,16 @@ components:
         updated_at:
           type: string
           description: The date and time when the canned response was updated
-    canned_response_create_update_payload:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        content:
+        description:
           type: string
-          description: Message content for canned response
-          example: Hello, {{contact.name}}! Welcome to our service.
-        short_code:
-          type: string
-          description: Short Code for quick access of the canned response
-          example: welcome
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:

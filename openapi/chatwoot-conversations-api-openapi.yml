@@ -732,14 +732,98 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    conversation_labels:
+    user:
       type: object
       properties:
-        payload:
+        id:
+          type: number
+        access_token:
+          type: string
+        account_id:
+          type: number
+        available_name:
+          type: string
+        avatar_url:
+          type: string
+        confirmed:
+          type: boolean
+        display_name:
+          type:
+          - string
+          - 'null'
+        message_signature:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        hmac_identifier:
+          type: string
+        inviter_id:
+          type:
+          - number
+          - 'null'
+        name:
+          type: string
+        provider:
+          type: string
+        pubsub_token:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        ui_settings:
+          type: object
+        uid:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+        custom_attributes:
+          type: object
+          description: Available for users who are created through platform APIs and has custom attributes associated.
+        accounts:
           type: array
-          description: Array of labels
           items:
-            type: string
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+              status:
+                type: string
+              active_at:
+                type:
+                - string
+                - 'null'
+                format: date-time
+              role:
+                type: string
+                enum:
+                - administrator
+                - agent
+              permissions:
+                type: array
+                items:
+                  type: string
+              availability:
+                type: string
+              availability_status:
+                type: string
+              auto_offline:
+                type: boolean
+              custom_role_id:
+                type:
+                - number
+                - 'null'
+              custom_role:
+                type:
+                - object
+                - 'null'
     message:
       type: object
       properties:
@@ -859,21 +943,6 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     conversation:
       type: object
       properties:
@@ -1063,158 +1132,6 @@ components:
                         hmac_verified:
                           type: boolean
                           description: Whether the hmac is verified
-    reporting_event:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the reporting event
-        name:
-          type: string
-          description: Name of the event (e.g., first_response, resolution, reply_time)
-        value:
-          type: number
-          format: double
-          description: Value of the metric in seconds
-        value_in_business_hours:
-          type: number
-          format: double
-          description: Value of the metric in seconds, calculated only for business hours
-        event_start_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event started
-        event_end_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event ended
-        account_id:
-          type: number
-          description: ID of the account
-        conversation_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the conversation
-        inbox_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the inbox
-        user_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the user/agent
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was created
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was last updated
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    user:
-      type: object
-      properties:
-        id:
-          type: number
-        access_token:
-          type: string
-        account_id:
-          type: number
-        available_name:
-          type: string
-        avatar_url:
-          type: string
-        confirmed:
-          type: boolean
-        display_name:
-          type:
-          - string
-          - 'null'
-        message_signature:
-          type:
-          - string
-          - 'null'
-        email:
-          type: string
-        hmac_identifier:
-          type: string
-        inviter_id:
-          type:
-          - number
-          - 'null'
-        name:
-          type: string
-        provider:
-          type: string
-        pubsub_token:
-          type: string
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-        ui_settings:
-          type: object
-        uid:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-        custom_attributes:
-          type: object
-          description: Available for users who are created through platform APIs and has custom attributes associated.
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-              name:
-                type: string
-              status:
-                type: string
-              active_at:
-                type:
-                - string
-                - 'null'
-                format: date-time
-              role:
-                type: string
-                enum:
-                - administrator
-                - agent
-              permissions:
-                type: array
-                items:
-                  type: string
-              availability:
-                type: string
-              availability_status:
-                type: string
-              auto_offline:
-                type: boolean
-              custom_role_id:
-                type:
-                - number
-                - 'null'
-              custom_role:
-                type:
-                - object
-                - 'null'
     conversation_show:
       type: object
       allOf:
@@ -1279,6 +1196,89 @@ components:
               hmac_verified:
                 type: boolean
                 description: Whether the hmac is verified
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    conversation_labels:
+      type: object
+      properties:
+        payload:
+          type: array
+          description: Array of labels
+          items:
+            type: string
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    reporting_event:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the reporting event
+        name:
+          type: string
+          description: Name of the event (e.g., first_response, resolution, reply_time)
+        value:
+          type: number
+          format: double
+          description: Value of the metric in seconds
+        value_in_business_hours:
+          type: number
+          format: double
+          description: Value of the metric in seconds, calculated only for business hours
+        event_start_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event started
+        event_end_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event ended
+        account_id:
+          type: number
+          description: ID of the account
+        conversation_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the conversation
+        inbox_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the inbox
+        user_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the user/agent
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was last updated
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     conversation_create_payload:
       type: object
       required:
@@ -1362,46 +1362,6 @@ components:
                   description: The processed param values for template variables in template
                   example:
                     '1': Chatwoot
-    ConversationList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            meta:
-              type: object
-            payload:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-    ConversationCreate:
-      type: object
-      required:
-      - source_id
-      - inbox_id
-      properties:
-        source_id:
-          type: string
-        inbox_id:
-          type: integer
-        contact_id:
-          type: integer
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-        assignee_id:
-          type: integer
-        team_id:
-          type: integer
-        message:
-          type: object
-          properties:
-            content:
-              type: string
     Conversation:
       type: object
       properties:
@@ -1438,6 +1398,46 @@ components:
         custom_attributes:
           type: object
           additionalProperties: true
+    ConversationCreate:
+      type: object
+      required:
+      - source_id
+      - inbox_id
+      properties:
+        source_id:
+          type: string
+        inbox_id:
+          type: integer
+        contact_id:
+          type: integer
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          - snoozed
+        assignee_id:
+          type: integer
+        team_id:
+          type: integer
+        message:
+          type: object
+          properties:
+            content:
+              type: string
+    ConversationList:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+            payload:
+              type: array
+              items:
+                $ref: '#/components/schemas/Conversation'
   parameters:
     account_id:
       in: path

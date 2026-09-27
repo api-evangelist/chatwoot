@@ -667,144 +667,6 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    agent_summary:
-      type: array
-      description: Agent summary report containing conversation statistics grouped by agent.
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The agent (user) ID
-          conversations_count:
-            type: number
-            description: Number of conversations assigned to the agent during the date range
-          resolved_conversations_count:
-            type: number
-            description: Number of conversations resolved by the agent during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
-      example:
-      - id: 1
-        conversations_count: 150
-        resolved_conversations_count: 120
-        avg_resolution_time: 3600
-        avg_first_response_time: 300
-        avg_reply_time: 600
-      - id: 2
-        conversations_count: 75
-        resolved_conversations_count: 60
-        avg_resolution_time: 1800
-        avg_first_response_time: 180
-        avg_reply_time: 420
-    account_summary:
-      type: object
-      properties:
-        avg_first_response_time:
-          type: string
-        avg_resolution_time:
-          type: string
-        conversations_count:
-          type: number
-        incoming_messages_count:
-          type: number
-        outgoing_messages_count:
-          type: number
-        resolutions_count:
-          type: number
-        previous:
-          type: object
-          properties:
-            avg_first_response_time:
-              type: string
-            avg_resolution_time:
-              type: string
-            conversations_count:
-              type: number
-            incoming_messages_count:
-              type: number
-            outgoing_messages_count:
-              type: number
-            resolutions_count:
-              type: number
-    reporting_event_meta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of reporting events
-        current_page:
-          type: integer
-          description: Current page number
-        total_pages:
-          type: integer
-          description: Total number of pages
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    team_summary:
-      type: array
-      description: Team summary report containing conversation statistics grouped by team.
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The team ID
-          conversations_count:
-            type: number
-            description: Number of conversations assigned to the team during the date range
-          resolved_conversations_count:
-            type: number
-            description: Number of conversations resolved by the team during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
-      example:
-      - id: 1
-        conversations_count: 250
-        resolved_conversations_count: 200
-        avg_resolution_time: 2800
-        avg_first_response_time: 240
-        avg_reply_time: 500
-      - id: 2
-        conversations_count: 180
-        resolved_conversations_count: 150
-        avg_resolution_time: 2400
-        avg_first_response_time: 200
-        avg_reply_time: 450
     inbox_summary:
       type: array
       description: Inbox summary report containing conversation statistics grouped by inbox.
@@ -848,15 +710,6 @@ components:
         avg_resolution_time: 1800
         avg_first_response_time: 180
         avg_reply_time: 420
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     inbox_label_matrix:
       type: object
       description: Inbox-label matrix report showing the count of conversations for each inbox-label combination.
@@ -912,38 +765,6 @@ components:
         - - 8
           - 12
           - 2
-    outgoing_messages_count:
-      type: array
-      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The ID of the grouped entity (agent, team, inbox, or label).
-          name:
-            type: string
-            description: The name of the grouped entity.
-          outgoing_messages_count:
-            type: number
-            description: The total number of outgoing messages for this entity in the given time range.
-      example:
-      - id: 1
-        name: Agent One
-        outgoing_messages_count: 42
-      - id: 2
-        name: Agent Two
-        outgoing_messages_count: 18
-    reporting_events_list_response:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/reporting_event_meta'
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/reporting_event'
-          description: List of reporting events
     channel_summary:
       type: object
       description: Channel summary report containing conversation counts grouped by channel type and status. Available in version 4.10.0+.
@@ -979,6 +800,152 @@ components:
           pending: 3
           snoozed: 1
           total: 24
+    account_summary:
+      type: object
+      properties:
+        avg_first_response_time:
+          type: string
+        avg_resolution_time:
+          type: string
+        conversations_count:
+          type: number
+        incoming_messages_count:
+          type: number
+        outgoing_messages_count:
+          type: number
+        resolutions_count:
+          type: number
+        previous:
+          type: object
+          properties:
+            avg_first_response_time:
+              type: string
+            avg_resolution_time:
+              type: string
+            conversations_count:
+              type: number
+            incoming_messages_count:
+              type: number
+            outgoing_messages_count:
+              type: number
+            resolutions_count:
+              type: number
+    agent_summary:
+      type: array
+      description: Agent summary report containing conversation statistics grouped by agent.
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The agent (user) ID
+          conversations_count:
+            type: number
+            description: Number of conversations assigned to the agent during the date range
+          resolved_conversations_count:
+            type: number
+            description: Number of conversations resolved by the agent during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
+      example:
+      - id: 1
+        conversations_count: 150
+        resolved_conversations_count: 120
+        avg_resolution_time: 3600
+        avg_first_response_time: 300
+        avg_reply_time: 600
+      - id: 2
+        conversations_count: 75
+        resolved_conversations_count: 60
+        avg_resolution_time: 1800
+        avg_first_response_time: 180
+        avg_reply_time: 420
+    agent_conversation_metrics:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        thumbnail:
+          type: string
+        availability:
+          type: string
+        metric:
+          type: object
+          properties:
+            open:
+              type: number
+            unattended:
+              type: number
+    team_summary:
+      type: array
+      description: Team summary report containing conversation statistics grouped by team.
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The team ID
+          conversations_count:
+            type: number
+            description: Number of conversations assigned to the team during the date range
+          resolved_conversations_count:
+            type: number
+            description: Number of conversations resolved by the team during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
+      example:
+      - id: 1
+        conversations_count: 250
+        resolved_conversations_count: 200
+        avg_resolution_time: 2800
+        avg_first_response_time: 240
+        avg_reply_time: 500
+      - id: 2
+        conversations_count: 180
+        resolved_conversations_count: 150
+        avg_resolution_time: 2400
+        avg_first_response_time: 200
+        avg_reply_time: 450
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     first_response_time_distribution:
       type: object
       description: First response time distribution report grouped by channel type. Shows the count of conversations with first response times in different time buckets.
@@ -1014,6 +981,16 @@ components:
           4-8h: 20
           8-24h: 10
           24h+: 5
+    reporting_events_list_response:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/reporting_event_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/reporting_event'
+          description: List of reporting events
     reporting_event:
       type: object
       properties:
@@ -1065,26 +1042,49 @@ components:
           type: string
           format: date-time
           description: The timestamp when the reporting event was last updated
-    agent_conversation_metrics:
+    reporting_event_meta:
       type: object
       properties:
-        id:
-          type: number
-        name:
+        count:
+          type: integer
+          description: Total number of reporting events
+        current_page:
+          type: integer
+          description: Current page number
+        total_pages:
+          type: integer
+          description: Total number of pages
+    request_error:
+      type: object
+      properties:
+        field:
           type: string
-        email:
+        message:
           type: string
-        thumbnail:
+        code:
           type: string
-        availability:
-          type: string
-        metric:
-          type: object
-          properties:
-            open:
-              type: number
-            unattended:
-              type: number
+    outgoing_messages_count:
+      type: array
+      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The ID of the grouped entity (agent, team, inbox, or label).
+          name:
+            type: string
+            description: The name of the grouped entity.
+          outgoing_messages_count:
+            type: number
+            description: The total number of outgoing messages for this entity in the given time range.
+      example:
+      - id: 1
+        name: Agent One
+        outgoing_messages_count: 42
+      - id: 2
+        name: Agent Two
+        outgoing_messages_count: 18
   parameters:
     account_id:
       in: path
@@ -1093,14 +1093,6 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
-    page:
-      in: query
-      name: page
-      schema:
-        type: integer
-        default: 1
-      required: false
-      description: The page parameter
     report_type:
       in: query
       name: type
@@ -1128,6 +1120,14 @@ components:
         - resolutions_count
       required: true
       description: The type of metric
+    page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+      required: false
+      description: The page parameter
     AccountId:
       name: account_id
       in: path
