@@ -92,18 +92,18 @@ components:
       description: The display id of the conversation.
       schema:
         type: integer
-    ContactIdentifier:
-      name: contact_identifier
-      in: path
-      required: true
-      description: The source_id / contact identifier returned when the client contact was created.
-      schema:
-        type: string
     InboxIdentifier:
       name: inbox_identifier
       in: path
       required: true
       description: The public inbox identifier (channel/web-widget identifier).
+      schema:
+        type: string
+    ContactIdentifier:
+      name: contact_identifier
+      in: path
+      required: true
+      description: The source_id / contact identifier returned when the client contact was created.
       schema:
         type: string
   securitySchemes:

@@ -100,21 +100,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
-    public_contact_identifier:
-      in: path
-      name: contact_identifier
-      schema:
-        type: string
-      required: true
-      description: The source id of contact obtained on contact create
   schemas:
     public_contact_record:
       type: object
@@ -210,43 +195,6 @@ components:
           description: Labels applied to the contact
           items:
             type: string
-    public_contact:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the contact
-        source_id:
-          type: string
-          description: The session identifier of the contact
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the contact when available
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email of the contact
-        phone_number:
-          type:
-          - string
-          - 'null'
-          description: Phone number of the contact
-        pubsub_token:
-          type: string
-          description: The token to be used to connect to chatwoot websocket
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     public_contact_create_update_payload:
       type: object
       properties:
@@ -287,6 +235,58 @@ components:
           type: string
         code:
           type: string
+    public_contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        source_id:
+          type: string
+          description: The session identifier of the contact
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the contact when available
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email of the contact
+        phone_number:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the contact
+        pubsub_token:
+          type: string
+          description: The token to be used to connect to chatwoot websocket
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  parameters:
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
   securitySchemes:
     userApiKey:
       type: apiKey

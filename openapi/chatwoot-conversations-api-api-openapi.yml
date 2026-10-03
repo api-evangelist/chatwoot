@@ -206,13 +206,133 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    public_conversation_create_payload:
+    public_conversation:
       type: object
       properties:
+        id:
+          type: integer
+          description: Id of the conversation
+        uuid:
+          type: string
+          description: UUID of the conversation
+        inbox_id:
+          type: integer
+          description: The inbox id of the conversation
+        contact_last_seen_at:
+          type: integer
+          description: Timestamp of when the contact last seen the conversation (Unix timestamp)
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          - snoozed
+          description: The status of the conversation
+        agent_last_seen_at:
+          type: integer
+          description: Timestamp of when the agent last seen the conversation (Unix timestamp)
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/public_message'
+          description: Messages in the conversation
+        contact:
+          $ref: '#/components/schemas/public_contact_record'
+    public_contact_record:
+      type: object
+      additionalProperties: true
+      description: Full serialized contact record returned when the public API renders a Contact model directly.
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the contact when available
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email of the contact
+        phone_number:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the contact
+        identifier:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the contact
+        blocked:
+          type: boolean
+          description: Whether the contact is blocked
+        additional_attributes:
+          type:
+          - object
+          - 'null'
+          description: Additional attributes of the contact when present
         custom_attributes:
-          type: object
-          description: Custom attributes of the conversation
-          example: {}
+          type:
+          - object
+          - 'null'
+          description: Custom attributes of the contact when present
+        contact_type:
+          type:
+          - string
+          - 'null'
+          description: Contact type of the contact when available
+        country_code:
+          type:
+          - string
+          - 'null'
+          description: Country code of the contact
+        last_activity_at:
+          type:
+          - string
+          - 'null'
+          description: Last activity timestamp of the contact in ISO 8601 format
+        created_at:
+          type:
+          - string
+          - 'null'
+          description: Created timestamp of the contact in ISO 8601 format
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Updated timestamp of the contact in ISO 8601 format
+        last_name:
+          type:
+          - string
+          - 'null'
+          description: Last name of the contact
+        middle_name:
+          type:
+          - string
+          - 'null'
+          description: Middle name of the contact
+        location:
+          type:
+          - string
+          - 'null'
+          description: Location of the contact
+        account_id:
+          type: integer
+          description: Account id of the contact
+        company_id:
+          type:
+          - integer
+          - 'null'
+          description: Company id of the contact
+        label_list:
+          type: array
+          description: Labels applied to the contact
+          items:
+            type: string
     public_message_sender:
       type: object
       additionalProperties: true
@@ -321,6 +441,22 @@ components:
             $ref: '#/components/schemas/public_message_attachment'
         sender:
           $ref: '#/components/schemas/public_message_sender'
+    public_conversation_create_payload:
+      type: object
+      properties:
+        custom_attributes:
+          type: object
+          description: Custom attributes of the conversation
+          example: {}
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     public_message_attachment:
       type: object
       additionalProperties: true
@@ -395,100 +531,6 @@ components:
         transcribed_text:
           type: string
           description: Transcribed text for audio attachments
-    public_contact_record:
-      type: object
-      additionalProperties: true
-      description: Full serialized contact record returned when the public API renders a Contact model directly.
-      properties:
-        id:
-          type: integer
-          description: Id of the contact
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the contact when available
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email of the contact
-        phone_number:
-          type:
-          - string
-          - 'null'
-          description: Phone number of the contact
-        identifier:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the contact
-        blocked:
-          type: boolean
-          description: Whether the contact is blocked
-        additional_attributes:
-          type:
-          - object
-          - 'null'
-          description: Additional attributes of the contact when present
-        custom_attributes:
-          type:
-          - object
-          - 'null'
-          description: Custom attributes of the contact when present
-        contact_type:
-          type:
-          - string
-          - 'null'
-          description: Contact type of the contact when available
-        country_code:
-          type:
-          - string
-          - 'null'
-          description: Country code of the contact
-        last_activity_at:
-          type:
-          - string
-          - 'null'
-          description: Last activity timestamp of the contact in ISO 8601 format
-        created_at:
-          type:
-          - string
-          - 'null'
-          description: Created timestamp of the contact in ISO 8601 format
-        updated_at:
-          type:
-          - string
-          - 'null'
-          description: Updated timestamp of the contact in ISO 8601 format
-        last_name:
-          type:
-          - string
-          - 'null'
-          description: Last name of the contact
-        middle_name:
-          type:
-          - string
-          - 'null'
-          description: Middle name of the contact
-        location:
-          type:
-          - string
-          - 'null'
-          description: Location of the contact
-        account_id:
-          type: integer
-          description: Account id of the contact
-        company_id:
-          type:
-          - integer
-          - 'null'
-          description: Company id of the contact
-        label_list:
-          type: array
-          description: Labels applied to the contact
-          items:
-            type: string
     bad_request_error:
       title: data
       type: object
@@ -499,56 +541,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    public_conversation:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the conversation
-        uuid:
-          type: string
-          description: UUID of the conversation
-        inbox_id:
-          type: integer
-          description: The inbox id of the conversation
-        contact_last_seen_at:
-          type: integer
-          description: Timestamp of when the contact last seen the conversation (Unix timestamp)
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-          description: The status of the conversation
-        agent_last_seen_at:
-          type: integer
-          description: Timestamp of when the agent last seen the conversation (Unix timestamp)
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/public_message'
-          description: Messages in the conversation
-        contact:
-          $ref: '#/components/schemas/public_contact_record'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
     public_contact_identifier:
       in: path
       name: contact_identifier
@@ -556,6 +549,13 @@ components:
         type: string
       required: true
       description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
     conversation_id:
       in: path
       name: conversation_id

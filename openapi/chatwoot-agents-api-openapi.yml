@@ -143,31 +143,22 @@ paths:
     servers:
     - url: https://app.chatwoot.com/
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   schemas:
-    agent_update_payload:
-      type: object
-      required:
-      - role
-      properties:
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: Whether its administrator or agent
-          example: agent
-        availability:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          description: The configured availability of the agent.
-          example: online
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-          example: true
     agent_create_payload:
       type: object
       required:
@@ -202,16 +193,6 @@ components:
           type: boolean
           description: Whether the agent is automatically marked offline when they are away.
           example: true
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:
@@ -221,6 +202,30 @@ components:
           type: string
         code:
           type: string
+    agent_update_payload:
+      type: object
+      required:
+      - role
+      properties:
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: Whether its administrator or agent
+          example: agent
+        availability:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          description: The configured availability of the agent.
+          example: online
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+          example: true
     agent:
       type: object
       properties:
@@ -265,6 +270,16 @@ components:
           - integer
           - 'null'
           description: The custom role id of the agent
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     AgentUpdate:
       type: object
       properties:
@@ -279,19 +294,6 @@ components:
           - online
           - offline
           - busy
-    AgentCreate:
-      type: object
-      required:
-      - email
-      - role
-      properties:
-        email:
-          type: string
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
     Agent:
       type: object
       properties:
@@ -314,21 +316,19 @@ components:
           - busy
         confirmed:
           type: boolean
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
+    AgentCreate:
+      type: object
+      required:
+      - email
+      - role
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
   securitySchemes:
     userApiKey:
       type: apiKey

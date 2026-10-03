@@ -170,6 +170,15 @@ components:
           type: string
           description: Short Code for quick access of the canned response
           example: welcome
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     canned_response:
       type: object
       properties:
@@ -201,15 +210,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     CannedResponse:
       type: object
       required:

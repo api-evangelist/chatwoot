@@ -157,6 +157,29 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    user_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the user
+          example: Daniel
+        display_name:
+          type: string
+          description: Display name of the user
+          example: Dan
+        email:
+          type: string
+          description: Email of the user
+          example: daniel@acme.inc
+        password:
+          type: string
+          description: Password must contain uppercase, lowercase letters, number and a special character
+          example: Password2!
+        custom_attributes:
+          type: object
+          description: Custom attributes you want to associate with the user
+          example: {}
     user:
       type: object
       properties:
@@ -249,29 +272,15 @@ components:
                 type:
                 - object
                 - 'null'
-    user_create_update_payload:
+    request_error:
       type: object
       properties:
-        name:
+        field:
           type: string
-          description: Name of the user
-          example: Daniel
-        display_name:
+        message:
           type: string
-          description: Display name of the user
-          example: Dan
-        email:
+        code:
           type: string
-          description: Email of the user
-          example: daniel@acme.inc
-        password:
-          type: string
-          description: Password must contain uppercase, lowercase letters, number and a special character
-          example: Password2!
-        custom_attributes:
-          type: object
-          description: Custom attributes you want to associate with the user
-          example: {}
     bad_request_error:
       title: data
       type: object
@@ -282,15 +291,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     platform_user_id:
       in: path

@@ -116,16 +116,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     request_error:
       type: object
       properties:
@@ -227,6 +217,16 @@ components:
                 type:
                 - object
                 - 'null'
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

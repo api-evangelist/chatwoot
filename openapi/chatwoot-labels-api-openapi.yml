@@ -218,6 +218,15 @@ components:
           type: boolean
           description: Whether the label should appear in the sidebar
           example: true
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     label:
       type: object
       properties:
@@ -246,15 +255,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     Label:
       type: object
       properties:

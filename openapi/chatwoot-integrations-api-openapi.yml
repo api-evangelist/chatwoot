@@ -137,9 +137,61 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    integrations_hook:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the integration hook
+        app_id:
+          type: string
+          description: The ID of the integration app
+        inbox_id:
+          type: string
+          description: Inbox ID if its an Inbox integration
+        account_id:
+          type: string
+          description: Account ID of the integration
+        status:
+          type: boolean
+          description: Whether the integration hook is enabled for the account
+        hook_type:
+          type: boolean
+          description: Whether its an account or inbox integration hook
+        settings:
+          type: object
+          description: The associated settings for the integration
     integrations_hook_update_payload:
       type: object
       properties:
+        status:
+          type: integer
+          description: The status of the integration (0 for inactive, 1 for active)
+          example: 1
+        settings:
+          type: object
+          description: The settings required by the integration
+          example: {}
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    integrations_hook_create_payload:
+      type: object
+      properties:
+        app_id:
+          type: integer
+          description: The ID of app for which integration hook is being created
+          example: 1
+        inbox_id:
+          type: integer
+          description: The inbox ID, if the hook is an inbox hook
+          example: 1
         status:
           type: integer
           description: The status of the integration (0 for inactive, 1 for active)
@@ -184,58 +236,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    integrations_hook_create_payload:
-      type: object
-      properties:
-        app_id:
-          type: integer
-          description: The ID of app for which integration hook is being created
-          example: 1
-        inbox_id:
-          type: integer
-          description: The inbox ID, if the hook is an inbox hook
-          example: 1
-        status:
-          type: integer
-          description: The status of the integration (0 for inactive, 1 for active)
-          example: 1
-        settings:
-          type: object
-          description: The settings required by the integration
-          example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    integrations_hook:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the integration hook
-        app_id:
-          type: string
-          description: The ID of the integration app
-        inbox_id:
-          type: string
-          description: Inbox ID if its an Inbox integration
-        account_id:
-          type: string
-          description: Account ID of the integration
-        status:
-          type: boolean
-          description: Whether the integration hook is enabled for the account
-        hook_type:
-          type: boolean
-          description: Whether its an account or inbox integration hook
-        settings:
-          type: object
-          description: The associated settings for the integration
   parameters:
     account_id:
       in: path

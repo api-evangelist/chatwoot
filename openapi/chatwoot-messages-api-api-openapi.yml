@@ -100,6 +100,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
   schemas:
     public_message_sender:
       type: object
@@ -209,6 +238,46 @@ components:
             $ref: '#/components/schemas/public_message_attachment'
         sender:
           $ref: '#/components/schemas/public_message_sender'
+    public_message_update_payload:
+      type: object
+      properties:
+        submitted_values:
+          type: object
+          description: Replies to the Bot Message Types
+          properties:
+            name:
+              type: string
+              description: The name of the submiitted value
+              example: My Name
+            title:
+              type: string
+              description: The title of the submitted value
+              example: My Title
+            value:
+              type: string
+              description: The value of the submitted value
+              example: value
+            csat_survey_response:
+              type: object
+              description: The CSAT survey response
+              properties:
+                feedback_message:
+                  type: string
+                  description: The feedback message of the CSAT survey response
+                  example: Great service!
+                rating:
+                  type: integer
+                  description: The rating of the CSAT survey response
+                  example: 5
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     public_message_create_payload:
       type: object
       properties:
@@ -294,37 +363,6 @@ components:
         transcribed_text:
           type: string
           description: Transcribed text for audio attachments
-    public_message_update_payload:
-      type: object
-      properties:
-        submitted_values:
-          type: object
-          description: Replies to the Bot Message Types
-          properties:
-            name:
-              type: string
-              description: The name of the submiitted value
-              example: My Name
-            title:
-              type: string
-              description: The title of the submitted value
-              example: My Title
-            value:
-              type: string
-              description: The value of the submitted value
-              example: value
-            csat_survey_response:
-              type: object
-              description: The CSAT survey response
-              properties:
-                feedback_message:
-                  type: string
-                  description: The feedback message of the CSAT survey response
-                  example: Great service!
-                rating:
-                  type: integer
-                  description: The rating of the CSAT survey response
-                  example: 5
     bad_request_error:
       title: data
       type: object
@@ -335,44 +373,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-  parameters:
-    message_id:
-      in: path
-      name: message_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the message
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
-    public_contact_identifier:
-      in: path
-      name: contact_identifier
-      schema:
-        type: string
-      required: true
-      description: The source id of contact obtained on contact create
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
   securitySchemes:
     userApiKey:
       type: apiKey

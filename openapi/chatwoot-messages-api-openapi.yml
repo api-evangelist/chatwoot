@@ -335,58 +335,155 @@ paths:
     servers:
     - url: https://app.chatwoot.com/
 components:
+  parameters:
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
   schemas:
-    contact:
+    conversation_message_create_payload:
       type: object
+      required:
+      - content
       properties:
-        payload:
-          type: array
-          items:
-            type: object
-            properties:
-              additional_attributes:
-                type: object
-                description: The object containing additional attributes related to the contact
-              availability_status:
-                type: string
-                description: The availability status of the contact
-              email:
-                type: string
-                description: The email address of the contact
-              id:
-                type: integer
-                description: The ID of the contact
-              name:
-                type: string
-                description: The name of the contact
-              phone_number:
-                type: string
-                description: The phone number of the contact
-              blocked:
-                type: boolean
-                description: Whether the contact is blocked
-              identifier:
-                type: string
-                description: The identifier of the contact
-              thumbnail:
-                type: string
-                description: The thumbnail of the contact
-              custom_attributes:
-                type: object
-                description: The custom attributes of the contact
-                example:
-                  attribute_key: attribute_value
-                  signed_up_at: dd/mm/yyyy
-              last_activity_at:
-                type: integer
-                description: The last activity at of the contact
-              created_at:
-                type: integer
-                description: The created at of the contact
-              contact_inboxes:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_inboxes'
+        content:
+          type: string
+          description: The content of the message
+          example: Hello, how can I help you?
+        message_type:
+          type: string
+          enum:
+          - outgoing
+          - incoming
+          description: The type of the message
+          example: outgoing
+        private:
+          type: boolean
+          description: Flag to identify if it is a private note
+          example: false
+        content_type:
+          type: string
+          enum:
+          - text
+          - input_email
+          - cards
+          - input_select
+          - form
+          - article
+          description: Content type of the message
+          example: text
+        content_attributes:
+          type: object
+          description: Attributes based on the content type
+          example: {}
+        campaign_id:
+          type: integer
+          description: The campaign id to which the message belongs
+          example: 1
+        template_params:
+          type: object
+          description: WhatsApp template parameters for sending structured messages
+          required:
+          - name
+          - category
+          - language
+          - processed_params
+          properties:
+            name:
+              type: string
+              description: Name of the WhatsApp template (must be approved in WhatsApp Business Manager)
+              example: purchase_receipt
+            category:
+              type: string
+              enum:
+              - UTILITY
+              - MARKETING
+              - SHIPPING_UPDATE
+              - TICKET_UPDATE
+              - ISSUE_RESOLUTION
+              description: Category of the template
+              example: UTILITY
+            language:
+              type: string
+              description: Language code of the template (BCP 47 format)
+              example: en_US
+            processed_params:
+              type: object
+              description: Processed template parameters organized by component type
+              properties:
+                body:
+                  type: object
+                  description: Body component parameters with variable placeholders
+                  additionalProperties:
+                    type: string
+                  example:
+                    '1': Visa
+                    '2': Nike
+                    '3': Bill
+                header:
+                  type: object
+                  description: Header component parameters for media templates
+                  properties:
+                    media_url:
+                      type: string
+                      format: uri
+                      description: Publicly accessible URL for IMAGE, VIDEO, or DOCUMENT headers
+                      example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+                    media_type:
+                      type: string
+                      enum:
+                      - image
+                      - video
+                      - document
+                      description: Type of media for the header
+                      example: document
+                buttons:
+                  type: array
+                  description: Button component parameters for interactive templates
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                        - url
+                        - copy_code
+                        description: Type of button parameter
+                      parameter:
+                        type: string
+                        description: Dynamic parameter value for the button
+                        example: SSFSDFSD
     message:
       type: object
       properties:
@@ -506,154 +603,57 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    conversation_message_create_payload:
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          type: string
-          description: The content of the message
-          example: Hello, how can I help you?
-        message_type:
-          type: string
-          enum:
-          - outgoing
-          - incoming
-          description: The type of the message
-          example: outgoing
-        private:
-          type: boolean
-          description: Flag to identify if it is a private note
-          example: false
-        content_type:
-          type: string
-          enum:
-          - text
-          - input_email
-          - cards
-          - input_select
-          - form
-          - article
-          description: Content type of the message
-          example: text
-        content_attributes:
-          type: object
-          description: Attributes based on the content type
-          example: {}
-        campaign_id:
-          type: integer
-          description: The campaign id to which the message belongs
-          example: 1
-        template_params:
-          type: object
-          description: WhatsApp template parameters for sending structured messages
-          required:
-          - name
-          - category
-          - language
-          - processed_params
-          properties:
-            name:
-              type: string
-              description: Name of the WhatsApp template (must be approved in WhatsApp Business Manager)
-              example: purchase_receipt
-            category:
-              type: string
-              enum:
-              - UTILITY
-              - MARKETING
-              - SHIPPING_UPDATE
-              - TICKET_UPDATE
-              - ISSUE_RESOLUTION
-              description: Category of the template
-              example: UTILITY
-            language:
-              type: string
-              description: Language code of the template (BCP 47 format)
-              example: en_US
-            processed_params:
-              type: object
-              description: Processed template parameters organized by component type
-              properties:
-                body:
-                  type: object
-                  description: Body component parameters with variable placeholders
-                  additionalProperties:
-                    type: string
-                  example:
-                    '1': Visa
-                    '2': Nike
-                    '3': Bill
-                header:
-                  type: object
-                  description: Header component parameters for media templates
-                  properties:
-                    media_url:
-                      type: string
-                      format: uri
-                      description: Publicly accessible URL for IMAGE, VIDEO, or DOCUMENT headers
-                      example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
-                    media_type:
-                      type: string
-                      enum:
-                      - image
-                      - video
-                      - document
-                      description: Type of media for the header
-                      example: document
-                buttons:
-                  type: array
-                  description: Button component parameters for interactive templates
-                  items:
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        enum:
-                        - url
-                        - copy_code
-                        description: Type of button parameter
-                      parameter:
-                        type: string
-                        description: Dynamic parameter value for the button
-                        example: SSFSDFSD
-    bad_request_error:
-      title: data
+    contact:
       type: object
       properties:
-        description:
-          type: string
-        errors:
+        payload:
           type: array
           items:
-            $ref: '#/components/schemas/request_error'
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
-    inbox_contact:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the inbox
-        avatar_url:
-          type: string
-          description: The avatar image of the inbox
-        channel_id:
-          type: number
-          description: The ID of the channel
-        name:
-          type: string
-          description: The name of the inbox
-        channel_type:
-          type: string
-          description: The type of the inbox
-        provider:
-          type: string
-          description: The provider of the inbox
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
     request_error:
       type: object
       properties:
@@ -707,6 +707,11 @@ components:
           - integer
           - 'null'
           description: The custom role id of the agent
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
     contact_inboxes:
       type: object
       properties:
@@ -715,6 +720,54 @@ components:
           description: Contact Inbox Source Id
         inbox:
           $ref: '#/components/schemas/inbox_contact'
+    inbox_contact:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the inbox
+        avatar_url:
+          type: string
+          description: The avatar image of the inbox
+        channel_id:
+          type: number
+          description: The ID of the channel
+        name:
+          type: string
+          description: The name of the inbox
+        channel_type:
+          type: string
+          description: The type of the inbox
+        provider:
+          type: string
+          description: The provider of the inbox
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    MessageCreate:
+      type: object
+      properties:
+        content:
+          type: string
+        message_type:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+        private:
+          type: boolean
+        content_type:
+          type: string
+        content_attributes:
+          type: object
+          additionalProperties: true
     Message:
       type: object
       properties:
@@ -737,59 +790,6 @@ components:
           type: object
         created_at:
           type: integer
-    MessageCreate:
-      type: object
-      properties:
-        content:
-          type: string
-        message_type:
-          type: string
-          enum:
-          - incoming
-          - outgoing
-        private:
-          type: boolean
-        content_type:
-          type: string
-        content_attributes:
-          type: object
-          additionalProperties: true
-  parameters:
-    message_id:
-      in: path
-      name: message_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the message
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

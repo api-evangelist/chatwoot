@@ -301,6 +301,15 @@ components:
             description: Single automation rule (for show/create/update endpoints)
             allOf:
             - $ref: '#/components/schemas/automation_rule_item'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     automation_rule_create_update_payload:
       type: object
       properties:
@@ -344,15 +353,6 @@ components:
               query_operator: OR
               values:
               - help
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     account_id:
       in: path

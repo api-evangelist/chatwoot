@@ -38,6 +38,121 @@ paths:
                 $ref: '#/components/schemas/conversation_messages'
 components:
   schemas:
+    conversation_messages:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/conversation_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/message_detailed'
+          description: List of messages in the conversation
+    conversation_meta:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels associated with the conversation
+        additional_attributes:
+          type: object
+          properties:
+            browser:
+              type: object
+              properties:
+                device_name:
+                  type: string
+                  description: Name of the device
+                browser_name:
+                  type: string
+                  description: Name of the browser
+                platform_name:
+                  type: string
+                  description: Name of the platform
+                browser_version:
+                  type: string
+                  description: Version of the browser
+                platform_version:
+                  type: string
+                  description: Version of the platform
+            referer:
+              type: string
+              description: Referrer URL
+            initiated_at:
+              type: object
+              properties:
+                timestamp:
+                  type: string
+                  description: Timestamp when the conversation was initiated
+            browser_language:
+              type: string
+              description: Browser language setting
+            conversation_language:
+              type: string
+              description: Conversation language
+          description: Additional attributes of the conversation
+        contact:
+          $ref: '#/components/schemas/contact_detail'
+        assignee:
+          allOf:
+          - $ref: '#/components/schemas/agent'
+          description: The agent assigned to the conversation
+        agent_last_seen_at:
+          type:
+          - string
+          - 'null'
+          description: Timestamp when the agent last saw the conversation
+        assignee_last_seen_at:
+          type:
+          - string
+          - 'null'
+          description: Timestamp when the assignee last saw the conversation
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          type:
+          - integer
+          - 'null'
+          description: The custom role id of the agent
     message_detailed:
       type: object
       properties:
@@ -151,67 +266,6 @@ components:
               file_size:
                 type: number
                 description: The size of the attached file in bytes
-    conversation_meta:
-      type: object
-      properties:
-        labels:
-          type: array
-          items:
-            type: string
-          description: Labels associated with the conversation
-        additional_attributes:
-          type: object
-          properties:
-            browser:
-              type: object
-              properties:
-                device_name:
-                  type: string
-                  description: Name of the device
-                browser_name:
-                  type: string
-                  description: Name of the browser
-                platform_name:
-                  type: string
-                  description: Name of the platform
-                browser_version:
-                  type: string
-                  description: Version of the browser
-                platform_version:
-                  type: string
-                  description: Version of the platform
-            referer:
-              type: string
-              description: Referrer URL
-            initiated_at:
-              type: object
-              properties:
-                timestamp:
-                  type: string
-                  description: Timestamp when the conversation was initiated
-            browser_language:
-              type: string
-              description: Browser language setting
-            conversation_language:
-              type: string
-              description: Conversation language
-          description: Additional attributes of the conversation
-        contact:
-          $ref: '#/components/schemas/contact_detail'
-        assignee:
-          allOf:
-          - $ref: '#/components/schemas/agent'
-          description: The agent assigned to the conversation
-        agent_last_seen_at:
-          type:
-          - string
-          - 'null'
-          description: Timestamp when the agent last saw the conversation
-        assignee_last_seen_at:
-          type:
-          - string
-          - 'null'
-          description: Timestamp when the assignee last saw the conversation
     contact_detail:
       type: object
       properties:
@@ -266,60 +320,6 @@ components:
           description: The type of entity
           enum:
           - contact
-    agent:
-      type: object
-      properties:
-        id:
-          type: integer
-        account_id:
-          type: integer
-        availability_status:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          readOnly: true
-          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-        confirmed:
-          type: boolean
-          description: Whether the agent has confirmed their email address.
-        email:
-          type: string
-          description: The email of the agent
-        available_name:
-          type: string
-          description: The available name of the agent
-        name:
-          type: string
-          description: The name of the agent
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: The role of the agent
-        thumbnail:
-          type: string
-          description: The thumbnail of the agent
-        custom_role_id:
-          type:
-          - integer
-          - 'null'
-          description: The custom role id of the agent
-    conversation_messages:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/conversation_meta'
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/message_detailed'
-          description: List of messages in the conversation
   parameters:
     account_id:
       in: path
