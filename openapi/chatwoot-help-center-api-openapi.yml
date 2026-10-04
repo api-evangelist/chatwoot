@@ -311,69 +311,6 @@ components:
             - article_name
             title: article title
             description: article description
-    category:
-      type: object
-      properties:
-        id:
-          type: integer
-        description:
-          type: string
-          description: The text content.
-        locale:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        position:
-          type: integer
-        portal_id:
-          type: integer
-        account_id:
-          type: integer
-        associated_category_id:
-          type: integer
-          description: To associate similar categories to each other, e.g same category of product documentation in different languages
-        parent_category_id:
-          type: integer
-          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
-    article:
-      type: object
-      properties:
-        id:
-          type: integer
-        content:
-          type: string
-          description: The text content.
-        meta:
-          type: object
-        position:
-          type: integer
-        status:
-          type: integer
-          enum:
-          - draft
-          - published
-          - archived
-        title:
-          type: string
-        slug:
-          type: string
-        views:
-          type: integer
-        portal_id:
-          type: integer
-        account_id:
-          type: integer
-        author_id:
-          type: integer
-        category_id:
-          type: integer
-        folder_id:
-          type: integer
-        associated_article_id:
-          type: integer
-          description: To associate similar articles to each other, e.g to provide the link for the reference.
     portal_item:
       type: object
       properties:
@@ -415,140 +352,16 @@ components:
           $ref: '#/components/schemas/portal_logo'
         meta:
           $ref: '#/components/schemas/portal_meta'
-    portal_create_update_payload:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        color:
+        description:
           type: string
-          description: Header color for help-center in hex format
-          example: '#FFFFFF'
-        custom_domain:
-          type: string
-          description: Custom domain to display help center.
-          example: chatwoot.help
-        header_text:
-          type: string
-          description: Help center header
-          example: Handbook
-        homepage_link:
-          type: string
-          description: link to main dashboard
-          example: https://www.chatwoot.com/
-        name:
-          type: string
-          description: Name for the portal
-          example: Handbook
-        page_title:
-          type: string
-          description: Page title for the portal
-          example: Handbook
-        slug:
-          type: string
-          description: Slug for the portal to display in link
-          example: handbook
-        archived:
-          type: boolean
-          description: Status to check if portal is live
-          example: false
-        config:
-          type: object
-          description: Configuration about supporting locales
-          example:
-            allowed_locales:
-            - en
-            - es
-            default_locale: en
-    portal_meta:
-      type: object
-      properties:
-        all_articles_count:
-          type: integer
-          description: Total number of articles
-        archived_articles_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of archived articles
-        published_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of published articles
-        draft_articles_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of draft articles
-        categories_count:
-          type: integer
-          description: Number of categories
-        default_locale:
-          type: string
-          description: Default locale for the portal
-    portal:
-      type: object
-      properties:
-        payload:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/portal_item'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    portal_logo:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: ID of the logo file
-        portal_id:
-          type: integer
-          description: ID of the portal this logo belongs to
-        file_type:
-          type: string
-          description: MIME type of the file
-        account_id:
-          type: integer
-          description: ID of the account
-        file_url:
-          type: string
-          description: URL to access the logo file
-        blob_id:
-          type: integer
-          description: ID of the blob
-        filename:
-          type: string
-          description: Name of the file
-    portal_config:
-      type: object
-      description: Configuration settings for the portal
-      properties:
-        allowed_locales:
-          type: array
-          description: List of allowed locales for the portal
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                description: The language code
-              articles_count:
-                type: integer
-                description: Number of articles in this locale
-              categories_count:
-                type: integer
-                description: Number of categories in this locale
-    portal_single:
-      type: object
-      properties:
-        payload:
-          $ref: '#/components/schemas/portal_item'
+            $ref: '#/components/schemas/request_error'
     category_create_update_payload:
       type: object
       properties:
@@ -584,6 +397,51 @@ components:
           type: integer
           description: To associate similar categories to each other, e.g same category of product documentation in different languages
           example: 2
+    portal_config:
+      type: object
+      description: Configuration settings for the portal
+      properties:
+        allowed_locales:
+          type: array
+          description: List of allowed locales for the portal
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The language code
+              articles_count:
+                type: integer
+                description: Number of articles in this locale
+              categories_count:
+                type: integer
+                description: Number of categories in this locale
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+          description: The text content.
+        locale:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        position:
+          type: integer
+        portal_id:
+          type: integer
+        account_id:
+          type: integer
+        associated_category_id:
+          type: integer
+          description: To associate similar categories to each other, e.g same category of product documentation in different languages
+        parent_category_id:
+          type: integer
+          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
     inbox:
       type: object
       properties:
@@ -740,24 +598,159 @@ components:
           - string
           - 'null'
           description: Provider of the channel
-    bad_request_error:
-      title: data
+    article:
       type: object
       properties:
-        description:
+        id:
+          type: integer
+        content:
           type: string
-        errors:
+          description: The text content.
+        meta:
+          type: object
+        position:
+          type: integer
+        status:
+          type: integer
+          enum:
+          - draft
+          - published
+          - archived
+        title:
+          type: string
+        slug:
+          type: string
+        views:
+          type: integer
+        portal_id:
+          type: integer
+        account_id:
+          type: integer
+        author_id:
+          type: integer
+        category_id:
+          type: integer
+        folder_id:
+          type: integer
+        associated_article_id:
+          type: integer
+          description: To associate similar articles to each other, e.g to provide the link for the reference.
+    portal_single:
+      type: object
+      properties:
+        payload:
+          $ref: '#/components/schemas/portal_item'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    portal_meta:
+      type: object
+      properties:
+        all_articles_count:
+          type: integer
+          description: Total number of articles
+        archived_articles_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of archived articles
+        published_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of published articles
+        draft_articles_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of draft articles
+        categories_count:
+          type: integer
+          description: Number of categories
+        default_locale:
+          type: string
+          description: Default locale for the portal
+    portal_logo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the logo file
+        portal_id:
+          type: integer
+          description: ID of the portal this logo belongs to
+        file_type:
+          type: string
+          description: MIME type of the file
+        account_id:
+          type: integer
+          description: ID of the account
+        file_url:
+          type: string
+          description: URL to access the logo file
+        blob_id:
+          type: integer
+          description: ID of the blob
+        filename:
+          type: string
+          description: Name of the file
+    portal_create_update_payload:
+      type: object
+      properties:
+        color:
+          type: string
+          description: Header color for help-center in hex format
+          example: '#FFFFFF'
+        custom_domain:
+          type: string
+          description: Custom domain to display help center.
+          example: chatwoot.help
+        header_text:
+          type: string
+          description: Help center header
+          example: Handbook
+        homepage_link:
+          type: string
+          description: link to main dashboard
+          example: https://www.chatwoot.com/
+        name:
+          type: string
+          description: Name for the portal
+          example: Handbook
+        page_title:
+          type: string
+          description: Page title for the portal
+          example: Handbook
+        slug:
+          type: string
+          description: Slug for the portal to display in link
+          example: handbook
+        archived:
+          type: boolean
+          description: Status to check if portal is live
+          example: false
+        config:
+          type: object
+          description: Configuration about supporting locales
+          example:
+            allowed_locales:
+            - en
+            - es
+            default_locale: en
+    portal:
+      type: object
+      properties:
+        payload:
           type: array
           items:
-            $ref: '#/components/schemas/request_error'
+            $ref: '#/components/schemas/portal_item'
   parameters:
-    portal_id:
-      in: path
-      name: id
-      schema:
-        type: string
-      required: true
-      description: The slug identifier of the portal
     account_id:
       in: path
       name: account_id
@@ -765,6 +758,13 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
+    portal_id:
+      in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: The slug identifier of the portal
   securitySchemes:
     userApiKey:
       type: apiKey

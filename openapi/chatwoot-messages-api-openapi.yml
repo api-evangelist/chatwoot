@@ -335,43 +335,73 @@ paths:
     servers:
     - url: https://app.chatwoot.com/
 components:
-  parameters:
-    message_id:
-      in: path
-      name: message_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the message
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
   schemas:
+    contact:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            type: object
+            properties:
+              additional_attributes:
+                type: object
+                description: The object containing additional attributes related to the contact
+              availability_status:
+                type: string
+                description: The availability status of the contact
+              email:
+                type: string
+                description: The email address of the contact
+              id:
+                type: integer
+                description: The ID of the contact
+              name:
+                type: string
+                description: The name of the contact
+              phone_number:
+                type: string
+                description: The phone number of the contact
+              blocked:
+                type: boolean
+                description: Whether the contact is blocked
+              identifier:
+                type: string
+                description: The identifier of the contact
+              thumbnail:
+                type: string
+                description: The thumbnail of the contact
+              custom_attributes:
+                type: object
+                description: The custom attributes of the contact
+                example:
+                  attribute_key: attribute_value
+                  signed_up_at: dd/mm/yyyy
+              last_activity_at:
+                type: integer
+                description: The last activity at of the contact
+              created_at:
+                type: integer
+                description: The created at of the contact
+              contact_inboxes:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact_inboxes'
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     conversation_message_create_payload:
       type: object
       required:
@@ -484,6 +514,58 @@ components:
                         type: string
                         description: Dynamic parameter value for the button
                         example: SSFSDFSD
+    contact_inboxes:
+      type: object
+      properties:
+        source_id:
+          type: string
+          description: Contact Inbox Source Id
+        inbox:
+          $ref: '#/components/schemas/inbox_contact'
+    agent:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        availability_status:
+          type: string
+          enum:
+          - online
+          - busy
+          - offline
+          readOnly: true
+          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
+        auto_offline:
+          type: boolean
+          description: Whether the agent is automatically marked offline when they are away.
+        confirmed:
+          type: boolean
+          description: Whether the agent has confirmed their email address.
+        email:
+          type: string
+          description: The email of the agent
+        available_name:
+          type: string
+          description: The available name of the agent
+        name:
+          type: string
+          description: The name of the agent
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+          description: The role of the agent
+        thumbnail:
+          type: string
+          description: The thumbnail of the agent
+        custom_role_id:
+          type:
+          - integer
+          - 'null'
+          description: The custom role id of the agent
     message:
       type: object
       properties:
@@ -603,123 +685,6 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    contact:
-      type: object
-      properties:
-        payload:
-          type: array
-          items:
-            type: object
-            properties:
-              additional_attributes:
-                type: object
-                description: The object containing additional attributes related to the contact
-              availability_status:
-                type: string
-                description: The availability status of the contact
-              email:
-                type: string
-                description: The email address of the contact
-              id:
-                type: integer
-                description: The ID of the contact
-              name:
-                type: string
-                description: The name of the contact
-              phone_number:
-                type: string
-                description: The phone number of the contact
-              blocked:
-                type: boolean
-                description: Whether the contact is blocked
-              identifier:
-                type: string
-                description: The identifier of the contact
-              thumbnail:
-                type: string
-                description: The thumbnail of the contact
-              custom_attributes:
-                type: object
-                description: The custom attributes of the contact
-                example:
-                  attribute_key: attribute_value
-                  signed_up_at: dd/mm/yyyy
-              last_activity_at:
-                type: integer
-                description: The last activity at of the contact
-              created_at:
-                type: integer
-                description: The created at of the contact
-              contact_inboxes:
-                type: array
-                items:
-                  $ref: '#/components/schemas/contact_inboxes'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    agent:
-      type: object
-      properties:
-        id:
-          type: integer
-        account_id:
-          type: integer
-        availability_status:
-          type: string
-          enum:
-          - online
-          - busy
-          - offline
-          readOnly: true
-          description: The effective availability status of the agent, derived from the configured availability, auto-offline setting, and current presence. To update an agent's configured availability, use the availability field in create or update requests.
-        auto_offline:
-          type: boolean
-          description: Whether the agent is automatically marked offline when they are away.
-        confirmed:
-          type: boolean
-          description: Whether the agent has confirmed their email address.
-        email:
-          type: string
-          description: The email of the agent
-        available_name:
-          type: string
-          description: The available name of the agent
-        name:
-          type: string
-          description: The name of the agent
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-          description: The role of the agent
-        thumbnail:
-          type: string
-          description: The thumbnail of the agent
-        custom_role_id:
-          type:
-          - integer
-          - 'null'
-          description: The custom role id of the agent
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
-    contact_inboxes:
-      type: object
-      properties:
-        source_id:
-          type: string
-          description: Contact Inbox Source Id
-        inbox:
-          $ref: '#/components/schemas/inbox_contact'
     inbox_contact:
       type: object
       properties:
@@ -741,16 +706,15 @@ components:
         provider:
           type: string
           description: The provider of the inbox
-    bad_request_error:
-      title: data
+    request_error:
       type: object
       properties:
-        description:
+        field:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+        message:
+          type: string
+        code:
+          type: string
     MessageCreate:
       type: object
       properties:
@@ -790,6 +754,42 @@ components:
           type: object
         created_at:
           type: integer
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    message_id:
+      in: path
+      name: message_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the message
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
+      schema:
+        type: integer
+    AccountId:
+      name: account_id
+      in: path
+      required: true
+      description: The numeric id of the account.
+      schema:
+        type: integer
   securitySchemes:
     userApiKey:
       type: apiKey

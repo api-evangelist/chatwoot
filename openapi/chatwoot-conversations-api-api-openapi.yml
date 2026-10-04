@@ -205,7 +205,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    public_contact_identifier:
+      in: path
+      name: contact_identifier
+      schema:
+        type: string
+      required: true
+      description: The source id of contact obtained on contact create
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
+    conversation_id:
+      in: path
+      name: conversation_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the conversation
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     public_conversation:
       type: object
       properties:
@@ -333,6 +365,129 @@ components:
           description: Labels applied to the contact
           items:
             type: string
+    public_message:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the message
+        content:
+          type:
+          - string
+          - 'null'
+          description: Text content of the message. Can be null for attachment-only messages.
+        message_type:
+          type: integer
+          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
+        content_type:
+          type: string
+          description: Content type of the message
+        content_attributes:
+          type: object
+          description: Additional content attributes of the message
+        created_at:
+          type: integer
+          description: Created at Unix timestamp of the message
+        conversation_id:
+          type: integer
+          description: Display Id of the conversation the message belongs to
+        attachments:
+          type: array
+          description: Attachments if any
+          items:
+            $ref: '#/components/schemas/public_message_attachment'
+        sender:
+          $ref: '#/components/schemas/public_message_sender'
+    public_conversation_create_payload:
+      type: object
+      properties:
+        custom_attributes:
+          type: object
+          description: Custom attributes of the conversation
+          example: {}
+    public_message_attachment:
+      type: object
+      additionalProperties: true
+      description: Attachment payload. Available fields vary by attachment file_type.
+      properties:
+        id:
+          type: integer
+          description: Id of the attachment
+        message_id:
+          type: integer
+          description: Id of the parent message
+        file_type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - file
+          - location
+          - fallback
+          - share
+          - story_mention
+          - contact
+          - ig_reel
+          - ig_post
+          - ig_story
+          - embed
+          description: Type of the attached file
+        account_id:
+          type: integer
+          description: Id of the account
+        extension:
+          type:
+          - string
+          - 'null'
+          description: File extension
+        data_url:
+          type:
+          - string
+          - 'null'
+          description: URL of the file. Can be null when an attachment variant has no external URL.
+        thumb_url:
+          type: string
+          description: URL of the file thumbnail
+        file_size:
+          type: integer
+          description: File size in bytes
+        width:
+          type:
+          - integer
+          - 'null'
+          description: Width of the attachment when available
+        height:
+          type:
+          - integer
+          - 'null'
+          description: Height of the attachment when available
+        coordinates_lat:
+          type: number
+          description: Latitude for location attachments
+        coordinates_long:
+          type: number
+          description: Longitude for location attachments
+        fallback_title:
+          type:
+          - string
+          - 'null'
+          description: Fallback title for location, fallback, and contact attachments when available
+        meta:
+          type: object
+          description: Metadata for contact attachments
+        transcribed_text:
+          type: string
+          description: Transcribed text for audio attachments
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     public_message_sender:
       type: object
       additionalProperties: true
@@ -408,161 +563,6 @@ components:
           - string
           - 'null'
           description: Created timestamp in ISO 8601 format when the sender is a captain assistant
-    public_message:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the message
-        content:
-          type:
-          - string
-          - 'null'
-          description: Text content of the message. Can be null for attachment-only messages.
-        message_type:
-          type: integer
-          description: 'Denotes the message type. Possible values: 0 (incoming), 1 (outgoing), 2 (activity), 3 (template)'
-        content_type:
-          type: string
-          description: Content type of the message
-        content_attributes:
-          type: object
-          description: Additional content attributes of the message
-        created_at:
-          type: integer
-          description: Created at Unix timestamp of the message
-        conversation_id:
-          type: integer
-          description: Display Id of the conversation the message belongs to
-        attachments:
-          type: array
-          description: Attachments if any
-          items:
-            $ref: '#/components/schemas/public_message_attachment'
-        sender:
-          $ref: '#/components/schemas/public_message_sender'
-    public_conversation_create_payload:
-      type: object
-      properties:
-        custom_attributes:
-          type: object
-          description: Custom attributes of the conversation
-          example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    public_message_attachment:
-      type: object
-      additionalProperties: true
-      description: Attachment payload. Available fields vary by attachment file_type.
-      properties:
-        id:
-          type: integer
-          description: Id of the attachment
-        message_id:
-          type: integer
-          description: Id of the parent message
-        file_type:
-          type: string
-          enum:
-          - image
-          - audio
-          - video
-          - file
-          - location
-          - fallback
-          - share
-          - story_mention
-          - contact
-          - ig_reel
-          - ig_post
-          - ig_story
-          - embed
-          description: Type of the attached file
-        account_id:
-          type: integer
-          description: Id of the account
-        extension:
-          type:
-          - string
-          - 'null'
-          description: File extension
-        data_url:
-          type:
-          - string
-          - 'null'
-          description: URL of the file. Can be null when an attachment variant has no external URL.
-        thumb_url:
-          type: string
-          description: URL of the file thumbnail
-        file_size:
-          type: integer
-          description: File size in bytes
-        width:
-          type:
-          - integer
-          - 'null'
-          description: Width of the attachment when available
-        height:
-          type:
-          - integer
-          - 'null'
-          description: Height of the attachment when available
-        coordinates_lat:
-          type: number
-          description: Latitude for location attachments
-        coordinates_long:
-          type: number
-          description: Longitude for location attachments
-        fallback_title:
-          type:
-          - string
-          - 'null'
-          description: Fallback title for location, fallback, and contact attachments when available
-        meta:
-          type: object
-          description: Metadata for contact attachments
-        transcribed_text:
-          type: string
-          description: Transcribed text for audio attachments
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-  parameters:
-    public_contact_identifier:
-      in: path
-      name: contact_identifier
-      schema:
-        type: string
-      required: true
-      description: The source id of contact obtained on contact create
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
-    conversation_id:
-      in: path
-      name: conversation_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the conversation
   securitySchemes:
     userApiKey:
       type: apiKey

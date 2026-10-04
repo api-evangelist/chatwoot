@@ -148,6 +148,16 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     agent_bot:
       type: object
       properties:
@@ -181,15 +191,6 @@ components:
         system_bot:
           type: boolean
           description: Whether the bot is a system bot
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     platform_agent_bot_create_update_payload:
       type: object
       properties:
@@ -217,16 +218,15 @@ components:
           type: string
           description: The url to a jpeg, png file for the agent bot avatar
           example: https://example.com/avatar.png
-    bad_request_error:
-      title: data
+    request_error:
       type: object
       properties:
-        description:
+        field:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+        message:
+          type: string
+        code:
+          type: string
   parameters:
     agent_bot_id:
       in: path

@@ -196,6 +196,16 @@ paths:
     - url: https://app.chatwoot.com/
 components:
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     custom_attribute:
       type: object
       properties:
@@ -283,16 +293,6 @@ components:
           type: string
         code:
           type: string
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     CustomAttributeDefinition:
       type: object
       required:

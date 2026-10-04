@@ -116,15 +116,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     user:
       type: object
       properties:
@@ -217,6 +208,15 @@ components:
                 type:
                 - object
                 - 'null'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object

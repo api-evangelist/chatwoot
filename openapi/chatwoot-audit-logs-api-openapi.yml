@@ -80,15 +80,6 @@ components:
       required: true
       description: The numeric ID of the account
   schemas:
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     audit_log:
       type: object
       properties:
@@ -148,6 +139,15 @@ components:
           - string
           - 'null'
           description: IP address from which the action was performed
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object

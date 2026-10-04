@@ -114,14 +114,6 @@ components:
           type: string
         code:
           type: string
-    contact_labels:
-      type: object
-      properties:
-        payload:
-          type: array
-          description: Array of labels
-          items:
-            type: string
     bad_request_error:
       title: data
       type: object
@@ -132,6 +124,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+    contact_labels:
+      type: object
+      properties:
+        payload:
+          type: array
+          description: Array of labels
+          items:
+            type: string
   securitySchemes:
     userApiKey:
       type: apiKey

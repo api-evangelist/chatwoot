@@ -183,6 +183,16 @@ components:
           type: object
           description: The configuration for the bot
           example: {}
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     agent_bot:
       type: object
       properties:
@@ -225,24 +235,7 @@ components:
           type: string
         code:
           type: string
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     agent_bot_id:
       in: path
       name: id
@@ -250,6 +243,13 @@ components:
         type: integer
       required: true
       description: The ID of the agentbot to be updated
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

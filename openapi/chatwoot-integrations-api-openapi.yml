@@ -137,6 +137,42 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    integrations_app:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the integration
+        name:
+          type: string
+          description: The name of the integration
+        description:
+          type: string
+          description: The description about the team
+        hook_type:
+          type: string
+          description: Whether the integration is an account or inbox integration
+        enabled:
+          type: boolean
+          description: Whether the integration is enabled for the account
+        allow_multiple_hooks:
+          type: boolean
+          description: Whether multiple hooks can be created for the integration
+        hooks:
+          type: array
+          items:
+            type: object
+          description: If there are any hooks created for this integration
     integrations_hook:
       type: object
       properties:
@@ -172,15 +208,6 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     integrations_hook_create_payload:
       type: object
       properties:
@@ -200,42 +227,15 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
-    integrations_app:
+    request_error:
       type: object
       properties:
-        id:
+        field:
           type: string
-          description: The ID of the integration
-        name:
+        message:
           type: string
-          description: The name of the integration
-        description:
+        code:
           type: string
-          description: The description about the team
-        hook_type:
-          type: string
-          description: Whether the integration is an account or inbox integration
-        enabled:
-          type: boolean
-          description: Whether the integration is enabled for the account
-        allow_multiple_hooks:
-          type: boolean
-          description: Whether multiple hooks can be created for the integration
-        hooks:
-          type: array
-          items:
-            type: object
-          description: If there are any hooks created for this integration
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   parameters:
     account_id:
       in: path

@@ -128,22 +128,53 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    webhook_id:
-      in: path
-      name: webhook_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the webhook
   schemas:
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    webhook:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the webhook
+        url:
+          type: string
+          description: The url to which the events will be send
+        name:
+          type: string
+          description: The name of the webhook
+        subscriptions:
+          type: array
+          items:
+            type: string
+            enum:
+            - conversation_created
+            - conversation_status_changed
+            - conversation_updated
+            - contact_created
+            - contact_updated
+            - message_created
+            - message_updated
+            - webwidget_triggered
+            - conversation_typing_on
+            - conversation_typing_off
+          description: The list of subscribed events
+        secret:
+          type:
+          - string
+          - 'null'
+          description: Secret used to sign webhook requests. Signed webhook deliveries include `X-Chatwoot-Timestamp` and `X-Chatwoot-Signature`; the signature is `sha256=` followed by the HMAC-SHA256 of `{timestamp}.{raw_request_body}` using this secret. Deliveries also include `X-Chatwoot-Delivery` when a delivery id is available.
+        account_id:
+          type: number
+          description: The id of the account which the webhook object belongs to
     webhook_create_update_payload:
       type: object
       properties:
@@ -182,52 +213,21 @@ components:
           type: string
         code:
           type: string
-    webhook:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The ID of the webhook
-        url:
-          type: string
-          description: The url to which the events will be send
-        name:
-          type: string
-          description: The name of the webhook
-        subscriptions:
-          type: array
-          items:
-            type: string
-            enum:
-            - conversation_created
-            - conversation_status_changed
-            - conversation_updated
-            - contact_created
-            - contact_updated
-            - message_created
-            - message_updated
-            - webwidget_triggered
-            - conversation_typing_on
-            - conversation_typing_off
-          description: The list of subscribed events
-        secret:
-          type:
-          - string
-          - 'null'
-          description: Secret used to sign webhook requests. Signed webhook deliveries include `X-Chatwoot-Timestamp` and `X-Chatwoot-Signature`; the signature is `sha256=` followed by the HMAC-SHA256 of `{timestamp}.{raw_request_body}` using this secret. Deliveries also include `X-Chatwoot-Delivery` when a delivery id is available.
-        account_id:
-          type: number
-          description: The id of the account which the webhook object belongs to
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
+    webhook_id:
+      in: path
+      name: webhook_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the webhook
   securitySchemes:
     userApiKey:
       type: apiKey

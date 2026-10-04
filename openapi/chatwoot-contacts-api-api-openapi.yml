@@ -101,6 +101,74 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    public_contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the contact
+        source_id:
+          type: string
+          description: The session identifier of the contact
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the contact when available
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email of the contact
+        phone_number:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the contact
+        pubsub_token:
+          type: string
+          description: The token to be used to connect to chatwoot websocket
+    public_contact_create_update_payload:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: External identifier of the contact
+          example: '1234567890'
+        identifier_hash:
+          type: string
+          description: Identifier hash prepared for HMAC authentication
+          example: e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9
+        email:
+          type: string
+          description: Email of the contact
+          example: alice@acme.inc
+        name:
+          type: string
+          description: Name of the contact
+          example: Alice
+        phone_number:
+          type: string
+          description: Phone number of the contact
+          example: '+123456789'
+        avatar:
+          type: string
+          format: binary
+          description: Send the form data with the avatar image binary or use the avatar_url
+        custom_attributes:
+          type: object
+          description: Custom attributes of the customer
+          example: {}
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     public_contact_record:
       type: object
       additionalProperties: true
@@ -195,37 +263,6 @@ components:
           description: Labels applied to the contact
           items:
             type: string
-    public_contact_create_update_payload:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: External identifier of the contact
-          example: '1234567890'
-        identifier_hash:
-          type: string
-          description: Identifier hash prepared for HMAC authentication
-          example: e93275d4eba0e5679ad55f5360af00444e2a888df9b0afa3e8b691c3173725f9
-        email:
-          type: string
-          description: Email of the contact
-          example: alice@acme.inc
-        name:
-          type: string
-          description: Name of the contact
-          example: Alice
-        phone_number:
-          type: string
-          description: Phone number of the contact
-          example: '+123456789'
-        avatar:
-          type: string
-          format: binary
-          description: Send the form data with the avatar image binary or use the avatar_url
-        custom_attributes:
-          type: object
-          description: Custom attributes of the customer
-          example: {}
     request_error:
       type: object
       properties:
@@ -235,43 +272,6 @@ components:
           type: string
         code:
           type: string
-    public_contact:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the contact
-        source_id:
-          type: string
-          description: The session identifier of the contact
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of the contact when available
-        email:
-          type:
-          - string
-          - 'null'
-          description: Email of the contact
-        phone_number:
-          type:
-          - string
-          - 'null'
-          description: Phone number of the contact
-        pubsub_token:
-          type: string
-          description: The token to be used to connect to chatwoot websocket
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
   parameters:
     public_contact_identifier:
       in: path

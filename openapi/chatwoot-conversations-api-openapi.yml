@@ -732,70 +732,444 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    conversation_show:
+    user:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/conversation'
-      - type: object
-        properties:
-          meta:
+      properties:
+        id:
+          type: number
+        access_token:
+          type: string
+        account_id:
+          type: number
+        available_name:
+          type: string
+        avatar_url:
+          type: string
+        confirmed:
+          type: boolean
+        display_name:
+          type:
+          - string
+          - 'null'
+        message_signature:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        hmac_identifier:
+          type: string
+        inviter_id:
+          type:
+          - number
+          - 'null'
+        name:
+          type: string
+        provider:
+          type: string
+        pubsub_token:
+          type: string
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        ui_settings:
+          type: object
+        uid:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+        custom_attributes:
+          type: object
+          description: Available for users who are created through platform APIs and has custom attributes associated.
+        accounts:
+          type: array
+          items:
             type: object
             properties:
-              sender:
-                type: object
-                properties:
-                  additional_attributes:
-                    type: object
-                    description: The additional attributes of the sender
-                  availability_status:
-                    type: string
-                    description: The availability status of the sender
-                  email:
-                    type:
-                    - string
-                    - 'null'
-                    description: The email of the sender
-                  id:
-                    type: number
-                    description: ID fo the sender
-                  name:
-                    type: string
-                    description: The name of the sender
-                  phone_number:
-                    type:
-                    - string
-                    - 'null'
-                    description: The phone number of the sender
-                  blocked:
-                    type: boolean
-                    description: Whether the sender is blocked
-                  identifier:
-                    type:
-                    - string
-                    - 'null'
-                    description: The identifier of the sender
-                  thumbnail:
-                    type:
-                    - string
-                    - 'null'
-                    description: Avatar URL of the contact
-                  custom_attributes:
-                    type: object
-                    description: The custom attributes of the sender
-                  last_activity_at:
-                    type: number
-                    description: The last activity at of the sender
-                  created_at:
-                    type: number
-                    description: The created at of the sender
-              channel:
+              id:
+                type: number
+              name:
                 type: string
-                description: Channel Type
-              assignee:
-                $ref: '#/components/schemas/user'
-              hmac_verified:
+              status:
+                type: string
+              active_at:
+                type:
+                - string
+                - 'null'
+                format: date-time
+              role:
+                type: string
+                enum:
+                - administrator
+                - agent
+              permissions:
+                type: array
+                items:
+                  type: string
+              availability:
+                type: string
+              availability_status:
+                type: string
+              auto_offline:
                 type: boolean
-                description: Whether the hmac is verified
+              custom_role_id:
+                type:
+                - number
+                - 'null'
+              custom_role:
+                type:
+                - object
+                - 'null'
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    reporting_event:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the reporting event
+        name:
+          type: string
+          description: Name of the event (e.g., first_response, resolution, reply_time)
+        value:
+          type: number
+          format: double
+          description: Value of the metric in seconds
+        value_in_business_hours:
+          type: number
+          format: double
+          description: Value of the metric in seconds, calculated only for business hours
+        event_start_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event started
+        event_end_time:
+          type: string
+          format: date-time
+          description: The timestamp when the event ended
+        account_id:
+          type: number
+          description: ID of the account
+        conversation_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the conversation
+        inbox_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the inbox
+        user_id:
+          type:
+          - number
+          - 'null'
+          description: ID of the user/agent
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the reporting event was last updated
+    conversation_labels:
+      type: object
+      properties:
+        payload:
+          type: array
+          description: Array of labels
+          items:
+            type: string
+    conversation_list:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                mine_count:
+                  type: number
+                unassigned_count:
+                  type: number
+                assigned_count:
+                  type: number
+                all_count:
+                  type: number
+            payload:
+              type: array
+              description: array of conversations
+              items:
+                allOf:
+                - $ref: '#/components/schemas/generic_id'
+                - $ref: '#/components/schemas/conversation'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        sender:
+                          type: object
+                          properties:
+                            additional_attributes:
+                              type: object
+                              description: The additional attributes of the sender
+                            availability_status:
+                              type: string
+                              description: The availability status of the sender
+                            email:
+                              type:
+                              - string
+                              - 'null'
+                              description: The email of the sender
+                            id:
+                              type: number
+                              description: ID fo the sender
+                            name:
+                              type: string
+                              description: The name of the sender
+                            phone_number:
+                              type:
+                              - string
+                              - 'null'
+                              description: The phone number of the sender
+                            blocked:
+                              type: boolean
+                              description: Whether the sender is blocked
+                            identifier:
+                              type:
+                              - string
+                              - 'null'
+                              description: The identifier of the sender
+                            thumbnail:
+                              type:
+                              - string
+                              - 'null'
+                              description: Avatar URL of the contact
+                            custom_attributes:
+                              type: object
+                              description: The custom attributes of the sender
+                            last_activity_at:
+                              type: number
+                              description: The last activity at of the sender
+                            created_at:
+                              type: number
+                              description: The created at of the sender
+                        channel:
+                          type: string
+                          description: Channel Type
+                        assignee:
+                          $ref: '#/components/schemas/user'
+                        hmac_verified:
+                          type: boolean
+                          description: Whether the hmac is verified
+    conversation_create_payload:
+      type: object
+      required:
+      - source_id
+      properties:
+        source_id:
+          type: string
+          description: Conversation source id
+          example: '1234567890'
+        inbox_id:
+          type: integer
+          description: 'Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email'
+          example: 1
+        contact_id:
+          type: integer
+          description: Contact Id for which conversation is created
+          example: 1
+        additional_attributes:
+          type: object
+          description: Lets you specify attributes like browser information
+          example:
+            browser: Chrome
+            browser_version: 89.0.4389.82
+            os: Windows
+            os_version: '10'
+        custom_attributes:
+          type: object
+          description: The object to save custom attributes for conversation, accepts custom attributes key and value
+          example:
+            attribute_key: attribute_value
+            priority_conversation_number: 3
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          description: Specify the conversation whether it's pending, open, closed
+          example: open
+        assignee_id:
+          type: integer
+          description: Agent Id for assigning a conversation to an agent
+          example: 1
+        team_id:
+          type: integer
+          description: Team Id for assigning a conversation to a team\
+          example: 1
+        snoozed_until:
+          type: string
+          format: date-time
+          description: Snoozed until date time
+          example: '2030-07-21T17:32:28Z'
+        message:
+          type: object
+          description: The initial message to be sent to the conversation
+          required:
+          - content
+          properties:
+            content:
+              type: string
+              description: The content of the message
+              example: Hello, how can I help you?
+            template_params:
+              type: object
+              description: The template params for the message in case of whatsapp Channel
+              properties:
+                name:
+                  type: string
+                  description: Name of the template
+                  example: sample_issue_resolution
+                category:
+                  type: string
+                  description: Category of the template
+                  example: UTILITY
+                language:
+                  type: string
+                  description: Language of the template
+                  example: en_US
+                processed_params:
+                  type: object
+                  description: The processed param values for template variables in template
+                  example:
+                    '1': Chatwoot
+    conversation:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the conversation
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/message'
+        account_id:
+          type: number
+          description: Account Id
+        uuid:
+          type: string
+          description: UUID of the conversation
+        additional_attributes:
+          type: object
+          description: The object containing additional attributes related to the conversation
+        agent_last_seen_at:
+          type: number
+          description: The last activity at of the agent
+        assignee_last_seen_at:
+          type: number
+          description: The last activity at of the assignee
+        can_reply:
+          type: boolean
+          description: Whether the conversation can be replied to
+        contact_last_seen_at:
+          type: number
+          description: The last activity at of the contact
+        custom_attributes:
+          type: object
+          description: The object to save custom attributes for conversation, accepts custom attributes key and value
+        inbox_id:
+          type: number
+          description: ID of the inbox
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels of the conversation
+        muted:
+          type: boolean
+          description: Whether the conversation is muted
+        snoozed_until:
+          type:
+          - number
+          - 'null'
+          description: The time at which the conversation will be unmuted
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          description: The status of the conversation
+        created_at:
+          type: number
+          description: The time at which conversation was created
+        updated_at:
+          type: number
+          description: The time at which conversation was updated
+        timestamp:
+          type: number
+          description: The time at which conversation was created
+        first_reply_created_at:
+          type:
+          - number
+          - 'null'
+          description: The time at which the first reply was created
+        unread_count:
+          type: number
+          description: The number of unread messages
+        last_non_activity_message:
+          oneOf:
+          - $ref: '#/components/schemas/message'
+          - type: 'null'
+          description: The last non activity message
+        last_activity_at:
+          type: number
+          description: The last activity at of the conversation
+        priority:
+          type:
+          - string
+          - 'null'
+          description: The priority of the conversation
+        waiting_since:
+          type:
+          - number
+          - 'null'
+          description: The time at which the conversation was waiting
+        sla_policy_id:
+          type:
+          - number
+          - 'null'
+          description: The ID of the SLA policy
+        applied_sla:
+          type: object
+          description: The applied SLA
+        sla_events:
+          type: array
+          items:
+            type: object
+            description: SLA event objects
     message:
       type: object
       properties:
@@ -915,189 +1289,70 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
-    user:
+    conversation_show:
       type: object
-      properties:
-        id:
-          type: number
-        access_token:
-          type: string
-        account_id:
-          type: number
-        available_name:
-          type: string
-        avatar_url:
-          type: string
-        confirmed:
-          type: boolean
-        display_name:
-          type:
-          - string
-          - 'null'
-        message_signature:
-          type:
-          - string
-          - 'null'
-        email:
-          type: string
-        hmac_identifier:
-          type: string
-        inviter_id:
-          type:
-          - number
-          - 'null'
-        name:
-          type: string
-        provider:
-          type: string
-        pubsub_token:
-          type: string
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-        ui_settings:
-          type: object
-        uid:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-        custom_attributes:
-          type: object
-          description: Available for users who are created through platform APIs and has custom attributes associated.
-        accounts:
-          type: array
-          items:
+      allOf:
+      - $ref: '#/components/schemas/conversation'
+      - type: object
+        properties:
+          meta:
             type: object
             properties:
-              id:
-                type: number
-              name:
+              sender:
+                type: object
+                properties:
+                  additional_attributes:
+                    type: object
+                    description: The additional attributes of the sender
+                  availability_status:
+                    type: string
+                    description: The availability status of the sender
+                  email:
+                    type:
+                    - string
+                    - 'null'
+                    description: The email of the sender
+                  id:
+                    type: number
+                    description: ID fo the sender
+                  name:
+                    type: string
+                    description: The name of the sender
+                  phone_number:
+                    type:
+                    - string
+                    - 'null'
+                    description: The phone number of the sender
+                  blocked:
+                    type: boolean
+                    description: Whether the sender is blocked
+                  identifier:
+                    type:
+                    - string
+                    - 'null'
+                    description: The identifier of the sender
+                  thumbnail:
+                    type:
+                    - string
+                    - 'null'
+                    description: Avatar URL of the contact
+                  custom_attributes:
+                    type: object
+                    description: The custom attributes of the sender
+                  last_activity_at:
+                    type: number
+                    description: The last activity at of the sender
+                  created_at:
+                    type: number
+                    description: The created at of the sender
+              channel:
                 type: string
-              status:
-                type: string
-              active_at:
-                type:
-                - string
-                - 'null'
-                format: date-time
-              role:
-                type: string
-                enum:
-                - administrator
-                - agent
-              permissions:
-                type: array
-                items:
-                  type: string
-              availability:
-                type: string
-              availability_status:
-                type: string
-              auto_offline:
+                description: Channel Type
+              assignee:
+                $ref: '#/components/schemas/user'
+              hmac_verified:
                 type: boolean
-              custom_role_id:
-                type:
-                - number
-                - 'null'
-              custom_role:
-                type:
-                - object
-                - 'null'
-    conversation_create_payload:
-      type: object
-      required:
-      - source_id
-      properties:
-        source_id:
-          type: string
-          description: Conversation source id
-          example: '1234567890'
-        inbox_id:
-          type: integer
-          description: 'Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email'
-          example: 1
-        contact_id:
-          type: integer
-          description: Contact Id for which conversation is created
-          example: 1
-        additional_attributes:
-          type: object
-          description: Lets you specify attributes like browser information
-          example:
-            browser: Chrome
-            browser_version: 89.0.4389.82
-            os: Windows
-            os_version: '10'
-        custom_attributes:
-          type: object
-          description: The object to save custom attributes for conversation, accepts custom attributes key and value
-          example:
-            attribute_key: attribute_value
-            priority_conversation_number: 3
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          description: Specify the conversation whether it's pending, open, closed
-          example: open
-        assignee_id:
-          type: integer
-          description: Agent Id for assigning a conversation to an agent
-          example: 1
-        team_id:
-          type: integer
-          description: Team Id for assigning a conversation to a team\
-          example: 1
-        snoozed_until:
-          type: string
-          format: date-time
-          description: Snoozed until date time
-          example: '2030-07-21T17:32:28Z'
-        message:
-          type: object
-          description: The initial message to be sent to the conversation
-          required:
-          - content
-          properties:
-            content:
-              type: string
-              description: The content of the message
-              example: Hello, how can I help you?
-            template_params:
-              type: object
-              description: The template params for the message in case of whatsapp Channel
-              properties:
-                name:
-                  type: string
-                  description: Name of the template
-                  example: sample_issue_resolution
-                category:
-                  type: string
-                  description: Category of the template
-                  example: UTILITY
-                language:
-                  type: string
-                  description: Language of the template
-                  example: en_US
-                processed_params:
-                  type: object
-                  description: The processed param values for template variables in template
-                  example:
-                    '1': Chatwoot
-    conversation_labels:
-      type: object
-      properties:
-        payload:
-          type: array
-          description: Array of labels
-          items:
-            type: string
+                description: Whether the hmac is verified
     request_error:
       type: object
       properties:
@@ -1107,261 +1362,6 @@ components:
           type: string
         code:
           type: string
-    reporting_event:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the reporting event
-        name:
-          type: string
-          description: Name of the event (e.g., first_response, resolution, reply_time)
-        value:
-          type: number
-          format: double
-          description: Value of the metric in seconds
-        value_in_business_hours:
-          type: number
-          format: double
-          description: Value of the metric in seconds, calculated only for business hours
-        event_start_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event started
-        event_end_time:
-          type: string
-          format: date-time
-          description: The timestamp when the event ended
-        account_id:
-          type: number
-          description: ID of the account
-        conversation_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the conversation
-        inbox_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the inbox
-        user_id:
-          type:
-          - number
-          - 'null'
-          description: ID of the user/agent
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was created
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the reporting event was last updated
-    conversation_list:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            meta:
-              type: object
-              properties:
-                mine_count:
-                  type: number
-                unassigned_count:
-                  type: number
-                assigned_count:
-                  type: number
-                all_count:
-                  type: number
-            payload:
-              type: array
-              description: array of conversations
-              items:
-                allOf:
-                - $ref: '#/components/schemas/generic_id'
-                - $ref: '#/components/schemas/conversation'
-                - type: object
-                  properties:
-                    meta:
-                      type: object
-                      properties:
-                        sender:
-                          type: object
-                          properties:
-                            additional_attributes:
-                              type: object
-                              description: The additional attributes of the sender
-                            availability_status:
-                              type: string
-                              description: The availability status of the sender
-                            email:
-                              type:
-                              - string
-                              - 'null'
-                              description: The email of the sender
-                            id:
-                              type: number
-                              description: ID fo the sender
-                            name:
-                              type: string
-                              description: The name of the sender
-                            phone_number:
-                              type:
-                              - string
-                              - 'null'
-                              description: The phone number of the sender
-                            blocked:
-                              type: boolean
-                              description: Whether the sender is blocked
-                            identifier:
-                              type:
-                              - string
-                              - 'null'
-                              description: The identifier of the sender
-                            thumbnail:
-                              type:
-                              - string
-                              - 'null'
-                              description: Avatar URL of the contact
-                            custom_attributes:
-                              type: object
-                              description: The custom attributes of the sender
-                            last_activity_at:
-                              type: number
-                              description: The last activity at of the sender
-                            created_at:
-                              type: number
-                              description: The created at of the sender
-                        channel:
-                          type: string
-                          description: Channel Type
-                        assignee:
-                          $ref: '#/components/schemas/user'
-                        hmac_verified:
-                          type: boolean
-                          description: Whether the hmac is verified
-    conversation:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the conversation
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/message'
-        account_id:
-          type: number
-          description: Account Id
-        uuid:
-          type: string
-          description: UUID of the conversation
-        additional_attributes:
-          type: object
-          description: The object containing additional attributes related to the conversation
-        agent_last_seen_at:
-          type: number
-          description: The last activity at of the agent
-        assignee_last_seen_at:
-          type: number
-          description: The last activity at of the assignee
-        can_reply:
-          type: boolean
-          description: Whether the conversation can be replied to
-        contact_last_seen_at:
-          type: number
-          description: The last activity at of the contact
-        custom_attributes:
-          type: object
-          description: The object to save custom attributes for conversation, accepts custom attributes key and value
-        inbox_id:
-          type: number
-          description: ID of the inbox
-        labels:
-          type: array
-          items:
-            type: string
-          description: The labels of the conversation
-        muted:
-          type: boolean
-          description: Whether the conversation is muted
-        snoozed_until:
-          type:
-          - number
-          - 'null'
-          description: The time at which the conversation will be unmuted
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          description: The status of the conversation
-        created_at:
-          type: number
-          description: The time at which conversation was created
-        updated_at:
-          type: number
-          description: The time at which conversation was updated
-        timestamp:
-          type: number
-          description: The time at which conversation was created
-        first_reply_created_at:
-          type:
-          - number
-          - 'null'
-          description: The time at which the first reply was created
-        unread_count:
-          type: number
-          description: The number of unread messages
-        last_non_activity_message:
-          oneOf:
-          - $ref: '#/components/schemas/message'
-          - type: 'null'
-          description: The last non activity message
-        last_activity_at:
-          type: number
-          description: The last activity at of the conversation
-        priority:
-          type:
-          - string
-          - 'null'
-          description: The priority of the conversation
-        waiting_since:
-          type:
-          - number
-          - 'null'
-          description: The time at which the conversation was waiting
-        sla_policy_id:
-          type:
-          - number
-          - 'null'
-          description: The ID of the SLA policy
-        applied_sla:
-          type: object
-          description: The applied SLA
-        sla_events:
-          type: array
-          items:
-            type: object
-            description: SLA event objects
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     ConversationList:
       type: object
       properties:
@@ -1374,6 +1374,34 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Conversation'
+    ConversationCreate:
+      type: object
+      required:
+      - source_id
+      - inbox_id
+      properties:
+        source_id:
+          type: string
+        inbox_id:
+          type: integer
+        contact_id:
+          type: integer
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          - snoozed
+        assignee_id:
+          type: integer
+        team_id:
+          type: integer
+        message:
+          type: object
+          properties:
+            content:
+              type: string
     Conversation:
       type: object
       properties:
@@ -1410,34 +1438,6 @@ components:
         custom_attributes:
           type: object
           additionalProperties: true
-    ConversationCreate:
-      type: object
-      required:
-      - source_id
-      - inbox_id
-      properties:
-        source_id:
-          type: string
-        inbox_id:
-          type: integer
-        contact_id:
-          type: integer
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-        assignee_id:
-          type: integer
-        team_id:
-          type: integer
-        message:
-          type: object
-          properties:
-            content:
-              type: string
   parameters:
     account_id:
       in: path
@@ -1453,18 +1453,18 @@ components:
         type: integer
       required: true
       description: The numeric ID of the conversation
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
     AccountId:
       name: account_id
       in: path
       required: true
       description: The numeric id of the account.
+      schema:
+        type: integer
+    ConversationId:
+      name: conversation_id
+      in: path
+      required: true
+      description: The display id of the conversation.
       schema:
         type: integer
   securitySchemes:
