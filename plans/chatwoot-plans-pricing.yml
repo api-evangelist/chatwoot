@@ -65,3 +65,52 @@ plans:
 rate_limit_statements:
 - Conversations 500/month
 - '* Unlimited usage is subject to the fair use policy .'
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  units:
+  - credit
+  plans:
+  - name: Hacker
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Startups
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Business
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Captain AI additional credits
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - other
