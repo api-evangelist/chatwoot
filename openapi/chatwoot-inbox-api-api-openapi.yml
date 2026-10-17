@@ -44,6 +44,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    public_inbox_identifier:
+      in: path
+      name: inbox_identifier
+      schema:
+        type: string
+      required: true
+      description: The identifier obtained from API inbox channel
   schemas:
     request_error:
       type: object
@@ -115,14 +123,6 @@ components:
         identity_validation_enabled:
           type: boolean
           description: Whether of not the User Identity Validation is enforced on the inbox
-  parameters:
-    public_inbox_identifier:
-      in: path
-      name: inbox_identifier
-      schema:
-        type: string
-      required: true
-      description: The identifier obtained from API inbox channel
   securitySchemes:
     userApiKey:
       type: apiKey

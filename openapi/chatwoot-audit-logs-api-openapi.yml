@@ -71,14 +71,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
     audit_log:
       type: object
@@ -158,6 +150,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

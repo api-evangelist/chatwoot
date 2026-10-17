@@ -129,16 +129,35 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    bad_request_error:
-      title: data
+    webhook_create_update_payload:
       type: object
       properties:
-        description:
+        url:
           type: string
-        errors:
+          description: The url where the events should be sent
+          example: https://example.com/webhook
+        name:
+          type: string
+          description: The name of the webhook
+        subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/request_error'
+            type: string
+            enum:
+            - conversation_created
+            - conversation_status_changed
+            - conversation_updated
+            - message_created
+            - message_updated
+            - contact_created
+            - contact_updated
+            - webwidget_triggered
+            - conversation_typing_on
+            - conversation_typing_off
+          description: The events you want to subscribe to.
+          example:
+          - conversation_created
+          - conversation_status_changed
     webhook:
       type: object
       properties:
@@ -175,35 +194,6 @@ components:
         account_id:
           type: number
           description: The id of the account which the webhook object belongs to
-    webhook_create_update_payload:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The url where the events should be sent
-          example: https://example.com/webhook
-        name:
-          type: string
-          description: The name of the webhook
-        subscriptions:
-          type: array
-          items:
-            type: string
-            enum:
-            - conversation_created
-            - conversation_status_changed
-            - conversation_updated
-            - message_created
-            - message_updated
-            - contact_created
-            - contact_updated
-            - webwidget_triggered
-            - conversation_typing_on
-            - conversation_typing_off
-          description: The events you want to subscribe to.
-          example:
-          - conversation_created
-          - conversation_status_changed
     request_error:
       type: object
       properties:
@@ -213,14 +203,17 @@ components:
           type: string
         code:
           type: string
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     webhook_id:
       in: path
       name: webhook_id
@@ -228,6 +221,13 @@ components:
         type: integer
       required: true
       description: The numeric ID of the webhook
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

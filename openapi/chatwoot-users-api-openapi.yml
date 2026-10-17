@@ -156,6 +156,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    platform_user_id:
+      in: path
+      name: id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the user on the platform
   schemas:
     user:
       type: object
@@ -249,16 +257,6 @@ components:
                 type:
                 - object
                 - 'null'
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     user_create_update_payload:
       type: object
       properties:
@@ -291,14 +289,16 @@ components:
           type: string
         code:
           type: string
-  parameters:
-    platform_user_id:
-      in: path
-      name: id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the user on the platform
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   securitySchemes:
     userApiKey:
       type: apiKey

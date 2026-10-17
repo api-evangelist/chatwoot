@@ -92,16 +92,22 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+    account_show_response:
+      allOf:
+      - $ref: '#/components/schemas/account_detail'
+      - type: object
+        properties:
+          latest_chatwoot_version:
+            type:
+            - string
+            - 'null'
+            description: Latest version of Chatwoot available
+            example: 3.0.0
+          subscribed_features:
+            type: array
+            items:
+              type: string
+            description: List of subscribed enterprise features (if enterprise edition is enabled)
     account_detail:
       type: object
       properties:
@@ -193,22 +199,15 @@ components:
             marked_for_deletion_reason:
               type: string
               description: Reason for account deletion
-    account_show_response:
-      allOf:
-      - $ref: '#/components/schemas/account_detail'
-      - type: object
-        properties:
-          latest_chatwoot_version:
-            type:
-            - string
-            - 'null'
-            description: Latest version of Chatwoot available
-            example: 3.0.0
-          subscribed_features:
-            type: array
-            items:
-              type: string
-            description: List of subscribed enterprise features (if enterprise edition is enabled)
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     account_update_payload:
       type: object
       properties:
@@ -260,15 +259,16 @@ components:
           type: string
           description: Account timezone
           example: UTC
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
   parameters:
     account_id:
       in: path

@@ -199,16 +199,6 @@ paths:
       description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     label_create_update_payload:
       type: object
       properties:
@@ -255,6 +245,16 @@ components:
         show_on_sidebar:
           type: boolean
           description: Whether the label should appear in the sidebar
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     Label:
       type: object
       properties:

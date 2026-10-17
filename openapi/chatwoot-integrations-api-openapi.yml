@@ -137,16 +137,17 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    bad_request_error:
-      title: data
+    integrations_hook_update_payload:
       type: object
       properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+        status:
+          type: integer
+          description: The status of the integration (0 for inactive, 1 for active)
+          example: 1
+        settings:
+          type: object
+          description: The settings required by the integration
+          example: {}
     integrations_app:
       type: object
       properties:
@@ -173,6 +174,15 @@ components:
           items:
             type: object
           description: If there are any hooks created for this integration
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     integrations_hook:
       type: object
       properties:
@@ -197,17 +207,16 @@ components:
         settings:
           type: object
           description: The associated settings for the integration
-    integrations_hook_update_payload:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        status:
-          type: integer
-          description: The status of the integration (0 for inactive, 1 for active)
-          example: 1
-        settings:
-          type: object
-          description: The settings required by the integration
-          example: {}
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     integrations_hook_create_payload:
       type: object
       properties:
@@ -227,15 +236,6 @@ components:
           type: object
           description: The settings required by the integration
           example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     account_id:
       in: path

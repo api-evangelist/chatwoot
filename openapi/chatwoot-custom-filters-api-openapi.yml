@@ -163,59 +163,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
-  parameters:
-    custom_filter_id:
-      in: path
-      name: custom_filter_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the custom filter
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    custom_filter:
-      type: object
-      properties:
-        id:
-          type: number
-          description: The ID of the custom filter
-        name:
-          type: string
-          description: The name of the custom filter
-        type:
-          type: string
-          enum:
-          - conversation
-          - contact
-          - report
-          description: The description about the custom filter
-        query:
-          type: object
-          description: A query that needs to be saved as a custom filter
-        created_at:
-          type: string
-          format: date-time
-          description: The time at which the custom filter was created
-        updated_at:
-          type: string
-          format: date-time
-          description: The time at which the custom filter was updated
     custom_filter_create_update_payload:
       type: object
       properties:
@@ -244,6 +192,58 @@ components:
           type: string
         code:
           type: string
+    custom_filter:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the custom filter
+        name:
+          type: string
+          description: The name of the custom filter
+        type:
+          type: string
+          enum:
+          - conversation
+          - contact
+          - report
+          description: The description about the custom filter
+        query:
+          type: object
+          description: A query that needs to be saved as a custom filter
+        created_at:
+          type: string
+          format: date-time
+          description: The time at which the custom filter was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The time at which the custom filter was updated
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+  parameters:
+    custom_filter_id:
+      in: path
+      name: custom_filter_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the custom filter
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
     userApiKey:
       type: apiKey

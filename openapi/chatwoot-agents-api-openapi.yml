@@ -144,31 +144,11 @@ paths:
     - url: https://app.chatwoot.com/
 components:
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
-    agent_create_payload:
+    agent_update_payload:
       type: object
       required:
-      - name
-      - email
       - role
       properties:
-        name:
-          type: string
-          description: Full Name of the agent
-          example: John Doe
-        email:
-          type: string
-          description: Email of the Agent
-          example: john.doe@acme.inc
         role:
           type: string
           enum:
@@ -232,11 +212,30 @@ components:
           - integer
           - 'null'
           description: The custom role id of the agent
-    agent_update_payload:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    agent_create_payload:
       type: object
       required:
+      - name
+      - email
       - role
       properties:
+        name:
+          type: string
+          description: Full Name of the agent
+          example: John Doe
+        email:
+          type: string
+          description: Email of the Agent
+          example: john.doe@acme.inc
         role:
           type: string
           enum:
@@ -256,29 +255,16 @@ components:
           type: boolean
           description: Whether the agent is automatically marked offline when they are away.
           example: true
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
-    AgentUpdate:
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-          - agent
-          - administrator
-        availability_status:
-          type: string
-          enum:
-          - online
-          - offline
-          - busy
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     AgentCreate:
       type: object
       required:
@@ -314,6 +300,20 @@ components:
           - busy
         confirmed:
           type: boolean
+    AgentUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - agent
+          - administrator
+        availability_status:
+          type: string
+          enum:
+          - online
+          - offline
+          - busy
   parameters:
     account_id:
       in: path

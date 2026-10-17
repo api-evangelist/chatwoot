@@ -156,6 +156,15 @@ components:
                 type:
                 - object
                 - 'null'
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object
@@ -166,15 +175,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
   parameters:
     account_id:
       in: path

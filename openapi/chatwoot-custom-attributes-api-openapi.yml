@@ -196,16 +196,6 @@ paths:
     - url: https://app.chatwoot.com/
 components:
   schemas:
-    bad_request_error:
-      title: data
-      type: object
-      properties:
-        description:
-          type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
     custom_attribute:
       type: object
       properties:
@@ -245,6 +235,15 @@ components:
         updated_at:
           type: string
           description: The date and time when the custom attribute was updated
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     custom_attribute_create_update_payload:
       type: object
       properties:
@@ -284,15 +283,16 @@ components:
           type: string
           description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
           example: Please enter a valid value
-    request_error:
+    bad_request_error:
+      title: data
       type: object
       properties:
-        field:
+        description:
           type: string
-        message:
-          type: string
-        code:
-          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
     CustomAttributeDefinition:
       type: object
       required:
