@@ -24,6 +24,7 @@ paths:
       operationId: list-all-webhooks
       summary: List all webhooks
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: List all webhooks in the account
       responses:
@@ -48,6 +49,7 @@ paths:
       operationId: create-a-webhook
       summary: Add a webhook
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Add a webhook subscription to the account
       parameters:
@@ -81,6 +83,7 @@ paths:
       operationId: update-a-webhook
       summary: Update a webhook object
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Update a webhook object in the account
       parameters:
@@ -110,6 +113,7 @@ paths:
       operationId: delete-a-webhook
       summary: Delete a webhook
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Delete a webhook from the account
       responses:
@@ -129,6 +133,15 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     webhook_create_update_payload:
       type: object
       properties:
@@ -187,22 +200,12 @@ components:
             - conversation_typing_off
           description: The list of subscribed events
         secret:
-          type:
-          - string
-          - 'null'
+          type: string
+          nullable: true
           description: Secret used to sign webhook requests. Signed webhook deliveries include `X-Chatwoot-Timestamp` and `X-Chatwoot-Signature`; the signature is `sha256=` followed by the HMAC-SHA256 of `{timestamp}.{raw_request_body}` using this secret. Deliveries also include `X-Chatwoot-Delivery` when a delivery id is available.
         account_id:
           type: number
           description: The id of the account which the webhook object belongs to
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     bad_request_error:
       title: data
       type: object
@@ -229,21 +232,33 @@ components:
       required: true
       description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -257,6 +272,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

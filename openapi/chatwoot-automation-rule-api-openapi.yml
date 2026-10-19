@@ -28,6 +28,7 @@ paths:
       - $ref: '#/components/parameters/page'
       description: Get details of automation rules in an Account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       responses:
         '200':
@@ -49,6 +50,7 @@ paths:
       summary: Add a new automation rule
       description: Add a new automation rule to account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -85,6 +87,7 @@ paths:
       summary: Get a automation rule details
       description: Get the details of a automation rule in the account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - in: path
@@ -143,6 +146,7 @@ paths:
       summary: Update automation rule in Account
       description: Update a automation rule in account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - in: path
@@ -182,6 +186,7 @@ paths:
       operationId: delete-automation-rule-from-account
       summary: Remove a automation rule from account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - in: path
@@ -223,6 +228,15 @@ components:
       required: true
       description: The numeric ID of the account
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     automation_rule:
       type: object
       properties:
@@ -237,58 +251,6 @@ components:
             description: Single automation rule (for show/create/update endpoints)
             allOf:
             - $ref: '#/components/schemas/automation_rule_item'
-    automation_rule_create_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Rule name
-          example: Add label on message create event
-        description:
-          type: string
-          description: The description about the automation and actions
-          example: Add label support and sales on message create event if incoming message content contains text help
-        event_name:
-          type: string
-          enum:
-          - conversation_created
-          - conversation_updated
-          - conversation_resolved
-          - message_created
-          example: message_created
-          description: The event when you want to execute the automation actions
-        active:
-          type: boolean
-          description: Enable/disable automation rule
-        actions:
-          type: array
-          description: Array of actions which you want to perform when condition matches, e.g add label support if message contains content help.
-          items:
-            type: object
-            example:
-              action_name: add_label
-              action_params:
-              - support
-        conditions:
-          type: array
-          description: Array of conditions on which conversation filter would work, e.g message content contains text help.
-          items:
-            type: object
-            example:
-              attribute_key: content
-              filter_operator: contains
-              query_operator: OR
-              values:
-              - help
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     automation_rule_item:
       type: object
       properties:
@@ -359,6 +321,49 @@ components:
         active:
           type: boolean
           description: Enable/disable automation rule
+    automation_rule_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Rule name
+          example: Add label on message create event
+        description:
+          type: string
+          description: The description about the automation and actions
+          example: Add label support and sales on message create event if incoming message content contains text help
+        event_name:
+          type: string
+          enum:
+          - conversation_created
+          - conversation_updated
+          - conversation_resolved
+          - message_created
+          example: message_created
+          description: The event when you want to execute the automation actions
+        active:
+          type: boolean
+          description: Enable/disable automation rule
+        actions:
+          type: array
+          description: Array of actions which you want to perform when condition matches, e.g add label support if message contains content help.
+          items:
+            type: object
+            example:
+              action_name: add_label
+              action_params:
+              - support
+        conditions:
+          type: array
+          description: Array of conditions on which conversation filter would work, e.g message content contains text help.
+          items:
+            type: object
+            example:
+              attribute_key: content
+              filter_operator: contains
+              query_operator: OR
+              values:
+              - help
     bad_request_error:
       title: data
       type: object
@@ -370,21 +375,33 @@ components:
           items:
             $ref: '#/components/schemas/request_error'
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -398,6 +415,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Custom Attributes API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  version: '1.0'
-  description: 'Operations tagged Custom Attributes across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
 servers:
 - url: https://app.chatwoot.com/
-- url: https://app.chatwoot.com
-  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Custom Attributes
   description: Custom fields for contacts and conversations
@@ -32,6 +35,7 @@ paths:
         required: true
       description: Get details of custom attributes in an Account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       responses:
         '200':
@@ -56,6 +60,7 @@ paths:
       summary: Add a new custom attribute
       description: Add a new custom attribute to account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -76,8 +81,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/custom_attribute_definitions/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -93,6 +96,7 @@ paths:
       operationId: get-details-of-a-single-custom-attribute
       summary: Get a custom attribute details
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get the details of a custom attribute in the account
       parameters:
@@ -129,6 +133,7 @@ paths:
       summary: Update custom attribute in Account
       description: Update a custom attribute in account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - in: path
@@ -168,6 +173,7 @@ paths:
       operationId: delete-custom-attribute-from-account
       summary: Remove a custom attribute from account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - $ref: '#/components/parameters/account_id'
@@ -192,58 +198,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
 components:
   schemas:
-    custom_attribute:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Identifier
-        attribute_display_name:
-          type: string
-          description: Attribute display name
-        attribute_display_type:
-          type: string
-          description: Attribute display type (text, number, currency, percent, link, date, list, checkbox)
-        attribute_description:
-          type: string
-          description: Attribute description
-        attribute_key:
-          type: string
-          description: Attribute unique key value
-        regex_pattern:
-          type: string
-          description: Regex pattern
-        regex_cue:
-          type: string
-          description: Regex cue
-        attribute_values:
-          type: string
-          description: Attribute values
-        attribute_model:
-          type: string
-          description: Attribute type(conversation_attribute/contact_attribute)
-        default_value:
-          type: string
-          description: Attribute default value
-        created_at:
-          type: string
-          description: The date and time when the custom attribute was created
-        updated_at:
-          type: string
-          description: The date and time when the custom attribute was updated
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     custom_attribute_create_update_payload:
       type: object
       properties:
@@ -283,6 +239,54 @@ components:
           type: string
           description: Regex cue message (Only applicable for type- text). The cue message is shown when the regex pattern is not matched.
           example: Please enter a valid value
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    custom_attribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identifier
+        attribute_display_name:
+          type: string
+          description: Attribute display name
+        attribute_display_type:
+          type: string
+          description: Attribute display type (text, number, currency, percent, link, date, list, checkbox)
+        attribute_description:
+          type: string
+          description: Attribute description
+        attribute_key:
+          type: string
+          description: Attribute unique key value
+        regex_pattern:
+          type: string
+          description: Regex pattern
+        regex_cue:
+          type: string
+          description: Regex cue
+        attribute_values:
+          type: string
+          description: Attribute values
+        attribute_model:
+          type: string
+          description: Attribute type(conversation_attribute/contact_attribute)
+        default_value:
+          type: string
+          description: Attribute default value
+        created_at:
+          type: string
+          description: The date and time when the custom attribute was created
+        updated_at:
+          type: string
+          description: The date and time when the custom attribute was updated
     bad_request_error:
       title: data
       type: object
@@ -293,37 +297,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    CustomAttributeDefinition:
-      type: object
-      required:
-      - attribute_display_name
-      - attribute_key
-      - attribute_model
-      properties:
-        attribute_display_name:
-          type: string
-        attribute_key:
-          type: string
-        attribute_display_type:
-          type: string
-          enum:
-          - text
-          - number
-          - currency
-          - percent
-          - link
-          - date
-          - list
-          - checkbox
-        attribute_model:
-          type: string
-          enum:
-          - conversation_attribute
-          - contact_attribute
-        attribute_values:
-          type: array
-          items:
-            type: string
   parameters:
     account_id:
       in: path
@@ -332,32 +305,34 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
-x-refined-from:
-- chatwoot-application-api-openapi.yml
-- chatwoot-openapi.yml
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -371,6 +346,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

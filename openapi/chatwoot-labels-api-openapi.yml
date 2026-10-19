@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Labels API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  version: '1.0'
-  description: 'Operations tagged Labels across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
 servers:
 - url: https://app.chatwoot.com/
-- url: https://app.chatwoot.com
-  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Labels
   description: Account label management APIs
@@ -21,6 +24,7 @@ paths:
       operationId: list-all-labels
       summary: List all labels
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: List all labels available in the current account
       responses:
@@ -48,6 +52,7 @@ paths:
       operationId: create-a-label
       summary: Create a label
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Create a label in the account
       requestBody:
@@ -69,8 +74,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/labels/{id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -86,6 +89,7 @@ paths:
       operationId: get-details-of-a-single-label
       summary: Get a label
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get the details of a label in the account
       responses:
@@ -113,6 +117,7 @@ paths:
       operationId: update-a-label
       summary: Update a label
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Update a label's attributes
       requestBody:
@@ -140,6 +145,7 @@ paths:
       operationId: delete-a-label
       summary: Delete a label
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Delete a label from the account
       responses:
@@ -157,67 +163,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
-  /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels:
-    parameters:
-    - $ref: '#/components/parameters/AccountId'
-    - $ref: '#/components/parameters/ConversationId'
-    get:
-      operationId: getConversationLabels
-      tags:
-      - Labels
-      summary: List labels applied to a conversation
-      responses:
-        '200':
-          description: Object with a payload array of label names.
-      security:
-      - userApiKey: []
-    post:
-      operationId: setConversationLabels
-      tags:
-      - Labels
-      summary: Set the labels applied to a conversation
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                labels:
-                  type: array
-                  items:
-                    type: string
-      responses:
-        '200':
-          description: The updated label list.
-      security:
-      - userApiKey: []
-    servers:
-    - url: https://app.chatwoot.com
-      description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    label_create_update_payload:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The label title
-          example: support
-        description:
-          type: string
-          description: A short description for the label
-          example: Conversations that need support follow-up
-        color:
-          type: string
-          description: Hex color code for the label
-          example: '#1f93ff'
-        show_on_sidebar:
-          type: boolean
-          description: Whether the label should appear in the sidebar
-          example: true
     request_error:
       type: object
       properties:
@@ -245,6 +192,25 @@ components:
         show_on_sidebar:
           type: boolean
           description: Whether the label should appear in the sidebar
+    label_create_update_payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The label title
+          example: support
+        description:
+          type: string
+          description: A short description for the label
+          example: Conversations that need support follow-up
+        color:
+          type: string
+          description: Hex color code for the label
+          example: '#1f93ff'
+        show_on_sidebar:
+          type: boolean
+          description: Whether the label should appear in the sidebar
+          example: true
     bad_request_error:
       title: data
       type: object
@@ -255,19 +221,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-    Label:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        description:
-          type: string
-        color:
-          type: string
-        show_on_sidebar:
-          type: boolean
   parameters:
     account_id:
       in: path
@@ -276,39 +229,34 @@ components:
         type: integer
       required: true
       description: The numeric ID of the account
-    ConversationId:
-      name: conversation_id
-      in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
-x-refined-from:
-- chatwoot-application-api-openapi.yml
-- chatwoot-openapi.yml
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -322,6 +270,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

@@ -64,8 +64,9 @@ tags_raw:
 apis:
 - aid: chatwoot:client-api
   name: Chatwoot Client API
-  description: The Client API is designed for building custom messaging interfaces for end users. Authenticates
-    using inbox identifiers and contact identifiers rather than user tokens. Supports conversation creation,
+  description: >-
+    The Client API is designed for building custom messaging interfaces for end users. Authenticates using
+    inbox identifiers and contact identifiers rather than user tokens. Supports conversation creation,
     messaging, and session management for widget integrations.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
@@ -84,9 +85,10 @@ apis:
     url: https://www.chatwoot.com/help-center/
 - aid: chatwoot:platform-api
   name: Chatwoot Platform API
-  description: The Platform API is used to manage Chatwoot installations at the super admin level, including
-    managing accounts, users, and installation-wide settings. Requires Platform App access tokens from
-    the Super Admin Console. Available only on self-hosted and managed hosting deployments.
+  description: >-
+    The Platform API is used to manage Chatwoot installations at the super admin level, including managing
+    accounts, users, and installation-wide settings. Requires Platform App access tokens from the Super
+    Admin Console. Available only on self-hosted and managed hosting deployments.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
@@ -106,7 +108,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/m2zyu6l/chatwoot-platform-apis
   contact:
   - FN: Chatwoot Support
     url: https://www.chatwoot.com/help-center/
@@ -123,7 +126,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-account-api
   name: Chatwoot Account API
   description: The Account API from Chatwoot — 1 operation(s) for account.
@@ -137,51 +141,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-account-users-api
-  name: Chatwoot Account Users API
-  description: Account user management APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Account Users
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-account-users-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-accounts-api
-  name: Chatwoot Accounts API
-  description: Account management APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Account
-  tags_raw:
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-accounts-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-agentbots-api
-  name: Chatwoot AgentBots API
-  description: Bot integrations
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - AgentBots
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-agentbots-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-agents-api
   name: Chatwoot Agents API
   description: Agent management APIs
@@ -195,7 +156,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-audit-logs-api
   name: Chatwoot Audit Logs API
   description: The Audit Logs API from Chatwoot — 1 operation(s) for audit logs.
@@ -209,7 +171,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-automation-rule-api
   name: Chatwoot Automation Rule API
   description: Workflow automation rules
@@ -223,7 +186,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-canned-responses-api
   name: Chatwoot Canned Responses API
   description: Pre-defined responses for common queries
@@ -237,7 +201,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-contact-labels-api
   name: Chatwoot Contact Labels API
   description: Manage contact labels
@@ -251,21 +216,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-contacts-api-api
-  name: Chatwoot Contacts API
-  description: Public contact APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Contacts API
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-contacts-api-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-contacts-api
   name: Chatwoot Contacts API
   description: Contact management APIs
@@ -279,23 +231,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-conversation-api
-  name: Chatwoot Conversation API
-  description: The Conversation API from Chatwoot — 1 operation(s) for conversation.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Conversations
-  tags_raw:
-  - Conversation
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-conversation-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-conversation-assignments-api
   name: Chatwoot Conversation Assignments API
   description: Manage conversation assignments
@@ -309,21 +246,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-conversations-api-api
-  name: Chatwoot Conversations API
-  description: Public conversation APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Conversations API
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-conversations-api-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-conversations-api
   name: Chatwoot Conversations API
   description: Conversation management APIs
@@ -337,21 +261,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-csat-survey-page-api
-  name: Chatwoot CSAT Survey Page API
-  description: Customer satisfaction survey
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - CSAT Survey Page
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-csat-survey-page-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-custom-attributes-api
   name: Chatwoot Custom Attributes API
   description: Custom fields for contacts and conversations
@@ -365,7 +276,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-custom-filters-api
   name: Chatwoot Custom Filters API
   description: Saved filters for conversations
@@ -379,7 +291,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-help-center-api
   name: Chatwoot Help Center API
   description: Knowledge base management
@@ -393,21 +306,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-inbox-api-api
-  name: Chatwoot Inbox API
-  description: The Inbox API API from Chatwoot — 1 operation(s) for inbox api.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Inbox API
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-inbox-api-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-inboxes-api
   name: Chatwoot Inboxes API
   description: Communication channels setup
@@ -421,7 +321,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-integrations-api
   name: Chatwoot Integrations API
   description: Third-party integrations
@@ -437,7 +338,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-labels-api
   name: Chatwoot Labels API
   description: Account label management APIs
@@ -451,21 +353,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-messages-api-api
-  name: Chatwoot Messages API
-  description: Public message APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Messages API
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-messages-api-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-messages-api
   name: Chatwoot Messages API
   description: Message management APIs
@@ -481,7 +370,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-profile-api
   name: Chatwoot Profile API
   description: User profile APIs
@@ -497,7 +387,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-reports-api
   name: Chatwoot Reports API
   description: Analytics and reporting APIs
@@ -511,7 +402,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-teams-api
   name: Chatwoot Teams API
   description: Team management APIs
@@ -527,23 +419,8 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-users-api
-  name: Chatwoot Users API
-  description: User management APIs
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - User
-  tags_raw:
-  - Users
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-users-api-openapi.yml
-  - type: Documentation
-    url: https://developers.chatwoot.com/api-reference/introduction
-  - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 - aid: chatwoot:chatwoot-webhooks-api
   name: Chatwoot Webhooks API
   description: Event notification webhooks
@@ -559,77 +436,25 @@ apis:
   - type: Documentation
     url: https://developers.chatwoot.com/api-reference/introduction
   - type: PostmanCollection
-    url: https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
-- aid: chatwoot:chatwoot-automation-rules-api
-  name: Chatwoot Automation Rules API
-  description: Application API - manage automation rules.
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
+- aid: chatwoot:chatwoot-campaigns-api
+  name: Chatwoot Campaigns API
+  description: >-
+    Create, schedule, and manage campaigns. Requires an account administrator and API access enabled for
+    the account.
   humanURL: https://developers.chatwoot.com/api-reference/introduction
   baseURL: https://app.chatwoot.com
   tags:
-  - Automation Rules
+  - Campaigns
   properties:
   - type: OpenAPI
-    url: openapi/chatwoot-automation-rules-api-openapi.yml
-- aid: chatwoot:chatwoot-client-contacts-api
-  name: Chatwoot Client Contacts API
-  description: Client API - end-user contact management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Client Contacts
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-client-contacts-api-openapi.yml
-- aid: chatwoot:chatwoot-client-conversations-api
-  name: Chatwoot Client Conversations API
-  description: Client API - end-user conversation management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Client Conversations
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-client-conversations-api-openapi.yml
-- aid: chatwoot:chatwoot-client-messages-api
-  name: Chatwoot Client Messages API
-  description: Client API - end-user message management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Client Messages
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-client-messages-api-openapi.yml
-- aid: chatwoot:chatwoot-platform-accounts-api
-  name: Chatwoot Platform Accounts API
-  description: Platform API - super-admin account management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Platform Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-platform-accounts-api-openapi.yml
-- aid: chatwoot:chatwoot-platform-agent-bots-api
-  name: Chatwoot Platform Agent Bots API
-  description: Platform API - super-admin agent bot management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Platform Agent Bots
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-platform-agent-bots-api-openapi.yml
-- aid: chatwoot:chatwoot-platform-users-api
-  name: Chatwoot Platform Users API
-  description: Platform API - super-admin user management.
-  humanURL: https://developers.chatwoot.com/api-reference/introduction
-  baseURL: https://app.chatwoot.com
-  tags:
-  - Platform Users
-  properties:
-  - type: OpenAPI
-    url: openapi/chatwoot-platform-users-api-openapi.yml
+    url: openapi/chatwoot-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://developers.chatwoot.com/api-reference/introduction
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/chatwoot/chatwoot-apis/documentation/fu7fw8d/chatwoot-application-api-v1-0
 common:
 - type: CapabilityMap
   url: capabilities/chatwoot-capability-edges.yml

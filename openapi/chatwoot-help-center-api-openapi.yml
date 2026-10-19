@@ -25,6 +25,7 @@ paths:
       summary: Add a new portal
       description: Add a new portal to account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -54,6 +55,7 @@ paths:
       - $ref: '#/components/parameters/account_id'
       description: Get details of portals in an Account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       responses:
         '200':
@@ -110,6 +112,86 @@ paths:
     parameters:
     - $ref: '#/components/parameters/account_id'
     - $ref: '#/components/parameters/portal_id'
+    get:
+      tags:
+      - Help Center
+      operationId: get-details-of-a-single-portal
+      summary: Get a portal details
+      description: Get the details of a portal in the account
+      security:
+      - userBearerAuth: []
+      - userApiKey: []
+      parameters:
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/portal_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/portal_item'
+              example:
+                id: 123
+                archived: false
+                color: '#1F93FF'
+                config:
+                  allowed_locales:
+                  - code: en
+                    articles_count: 32
+                    categories_count: 9
+                custom_domain: chatwoot.help
+                header_text: Handbook
+                homepage_link: https://www.chatwoot.com
+                name: Handbook
+                slug: handbook
+                page_title: Handbook
+                account_id: 123
+                inbox:
+                  id: 123
+                  name: Chatwoot
+                  website_url: chatwoot.com
+                  channel_type: Channel::WebWidget
+                  avatar_url: https://example.com/avatar.png
+                  widget_color: '#1F93FF'
+                  website_token: 4cWzuf9i9jxN9tbnv8K9STKU
+                  enable_auto_assignment: true
+                  web_widget_script: <script>...</script>
+                  welcome_title: Hi there ! 🙌🏼
+                  welcome_tagline: We make it simple to connect with us.
+                  greeting_enabled: true
+                  greeting_message: Hey there 👋, Thank you for reaching out to us.
+                  channel_id: 123
+                  working_hours_enabled: true
+                  enable_email_collect: true
+                  csat_survey_enabled: true
+                  timezone: America/Los_Angeles
+                  business_name: Chatwoot
+                  hmac_mandatory: true
+                logo:
+                  id: 123
+                  portal_id: 123
+                  file_type: image/png
+                  account_id: 123
+                  file_url: https://example.com/logo.png
+                  blob_id: 123
+                  filename: square.png
+                meta:
+                  all_articles_count: 32
+                  categories_count: 9
+                  default_locale: en
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: The given portal ID does not exist in the account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
     patch:
       tags:
       - Help Center
@@ -117,6 +199,7 @@ paths:
       summary: Update a portal
       description: Update a portal to account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - $ref: '#/components/parameters/account_id'
@@ -207,6 +290,7 @@ paths:
       summary: Add a new category
       description: Add a new category to portal
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -238,6 +322,7 @@ paths:
       summary: Add a new article
       description: Add a new article to portal
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -260,196 +345,6 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
-    portal:
-      type: object
-      properties:
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/portal_item'
-    portal_meta:
-      type: object
-      properties:
-        all_articles_count:
-          type: integer
-          description: Total number of articles
-        archived_articles_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of archived articles
-        published_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of published articles
-        draft_articles_count:
-          type:
-          - integer
-          - 'null'
-          description: Number of draft articles
-        categories_count:
-          type: integer
-          description: Number of categories
-        default_locale:
-          type: string
-          description: Default locale for the portal
-    portal_item:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The ID of the portal
-        archived:
-          type: boolean
-          description: Whether the portal is archived
-        color:
-          type: string
-          description: The color code for the portal
-        config:
-          $ref: '#/components/schemas/portal_config'
-        custom_domain:
-          type: string
-          description: Custom domain for the portal
-        header_text:
-          type: string
-          description: The header text for the portal
-        homepage_link:
-          type: string
-          description: Homepage link for the portal
-        name:
-          type: string
-          description: Name of the portal
-        slug:
-          type: string
-          description: URL slug for the portal
-        page_title:
-          type: string
-          description: Page title for the portal
-        account_id:
-          type: integer
-          description: ID of the account the portal belongs to
-        inbox:
-          $ref: '#/components/schemas/inbox'
-        logo:
-          $ref: '#/components/schemas/portal_logo'
-        meta:
-          $ref: '#/components/schemas/portal_meta'
-    category:
-      type: object
-      properties:
-        id:
-          type: integer
-        description:
-          type: string
-          description: The text content.
-        locale:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        position:
-          type: integer
-        portal_id:
-          type: integer
-        account_id:
-          type: integer
-        associated_category_id:
-          type: integer
-          description: To associate similar categories to each other, e.g same category of product documentation in different languages
-        parent_category_id:
-          type: integer
-          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
-    portal_logo:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: ID of the logo file
-        portal_id:
-          type: integer
-          description: ID of the portal this logo belongs to
-        file_type:
-          type: string
-          description: MIME type of the file
-        account_id:
-          type: integer
-          description: ID of the account
-        file_url:
-          type: string
-          description: URL to access the logo file
-        blob_id:
-          type: integer
-          description: ID of the blob
-        filename:
-          type: string
-          description: Name of the file
-    article_create_update_payload:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The title of the article
-          example: Article Title
-        slug:
-          type: string
-          description: The slug of the article
-          example: article-title
-        position:
-          type: integer
-          description: article position in category
-          example: 1
-        content:
-          type: string
-          description: The text content.
-          example: This is the content of the article
-        description:
-          type: string
-          description: The description of the article
-          example: This is the description of the article
-        category_id:
-          type: integer
-          description: The category id of the article
-          example: 1
-        author_id:
-          type: integer
-          description: The author agent id of the article
-          example: 1
-        associated_article_id:
-          type: integer
-          description: To associate similar articles to each other, e.g to provide the link for the reference.
-          example: 2
-        status:
-          type: integer
-          description: The status of the article. 0 for draft, 1 for published, 2 for archived
-          example: 1
-        locale:
-          type: string
-          description: The locale of the article
-          example: en
-        meta:
-          type: object
-          description: Use for search
-          example:
-            tags:
-            - article_name
-            title: article title
-            description: article description
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    portal_single:
-      type: object
-      properties:
-        payload:
-          $ref: '#/components/schemas/portal_item'
     portal_config:
       type: object
       description: Configuration settings for the portal
@@ -469,41 +364,6 @@ components:
               categories_count:
                 type: integer
                 description: Number of categories in this locale
-    category_create_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the category
-          example: Category Name
-        description:
-          type: string
-          description: A description for the category
-          example: Category description
-        position:
-          type: integer
-          description: Category position in the portal list to sort
-          example: 1
-        slug:
-          type: string
-          description: The category slug used in the URL
-          example: category-name
-        locale:
-          type: string
-          description: The locale of the category
-          example: en
-        icon:
-          type: string
-          description: The icon of the category as a string (emoji)
-          example: 📚
-        parent_category_id:
-          type: integer
-          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
-          example: 1
-        associated_category_id:
-          type: integer
-          description: To associate similar categories to each other, e.g same category of product documentation in different languages
-          example: 2
     portal_create_update_payload:
       type: object
       properties:
@@ -547,6 +407,15 @@ components:
             - en
             - es
             default_locale: en
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     inbox:
       type: object
       properties:
@@ -557,8 +426,55 @@ components:
           type: string
           description: The name of the inbox
         website_url:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Website URL
+        page_id:
+          type:
+          - string
+          - 'null'
+          description: Facebook Page ID associated with the inbox
+        instagram_id:
+          type:
+          - string
+          - 'null'
+          description: Instagram account ID associated with the inbox
+        business_id:
+          type:
+          - string
+          - 'null'
+          description: TikTok business ID associated with the inbox
+        provider_name:
+          type:
+          - string
+          - 'null'
+          description: Provider username or page name associated with the social inbox
+        profile_id:
+          type:
+          - string
+          - 'null'
+          description: X profile ID associated with the inbox
+        line_channel_id:
+          type:
+          - string
+          - 'null'
+          description: LINE channel ID associated with the inbox
+        email:
+          type:
+          - string
+          - 'null'
+          description: Email address associated with the inbox
+        bot_name:
+          type:
+          - string
+          - 'null'
+          description: Telegram bot name associated with the inbox
+        inbox_identifier:
+          type:
+          - string
+          - 'null'
+          description: Public identifier associated with an API inbox
         channel_type:
           type: string
           description: The type of the inbox
@@ -566,16 +482,22 @@ components:
           type: string
           description: The avatar image of the inbox
         widget_color:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Widget Color used for customization of the widget
         website_token:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Website Token
         enable_auto_assignment:
           type: boolean
           description: The flag which shows whether Auto Assignment is enabled or not
         web_widget_script:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Script used to load the website widget
         welcome_title:
           type:
@@ -672,8 +594,15 @@ components:
           - string
           - 'null'
           description: Business name associated with the inbox
+        branded_email_layout:
+          type:
+          - string
+          - 'null'
+          description: Liquid HTML layout for branded email replies. Available to administrators for Email inbox show/update responses.
         hmac_mandatory:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Whether HMAC verification is mandatory
         selected_feature_flags:
           type:
@@ -683,7 +612,9 @@ components:
           items:
             type: string
         reply_time:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Expected reply time
         messaging_service_sid:
           type:
@@ -703,16 +634,64 @@ components:
           - string
           - 'null'
           description: Provider of the channel
-    bad_request_error:
-      title: data
+    portal_single:
       type: object
       properties:
+        payload:
+          $ref: '#/components/schemas/portal_item'
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
         description:
           type: string
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_error'
+          description: The text content.
+        locale:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        position:
+          type: integer
+        portal_id:
+          type: integer
+        account_id:
+          type: integer
+        associated_category_id:
+          type: integer
+          description: To associate similar categories to each other, e.g same category of product documentation in different languages
+        parent_category_id:
+          type: integer
+          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
+    portal_meta:
+      type: object
+      properties:
+        all_articles_count:
+          type: integer
+          description: Total number of articles
+        archived_articles_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of archived articles
+        published_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of published articles
+        draft_articles_count:
+          type:
+          - integer
+          - 'null'
+          description: Number of draft articles
+        categories_count:
+          type: integer
+          description: Number of categories
+        default_locale:
+          type: string
+          description: Default locale for the portal
     article:
       type: object
       properties:
@@ -750,14 +729,175 @@ components:
         associated_article_id:
           type: integer
           description: To associate similar articles to each other, e.g to provide the link for the reference.
+    category_create_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the category
+          example: Category Name
+        description:
+          type: string
+          description: A description for the category
+          example: Category description
+        position:
+          type: integer
+          description: Category position in the portal list to sort
+          example: 1
+        slug:
+          type: string
+          description: The category slug used in the URL
+          example: category-name
+        locale:
+          type: string
+          description: The locale of the category
+          example: en
+        icon:
+          type: string
+          description: The icon of the category as a string (emoji)
+          example: 📚
+        parent_category_id:
+          type: integer
+          description: To define parent category, e.g product documentation has multiple level features in sales category or in engineering category.
+          example: 1
+        associated_category_id:
+          type: integer
+          description: To associate similar categories to each other, e.g same category of product documentation in different languages
+          example: 2
+    portal:
+      type: object
+      properties:
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/portal_item'
+    article_create_update_payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the article
+          example: Article Title
+        slug:
+          type: string
+          description: The slug of the article
+          example: article-title
+        position:
+          type: integer
+          description: article position in category
+          example: 1
+        content:
+          type: string
+          description: The text content.
+          example: This is the content of the article
+        description:
+          type: string
+          description: The description of the article
+          example: This is the description of the article
+        category_id:
+          type: integer
+          description: The category id of the article
+          example: 1
+        author_id:
+          type: integer
+          description: The author agent id of the article
+          example: 1
+        associated_article_id:
+          type: integer
+          description: To associate similar articles to each other, e.g to provide the link for the reference.
+          example: 2
+        status:
+          type: integer
+          description: The status of the article. 0 for draft, 1 for published, 2 for archived
+          example: 1
+        locale:
+          type: string
+          description: The locale of the article
+          example: en
+        meta:
+          type: object
+          description: Use for search
+          example:
+            tags:
+            - article_name
+            title: article title
+            description: article description
+    portal_item:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the portal
+        archived:
+          type: boolean
+          description: Whether the portal is archived
+        color:
+          type: string
+          description: The color code for the portal
+        config:
+          $ref: '#/components/schemas/portal_config'
+        custom_domain:
+          type: string
+          description: Custom domain for the portal
+        header_text:
+          type: string
+          description: The header text for the portal
+        homepage_link:
+          type: string
+          description: Homepage link for the portal
+        name:
+          type: string
+          description: Name of the portal
+        slug:
+          type: string
+          description: URL slug for the portal
+        page_title:
+          type: string
+          description: Page title for the portal
+        account_id:
+          type: integer
+          description: ID of the account the portal belongs to
+        inbox:
+          $ref: '#/components/schemas/inbox'
+        logo:
+          $ref: '#/components/schemas/portal_logo'
+        meta:
+          $ref: '#/components/schemas/portal_meta'
+    bad_request_error:
+      title: data
+      type: object
+      properties:
+        description:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_error'
+    portal_logo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the logo file
+        portal_id:
+          type: integer
+          description: ID of the portal this logo belongs to
+        file_type:
+          type: string
+          description: MIME type of the file
+        account_id:
+          type: integer
+          description: ID of the account
+        file_url:
+          type: string
+          description: URL to access the logo file
+        blob_id:
+          type: integer
+          description: ID of the blob
+        filename:
+          type: string
+          description: Name of the file
   parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     portal_id:
       in: path
       name: id
@@ -765,22 +905,41 @@ components:
         type: string
       required: true
       description: The slug identifier of the portal
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -794,6 +953,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

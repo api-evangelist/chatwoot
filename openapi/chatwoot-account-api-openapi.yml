@@ -24,6 +24,7 @@ paths:
       summary: Get account details
       description: Get the details of the current account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - $ref: '#/components/parameters/account_id'
@@ -53,6 +54,7 @@ paths:
       summary: Update account
       description: Update account details, settings, and custom attributes
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - $ref: '#/components/parameters/account_id'
@@ -92,6 +94,15 @@ paths:
                 $ref: '#/components/schemas/bad_request_error'
 components:
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     account_show_response:
       allOf:
       - $ref: '#/components/schemas/account_detail'
@@ -108,6 +119,57 @@ components:
             items:
               type: string
             description: List of subscribed enterprise features (if enterprise edition is enabled)
+    account_update_payload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the account
+          example: My Account
+        locale:
+          type: string
+          description: The locale of the account
+          example: en
+        domain:
+          type: string
+          description: The domain of the account
+          example: example.com
+        support_email:
+          type: string
+          description: The support email of the account
+          example: support@example.com
+        auto_resolve_after:
+          type:
+          - integer
+          - 'null'
+          minimum: 10
+          maximum: 1439856
+          description: Auto resolve conversations after specified minutes
+          example: 1440
+        auto_resolve_message:
+          type:
+          - string
+          - 'null'
+          description: Message to send when auto resolving
+          example: This conversation has been automatically resolved due to inactivity
+        auto_resolve_ignore_waiting:
+          type:
+          - boolean
+          - 'null'
+          description: Whether to ignore waiting conversations for auto resolve
+          example: false
+        industry:
+          type: string
+          description: Industry type
+          example: Technology
+        company_size:
+          type: string
+          description: Company size
+          example: 50-100
+        timezone:
+          type: string
+          description: Account timezone
+          example: UTC
     account_detail:
       type: object
       properties:
@@ -199,66 +261,6 @@ components:
             marked_for_deletion_reason:
               type: string
               description: Reason for account deletion
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    account_update_payload:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the account
-          example: My Account
-        locale:
-          type: string
-          description: The locale of the account
-          example: en
-        domain:
-          type: string
-          description: The domain of the account
-          example: example.com
-        support_email:
-          type: string
-          description: The support email of the account
-          example: support@example.com
-        auto_resolve_after:
-          type:
-          - integer
-          - 'null'
-          minimum: 10
-          maximum: 1439856
-          description: Auto resolve conversations after specified minutes
-          example: 1440
-        auto_resolve_message:
-          type:
-          - string
-          - 'null'
-          description: Message to send when auto resolving
-          example: This conversation has been automatically resolved due to inactivity
-        auto_resolve_ignore_waiting:
-          type:
-          - boolean
-          - 'null'
-          description: Whether to ignore waiting conversations for auto resolve
-          example: false
-        industry:
-          type: string
-          description: Industry type
-          example: Technology
-        company_size:
-          type: string
-          description: Company size
-          example: 50-100
-        timezone:
-          type: string
-          description: Account timezone
-          example: UTC
     bad_request_error:
       title: data
       type: object
@@ -278,21 +280,33 @@ components:
       required: true
       description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -306,6 +320,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/chatwoot/chatwoot/develop/swagger/tag_groups/application_swagger.json",
+ "final": "https://raw.githubusercontent.com/chatwoot/chatwoot/develop/swagger/tag_groups/application_swagger.json",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 492230,
+ "sha256": "5cf8d3647ec8b7c60c83dde98b3fbef3849eba6c2a4f5585ebfb2a519053dae5",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

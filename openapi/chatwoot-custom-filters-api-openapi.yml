@@ -35,6 +35,7 @@ paths:
       summary: List all custom filters
       description: List all custom filters in a category of a user
       security:
+      - userBearerAuth: []
       - userApiKey: []
       responses:
         '200':
@@ -61,6 +62,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/account_id'
       security:
+      - userBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -92,6 +94,7 @@ paths:
       summary: Get a custom filter details
       description: Get the details of a custom filter in the account
       security:
+      - userBearerAuth: []
       - userApiKey: []
       responses:
         '200':
@@ -118,6 +121,7 @@ paths:
       operationId: update-a-custom-filter
       summary: Update a custom filter
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Update a custom filter's attributes
       requestBody:
@@ -145,6 +149,7 @@ paths:
       operationId: delete-a-custom-filter
       summary: Delete a custom filter
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Delete a custom filter from the account
       responses:
@@ -183,15 +188,6 @@ components:
           type: object
           description: A query that needs to be saved as a custom filter
           example: {}
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
     custom_filter:
       type: object
       properties:
@@ -219,6 +215,15 @@ components:
           type: string
           format: date-time
           description: The time at which the custom filter was updated
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     bad_request_error:
       title: data
       type: object
@@ -245,21 +250,33 @@ components:
       required: true
       description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -273,6 +290,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

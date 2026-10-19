@@ -24,6 +24,7 @@ paths:
       summary: List Audit Logs in Account
       description: Get Details of Audit Log entries for an Account. This endpoint is only available in Enterprise editions and requires the audit_logs feature to be enabled.
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - name: page
@@ -33,6 +34,45 @@ paths:
         schema:
           type: integer
           default: 1
+      - name: q
+        in: query
+        description: Filter entries by the name or email of the user who performed the action
+        required: false
+        schema:
+          type: string
+      - name: types
+        in: query
+        description: Filter entries by the type of the audited record
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            example: Inbox
+      - name: since
+        in: query
+        description: Only return entries created at or after this unix timestamp
+        required: false
+        schema:
+          type: integer
+          example: 1755388800
+      - name: until
+        in: query
+        description: Only return entries created at or before this unix timestamp
+        required: false
+        schema:
+          type: integer
+          example: 1755993599
+      - name: sort
+        in: query
+        description: Order of the entries by creation time
+        required: false
+        schema:
+          type: string
+          enum:
+          - desc
+          - asc
+          default: desc
       responses:
         '200':
           description: Success
@@ -71,7 +111,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
 components:
+  parameters:
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
   schemas:
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
     audit_log:
       type: object
       properties:
@@ -85,8 +142,10 @@ components:
           type: string
           description: The type of the audited object (e.g., Conversation, Contact, User)
         auditable:
-          type: object
-          description: The audited object data
+          type:
+          - object
+          - 'null'
+          description: The audited object data. Null for message deletion entries, which are served without the message payload.
         associated_id:
           type: integer
           description: The ID of the associated object (typically the account ID)
@@ -130,16 +189,12 @@ components:
           type:
           - string
           - 'null'
-          description: IP address from which the action was performed
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
+          description: IP address from which the action was performed. Masked to the network portion (for example 203.0.113.x) unless the account has the audit_log_ip_address feature enabled, in which case the full address is returned.
+        location:
+          type:
+          - string
+          - 'null'
+          description: City and country resolved from remote_address, present only when the account has the ip_lookup feature enabled and the address has been resolved. Omitted when the account returns full IP addresses.
     bad_request_error:
       title: data
       type: object
@@ -150,30 +205,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/request_error'
-  parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -187,6 +246,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

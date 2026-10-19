@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Reports API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  version: '1.0'
-  description: 'Operations tagged Reports across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
 servers:
 - url: https://app.chatwoot.com/
-- url: https://app.chatwoot.com
-  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Reports
   description: Analytics and reporting APIs
@@ -21,6 +24,7 @@ paths:
       operationId: get-account-reporting-events
       summary: Account Reporting Events
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get paginated reporting events for the account. This endpoint returns reporting events such as first response time, resolution time, and other metrics. Only administrators can access this endpoint. Results are paginated with 25 items per page.
       parameters:
@@ -63,8 +67,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -91,6 +93,7 @@ paths:
       operationId: list-all-conversation-statistics
       summary: Get Account reports
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get Account reports for a specific type, metric and date range
       responses:
@@ -120,8 +123,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/summary:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -147,6 +148,7 @@ paths:
       operationId: list-all-conversation-statistics-summary
       summary: Get Account reports summary
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get Account reports summary for a specific type and date range
       responses:
@@ -168,8 +170,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/conversations:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -187,6 +187,7 @@ paths:
       operationId: get-account-conversation-metrics
       summary: Account Conversation Metrics
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get conversation metrics for Account
       responses:
@@ -216,8 +217,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/conversations/:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -240,6 +239,7 @@ paths:
       operationId: get-agent-conversation-metrics
       summary: Agent Conversation Metrics
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get conversation metrics for Agent
       responses:
@@ -264,8 +264,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/summary_reports/channel:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -285,6 +283,7 @@ paths:
       operationId: get-channel-summary-report
       summary: Get conversation statistics grouped by channel type
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get conversation counts grouped by channel type and status for a given date range.
 
@@ -311,8 +310,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/summary_reports/inbox:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -337,6 +334,7 @@ paths:
       operationId: get-inbox-summary-report
       summary: Get conversation statistics grouped by inbox
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get conversation statistics grouped by inbox for a given date range.
 
@@ -356,8 +354,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/summary_reports/agent:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -382,6 +378,7 @@ paths:
       operationId: get-agent-summary-report
       summary: Get conversation statistics grouped by agent
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get conversation statistics grouped by agent for a given date range.
 
@@ -401,8 +398,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/summary_reports/team:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -427,6 +422,7 @@ paths:
       operationId: get-team-summary-report
       summary: Get conversation statistics grouped by team
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get conversation statistics grouped by team for a given date range.
 
@@ -446,8 +442,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/first_response_time_distribution:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -467,6 +461,7 @@ paths:
       operationId: get-first-response-time-distribution
       summary: Get first response time distribution by channel
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get the distribution of first response times grouped by channel type.
 
@@ -487,8 +482,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/inbox_label_matrix:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -522,6 +515,7 @@ paths:
       operationId: get-inbox-label-matrix
       summary: Get inbox-label matrix report
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get a matrix showing the count of conversations for each inbox-label combination.
 
@@ -544,8 +538,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v2/accounts/{account_id}/reports/outgoing_messages_count:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -565,6 +557,7 @@ paths:
       operationId: get-outgoing-messages-count
       summary: Get outgoing messages count grouped by entity
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: 'Get the count of outgoing messages grouped by a specified entity (agent, team, inbox, or label).
 
@@ -597,74 +590,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
-  /api/v1/accounts/{account_id}/reports:
-    parameters:
-    - $ref: '#/components/parameters/AccountId'
-    get:
-      operationId: getReport
-      tags:
-      - Reports
-      summary: Get a metric report over a time range
-      parameters:
-      - name: metric
-        in: query
-        required: true
-        schema:
-          type: string
-          enum:
-          - conversations_count
-          - incoming_messages_count
-          - outgoing_messages_count
-          - avg_first_response_time
-          - avg_resolution_time
-          - resolutions_count
-      - name: type
-        in: query
-        required: true
-        schema:
-          type: string
-          enum:
-          - account
-          - agent
-          - inbox
-          - label
-          - team
-      - name: since
-        in: query
-        schema:
-          type: string
-          description: Unix epoch seconds for the start of the range.
-      - name: until
-        in: query
-        schema:
-          type: string
-          description: Unix epoch seconds for the end of the range.
-      responses:
-        '200':
-          description: Time-series data points for the requested metric.
-      security:
-      - userApiKey: []
-    servers:
-    - url: https://app.chatwoot.com
-      description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
-  /api/v1/accounts/{account_id}/conversations/meta:
-    parameters:
-    - $ref: '#/components/parameters/AccountId'
-    get:
-      operationId: getConversationReportsSummary
-      tags:
-      - Reports
-      summary: Get a summary count of conversations by status (open, unassigned, etc.)
-      responses:
-        '200':
-          description: Conversation count summary.
-      security:
-      - userApiKey: []
-    servers:
-    - url: https://app.chatwoot.com
-      description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   parameters:
     page:
@@ -675,6 +600,13 @@ components:
         default: 1
       required: false
       description: The page parameter
+    account_id:
+      in: path
+      name: account_id
+      schema:
+        type: integer
+      required: true
+      description: The numeric ID of the account
     report_type:
       in: query
       name: type
@@ -702,113 +634,114 @@ components:
         - resolutions_count
       required: true
       description: The type of metric
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
-    AccountId:
-      name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
-      schema:
-        type: integer
   schemas:
-    channel_summary:
-      type: object
-      description: Channel summary report containing conversation counts grouped by channel type and status. Available in version 4.10.0+.
-      additionalProperties:
-        type: object
-        description: Conversation statistics for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
-        properties:
-          open:
-            type: number
-            description: Number of open conversations
-          resolved:
-            type: number
-            description: Number of resolved conversations
-          pending:
-            type: number
-            description: Number of pending conversations
-          snoozed:
-            type: number
-            description: Number of snoozed conversations
-          total:
-            type: number
-            description: Total number of conversations
-      example:
-        Channel::WebWidget:
-          open: 10
-          resolved: 20
-          pending: 5
-          snoozed: 2
-          total: 37
-        Channel::Api:
-          open: 5
-          resolved: 15
-          pending: 3
-          snoozed: 1
-          total: 24
-    outgoing_messages_count:
+    team_summary:
       type: array
-      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
+      description: Team summary report containing conversation statistics grouped by team.
       items:
         type: object
         properties:
           id:
             type: number
-            description: The ID of the grouped entity (agent, team, inbox, or label).
-          name:
-            type: string
-            description: The name of the grouped entity.
-          outgoing_messages_count:
+            description: The team ID
+          conversations_count:
             type: number
-            description: The total number of outgoing messages for this entity in the given time range.
+            description: Number of conversations assigned to the team during the date range
+          resolved_conversations_count:
+            type: number
+            description: Number of conversations resolved by the team during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
       example:
       - id: 1
-        name: Agent One
-        outgoing_messages_count: 42
+        conversations_count: 250
+        resolved_conversations_count: 200
+        avg_resolution_time: 2800
+        avg_first_response_time: 240
+        avg_reply_time: 500
       - id: 2
-        name: Agent Two
-        outgoing_messages_count: 18
-    first_response_time_distribution:
+        conversations_count: 180
+        resolved_conversations_count: 150
+        avg_resolution_time: 2400
+        avg_first_response_time: 200
+        avg_reply_time: 450
+    reporting_event_meta:
       type: object
-      description: First response time distribution report grouped by channel type. Shows the count of conversations with first response times in different time buckets.
-      additionalProperties:
+      properties:
+        count:
+          type: integer
+          description: Total number of reporting events
+        current_page:
+          type: integer
+          description: Current page number
+        total_pages:
+          type: integer
+          description: Total number of pages
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    agent_summary:
+      type: array
+      description: Agent summary report containing conversation statistics grouped by agent.
+      items:
         type: object
-        description: First response time distribution for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
         properties:
-          0-1h:
+          id:
             type: number
-            description: Number of conversations with first response time less than 1 hour
-          1-4h:
+            description: The agent (user) ID
+          conversations_count:
             type: number
-            description: Number of conversations with first response time between 1-4 hours
-          4-8h:
+            description: Number of conversations assigned to the agent during the date range
+          resolved_conversations_count:
             type: number
-            description: Number of conversations with first response time between 4-8 hours
-          8-24h:
-            type: number
-            description: Number of conversations with first response time between 8-24 hours
-          24h+:
-            type: number
-            description: Number of conversations with first response time greater than 24 hours
+            description: Number of conversations resolved by the agent during the date range
+          avg_resolution_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) to resolve conversations. Null if no data available.
+          avg_first_response_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) for the first response. Null if no data available.
+          avg_reply_time:
+            type:
+            - number
+            - 'null'
+            description: Average time (in seconds) between replies. Null if no data available.
       example:
-        Channel::WebWidget:
-          0-1h: 150
-          1-4h: 80
-          4-8h: 45
-          8-24h: 30
-          24h+: 15
-        Channel::Api:
-          0-1h: 75
-          1-4h: 40
-          4-8h: 20
-          8-24h: 10
-          24h+: 5
+      - id: 1
+        conversations_count: 150
+        resolved_conversations_count: 120
+        avg_resolution_time: 3600
+        avg_first_response_time: 300
+        avg_reply_time: 600
+      - id: 2
+        conversations_count: 75
+        resolved_conversations_count: 60
+        avg_resolution_time: 1800
+        avg_first_response_time: 180
+        avg_reply_time: 420
     inbox_summary:
       type: array
       description: Inbox summary report containing conversation statistics grouped by inbox.
@@ -852,18 +785,6 @@ components:
         avg_resolution_time: 1800
         avg_first_response_time: 180
         avg_reply_time: 420
-    reporting_event_meta:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Total number of reporting events
-        current_page:
-          type: integer
-          description: Current page number
-        total_pages:
-          type: integer
-          description: Total number of pages
     account_summary:
       type: object
       properties:
@@ -894,6 +815,38 @@ components:
               type: number
             resolutions_count:
               type: number
+    reporting_events_list_response:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/reporting_event_meta'
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/reporting_event'
+          description: List of reporting events
+    outgoing_messages_count:
+      type: array
+      description: Outgoing messages count report grouped by entity (agent, team, inbox, or label).
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: The ID of the grouped entity (agent, team, inbox, or label).
+          name:
+            type: string
+            description: The name of the grouped entity.
+          outgoing_messages_count:
+            type: number
+            description: The total number of outgoing messages for this entity in the given time range.
+      example:
+      - id: 1
+        name: Agent One
+        outgoing_messages_count: 42
+      - id: 2
+        name: Agent Two
+        outgoing_messages_count: 18
     inbox_label_matrix:
       type: object
       description: Inbox-label matrix report showing the count of conversations for each inbox-label combination.
@@ -949,49 +902,41 @@ components:
         - - 8
           - 12
           - 2
-    team_summary:
-      type: array
-      description: Team summary report containing conversation statistics grouped by team.
-      items:
+    channel_summary:
+      type: object
+      description: Channel summary report containing conversation counts grouped by channel type and status. Available in version 4.10.0+.
+      additionalProperties:
         type: object
+        description: Conversation statistics for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
         properties:
-          id:
+          open:
             type: number
-            description: The team ID
-          conversations_count:
+            description: Number of open conversations
+          resolved:
             type: number
-            description: Number of conversations assigned to the team during the date range
-          resolved_conversations_count:
+            description: Number of resolved conversations
+          pending:
             type: number
-            description: Number of conversations resolved by the team during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
+            description: Number of pending conversations
+          snoozed:
+            type: number
+            description: Number of snoozed conversations
+          total:
+            type: number
+            description: Total number of conversations
       example:
-      - id: 1
-        conversations_count: 250
-        resolved_conversations_count: 200
-        avg_resolution_time: 2800
-        avg_first_response_time: 240
-        avg_reply_time: 500
-      - id: 2
-        conversations_count: 180
-        resolved_conversations_count: 150
-        avg_resolution_time: 2400
-        avg_first_response_time: 200
-        avg_reply_time: 450
+        Channel::WebWidget:
+          open: 10
+          resolved: 20
+          pending: 5
+          snoozed: 2
+          total: 37
+        Channel::Api:
+          open: 5
+          resolved: 15
+          pending: 3
+          snoozed: 1
+          total: 24
     agent_conversation_metrics:
       type: object
       properties:
@@ -1012,15 +957,41 @@ components:
               type: number
             unattended:
               type: number
-    request_error:
+    first_response_time_distribution:
       type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
+      description: First response time distribution report grouped by channel type. Shows the count of conversations with first response times in different time buckets.
+      additionalProperties:
+        type: object
+        description: First response time distribution for a specific channel type (e.g., Channel::WebWidget, Channel::Api)
+        properties:
+          0-1h:
+            type: number
+            description: Number of conversations with first response time less than 1 hour
+          1-4h:
+            type: number
+            description: Number of conversations with first response time between 1-4 hours
+          4-8h:
+            type: number
+            description: Number of conversations with first response time between 4-8 hours
+          8-24h:
+            type: number
+            description: Number of conversations with first response time between 8-24 hours
+          24h+:
+            type: number
+            description: Number of conversations with first response time greater than 24 hours
+      example:
+        Channel::WebWidget:
+          0-1h: 150
+          1-4h: 80
+          4-8h: 45
+          8-24h: 30
+          24h+: 15
+        Channel::Api:
+          0-1h: 75
+          1-4h: 40
+          4-8h: 20
+          8-24h: 10
+          24h+: 5
     reporting_event:
       type: object
       properties:
@@ -1072,59 +1043,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the reporting event was last updated
-    agent_summary:
-      type: array
-      description: Agent summary report containing conversation statistics grouped by agent.
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: The agent (user) ID
-          conversations_count:
-            type: number
-            description: Number of conversations assigned to the agent during the date range
-          resolved_conversations_count:
-            type: number
-            description: Number of conversations resolved by the agent during the date range
-          avg_resolution_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) to resolve conversations. Null if no data available.
-          avg_first_response_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) for the first response. Null if no data available.
-          avg_reply_time:
-            type:
-            - number
-            - 'null'
-            description: Average time (in seconds) between replies. Null if no data available.
-      example:
-      - id: 1
-        conversations_count: 150
-        resolved_conversations_count: 120
-        avg_resolution_time: 3600
-        avg_first_response_time: 300
-        avg_reply_time: 600
-      - id: 2
-        conversations_count: 75
-        resolved_conversations_count: 60
-        avg_resolution_time: 1800
-        avg_first_response_time: 180
-        avg_reply_time: 420
-    reporting_events_list_response:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/reporting_event_meta'
-        payload:
-          type: array
-          items:
-            $ref: '#/components/schemas/reporting_event'
-          description: List of reporting events
     bad_request_error:
       title: data
       type: object
@@ -1136,24 +1054,33 @@ components:
           items:
             $ref: '#/components/schemas/request_error'
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
-x-refined-from:
-- chatwoot-application-api-openapi.yml
-- chatwoot-openapi.yml
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -1167,6 +1094,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels

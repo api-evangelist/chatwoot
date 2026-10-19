@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
   title: Chatwoot Conversations API
+  description: This is the API documentation for Chatwoot server.
+  version: 1.1.0
   termsOfService: https://www.chatwoot.com/terms-of-service/
-  version: '1.0'
-  description: 'Operations tagged Conversations across 2 of this provider''s published API definitions: chatwoot-application-api-openapi.yml, chatwoot-openapi.yml. Each path carries the servers of the definition it was published in.'
+  contact:
+    email: hello@chatwoot.com
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
 servers:
 - url: https://app.chatwoot.com/
-- url: https://app.chatwoot.com
-  description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 tags:
 - name: Conversations
   description: Conversation management APIs
@@ -22,6 +25,7 @@ paths:
       description: Get open, unassigned and all Conversation counts
       summary: Get Conversation Counts
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - name: status
@@ -80,8 +84,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -92,6 +94,7 @@ paths:
       description: List all the conversations with pagination
       summary: Conversations List
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - name: assignee_type
@@ -165,6 +168,8 @@ paths:
 
         Learn more about source_id: https://www.chatwoot.com/hc/user-guide/articles/1677839703-how-to-create-an-api-channel-inbox#send-messages-to-the-api-channel'
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       - agentBotApiKey: []
       requestBody:
@@ -196,8 +201,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations/filter:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -208,12 +211,30 @@ paths:
       description: Filter conversations with custom filter options and pagination
       summary: Conversations Filter
       security:
+      - userBearerAuth: []
       - userApiKey: []
       parameters:
       - name: page
         in: query
         schema:
           type: number
+      - name: sort_by
+        in: query
+        description: Sort filtered conversations using the same options as the conversation list.
+        schema:
+          type: string
+          default: last_activity_at_desc
+          enum:
+          - last_activity_at_asc
+          - last_activity_at_desc
+          - created_at_asc
+          - created_at_desc
+          - priority_asc
+          - priority_desc
+          - waiting_since_asc
+          - waiting_since_desc
+          - priority_desc_created_at_asc
+          - unread
       requestBody:
         required: true
         content:
@@ -272,8 +293,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations/{conversation_id}:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -284,6 +303,8 @@ paths:
       operationId: get-details-of-a-conversation
       summary: Conversation Details
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       description: Get all details regarding a conversation with all messages in the conversation
       responses:
@@ -312,6 +333,8 @@ paths:
       summary: Update Conversation
       description: Update Conversation Attributes
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       - agentBotApiKey: []
       requestBody:
@@ -322,14 +345,16 @@ paths:
               type: object
               properties:
                 priority:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   enum:
                   - urgent
                   - high
                   - medium
                   - low
-                  - none
-                  description: The priority of the conversation
+                  - null
+                  description: The priority of the conversation. Set to null to clear the priority.
                   example: high
                 sla_policy_id:
                   type: number
@@ -354,8 +379,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: string
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_status:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -377,6 +411,8 @@ paths:
 
         reply from the contact.'
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       - agentBotApiKey: []
       requestBody:
@@ -437,8 +473,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_priority:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -450,26 +484,28 @@ paths:
       summary: Toggle Priority
       description: Toggles the priority of conversation
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       - agentBotApiKey: []
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
               type: object
-              required:
-              - priority
               properties:
                 priority:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   enum:
                   - urgent
                   - high
                   - medium
                   - low
-                  - none
-                  description: The priority of the conversation
+                  - null
+                  description: The priority of the conversation. Omit or set to null to clear the priority.
                   example: high
       responses:
         '200':
@@ -486,8 +522,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: string
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_typing_status:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -499,6 +544,8 @@ paths:
       summary: Toggle Typing Status
       description: Toggles the typing status for a conversation.
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       - agentBotApiKey: []
       requestBody:
@@ -536,8 +583,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/update_last_seen:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversations
+      operationId: conversationUpdateLastSeen
+      summary: Update Last Seen
+      security:
+      - userBearerAuth: []
+      - userApiKey: []
+      description: Updates the last seen of the conversation so that conversations will have the bubbles in the agents screen
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conversation_show'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/custom_attributes:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -549,6 +626,8 @@ paths:
       summary: Update Custom Attributes
       description: Updates the custom attributes of a conversation
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       requestBody:
         required: true
@@ -565,6 +644,10 @@ paths:
                   example:
                     order_id: '12345'
                     previous_conversation: '67890'
+                merge:
+                  type: boolean
+                  default: false
+                  description: When true, only the keys sent in `custom_attributes` are updated and the remaining keys are kept intact. When false (default), the whole custom attributes hash is replaced. Use the destroy_custom_attributes endpoint to remove keys.
       responses:
         '200':
           description: Success
@@ -588,8 +671,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
+  /api/v1/accounts/{account_id}/conversations/{conversation_id}/destroy_custom_attributes:
+    parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    post:
+      tags:
+      - Conversations
+      operationId: destroy-custom-attributes-of-a-conversation
+      summary: Destroy Custom Attributes
+      description: Removes the given custom attribute keys from a conversation
+      security:
+      - userBearerAuth: []
+      - userApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - custom_attributes
+              properties:
+                custom_attributes:
+                  type: array
+                  items:
+                    type: string
+                  description: The list of custom attribute keys to remove from the conversation
+                  example:
+                  - order_id
+                  - previous_conversation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_attributes:
+                    type: object
+                    description: The remaining custom attributes of the conversation
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
+        '404':
+          description: Conversation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request_error'
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -600,6 +734,8 @@ paths:
       operationId: list-all-labels-of-a-conversation
       summary: List Labels
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       description: Lists all the labels of a conversation
       responses:
@@ -627,6 +763,8 @@ paths:
       operationId: conversation-add-labels
       summary: Add Labels
       security:
+      - userBearerAuth: []
+      - agentBotBearerAuth: []
       - userApiKey: []
       description: Add labels to a conversation. Note that this API would overwrite the existing list of labels associated to the conversation.
       requestBody:
@@ -665,8 +803,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
   /api/v1/accounts/{account_id}/conversations/{conversation_id}/reporting_events:
     parameters:
     - $ref: '#/components/parameters/account_id'
@@ -677,6 +813,7 @@ paths:
       operationId: get-conversation-reporting-events
       summary: Conversation Reporting Events
       security:
+      - userBearerAuth: []
       - userApiKey: []
       description: Get reporting events for a specific conversation. This endpoint returns events such as first response time, resolution time, and other metrics for the conversation, sorted by creation time in ascending order.
       responses:
@@ -701,129 +838,72 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad_request_error'
-    servers:
-    - url: https://app.chatwoot.com/
-  /api/v1/accounts/{account_id}/conversations/{conversation_id}/assignments:
-    parameters:
-    - $ref: '#/components/parameters/AccountId'
-    - $ref: '#/components/parameters/ConversationId'
-    post:
-      operationId: assignConversation
-      tags:
-      - Conversations
-      summary: Assign a conversation to an agent or a team
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                assignee_id:
-                  type: integer
-                team_id:
-                  type: integer
-      responses:
-        '200':
-          description: The assignment result.
-      security:
-      - userApiKey: []
-    servers:
-    - url: https://app.chatwoot.com
-      description: Chatwoot Cloud. For self-hosted installations, substitute your own host.
 components:
   schemas:
-    conversation_labels:
+    conversation_show:
       type: object
-      properties:
-        payload:
-          type: array
-          description: Array of labels
-          items:
-            type: string
-    conversation_list:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            meta:
-              type: object
-              properties:
-                mine_count:
-                  type: number
-                unassigned_count:
-                  type: number
-                assigned_count:
-                  type: number
-                all_count:
-                  type: number
-            payload:
-              type: array
-              description: array of conversations
-              items:
-                allOf:
-                - $ref: '#/components/schemas/generic_id'
-                - $ref: '#/components/schemas/conversation'
-                - type: object
-                  properties:
-                    meta:
-                      type: object
-                      properties:
-                        sender:
-                          type: object
-                          properties:
-                            additional_attributes:
-                              type: object
-                              description: The additional attributes of the sender
-                            availability_status:
-                              type: string
-                              description: The availability status of the sender
-                            email:
-                              type:
-                              - string
-                              - 'null'
-                              description: The email of the sender
-                            id:
-                              type: number
-                              description: ID fo the sender
-                            name:
-                              type: string
-                              description: The name of the sender
-                            phone_number:
-                              type:
-                              - string
-                              - 'null'
-                              description: The phone number of the sender
-                            blocked:
-                              type: boolean
-                              description: Whether the sender is blocked
-                            identifier:
-                              type:
-                              - string
-                              - 'null'
-                              description: The identifier of the sender
-                            thumbnail:
-                              type:
-                              - string
-                              - 'null'
-                              description: Avatar URL of the contact
-                            custom_attributes:
-                              type: object
-                              description: The custom attributes of the sender
-                            last_activity_at:
-                              type: number
-                              description: The last activity at of the sender
-                            created_at:
-                              type: number
-                              description: The created at of the sender
-                        channel:
-                          type: string
-                          description: Channel Type
-                        assignee:
-                          $ref: '#/components/schemas/user'
-                        hmac_verified:
-                          type: boolean
-                          description: Whether the hmac is verified
+      allOf:
+      - $ref: '#/components/schemas/conversation'
+      - type: object
+        properties:
+          meta:
+            type: object
+            properties:
+              sender:
+                type: object
+                properties:
+                  additional_attributes:
+                    type: object
+                    description: The additional attributes of the sender
+                  availability_status:
+                    type: string
+                    description: The availability status of the sender
+                  email:
+                    type:
+                    - string
+                    - 'null'
+                    description: The email of the sender
+                  id:
+                    type: number
+                    description: ID fo the sender
+                  name:
+                    type: string
+                    description: The name of the sender
+                  phone_number:
+                    type:
+                    - string
+                    - 'null'
+                    description: The phone number of the sender
+                  blocked:
+                    type: boolean
+                    description: Whether the sender is blocked
+                  identifier:
+                    type:
+                    - string
+                    - 'null'
+                    description: The identifier of the sender
+                  thumbnail:
+                    type:
+                    - string
+                    - 'null'
+                    description: Avatar URL of the contact
+                  custom_attributes:
+                    type: object
+                    description: The custom attributes of the sender
+                  last_activity_at:
+                    type: number
+                    description: The last activity at of the sender
+                  created_at:
+                    type: number
+                    description: The created at of the sender
+              channel:
+                type: string
+                description: Channel Type
+              assignee:
+                $ref: '#/components/schemas/user'
+              hmac_verified:
+                type: boolean
+                description: Whether the hmac is verified
     message:
       type: object
       properties:
@@ -854,7 +934,9 @@ components:
           type: integer
           description: The time at which message was created
         updated_at:
-          type: integer
+          type:
+          - integer
+          - string
           description: The time at which message was updated
         private:
           type: boolean
@@ -943,6 +1025,195 @@ components:
         sender:
           type: object
           description: User/Agent/AgentBot object
+    request_error:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+    conversation_labels:
+      type: object
+      properties:
+        payload:
+          type: array
+          description: Array of labels
+          items:
+            type: string
+    generic_id:
+      type: object
+      properties:
+        id:
+          type: number
+    conversation_list:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                mine_count:
+                  type: number
+                unassigned_count:
+                  type: number
+                assigned_count:
+                  type: number
+                all_count:
+                  type: number
+            payload:
+              type: array
+              description: array of conversations
+              items:
+                allOf:
+                - $ref: '#/components/schemas/generic_id'
+                - $ref: '#/components/schemas/conversation'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        sender:
+                          type: object
+                          properties:
+                            additional_attributes:
+                              type: object
+                              description: The additional attributes of the sender
+                            availability_status:
+                              type: string
+                              description: The availability status of the sender
+                            email:
+                              type:
+                              - string
+                              - 'null'
+                              description: The email of the sender
+                            id:
+                              type: number
+                              description: ID fo the sender
+                            name:
+                              type: string
+                              description: The name of the sender
+                            phone_number:
+                              type:
+                              - string
+                              - 'null'
+                              description: The phone number of the sender
+                            blocked:
+                              type: boolean
+                              description: Whether the sender is blocked
+                            identifier:
+                              type:
+                              - string
+                              - 'null'
+                              description: The identifier of the sender
+                            thumbnail:
+                              type:
+                              - string
+                              - 'null'
+                              description: Avatar URL of the contact
+                            custom_attributes:
+                              type: object
+                              description: The custom attributes of the sender
+                            last_activity_at:
+                              type: number
+                              description: The last activity at of the sender
+                            created_at:
+                              type: number
+                              description: The created at of the sender
+                        channel:
+                          type: string
+                          description: Channel Type
+                        assignee:
+                          $ref: '#/components/schemas/user'
+                        hmac_verified:
+                          type: boolean
+                          description: Whether the hmac is verified
+    conversation_create_payload:
+      type: object
+      required:
+      - source_id
+      properties:
+        source_id:
+          type: string
+          description: Conversation source id
+          example: '1234567890'
+        inbox_id:
+          type: integer
+          description: 'Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email'
+          example: 1
+        contact_id:
+          type: integer
+          description: Contact Id for which conversation is created
+          example: 1
+        additional_attributes:
+          type: object
+          description: Lets you specify attributes like browser information
+          example:
+            browser: Chrome
+            browser_version: 89.0.4389.82
+            os: Windows
+            os_version: '10'
+        custom_attributes:
+          type: object
+          description: The object to save custom attributes for conversation, accepts custom attributes key and value
+          example:
+            attribute_key: attribute_value
+            priority_conversation_number: 3
+        status:
+          type: string
+          enum:
+          - open
+          - resolved
+          - pending
+          description: Specify the conversation whether it's pending, open, closed
+          example: open
+        assignee_id:
+          type: integer
+          description: Agent Id for assigning a conversation to an agent
+          example: 1
+        team_id:
+          type: integer
+          description: Team Id for assigning a conversation to a team\
+          example: 1
+        snoozed_until:
+          type: string
+          format: date-time
+          description: Snoozed until date time
+          example: '2030-07-21T17:32:28Z'
+        message:
+          type: object
+          description: The initial message to be sent to the conversation
+          required:
+          - content
+          properties:
+            content:
+              type: string
+              description: The content of the message
+              example: Hello, how can I help you?
+            template_params:
+              type: object
+              description: The template params for the message in case of whatsapp Channel
+              properties:
+                name:
+                  type: string
+                  description: Name of the template
+                  example: sample_issue_resolution
+                category:
+                  type: string
+                  description: Category of the template
+                  example: UTILITY
+                language:
+                  type: string
+                  description: Language of the template
+                  example: en_US
+                processed_params:
+                  type: object
+                  description: The processed param values for template variables in template
+                  example:
+                    '1': Chatwoot
     user:
       type: object
       properties:
@@ -1035,103 +1306,6 @@ components:
                 type:
                 - object
                 - 'null'
-    generic_id:
-      type: object
-      properties:
-        id:
-          type: number
-    request_error:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-    conversation_create_payload:
-      type: object
-      required:
-      - source_id
-      properties:
-        source_id:
-          type: string
-          description: Conversation source id
-          example: '1234567890'
-        inbox_id:
-          type: integer
-          description: 'Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email'
-          example: 1
-        contact_id:
-          type: integer
-          description: Contact Id for which conversation is created
-          example: 1
-        additional_attributes:
-          type: object
-          description: Lets you specify attributes like browser information
-          example:
-            browser: Chrome
-            browser_version: 89.0.4389.82
-            os: Windows
-            os_version: '10'
-        custom_attributes:
-          type: object
-          description: The object to save custom attributes for conversation, accepts custom attributes key and value
-          example:
-            attribute_key: attribute_value
-            priority_conversation_number: 3
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          description: Specify the conversation whether it's pending, open, closed
-          example: open
-        assignee_id:
-          type: integer
-          description: Agent Id for assigning a conversation to an agent
-          example: 1
-        team_id:
-          type: integer
-          description: Team Id for assigning a conversation to a team\
-          example: 1
-        snoozed_until:
-          type: string
-          format: date-time
-          description: Snoozed until date time
-          example: '2030-07-21T17:32:28Z'
-        message:
-          type: object
-          description: The initial message to be sent to the conversation
-          required:
-          - content
-          properties:
-            content:
-              type: string
-              description: The content of the message
-              example: Hello, how can I help you?
-            template_params:
-              type: object
-              description: The template params for the message in case of whatsapp Channel
-              properties:
-                name:
-                  type: string
-                  description: Name of the template
-                  example: sample_issue_resolution
-                category:
-                  type: string
-                  description: Category of the template
-                  example: UTILITY
-                language:
-                  type: string
-                  description: Language of the template
-                  example: en_US
-                processed_params:
-                  type: object
-                  description: The processed param values for template variables in template
-                  example:
-                    '1': Chatwoot
     reporting_event:
       type: object
       properties:
@@ -1183,70 +1357,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the reporting event was last updated
-    conversation_show:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/conversation'
-      - type: object
-        properties:
-          meta:
-            type: object
-            properties:
-              sender:
-                type: object
-                properties:
-                  additional_attributes:
-                    type: object
-                    description: The additional attributes of the sender
-                  availability_status:
-                    type: string
-                    description: The availability status of the sender
-                  email:
-                    type:
-                    - string
-                    - 'null'
-                    description: The email of the sender
-                  id:
-                    type: number
-                    description: ID fo the sender
-                  name:
-                    type: string
-                    description: The name of the sender
-                  phone_number:
-                    type:
-                    - string
-                    - 'null'
-                    description: The phone number of the sender
-                  blocked:
-                    type: boolean
-                    description: Whether the sender is blocked
-                  identifier:
-                    type:
-                    - string
-                    - 'null'
-                    description: The identifier of the sender
-                  thumbnail:
-                    type:
-                    - string
-                    - 'null'
-                    description: Avatar URL of the contact
-                  custom_attributes:
-                    type: object
-                    description: The custom attributes of the sender
-                  last_activity_at:
-                    type: number
-                    description: The last activity at of the sender
-                  created_at:
-                    type: number
-                    description: The created at of the sender
-              channel:
-                type: string
-                description: Channel Type
-              assignee:
-                $ref: '#/components/schemas/user'
-              hmac_verified:
-                type: boolean
-                description: Whether the hmac is verified
     bad_request_error:
       title: data
       type: object
@@ -1362,90 +1472,7 @@ components:
           items:
             type: object
             description: SLA event objects
-    ConversationCreate:
-      type: object
-      required:
-      - source_id
-      - inbox_id
-      properties:
-        source_id:
-          type: string
-        inbox_id:
-          type: integer
-        contact_id:
-          type: integer
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-        assignee_id:
-          type: integer
-        team_id:
-          type: integer
-        message:
-          type: object
-          properties:
-            content:
-              type: string
-    ConversationList:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            meta:
-              type: object
-            payload:
-              type: array
-              items:
-                $ref: '#/components/schemas/Conversation'
-    Conversation:
-      type: object
-      properties:
-        id:
-          type: integer
-        account_id:
-          type: integer
-        inbox_id:
-          type: integer
-        status:
-          type: string
-          enum:
-          - open
-          - resolved
-          - pending
-          - snoozed
-        contact_id:
-          type: integer
-        assignee_id:
-          type: integer
-        team_id:
-          type: integer
-        priority:
-          type: string
-          enum:
-          - low
-          - medium
-          - high
-          - urgent
-        labels:
-          type: array
-          items:
-            type: string
-        custom_attributes:
-          type: object
-          additionalProperties: true
   parameters:
-    account_id:
-      in: path
-      name: account_id
-      schema:
-        type: integer
-      required: true
-      description: The numeric ID of the account
     conversation_id:
       in: path
       name: conversation_id
@@ -1453,39 +1480,41 @@ components:
         type: integer
       required: true
       description: The numeric ID of the conversation
-    ConversationId:
-      name: conversation_id
+    account_id:
       in: path
-      required: true
-      description: The display id of the conversation.
-      schema:
-        type: integer
-    AccountId:
       name: account_id
-      in: path
-      required: true
-      description: The numeric id of the account.
       schema:
         type: integer
+      required: true
+      description: The numeric ID of the account
   securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a user API token from **Profile Settings**. Available in Chatwoot `v4.19.0` and later.'
+    agentBotBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using an agent bot token from **Settings → Agent Bots**. Available in Chatwoot `v4.19.0` and later.'
+    platformAppBearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate with `Authorization: Bearer <token>` using a platform app token from **Super Admin**. Available in Chatwoot `v4.19.0` and later.'
     userApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by visiting the profile page or via rails console. Provides access to  endpoints based on the user permissions levels. This token can be saved by an external system when user is created via API, to perform activities on behalf of the user.
+      description: Find your API token in **Profile Settings**. The `api_access_token` header remains supported, but will be deprecated in a future release. For new integrations, use Bearer authentication.
     agentBotApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token should be provided by system admin or obtained via rails console. This token can be used to build bot integrations and can only access limited apis.
+      description: Find your agent bot token in **Settings → Agent Bots**. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Agent bot tokens can access only bot-permitted APIs.
     platformAppApiKey:
       type: apiKey
       in: header
       name: api_access_token
-      description: This token can be obtained by the system admin after creating a platformApp. This token should be used to provision agent bots, accounts, users and their roles.
-x-refined-from:
-- chatwoot-application-api-openapi.yml
-- chatwoot-openapi.yml
+      description: Create a platform app in **Super Admin** to get its token. For new integrations, use Bearer authentication in Chatwoot `v4.19.0` and later. Platform app tokens can provision agent bots, accounts, users, and roles.
 x-tagGroups:
 - name: Platform
   tags:
@@ -1499,6 +1528,7 @@ x-tagGroups:
   - Account
   - Agents
   - Audit Logs
+  - Campaigns
   - Canned Responses
   - Contacts
   - Contact Labels
