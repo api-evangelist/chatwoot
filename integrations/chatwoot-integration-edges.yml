@@ -12,6 +12,7 @@ checked:
 - https://zapier.com/apps/chatwoot/integrations
 - stripe/integrations/stripe-integration-edges.yml
 - digital-ocean/integrations/digital-ocean-integration-edges.yml
+- artifact-hub/integrations/artifact-hub-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -49,4 +50,23 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: Chat
+- partner_name: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: artifact-hub
+  evidence: https://artifacthub.io/packages/search?repo=chatwoot
+  mirror_of: artifact-hub/integrations/artifact-hub-integration-edges.yml
+  apps:
+  - chatwoot
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Artifact Hub listing (Helm chart)
+  badges:
+  - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
 templates: []
