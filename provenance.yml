@@ -25,23 +25,23 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-account-api
   collections/chatwoot-account-users-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-account-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-account-users-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-account-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-accounts-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-accounts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-accounts-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-accounts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-agentbots-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-agentbots-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-agentbots-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-agentbots-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-agents-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-agents-api
@@ -61,11 +61,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-automation-rule-api
   collections/chatwoot-automation-rules-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-automation-rules-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-automation-rules-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-automation-rules-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-canned-responses-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-canned-responses-api
@@ -73,23 +73,23 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-canned-responses-api
   collections/chatwoot-client-contacts-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-contacts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-client-contacts-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-contacts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-client-conversations-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-conversations-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-client-conversations-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-conversations-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-client-messages-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-messages-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-client-messages-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-client-messages-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-com.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -103,11 +103,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-contact-labels-api
   collections/chatwoot-contacts-api-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-contacts-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-contacts-api-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-contacts-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-contacts-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-contacts-api
@@ -115,11 +115,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-contacts-api
   collections/chatwoot-conversation-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-conversation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-conversation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-conversation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-conversation-assignments-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-conversation-assignments-api
@@ -127,11 +127,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-conversation-assignments-api
   collections/chatwoot-conversations-api-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-conversations-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-conversations-api-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-conversations-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-conversations-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-conversations-api
@@ -139,11 +139,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-conversations-api
   collections/chatwoot-csat-survey-page-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-csat-survey-page-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-csat-survey-page-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-csat-survey-page-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-custom-attributes-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-custom-attributes-api
@@ -163,11 +163,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-help-center-api
   collections/chatwoot-inbox-api-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-inbox-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-inbox-api-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-inbox-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-inboxes-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-inboxes-api
@@ -187,11 +187,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-labels-api
   collections/chatwoot-messages-api-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-messages-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-messages-api-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-messages-api-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-messages-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-messages-api
@@ -199,23 +199,23 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-messages-api
   collections/chatwoot-platform-accounts-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-accounts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-platform-accounts-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-accounts-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-platform-agent-bots-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-agent-bots-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-platform-agent-bots-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-agent-bots-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-platform-users-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-platform-users-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-platform-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-profile-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-profile-api
@@ -235,11 +235,11 @@ artifacts:
     method: derived
     evidence: openapi/chatwoot-teams-api
   collections/chatwoot-users-api.opencollection.json:
-    method: derived
-    evidence: openapi/chatwoot-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-users-api.postman_collection.json:
-    method: derived
-    evidence: openapi/chatwoot-users-api
+    method: unknown
+    evidence: no authorship recorded
   collections/chatwoot-webhooks-api.opencollection.json:
     method: derived
     evidence: openapi/chatwoot-webhooks-api
@@ -262,11 +262,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   finops/chatwoot-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/chatwoot-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/chatwoot-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -318,127 +324,7 @@ artifacts:
   json-schema/webhook.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -522,30 +408,32 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   mcp/chatwoot-mcp.yml:
     method: unknown
     evidence: no authorship recorded
-  openapi/_original/chatwoot-application-api-openapi.yml:
+  openapi/_original/chatwoot-openapi.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/chatwoot-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://raw.githubusercontent.com/chatwoot/chatwoot/develop/swagger/tag_groups/application_swagger.json
+      (sha256 5cf8d3647ec8, fetched 2026-10-19)
   openapi/chatwoot-account-agentbots-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-account-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-account-users-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-accounts-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-agentbots-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-agents-api-openapi.yml:
@@ -557,43 +445,22 @@ artifacts:
   openapi/chatwoot-automation-rule-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-automation-rules-api-openapi.yml:
+  openapi/chatwoot-campaigns-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-canned-responses-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-client-contacts-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-client-conversations-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-client-messages-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-contact-labels-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-contacts-api-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-contacts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-conversation-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-conversation-assignments-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-conversations-api-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-conversations-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-csat-survey-page-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-custom-attributes-api-openapi.yml:
@@ -605,9 +472,6 @@ artifacts:
   openapi/chatwoot-help-center-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-inbox-api-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-inboxes-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -617,19 +481,7 @@ artifacts:
   openapi/chatwoot-labels-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-messages-api-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-messages-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-platform-accounts-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-platform-agent-bots-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-platform-users-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-profile-api-openapi.yml:
@@ -639,9 +491,6 @@ artifacts:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-teams-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/chatwoot-users-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/chatwoot-webhooks-api-openapi.yml:
